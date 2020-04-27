@@ -4,6 +4,22 @@ import ReactDom from "react-dom";
 import Planning from "./layout/Planning"
 
 class Training extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            trainings: []
+        }
+    }
+
+    componentDidMount() {
+        fetch('http://0.0.0.0:8000/api/course')
+            .then(response => response.json())
+            .then((data) => {
+                this.setState({ trainings: data })
+            })
+    }
+
     render() {
         return (
             <div>
@@ -12,7 +28,8 @@ class Training extends Component {
 
                 <br />
 
-                <Planning />
+                <Planning trainings={this.state.trainings} />
+
             </div>
         )
     }
