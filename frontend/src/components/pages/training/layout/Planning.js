@@ -1,12 +1,16 @@
-import React, { Component } from "react";
-import ReactDom from "react-dom";
+import React from 'react'
 
-class Planning extends Component {
-    render() {
-        return (
-            <div>Planning</div>
-        )
-    }
-}
+const TrainingItem = ({ trainings }) => {
+  return (
+    <div>
+      <center><h1>Planning</h1></center>
+      {trainings.map((training) => (
+        <div key={training.id}>
+            <h5 >{training.name}</h5>
+        </div>
+      ))}
+    </div>
+  )
+};
 
-export default Planning
+export default TrainingItem

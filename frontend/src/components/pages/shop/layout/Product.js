@@ -1,21 +1,16 @@
-import React, { Component } from "react";
-import ReactDom from "react-dom";
+import React from "react";
 
-class Product extends Component {
-    render() {
+const Product = ({ products }) => {
+    return (
+        <div>
+            {products.map((product) => (
+                <div key={product.id}>
+                    <h5 >{product.name}</h5>
+                </div>
 
-        return (
-            <table>
-                <tbody>
-                    <tr >
-                        <th>
-                            product name
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-        )
-    }
-}
+            ))}
+        </div>
+    )
+};
 
 export default Product

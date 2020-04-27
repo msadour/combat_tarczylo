@@ -34,6 +34,7 @@ class TimeTableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TimeTable
+        fields = '__all__'
 
 
 class ClubSerializer(serializers.ModelSerializer):
@@ -110,4 +111,3 @@ class PendingSubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PendingSubscription
         fields = ['id', 'email', 'first_name', 'last_name', 'birthday', 'sex', 'date_creation']
-

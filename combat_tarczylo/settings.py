@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'frontend',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,12 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.DjangoModelPermissions',
+    )
+}
+
 WSGI_APPLICATION = 'combat_tarczylo.wsgi.application'
 
 
@@ -77,8 +84,12 @@ WSGI_APPLICATION = 'combat_tarczylo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        "HOST": "db",
+        "NAME": "combat_tarczylo",
+        "USER": "postgres",
+        "PASSWORD": "qwertz",
+        "PORT": 5432,
     }
 }
 
