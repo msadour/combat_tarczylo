@@ -20,3 +20,13 @@ class ArticleViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset, pk=pk)
         serializer = ArticleSerializer(user)
         return Response(serializer.data)
+
+    def patch(self, request, pk=None):
+        datas = request.data
+        article = Article.objects.get(id=pk)
+        for attr, value in datas.items():
+            setattr(article, attr, value)
+        article.save()
+        serializer = ArticleSerializer(article)
+
+        return Response(serializer.data)

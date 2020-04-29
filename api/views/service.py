@@ -21,6 +21,16 @@ class CourseViewSet(viewsets.ViewSet):
         serializer = CourseSerializer(course)
         return Response(serializer.data)
 
+    def patch(self, request, pk=None):
+        datas = request.data
+        course = Course.objects.get(id=pk)
+        for attr, value in datas.items():
+            setattr(course, attr, value)
+        course.save()
+        serializer = CourseSerializer(course)
+
+        return Response(serializer.data)
+
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ViewSet):
@@ -34,4 +44,14 @@ class InternshipViewSet(viewsets.ViewSet):
         queryset = Internship.objects.all()
         internship = get_object_or_404(queryset, pk=pk)
         serializer = InternshipSerializer(internship)
+        return Response(serializer.data)
+
+    def patch(self, request, pk=None):
+        datas = request.data
+        internship = Internship.objects.get(id=pk)
+        for attr, value in datas.items():
+            setattr(internship, attr, value)
+        internship.save()
+        serializer = InternshipSerializer(internship)
+
         return Response(serializer.data)

@@ -20,3 +20,13 @@ class BookViewSet(viewsets.ViewSet):
         book = get_object_or_404(queryset, pk=pk)
         serializer = BookAdvicedSerializer(book)
         return Response(serializer.data)
+
+    def patch(self, request, pk=None):
+        datas = request.data
+        book = BookAdviced.objects.get(id=pk)
+        for attr, value in datas.items():
+            setattr(book, attr, value)
+        book.save()
+        serializer = BookAdvicedSerializer(book)
+
+        return Response(serializer.data)
