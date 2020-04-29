@@ -1,6 +1,6 @@
 from django.forms import model_to_dict
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import permission_classes, action
+from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from django.contrib.auth.models import User
@@ -37,13 +37,6 @@ class MemberViewSet(viewsets.ViewSet):
         serializer = MemberSerializer(member)
         return Response(serializer.data)
 
-    def destroy(self, request, pk=None):
-        member = Member.objects.get(id=pk)
-        member.user.delete()
-        member.delete()
-
-        return Response({"message": "Member deleted"})
-
     def patch(self, request, pk=None):
         datas = request.data
         member = Member.objects.get(id=pk)
@@ -53,6 +46,14 @@ class MemberViewSet(viewsets.ViewSet):
         serializer = MemberSerializer(member)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        member = Member.objects.get(id=id)
+        member.user.delete()
+        member.delete()
+
+        return Response({"message": "Member deleted"})
 
 
 @permission_classes((permissions.AllowAny,))
@@ -92,3 +93,11 @@ class InstructorViewSet(viewsets.ViewSet):
         serializer = InstructorSerializer(instructor)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        instructor = Instructor.objects.get(id=id)
+        instructor.user.delete()
+        instructor.delete()
+
+        return Response({"message": "Instructor deleted"})

@@ -30,3 +30,11 @@ class BookViewSet(viewsets.ViewSet):
         serializer = BookAdvicedSerializer(book)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        book = BookAdviced.objects.get(id=id)
+        book.user.delete()
+        book.delete()
+
+        return Response({"message": "Book deleted"})

@@ -30,3 +30,11 @@ class ArticleViewSet(viewsets.ViewSet):
         serializer = ArticleSerializer(article)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        article = Article.objects.get(id=id)
+        article.user.delete()
+        article.delete()
+
+        return Response({"message": "Article deleted"})

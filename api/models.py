@@ -131,6 +131,7 @@ class Order(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
     is_bought = models.BooleanField(default=False)
+    date_creation = models.DateTimeField(null=True, blank=True, default=timezone.now)
 
 
 class PendingSubscription(models.Model):

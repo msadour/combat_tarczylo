@@ -31,6 +31,14 @@ class CourseViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        course = Course.objects.get(id=id)
+        course.user.delete()
+        course.delete()
+
+        return Response({"message": "Course deleted"})
+
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ViewSet):
@@ -55,3 +63,11 @@ class InternshipViewSet(viewsets.ViewSet):
         serializer = InternshipSerializer(internship)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        internship = Internship.objects.get(id=id)
+        internship.user.delete()
+        internship.delete()
+
+        return Response({"message": "Internship deleted"})

@@ -41,6 +41,14 @@ class ClubViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        club = Club.objects.get(id=id)
+        club.user.delete()
+        club.delete()
+
+        return Response({"message": "Club deleted"})
+
 
 @permission_classes((permissions.AllowAny,))
 class PresentationViewSet(viewsets.ViewSet):
@@ -76,6 +84,14 @@ class PresentationViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        presentation = Presentation.objects.get(id=id)
+        presentation.user.delete()
+        presentation.delete()
+
+        return Response({"message": "Presentation deleted"})
+
 
 @permission_classes((permissions.AllowAny,))
 class ImportantMessageViewSet(viewsets.ViewSet):
@@ -110,3 +126,11 @@ class ImportantMessageViewSet(viewsets.ViewSet):
         serializer = PresentationSerializer(important_message)
 
         return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        message = ImportantMessage.objects.get(id=id)
+        message.user.delete()
+        message.delete()
+
+        return Response({"message": "Message deleted"})
