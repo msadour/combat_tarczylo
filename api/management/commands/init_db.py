@@ -30,6 +30,7 @@ class Command(BaseCommand):
             Presentation.objects.all().delete()
             TimeTable.objects.all().delete()
             Club.objects.all().delete()
+            User.objects.all().delete()
             Member.objects.all().delete()
             Instructor.objects.all().delete()
             Course.objects.all().delete()
@@ -54,6 +55,13 @@ class Command(BaseCommand):
                                 time_table = apps.get_model('api', 'TimeTable')(**time_table)
                                 time_table.save()
                                 new_object.time_table.add(time_table)
+
+                        elif model in ['Member', 'Instructor']:
+                            user_data = datas.pop('user')
+                            new_object = apps.get_model('api', model)(**datas)
+                            user = User.objects.create_user(**user_data)
+                            new_object.user = user
+                            new_object.save()
 
                         elif model in ['Course', 'Internship']:
                             instructor_id = datas.pop('instructor')

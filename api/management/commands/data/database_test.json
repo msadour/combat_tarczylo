@@ -1,4 +1,5 @@
 {
+
   "BookAdviced" : [
     {
       "name": "Book 1",
@@ -40,9 +41,11 @@
     }
   ],
 
-  "Presentation" : [
+  "Presentation": [
     {
-      "text": "Prersentation text...."
+      "tct": "TCT is a club .....",
+      "darius": "Darius is .....",
+      "technical": "The technicals are ...."
     }
   ],
 
@@ -92,9 +95,11 @@
   "Member" : [
     {
       "id": 1,
-      "username": "member1@gmail.com",
-      "email": "member1@gmail.com",
-      "password": "qwertz",
+      "user": {
+        "username": "member1@gmail.com",
+        "email": "member1@gmail.com",
+        "password": "qwertz"
+      },
       "postal_code": "13051",
       "city": "berlin",
       "street": "rue du membre 1",
@@ -109,9 +114,11 @@
 
     {
       "id": 2,
-      "username": "member2@gmail.com",
-      "email": "member2@gmail.com",
-      "password": "qwertz",
+      "user": {
+        "username": "member2@gmail.com",
+        "email": "member2@gmail.com",
+        "password": "qwertz"
+      },
       "postal_code": "75019",
       "city": "paris",
       "street": "rue du membre 2",
@@ -126,9 +133,11 @@
 
     {
       "id": 3,
-      "username": "member3@gmail.com",
-      "email": "member3@gmail.com",
-      "password": "qwertz",
+      "user": {
+        "username": "member3@gmail.com",
+        "email": "member3@gmail.com",
+        "password": "qwertz"
+      },
       "postal_code": "88888",
       "city": "varsovie",
       "street": "rue du membre 3",
@@ -145,9 +154,13 @@
   "Instructor" : [
     {
       "id": 1,
-      "username": "instructor@gmail.com",
-      "email": "instructor@gmail.com",
-      "password": "qwertz",
+      "user": {
+        "username": "instructor@gmail.com",
+        "email": "instructor@gmail.com",
+        "password": "qwertz",
+        "first_name": "Darius",
+        "last_name": "Tarczylo"
+      },
       "postal_code": "88888",
       "city": "varsovie",
       "street": "rue de l'instructor 3",

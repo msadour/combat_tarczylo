@@ -6,28 +6,28 @@ class BookAdvicedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BookAdviced
-        fields = ['name', 'author', 'category', 'url']
+        fields = ['id', 'name', 'author', 'category', 'url']
 
 
 class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['title', 'content', 'category']
+        fields = ['id', 'title', 'content', 'category']
 
 
 class ImportantMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ImportantMessage
-        fields = ['content', 'date_creation']
+        fields = ['id', 'content', 'date_creation']
 
 
 class PresentationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Presentation
-        fields = ['text']
+        fields = ['id', 'tct', 'darius', 'technical']
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -38,30 +38,35 @@ class TimeTableSerializer(serializers.ModelSerializer):
 
 
 class ClubSerializer(serializers.ModelSerializer):
+    time_table = TimeTableSerializer(many=True)
+
     class Meta:
         model = Club
-        fields = ['name', 'description', 'street', 'number', 'zip_code', 'city', 'country', 'time_table']
+        fields = ['id', 'name', 'description', 'street', 'number', 'zip_code', 'city', 'country', 'time_table']
 
 
 class MemberSerializer(serializers.ModelSerializer):
 
+    user = serializers.CharField(source="get_user")
+
     class Meta:
         model = Member
-        fields = ['id', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
-                  'birthday', 'sex', 'date_creation', 'level']
+        fields = ['id', 'user', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
+                  'birthday', 'sex', 'level']
 
 
 class InstructorSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="get_user")
 
     class Meta:
         model = Instructor
-        fields = ['id', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
-                  'birthday', 'sex', 'date_creation', 'level', 'biography']
+        fields = ['id', 'user', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
+                  'birthday', 'sex', 'level', 'biography']
 
 
 class CourseSerializer(serializers.ModelSerializer):
 
-    instructor = InstructorSerializer(many=False)
+    instructor = serializers.CharField(source="get_full_name_instructor")
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
@@ -82,14 +87,16 @@ class InternshipSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
 
+    products = serializers.CharField(source='get_products')
+
     class Meta:
         model = Category
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'products']
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    category = CategorySerializer(many=False)
+    category = serializers.CharField(source='get_category')
 
     class Meta:
         model = Product
@@ -103,7 +110,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'member', 'products']
+        fields = ['id', 'member', 'products', 'is_bought']
 
 
 class PendingSubscriptionSerializer(serializers.ModelSerializer):
