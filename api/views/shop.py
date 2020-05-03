@@ -3,12 +3,26 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api.models import Product, Order, Category
+from api.models import Product, Order, Category, Member
 from api.serializers import ProductSerializer, OrderSerializer, CategorySerializer
 
 
 @permission_classes((permissions.AllowAny,))
 class OrderViewSet(viewsets.ViewSet):
+
+    def create(self, request, *args, **kwargs):
+        datas = request.data
+        member = int(datas.pop('member'))
+        products = datas.pop('products')
+        new_order = Order.objects.create(**datas)
+        new_order.member = Member.objects.get(id=member)
+        for product in products:
+            product = Product.objects.get(id=int(product))
+            new_order.products.add(product)
+
+        serializer = OrderSerializer(new_order, many=False)
+
+        return Response(serializer.data, status=201)
 
     def list(self, request):
         queryset = Order.objects.all()
@@ -34,7 +48,6 @@ class OrderViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         order = Order.objects.get(id=id)
-        order.user.delete()
         order.delete()
 
         return Response({"message": "Order deleted"})
@@ -42,6 +55,15 @@ class OrderViewSet(viewsets.ViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class ProductViewSet(viewsets.ViewSet):
+
+    def create(self, request, *args, **kwargs):
+        datas = request.data
+        category_id = datas.pop('category')
+        datas['category'] = Category.objects.get(id=category_id)
+        new_product = Product.objects.create(**datas)
+        serializer = ProductSerializer(new_product, many=False)
+
+        return Response(serializer.data, status=201)
 
     def list(self, request):
         queryset = Product.objects.all()
@@ -67,7 +89,6 @@ class ProductViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         product = Product.objects.get(id=id)
-        product.user.delete()
         product.delete()
 
         return Response({"message": "Product deleted"})
@@ -75,6 +96,15 @@ class ProductViewSet(viewsets.ViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class CategoryViewSet(viewsets.ViewSet):
+
+    def create(self, request, *args, **kwargs):
+        datas = request.data
+        new_category = Category.objects.create(**datas)
+
+        serializer = CategorySerializer(new_category, many=False)
+
+        return Response(serializer.data, status=201)
+
     def list(self, request):
         queryset = Category.objects.all()
         serializer = CategorySerializer(queryset, many=True)
@@ -99,7 +129,6 @@ class CategoryViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         category = Category.objects.get(id=id)
-        category.user.delete()
         category.delete()
 
         return Response({"message": "Category deleted"})

@@ -110,7 +110,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'member', 'products']
+        fields = ['id', 'member', 'products', 'is_bought']
 
 
 class PendingSubscriptionSerializer(serializers.ModelSerializer):
