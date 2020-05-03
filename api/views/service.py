@@ -1,14 +1,30 @@
-from rest_framework import viewsets, permissions
+from django.contrib.auth.models import User
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api.models import Course, Internship
-from api.serializers import CourseSerializer, InternshipSerializer
+from api.models import Course, Internship, Instructor
+from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 
 @permission_classes((permissions.AllowAny,))
 class CourseViewSet(viewsets.ViewSet):
+
+    def create(self, request):
+        datas = request.data
+        instructor_id = datas.pop('instructor')
+        time_tables = datas.pop('time_table')
+        new_course = Course.objects.create(**datas)
+        instructor = Instructor.objects.get(id=instructor_id)
+
+        for time_table in time_tables:
+            new_time_table = TimeTable.objects.create(**time_table)
+            new_course.time_table.add(new_time_table)
+
+        new_course.instructor = instructor
+        serializer = CourseSerializer(new_course, many=False)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Course.objects.all()
@@ -34,7 +50,6 @@ class CourseViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         course = Course.objects.get(id=id)
-        course.user.delete()
         course.delete()
 
         return Response({"message": "Course deleted"})
@@ -42,6 +57,22 @@ class CourseViewSet(viewsets.ViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ViewSet):
+
+    def create(self, request):
+        datas = request.data
+        instructor_id = datas.pop('instructor')
+        time_tables = datas.pop('time_table')
+        new_internship = Internship.objects.create(**datas)
+        instructor = Instructor.objects.get(id=instructor_id)
+
+        new_internship.instructor = instructor
+
+        for time_table in time_tables:
+            new_time_table = TimeTable.objects.create(**time_table)
+            new_internship.time_table.add(new_time_table)
+
+        serializer = InternshipSerializer(new_internship, many=False)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Internship.objects.all()
@@ -67,7 +98,6 @@ class InternshipViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         internship = Internship.objects.get(id=id)
-        internship.user.delete()
         internship.delete()
 
         return Response({"message": "Internship deleted"})

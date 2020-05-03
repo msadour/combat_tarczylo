@@ -1,9 +1,9 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api.models import Club, Presentation, ImportantMessage
+from api.models import Club, Presentation, ImportantMessage, TimeTable
 from api.serializers import ClubSerializer, PresentationSerializer, ImportantMessageSerializer
 
 
@@ -14,11 +14,16 @@ class ClubViewSet(viewsets.ViewSet):
         datas = request.data
         new_id = max([club.id for club in Club.objects.all()]) + 1
         datas['id'] = new_id
+        time_tables = datas.pop('time_table')
         new_club = Club.objects.create(**datas)
+
+        for time_table in time_tables:
+            new_time_table = TimeTable.objects.create(**time_table)
+            new_club.time_table.add(new_time_table)
 
         serializer = ClubSerializer(new_club, many=False)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Club.objects.all()[0]
@@ -44,10 +49,9 @@ class ClubViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         club = Club.objects.get(id=id)
-        club.user.delete()
         club.delete()
 
-        return Response({"message": "Club deleted"})
+        return Response({"message": "Club deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
@@ -61,7 +65,7 @@ class PresentationViewSet(viewsets.ViewSet):
 
         serializer = PresentationSerializer(new_presentation, many=False)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Presentation.objects.all()[0]
@@ -71,7 +75,7 @@ class PresentationViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         queryset = Presentation.objects.all()
         presentation = get_object_or_404(queryset, pk=pk)
-        serializer = ImportantMessage(presentation)
+        serializer = ImportantMessageSerializer(presentation)
         return Response(serializer.data)
 
     def patch(self, request, pk=None):
@@ -87,10 +91,9 @@ class PresentationViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         presentation = Presentation.objects.get(id=id)
-        presentation.user.delete()
         presentation.delete()
 
-        return Response({"message": "Presentation deleted"})
+        return Response({"message": "Presentation deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
@@ -104,7 +107,7 @@ class ImportantMessageViewSet(viewsets.ViewSet):
 
         serializer = ImportantMessageSerializer(new_message, many=False)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = ImportantMessage.objects.all()[0]
@@ -114,7 +117,7 @@ class ImportantMessageViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         queryset = ImportantMessage.objects.all()
         message = get_object_or_404(queryset, pk=pk)
-        serializer = ImportantMessage(message)
+        serializer = ImportantMessageSerializer(message)
         return Response(serializer.data)
 
     def patch(self, request, pk=None):
@@ -123,14 +126,13 @@ class ImportantMessageViewSet(viewsets.ViewSet):
         for attr, value in datas.items():
             setattr(important_message, attr, value)
         important_message.save()
-        serializer = PresentationSerializer(important_message)
+        serializer = ImportantMessageSerializer(important_message)
 
         return Response(serializer.data)
 
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         message = ImportantMessage.objects.get(id=id)
-        message.user.delete()
         message.delete()
 
-        return Response({"message": "Message deleted"})
+        return Response({"message": "Message deleted"}, status=status.HTTP_200_OK)

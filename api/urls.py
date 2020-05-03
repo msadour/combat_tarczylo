@@ -8,6 +8,7 @@ from api.views.service import CourseViewSet, InternshipViewSet
 from api.views.club import ClubViewSet, PresentationViewSet, ImportantMessageViewSet
 from api.views.shop import ProductViewSet, OrderViewSet, CategoryViewSet
 from api.views.book import BookViewSet
+from api.views.timetable import TimeTableViewSet
 
 router = DefaultRouter()
 router.register(r'article', ArticleViewSet, basename='article')
@@ -22,6 +23,7 @@ router.register(r'product', ProductViewSet, basename='product')
 router.register(r'category', CategoryViewSet, basename='category')
 router.register(r'order', OrderViewSet, basename='order')
 router.register(r'book', BookViewSet, basename='book')
+router.register(r'time_table', TimeTableViewSet, basename='time_table')
 
 urlpatterns = router.urls
 

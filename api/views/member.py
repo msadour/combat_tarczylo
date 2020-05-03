@@ -1,5 +1,5 @@
 from django.forms import model_to_dict
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -24,7 +24,7 @@ class MemberViewSet(viewsets.ViewSet):
 
         serializer = MemberSerializer(new_member, many=False)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Member.objects.all()
@@ -65,13 +65,14 @@ class InstructorViewSet(viewsets.ViewSet):
         datas['id'] = new_id
         user_data = datas.pop('user')
         new_instructor = Instructor.objects.create(**datas)
+
         user = User.objects.create_user(**user_data)
         new_instructor.user = user
         new_instructor.save()
 
         serializer = MemberSerializer(new_instructor, many=False)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         queryset = Instructor.objects.all()

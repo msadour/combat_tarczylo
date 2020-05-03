@@ -127,8 +127,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    date = models.DateTimeField(null=True, blank=True)
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product)
     is_bought = models.BooleanField(default=False)
     date_creation = models.DateTimeField(null=True, blank=True, default=timezone.now)
