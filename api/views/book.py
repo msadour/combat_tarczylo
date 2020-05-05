@@ -10,6 +10,14 @@ from api.serializers import BookAdvicedSerializer
 @permission_classes((permissions.AllowAny,))
 class BookViewSet(viewsets.ViewSet):
 
+    def create(self, request, *args, **kwargs):
+        datas = request.data
+        new_article = BookAdviced.objects.create(**datas)
+
+        serializer = BookAdvicedSerializer(new_article, many=False)
+
+        return Response(serializer.data, status=201)
+
     def list(self, request):
         queryset = BookAdviced.objects.all()
         serializer = BookAdvicedSerializer(queryset, many=True)
@@ -20,3 +28,20 @@ class BookViewSet(viewsets.ViewSet):
         book = get_object_or_404(queryset, pk=pk)
         serializer = BookAdvicedSerializer(book)
         return Response(serializer.data)
+
+    def patch(self, request, pk=None):
+        datas = request.data
+        book = BookAdviced.objects.get(id=pk)
+        for attr, value in datas.items():
+            setattr(book, attr, value)
+        book.save()
+        serializer = BookAdvicedSerializer(book)
+
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        id = request.data["id"]
+        book = BookAdviced.objects.get(id=id)
+        book.delete()
+
+        return Response({"message": "Book deleted"})
