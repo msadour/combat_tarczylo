@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt import views as jwt_views
 
 from api.views.article import ArticleViewSet
-from api.views.member import MemberViewSet, InstructorViewSet
+from api.views.member import MemberViewSet, InstructorViewSet, LogoutViewSet
 from api.views.service import CourseViewSet, InternshipViewSet
 from api.views.club import ClubViewSet, PresentationViewSet, ImportantMessageViewSet
 from api.views.shop import ProductViewSet, OrderViewSet, CategoryViewSet
@@ -24,11 +24,12 @@ router.register(r'category', CategoryViewSet, basename='category')
 router.register(r'order', OrderViewSet, basename='order')
 router.register(r'book', BookViewSet, basename='book')
 router.register(r'time_table', TimeTableViewSet, basename='time_table')
+router.register(r'logout', LogoutViewSet, basename='logout')
 
 urlpatterns = router.urls
 
 urlpatterns += [
-    # Your URLs...
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    # path('logout', Logout.as_view(), name='logout'),
 ]

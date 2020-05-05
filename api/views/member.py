@@ -1,8 +1,15 @@
-from django.forms import model_to_dict
+
+from django.contrib.auth import (
+    logout as django_logout
+)
+from django.conf import settings
+
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 from api.models import Member, Instructor
@@ -102,3 +109,26 @@ class InstructorViewSet(viewsets.ViewSet):
         instructor.delete()
 
         return Response({"message": "Instructor deleted"})
+
+
+@permission_classes((permissions.AllowAny,))
+class LogoutViewSet(viewsets.ViewSet):
+
+    def create(self, request, *args, **kwargs):
+        return self.logout(request)
+
+    def logout(self, request):
+
+        try:
+            request.user.auth_token.delete()
+        except (AttributeError, ObjectDoesNotExist):
+            pass
+        if getattr(settings, 'REST_SESSION_LOGIN', True):
+            django_logout(request)
+
+        response = Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
+        # if getattr(settings, 'REST_USE_JWT', False):
+        #     from rest_framework_jwt.settings import api_settings as jwt_settings
+        #     if jwt_settings.JWT_AUTH_COOKIE:
+        #         response.delete_cookie(jwt_settings.JWT_AUTH_COOKIE)
+        return response
