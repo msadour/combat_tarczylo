@@ -20,17 +20,20 @@ class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        axios.post('/api_tct/api/token/', { "username": this.state.username, "password": this.state.password})
+        axios.post('/api_tct/api-token-auth/', { "username": this.state.username, "password": this.state.password})
         .then(res => {
-            localStorage.setItem('jwt', res.data["access"]);
+            console.log(res.data)
+            localStorage.setItem('token', res.data["token"]);
+            localStorage.setItem('member_id', res.data["member_id"]);
             localStorage.setItem('username', this.state.username);
             this.props.history.push("/")
             window.location.reload();
         })
         .catch(err => {
-            localStorage.removeItem('jwt');
+            localStorage.removeItem('token');
             localStorage.removeItem('username');
             this.props.history.push("/authentication");
+            console.log(err)
         });
     }
 

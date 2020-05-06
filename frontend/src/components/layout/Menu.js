@@ -8,7 +8,7 @@ import MenuMember from "./menus/MenuMember"
 class Menu extends Component {
     render() {
 
-        if (localStorage.getItem('jwt')) {
+        if (localStorage.getItem('token')) {
             return <MenuMember />
         } else {
             return <MenuGuest />

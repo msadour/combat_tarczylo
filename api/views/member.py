@@ -6,18 +6,46 @@ from django.conf import settings
 
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, permissions, status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from rest_framework.views import APIView
 
 from api.models import Member, Instructor
 from api.serializers import MemberSerializer, InstructorSerializer
 
+#
+# class MemberDetailViewSet(APIView):
+#
+#     def post(self, request, *args, **kwargs):
+#         user = Token.objects.get(key=request.data['jwt']).user
+#         print(user)
+
+
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        member = Member.objects.get(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'username': member.user.username,
+            'member_id': member.id
+        })
+
 
 @permission_classes((permissions.AllowAny,))
 class MemberViewSet(viewsets.ViewSet):
+
+    authentication_classes = (TokenAuthentication,)
 
     def create(self, request, *args, **kwargs):
         datas = request.data
@@ -34,11 +62,12 @@ class MemberViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
+        print(request.user)
         queryset = Member.objects.all()
         serializer = MemberSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, pk=None, username=None):
         queryset = Member.objects.all()
         member = get_object_or_404(queryset, pk=pk)
         serializer = MemberSerializer(member)

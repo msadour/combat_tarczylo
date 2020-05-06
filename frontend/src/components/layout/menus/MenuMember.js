@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import { BrowserRouter, Link } from "react-router-dom";
 import axios from 'axios';
 
+import MemberProfile from "../../pages/member/MemberProfile"
+
 class MenuMember extends Component {
 
     constructor(props){
@@ -14,7 +16,7 @@ class MenuMember extends Component {
         e.preventDefault();
         axios.post('/api_tct/logout/')
         .then(res => {
-            localStorage.removeItem('jwt');
+            localStorage.removeItem('token');
             localStorage.removeItem('username');
         })
         window.location.reload();
@@ -32,8 +34,9 @@ class MenuMember extends Component {
                       </li>
 
                       <li className="nav-item active">
-                        <p className="nav-link">Profile</p>
-
+                        <Link to='/member_profile' className="nav-link">
+                            <p className="nav-link">Profile</p>
+                        </Link>
                       </li>
 
                       <li className="nav-item">
