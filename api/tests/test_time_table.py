@@ -1,5 +1,9 @@
 from __future__ import absolute_import
-import os ; os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
+import os ;
+
+from api.tests.factories.member import MemberFactory
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
 import django ; django.setup()
 
 from rest_framework import status
@@ -17,7 +21,7 @@ class TimeTableTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.time_table = TimeTableFactory(day='saturday', from_hour='10:00:00', to_hour='17:00:00', year=2020)
 

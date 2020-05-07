@@ -1,5 +1,12 @@
 
 from django.contrib.auth import (
+    logout as django_logout, authenticate, get_user_model
+)
+from django.conf import settings
+
+from django.core.exceptions import ObjectDoesNotExist
+
+from django.contrib.auth import (
     logout as django_logout
 )
 from django.conf import settings
@@ -12,11 +19,13 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 
 from api.models import Member, Instructor
-from api.serializers import MemberSerializer, InstructorSerializer
+from api.serializers import MemberSerializer, InstructorSerializer, AuthTokenSerializer
+
 
 #
 # class MemberDetailViewSet(APIView):
@@ -27,18 +36,20 @@ from api.serializers import MemberSerializer, InstructorSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
+    authentication_classes = [TokenAuthentication]
+
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+
+        serializer = AuthTokenSerializer()
+        user = serializer.validate(attrs=request.data)
+
         token, created = Token.objects.get_or_create(user=user)
-        member = Member.objects.get(user=user)
+        # member = Member.objects.get(user=user)
         return Response({
             'token': token.key,
-            'user_id': user.pk,
-            'username': member.user.username,
-            'member_id': member.id
+            # 'user_id': user.pk,
+            'username': user.username,
+            'member_id': user.id
         })
 
 
@@ -51,10 +62,7 @@ class MemberViewSet(viewsets.ViewSet):
         datas = request.data
         new_id = max([member.id for member in Member.objects.all()]) + 1
         datas['id'] = new_id
-        user_data = datas.pop('user')
         new_member = Member.objects.create(**datas)
-        user = User.objects.create_user(**user_data)
-        new_member.user = user
         new_member.save()
 
         serializer = MemberSerializer(new_member, many=False)
@@ -62,7 +70,6 @@ class MemberViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        print(request.user)
         queryset = Member.objects.all()
         serializer = MemberSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -86,7 +93,6 @@ class MemberViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         member = Member.objects.get(id=id)
-        member.user.delete()
         member.delete()
 
         return Response({"message": "Member deleted"})
@@ -99,11 +105,7 @@ class InstructorViewSet(viewsets.ViewSet):
         datas = request.data
         new_id = max([instructor.id for instructor in Instructor.objects.all()]) + 1
         datas['id'] = new_id
-        user_data = datas.pop('user')
         new_instructor = Instructor.objects.create(**datas)
-
-        user = User.objects.create_user(**user_data)
-        new_instructor.user = user
         new_instructor.save()
 
         serializer = MemberSerializer(new_instructor, many=False)
@@ -134,7 +136,6 @@ class InstructorViewSet(viewsets.ViewSet):
     def delete(self, request, *args, **kwargs):
         id = request.data["id"]
         instructor = Instructor.objects.get(id=id)
-        instructor.user.delete()
         instructor.delete()
 
         return Response({"message": "Instructor deleted"})

@@ -1,6 +1,10 @@
 from __future__ import absolute_import
 
 import os
+
+from api.models import Member
+from api.tests.factories.member import MemberFactory
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
 import django
 django.setup()
@@ -20,7 +24,7 @@ class ArticleTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.article = ArticleFactory()
 

@@ -15,14 +15,14 @@ class CourseViewSet(viewsets.ViewSet):
         datas = request.data
         instructor_id = datas.pop('instructor')
         time_tables = datas.pop('time_table')
-        new_course = Course.objects.create(**datas)
         instructor = Instructor.objects.get(id=instructor_id)
+        datas['instructor'] = instructor
+        new_course = Course.objects.create(**datas)
 
         for time_table in time_tables:
             new_time_table = TimeTable.objects.create(**time_table)
             new_course.time_table.add(new_time_table)
 
-        new_course.instructor = instructor
         serializer = CourseSerializer(new_course, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -61,11 +61,10 @@ class InternshipViewSet(viewsets.ViewSet):
     def create(self, request):
         datas = request.data
         instructor_id = datas.pop('instructor')
+        instructor = Instructor.objects.get(id=instructor_id)
+        datas['instructor_id'] = instructor.id
         time_tables = datas.pop('time_table')
         new_internship = Internship.objects.create(**datas)
-        instructor = Instructor.objects.get(id=instructor_id)
-
-        new_internship.instructor = instructor
 
         for time_table in time_tables:
             new_time_table = TimeTable.objects.create(**time_table)

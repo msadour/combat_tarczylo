@@ -1,14 +1,12 @@
 import datetime
-from django.utils import timezone
 
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.utils import timezone
 from django.forms.models import model_to_dict
 from django.db import models
-from django.contrib.auth.models import User
-from django.utils.timezone import now
+from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
 
-
-# class IPVisitor(models.Model):
-#     pass
+from api.managers import CustomUserManager
 
 
 class BookAdviced(models.Model):
@@ -54,9 +52,12 @@ class Club(models.Model):
     time_table = models.ManyToManyField(TimeTable)
 
 
-class Member(models.Model):
-    user = models.ForeignKey(User, related_name='member', on_delete=models.CASCADE, null=True)
+class Member(AbstractBaseUser, PermissionsMixin): # AbstractUser
+    email = models.EmailField(max_length=255, unique=True)
+    username = models.CharField(max_length=255, unique=True)
     postal_code = models.CharField(max_length=255, blank=True)
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=True)
     street = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
@@ -67,18 +68,17 @@ class Member(models.Model):
     sex = models.CharField(max_length=255, blank=True)
     level = models.CharField(max_length=255, blank=True)
 
-    def get_user(self):
-        return model_to_dict(self.user)
+    USERNAME_FIELD = 'username'
+
+    # objects = UserManager()
+    objects = CustomUserManager()
 
     def get_full_name(self):
-        return self.user.first_name + " " + self.user.last_name
+        return self.first_name + " " + self.last_name
 
 
 class Instructor(Member):
     biography = models.CharField(max_length=255, blank=True)
-
-    def get_user(self):
-        return model_to_dict(self.user)
 
 
 class Course(models.Model):

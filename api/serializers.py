@@ -1,5 +1,8 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate
 from rest_framework import serializers
+
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import *
@@ -50,21 +53,23 @@ class ClubSerializer(serializers.ModelSerializer):
 
 class MemberSerializer(serializers.ModelSerializer):
 
-    user = serializers.CharField(source="get_user")
+    full_name = serializers.CharField(source="get_full_name")
 
     class Meta:
         model = Member
-        fields = ['id', 'user', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
-                  'birthday', 'sex', 'level']
+        fields = ['id', 'email', 'username','password', 'first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
+                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'full_name', 'is_active']
 
 
 class InstructorSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source="get_user")
+
+    full_name = serializers.CharField(source="get_full_name")
 
     class Meta:
         model = Instructor
-        fields = ['id', 'user', 'postal_code', 'city', 'street', 'country', 'phone', 'insurance_name', 'insurance_number',
-                  'birthday', 'sex', 'level', 'biography']
+        fields = ['id', 'email', 'password','first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
+                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'biography', 'full_name',
+                  'is_active']
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -121,3 +126,39 @@ class PendingSubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PendingSubscription
         fields = ['id', 'email', 'first_name', 'last_name', 'birthday', 'sex', 'date_creation']
+
+
+class AuthTokenSerializer(serializers.Serializer):
+    """Serializer for the user authentication object.
+
+    Attributes:
+        email (str):
+        password (str):
+    """
+
+    username = serializers.CharField()
+    password = serializers.CharField(style={"input_type": "password"}, trim_whitespace=False)
+
+    def authenticate_user(self, username=None, password=None):
+        try:
+            # Try to find a user matching your username
+            user = Member.objects.get(username=username)
+
+            if check_password(password, user.password):
+                return user
+            else:
+                return None
+        except:
+            return None
+
+    def validate(self, attrs):
+
+        username = attrs.get("username")
+        password = attrs.get("password")
+
+        user = self.authenticate_user(username=username, password=password)
+        if not user:
+            msg = "Unable to authenticate with provided credentials"
+            raise serializers.ValidationError(msg, code="authorization")
+
+        return user
