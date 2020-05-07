@@ -5,6 +5,13 @@ from django.contrib.auth import (
 from django.conf import settings
 
 from django.core.exceptions import ObjectDoesNotExist
+
+from django.contrib.auth import (
+    logout as django_logout
+)
+from django.conf import settings
+
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -12,6 +19,9 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
 
 from api.models import Member, Instructor
 from api.serializers import MemberSerializer, InstructorSerializer, AuthTokenSerializer
