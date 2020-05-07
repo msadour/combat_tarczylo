@@ -70,7 +70,6 @@ class Member(AbstractBaseUser, PermissionsMixin): # AbstractUser
 
     USERNAME_FIELD = 'username'
 
-    # objects = UserManager()
     objects = CustomUserManager()
 
     def get_full_name(self):

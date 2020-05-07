@@ -19,8 +19,6 @@ class FormField extends Component {
         e.preventDefault();
         const member_id = localStorage.getItem("member_id");
 
-        alert(this.props.field)
-
         switch(this.props.field) {
             case "first_name":
                   axios.patch('/api_tct/member/' + member_id + '/', { "first_name" : this.state.new_value })

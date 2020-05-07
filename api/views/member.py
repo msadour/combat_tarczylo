@@ -60,7 +60,7 @@ class MemberViewSet(viewsets.ViewSet):
         datas = request.data
         new_id = max([member.id for member in Member.objects.all()]) + 1
         datas['id'] = new_id
-        new_member = Member.objects.create(**datas)
+        new_member = Member.objects.create_user(**datas)
         new_member.save()
 
         serializer = MemberSerializer(new_member, many=False)
