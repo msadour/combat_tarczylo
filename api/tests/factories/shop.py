@@ -2,7 +2,6 @@ import factory
 
 from api.models import Category, Product, Order
 from api.tests.factories.member import MemberFactory
-from api.tests.factories.user import UserFactory
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):

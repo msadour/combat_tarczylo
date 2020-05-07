@@ -1,9 +1,8 @@
 from random import random
 
 import factory
+from django.contrib.auth.models import User
 from factory.faker import faker
-
-from api.models import User
 
 FAKE = faker.Faker()
 

@@ -1,12 +1,21 @@
 import factory
+from factory.faker import faker
 
 from api.models import Member, Instructor
-from api.tests.factories.user import UserFactory
+
+FAKE = faker.Faker()
+
+
+def generate_username(*args):
+    """ returns a random username """
+    return FAKE.profile(fields=['username'])['username']
 
 
 class MemberFactory(factory.django.DjangoModelFactory):
 
-    user = factory.SubFactory(UserFactory)
+    username = factory.LazyAttribute(generate_username)
+    email = factory.LazyAttribute(generate_username)
+    password = 'qwertz'
     postal_code = "75019"
     city = "Paris"
     street = "street test"
@@ -24,7 +33,9 @@ class MemberFactory(factory.django.DjangoModelFactory):
 
 class InstructorFactory(factory.django.DjangoModelFactory):
 
-    user = factory.SubFactory(UserFactory)
+    username = factory.LazyAttribute(generate_username)
+    email = factory.LazyAttribute(generate_username)
+    password = 'qwertz'
     postal_code = "75019"
     city = "Paris"
     street = "street test"

@@ -1,6 +1,9 @@
 from __future__ import absolute_import
 
 import os
+
+from api.tests.factories.member import MemberFactory
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
 import django
 django.setup()
@@ -8,7 +11,6 @@ django.setup()
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from api.tests.factories.user import UserFactory
 from api.tests.factories.book import BookAdvicedFactory
 
 client = APIClient()
@@ -20,7 +22,7 @@ class BookAdvicedTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.book = BookAdvicedFactory()
 

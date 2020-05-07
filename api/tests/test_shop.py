@@ -28,7 +28,7 @@ class CategoryTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.category = CategoryFactory()
 
@@ -77,7 +77,7 @@ class ProductTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.product = ProductFactory()
 
@@ -135,7 +135,7 @@ class OrderTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.order = OrderFactory()
         self.order.products.add(ProductFactory())
@@ -180,7 +180,7 @@ class OrderTestCase(APITestCase):
 
         order = OrderFactory.create(
             date_creation="2020-04-20 10:00:00",
-            member=MemberFactory(user=UserFactory()),
+            member=MemberFactory(),
             products=(ProductFactory(), ProductFactory()),
             is_bought=False
         )
