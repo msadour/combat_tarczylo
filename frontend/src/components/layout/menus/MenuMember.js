@@ -18,8 +18,10 @@ class MenuMember extends Component {
         .then(res => {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
+            localStorage.removeItem('member_id');
         })
         window.location.reload();
+        this.props.history.push("/");
     }
 
     render() {

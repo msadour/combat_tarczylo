@@ -44,10 +44,8 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validate(attrs=request.data)
 
         token, created = Token.objects.get_or_create(user=user)
-        # member = Member.objects.get(user=user)
         return Response({
             'token': token.key,
-            # 'user_id': user.pk,
             'username': user.username,
             'member_id': user.id
         })
@@ -84,7 +82,10 @@ class MemberViewSet(viewsets.ViewSet):
         datas = request.data
         member = Member.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(member, attr, value)
+            if attr == "password":
+                member.set_password(value)
+            else:
+                setattr(member, attr, value)
         member.save()
         serializer = MemberSerializer(member)
 

@@ -12,7 +12,6 @@ django.setup()
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from api.tests.factories.user import UserFactory
 from api.tests.factories.article import ArticleFactory
 
 client = APIClient()
