@@ -1,15 +1,57 @@
-[
-  {
-    "pk": 1,
-    "model": "api.club",
-    "fields": {
-      "text": "Presentation du club, des cours ....."
+{
+
+  "BookAdviced" : [
+    {
+      "name": "Book 1",
+      "author": "author 1",
+      "category": "category 1",
+      "url": "cat1.com"
+    },
+    {
+      "name": "Book 2",
+      "author": "author 2",
+      "category": "category 2",
+      "url": "cat2.com"
+    },
+    {
+      "name": "Book 3",
+      "author": "author 3",
+      "category": "category 3",
+      "url": "cat3.com"
     }
-  },
-  {
-    "pk": 1,
-    "model": "api.club",
-    "fields": {
+  ],
+
+  "Article" : [
+    {
+      "title": "title1",
+      "content": "blablabla......",
+      "category": "cat1"
+    },
+
+    {
+      "title": "title2",
+      "content": "blablalbalba salut",
+      "category": "cat2"
+    }
+  ],
+
+  "ImportantMessage" : [
+    {
+      "content": "This is a important message"
+    }
+  ],
+
+  "Presentation": [
+    {
+      "tct": "TCT is a club .....",
+      "darius": "Darius is .....",
+      "technical": "The technicals are ...."
+    }
+  ],
+
+  "Club" : [
+    {
+      "id": 1,
       "name": "Club TCT",
       "description": "Description du club",
       "street": "rue du club",
@@ -19,63 +61,45 @@
       "country": "Germany",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "18:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "18:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
         },
 
         {
-          "pk": 3,
-          "model": "api.club",
-          "fields": {
-            "day": "wednesday",
-            "from_hour": "10:00:00",
-            "to_hour": "17:00:00"
-          }
+          "day": "wednesday",
+          "from_hour": "10:00:00",
+          "to_hour": "17:00:00"
         },
 
         {
-          "pk": 4,
-          "model": "api.club",
-          "fields": {
-            "day": "friday",
-            "from_hour": "10:00:00",
-            "to_hour": "19:00:00"
-          }
+          "day": "friday",
+          "from_hour": "10:00:00",
+          "to_hour": "19:00:00"
         },
         {
-          "pk": 5,
-          "model": "api.club",
-          "fields": {
-            "day": "saturday",
-            "from_hour": "10:00:00",
-            "to_hour": "16:00:00"
-          }
+          "day": "saturday",
+          "from_hour": "10:00:00",
+          "to_hour": "16:00:00"
         }
       ]
     }
-  },
-  {
-    "pk": 1,
-    "model": "api.member",
-    "fields": {
-      "username": "member1@gmail.com",
+  ],
+
+  "Member" : [
+    {
+      "id": 2,
       "email": "member1@gmail.com",
+      "username": "member1@gmail.com",
       "password": "qwertz",
+      "first_name": "fname1",
+      "last_name": "lname1",
       "postal_code": "13051",
       "city": "berlin",
       "street": "rue du membre 1",
@@ -86,15 +110,15 @@
       "birthday": "25/05/1992 10:00:00",
       "sex": "male",
       "level": "white"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "api.member",
-    "fields": {
-      "username": "member2@gmail.com",
+    },
+
+    {
+      "id": 3,
       "email": "member2@gmail.com",
+      "username": "member2@gmail.com",
       "password": "qwertz",
+      "first_name": "fname2",
+      "last_name": "lname2",
       "postal_code": "75019",
       "city": "paris",
       "street": "rue du membre 2",
@@ -103,17 +127,17 @@
       "insurance_name": "insurencemember1",
       "insurance_number": "123456",
       "birthday": "20/05/1992 10:00:00",
-      "gender": "female",
+      "sex": "female",
       "level": "green"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "api.member",
-    "fields": {
-      "username": "member3@gmail.com",
+    },
+
+    {
+      "id": 4,
       "email": "member3@gmail.com",
+      "username": "member3@gmail.com",
       "password": "qwertz",
+      "first_name": "fname3",
+      "last_name": "lname3",
       "postal_code": "88888",
       "city": "varsovie",
       "street": "rue du membre 3",
@@ -122,18 +146,19 @@
       "insurance_name": "insurencemember1",
       "insurance_number": "123456",
       "birthday": "20/05/1992 10:00:00",
-      "gender": "male",
+      "sex": "male",
       "level": "brown"
     }
-  },
+  ],
 
-  {
-    "pk": 1,
-    "model": "api.instructor",
-    "fields": {
-      "username": "instructor@gmail.com",
+  "Instructor" : [
+    {
+      "id": 1,
       "email": "instructor@gmail.com",
+      "username": "instructor@gmail.com",
       "password": "qwertz",
+      "first_name": "Darius",
+      "last_name": "Tarczylo",
       "postal_code": "88888",
       "city": "varsovie",
       "street": "rue de l'instructor 3",
@@ -143,303 +168,215 @@
       "insurance_number": "123456",
       "birthday": "20/05/1990 10:00:00",
       "sex": "male",
-      "rank": "black",
       "level": "black",
       "biography": "biography instructor"
     }
-  },
+  ],
 
-  {
-    "pk": 1,
-    "model": "api.course",
-    "fields": {
+  "Course" : [
+    {
+      "id": 1,
       "name": "fight",
       "description": "fight hand and foot",
       "level": "white",
       "category": "men",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
-    }
-  },
+    },
+
     {
-    "pk": 2,
-    "model": "api.course",
-    "fields": {
+      "id": 2,
       "name": "fight",
       "description": "fight hand and foot",
       "level": "black",
       "category": "men",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "18:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "18:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
         }
       ],
       "instructor": 1
-    }
-  },
-  {
-    "pk": 3,
-    "model": "api.course",
-    "fields": {
+    },
+
+    {
+      "id": 3,
       "name": "fight",
       "description": "fight knife",
       "level": "orange",
       "category": "men",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
-    }
-  },
+    },
+
     {
-    "pk": 4,
-    "model": "api.course",
-    "fields": {
+      "id": 4,
       "name": "fight",
       "description": "fight knife",
       "level": "orange",
       "category": "women",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
-    }
-  },
+    },
 
-  {
-    "pk": 5,
-    "model": "api.course",
-    "fields": {
+    {
+      "id": 5,
       "name": "fight",
       "description": "fight on the ground",
       "level": "blue",
       "category": "women",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
-    }
-  },
+    },
 
-  {
-    "pk": 6,
-    "model": "api.course",
-    "fields": {
+    {
+      "id": 6,
       "name": "general",
       "description": "general fight description",
       "level": "white",
       "category": "kid",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "monday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "tuesday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
     }
-  },
+  ],
 
-  {
-    "pk": 1,
-    "model": "api.internship",
-    "fields": {
+  "Internship" : [
+    {
       "name": "general",
       "description": "general fight description",
       "level": "all",
       "category": "kid",
       "time_table": [
         {
-          "pk": 1,
-          "model": "api.timetable",
-          "fields": {
-            "day": "Friday",
-            "from_hour": "10:00:00",
-            "to_hour": "11:00:00"
-          }
+          "day": "Friday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
         },
 
         {
-          "pk": 2,
-          "model": "api.club",
-          "fields": {
-            "day": "saturday",
-            "from_hour": "14:00:00",
-            "to_hour": "16:00:00"
-          }
+          "day": "saturday",
+          "from_hour": "14:00:00",
+          "to_hour": "16:00:00"
         }
       ],
       "instructor": 1,
-      "date_begin": "04/20/2020 10:00:00",
-      "date_end": "04/20/2020 10:00:00",
+      "date_begin": "2020-04-20 10:00:00",
+      "date_end": "2020-04-20 10:00:00",
       "price": 100,
       "theme": "knife"
     }
-  },
+  ],
 
-  {
-    "pk": 1,
-    "model": "api.category",
-    "fields": {
-        "name": "T-shirt"
+  "Category" : [
+    {
+      "id": 1,
+      "name": "T-shirt"
+    },
+
+    {
+      "id": 2,
+      "name": "Patch"
     }
-  },
+  ],
 
-  {
-    "pk": 2,
-    "model": "api.category",
-    "fields": {
-        "name": "Patch"
-    }
-  },
-
-  {
-    "pk": 1,
-    "model": "api.product",
-    "fields": {
+  "Product" : [
+    {
       "name": "t shirt black",
       "price": 15,
       "quantity_available": 3,
       "size": "M",
       "category": 1
-    }
-  },
-  {
-    "pk": 2,
-    "model": "api.product",
-    "fields": {
+    },
+
+    {
       "name": "t shirt white",
       "price": 15,
       "quantity_available": 3,
       "size": "L",
       "category": 1
-      }
-  },
+    },
 
     {
-    "pk": 1,
-    "model": "api.product",
-    "fields": {
       "name": "patch white",
       "price": 15,
       "quantity_available": 3,
       "size": "little",
       "category": 2
-      }
-  },
+    },
+
     {
-    "pk": 1,
-    "model": "api.product",
-    "fields": {
       "name": "patch white",
       "price": 15,
       "quantity_available": 3,
       "size": "big",
       "category": 2
-      }
-  }
-]
+    }
+  ]
+}

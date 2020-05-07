@@ -2,7 +2,24 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 
 class Subscription extends Component {
+
+    state = {
+        username: "",
+        email: "",
+        password: "",
+        password_again: "",
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        console.log('submit')
+    }
+
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
+
     render() {
+
+        const{username, email, password, password_again} = this.state
 
         return (
             <div className="col-md-6 m-auto">

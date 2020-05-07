@@ -30,7 +30,6 @@ class Command(BaseCommand):
             Presentation.objects.all().delete()
             TimeTable.objects.all().delete()
             Club.objects.all().delete()
-            User.objects.all().delete()
             Member.objects.all().delete()
             Instructor.objects.all().delete()
             Course.objects.all().delete()
@@ -40,7 +39,7 @@ class Command(BaseCommand):
             Order.objects.all().delete()
             PendingSubscription.objects.all().delete()
 
-        datas_files = BASE_DIR + "/commands/data/database_test.json"
+        datas_files = BASE_DIR + "/commands/data/data.json"
         # delete_data()
         with open(datas_files) as json_file:
             try:
@@ -57,10 +56,7 @@ class Command(BaseCommand):
                                 new_object.time_table.add(time_table)
 
                         elif model in ['Member', 'Instructor']:
-                            user_data = datas.pop('user')
-                            new_object = apps.get_model('api', model)(**datas)
-                            user = User.objects.create_user(**user_data)
-                            new_object.user = user
+                            new_object = apps.get_model('api', model).objects.create_user(**datas)
                             new_object.save()
 
                         elif model in ['Course', 'Internship']:

@@ -27,9 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
-
-# AUTH_USER_MODEL = "api.Member"
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    "rest_auth.registration",
     'frontend',
     'api'
 ]
@@ -77,9 +76,19 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.DjangoModelPermissions',
     # ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
 }
+
+AUTH_USER_MODEL = 'api.Member'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+SITE_ID = 1
+
 
 WSGI_APPLICATION = 'combat_tarczylo.wsgi.application'
 

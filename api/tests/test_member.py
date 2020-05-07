@@ -21,9 +21,8 @@ class MemberTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
-        self.client.force_authenticate(user=self.user_test)
-        self.member = MemberFactory(user=UserFactory())
+        self.member = MemberFactory()
+        self.client.force_authenticate(user=self.member)
 
     def test_list(self):
         response = self.client.get(url_member)
@@ -38,11 +37,11 @@ class MemberTestCase(APITestCase):
     def test_create(self):
 
         data_member = '''{
-          "user": {
-            "username": "member7@gmail.com",
-            "email": "member7@gmail.com",
-            "password": "qwertz"
-          },
+          "username": "member7@gmail.com",
+          "email": "member7@gmail.com",
+          "password": "qwertz",
+          "first_name": "fname2",
+          "last_name": "lname2",
           "postal_code": "13051",
           "city": "berlin",
           "street": "rue du membre 4",
@@ -82,9 +81,9 @@ class InstructorTestCase(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user_test = UserFactory()
+        self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
-        self.instructor = InstructorFactory(user=UserFactory())
+        self.instructor = InstructorFactory()
 
     def test_list(self):
         response = self.client.get(url_instructor)
@@ -99,7 +98,11 @@ class InstructorTestCase(APITestCase):
     def test_create(self):
 
         data_instructor = '''{
-            "user": {"username": "test", "email": "test@gmail.com", "password": "qwertz"},
+            "username": "instructor@gmail.com",
+            "email": "instructor@gmail.com",
+            "password": "qwertz",
+            "first_name": "fname2",
+            "last_name": "lname2",
             "postal_code": "88888",
             "city": "varsovie",
             "street": "rue du membre 3",

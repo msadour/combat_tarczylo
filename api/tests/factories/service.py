@@ -3,7 +3,6 @@ import factory
 from api.models import Course, Internship
 from .member import InstructorFactory
 from .timetable import TimeTableFactory
-from .user import UserFactory
 
 
 class CourseFactory(factory.django.DjangoModelFactory):
