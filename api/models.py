@@ -52,7 +52,7 @@ class Club(models.Model):
     time_table = models.ManyToManyField(TimeTable)
 
 
-class Member(AbstractBaseUser, PermissionsMixin): # AbstractUser
+class Member(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
     postal_code = models.CharField(max_length=255, blank=True)
@@ -70,7 +70,6 @@ class Member(AbstractBaseUser, PermissionsMixin): # AbstractUser
 
     USERNAME_FIELD = 'username'
 
-    # objects = UserManager()
     objects = CustomUserManager()
 
     def get_full_name(self):

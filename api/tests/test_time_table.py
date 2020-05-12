@@ -49,7 +49,7 @@ class TimeTableTestCase(APITestCase):
 
     def test_delete(self):
 
-        response = self.client.delete(url, data={'id': str(self.time_table.id)})
+        response = self.client.delete(url + str(self.time_table.id) + '/')
 
         self.assertEqual(response.status_code, 200)
 

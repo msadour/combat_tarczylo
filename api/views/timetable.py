@@ -38,9 +38,7 @@ class TimeTableViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        article = TimeTable.objects.get(id=id)
-        article.delete()
+    def delete(self, request, pk=None):
+        TimeTable.objects.get(id=pk).delete()
 
-        return Response({"message": "Article deleted"}, status=status.HTTP_200_OK)
+        return Response({"message": "TimeTable deleted"}, status=status.HTTP_200_OK)

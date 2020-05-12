@@ -52,10 +52,9 @@ class CategoryTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url_category, data={'id': str(self.category.id)})
+        response = self.client.delete(url_category + str(self.category.id) + '/')
 
-        request = self.client.get(url_category).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
         # Create a book
@@ -109,10 +108,9 @@ class ProductTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url_product, data={'id': str(self.product.id)})
+        response = self.client.delete(url_product + str(self.product.id) + '/')
 
-        request = self.client.get(url_product).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
 
@@ -168,10 +166,9 @@ class OrderTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url_order, data={'id': str(self.order.id)})
+        response = self.client.delete(url_order + str(self.order.id) + '/')
 
-        request = self.client.get(url_order).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
         # Create a book

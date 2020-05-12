@@ -15,6 +15,20 @@ import Presentation from "./pages/presentation/Presentation";
 import Shop from "./pages/shop/Shop";
 import TrainingPage from "./pages/training/TrainingPage";
 import LookingFor from "./pages/looking_for/LookingFor";
+import AdminPanel from "./pages/admin_panel/AdminPanel";
+
+import ArticleManager from "./pages/admin_panel/items/ArticleManager"
+import BookManager from "./pages/admin_panel/items/BookManager"
+import CategoryManager from "./pages/admin_panel/items/CategoryManager"
+import ClubManager from "./pages/admin_panel/items/ClubManager"
+import CourseManager from "./pages/admin_panel/items/CourseManager"
+import InternshipManager from "./pages/admin_panel/items/InternshipManager"
+import MemberManager from "./pages/admin_panel/items/MemberManager"
+import MessageManager from "./pages/admin_panel/items/MessageManager"
+import PresentationManager from "./pages/admin_panel/items/PresentationManager"
+import ProductManager from "./pages/admin_panel/items/ProductManager"
+
+
 
 import './style.css';
 
@@ -37,6 +51,17 @@ class App extends Component {
                                 <Route exact path='/shop' component={Shop} />
                                 <Route exact path='/looking_for' component={LookingFor} />
                                 <Route exact path='/training' component={TrainingPage} />
+
+                                <Route exact path='/admin_panel_member' component={MemberManager} />
+                                <Route exact path='/admin_panel_article' component={ArticleManager} />
+                                <Route exact path='/admin_panel_presentation' component={PresentationManager} />
+                                <Route exact path='/admin_panel_product' component={ProductManager} />
+                                <Route exact path='/admin_panel_product_category' component={CategoryManager} />
+                                <Route exact path='/admin_panel_course' component={CourseManager} />
+                                <Route exact path='/admin_panel_internship' component={InternshipManager}  />
+                                <Route exact path='/admin_panel_important_message' component={MessageManager} />
+                                <Route exact path='/admin_panel_club' component={ClubManager} />
+                                <Route exact path='/admin_panel_book' component={BookManager} />
                             </Switch>
                         </div>
                     </Fragment>
