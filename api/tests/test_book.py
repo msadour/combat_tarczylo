@@ -50,10 +50,9 @@ class BookAdvicedTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url, data={'id': str(self.book.id)})
+        response = self.client.delete(url + str(self.book.id) + '/')
 
-        request = self.client.get(url).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
         # Create a book

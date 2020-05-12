@@ -21,54 +21,53 @@ class FormField extends Component {
 
         switch(this.props.field) {
             case "first_name":
-                  axios.patch('/api_tct/member/' + member_id + '/', { "first_name" : this.state.new_value })
-                  .then(res => {
-                    window.location.reload();
-                    });
-                    break;
-
+              axios.patch('/api_tct/member/' + member_id + '/', { "first_name" : this.state.new_value })
+              .then(res => {
+                window.location.reload();
+            });
+            break;
 
             case "last_name":
               axios.patch('/api_tct/member/' + member_id + '/', { "last_name": this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
             case "email":
               axios.patch('/api_tct/member/' + member_id + '/', { "email" : this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
-              case "password":
+            case "password":
               axios.patch('/api_tct/member/' + member_id + '/', { "password": this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
-              case "postal_code":
+            case "postal_code":
               axios.patch('/api_tct/member/' + member_id + '/', { "postal_code" : this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
             case "city":
               axios.patch('/api_tct/member/' + member_id + '/', { "city" : this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
             case "street":
               axios.patch('/api_tct/member/' + member_id + '/', { "street" : this.state.new_value })
               .then(res => {
                 window.location.reload();
              });
-             break;
+            break;
 
             case "country":
               axios.patch('/api_tct/member/' + member_id + '/', { "country" : this.state.new_value })

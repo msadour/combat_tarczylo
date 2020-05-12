@@ -4,12 +4,18 @@ import { BrowserRouter, Link } from "react-router-dom";
 
 import MenuGuest from "./menus/MenuGuest"
 import MenuMember from "./menus/MenuMember"
+import MenuAdmin from "./menus/MenuAdmin"
 
 class Menu extends Component {
     render() {
 
         if (localStorage.getItem('token')) {
-            return <MenuMember />
+            if (localStorage.getItem('username') == 'instructor@gmail.com'){
+                return <MenuAdmin />
+            } else {
+                return <MenuMember />
+            }
+
         } else {
             return <MenuGuest />
         }

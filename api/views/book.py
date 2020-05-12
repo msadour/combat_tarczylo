@@ -1,8 +1,9 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
+from api.features import get_max_id
 from api.models import BookAdviced
 from api.serializers import BookAdvicedSerializer
 
@@ -12,6 +13,7 @@ class BookViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
+        datas['id'] = get_max_id('BookAdviced')
         new_article = BookAdviced.objects.create(**datas)
 
         serializer = BookAdvicedSerializer(new_article, many=False)
@@ -39,9 +41,6 @@ class BookViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        book = BookAdviced.objects.get(id=id)
-        book.delete()
-
-        return Response({"message": "Book deleted"})
+    def delete(self, request, pk=None):
+        BookAdviced.objects.get(id=pk).delete()
+        return Response({"message": "BookAdviced deleted"}, status=status.HTTP_200_OK)

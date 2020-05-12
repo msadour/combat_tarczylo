@@ -59,10 +59,9 @@ class MemberTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url_member, data={'id': str(self.member.id)})
+        response = self.client.delete(url_member + str(self.member.id) + '/')
 
-        request = self.client.get(url_member).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
 
@@ -121,10 +120,9 @@ class InstructorTestCase(APITestCase):
 
     def test_delete(self):
 
-        self.client.delete(url_instructor, data={'id': str(self.instructor.id)})
+        response = self.client.delete(url_instructor + str(self.instructor.id) + '/')
 
-        request = self.client.get(url_instructor).data
-        self.assertEqual(len(request), 0)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
 

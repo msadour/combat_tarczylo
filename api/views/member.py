@@ -91,12 +91,10 @@ class MemberViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        member = Member.objects.get(id=id)
-        member.delete()
+    def delete(self, request, pk=None):
+        Member.objects.get(id=pk).delete()
 
-        return Response({"message": "Member deleted"})
+        return Response({"message": "Member deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
@@ -134,12 +132,10 @@ class InstructorViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        instructor = Instructor.objects.get(id=id)
-        instructor.delete()
+    def delete(self, request, pk=None):
+        Instructor.objects.get(id=pk).delete()
 
-        return Response({"message": "Instructor deleted"})
+        return Response({"message": "Instructor deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))

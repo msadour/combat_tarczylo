@@ -3,6 +3,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
+from api.features import get_max_id
 from api.models import Club, Presentation, ImportantMessage, TimeTable
 from api.serializers import ClubSerializer, PresentationSerializer, ImportantMessageSerializer
 
@@ -12,8 +13,7 @@ class ClubViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        new_id = max([club.id for club in Club.objects.all()]) + 1
-        datas['id'] = new_id
+        datas['id'] = get_max_id('Club')
         time_tables = datas.pop('time_table')
         new_club = Club.objects.create(**datas)
 
@@ -46,10 +46,8 @@ class ClubViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        club = Club.objects.get(id=id)
-        club.delete()
+    def delete(self, request, pk=None):
+        Club.objects.get(id=pk).delete()
 
         return Response({"message": "Club deleted"}, status=status.HTTP_200_OK)
 
@@ -59,8 +57,7 @@ class PresentationViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        new_id = max([club.id for club in Presentation.objects.all()]) + 1
-        datas['id'] = new_id
+        datas['id'] = get_max_id('Presentation')
         new_presentation = Presentation.objects.create(**datas)
 
         serializer = PresentationSerializer(new_presentation, many=False)
@@ -88,10 +85,8 @@ class PresentationViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        presentation = Presentation.objects.get(id=id)
-        presentation.delete()
+    def delete(self, request, pk=None):
+        Presentation.objects.get(id=pk).delete()
 
         return Response({"message": "Presentation deleted"}, status=status.HTTP_200_OK)
 
@@ -100,11 +95,10 @@ class PresentationViewSet(viewsets.ViewSet):
 class ImportantMessageViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
+        ImportantMessage.objects.get(id=1).delete()
         datas = request.data
-        new_id = max([message.id for message in ImportantMessage.objects.all()]) + 1
-        datas['id'] = new_id
+        datas['id'] = 1
         new_message = ImportantMessage.objects.create(**datas)
-
         serializer = ImportantMessageSerializer(new_message, many=False)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -130,9 +124,7 @@ class ImportantMessageViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        message = ImportantMessage.objects.get(id=id)
-        message.delete()
+    def delete(self, request, pk=None):
+        ImportantMessage.objects.get(id=pk).delete()
 
         return Response({"message": "Message deleted"}, status=status.HTTP_200_OK)

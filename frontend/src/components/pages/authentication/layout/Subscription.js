@@ -241,4 +241,4 @@ class Subscription extends Component {
     }
 }
 
-export default withRouter(Subscription)
+export default withRouter(Subscription);

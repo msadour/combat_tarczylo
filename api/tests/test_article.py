@@ -49,10 +49,11 @@ class ArticleTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        article = ArticleFactory()
 
-        response = self.client.delete(url, data={'id': str(self.article.id)})
+        response = self.client.delete(url + str(article.id) + '/')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
         # Create a book
