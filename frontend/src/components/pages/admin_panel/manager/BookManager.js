@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MenuManager from "../manager/MenuManager"
 
 import BookCreateForm from "../layout/create/BookCreateForm"
+import BookUpdateForm from "../layout/update/BookUpdateForm"
 
 
 class BookManager extends Component {
@@ -11,7 +12,10 @@ class BookManager extends Component {
         return (
             <div>
                 <MenuManager />
+
                 <BookCreateForm />
+
+                <BookUpdateForm />
             </div>
 
         )

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-import Manager from "./manager/Manager"
 import MenuManager from "./manager/MenuManager"
 
 class AdminPanel extends Component {

@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 
 import MenuManager from "../manager/MenuManager"
+import ClubUpdateForm from "../layout/update/ClubUpdateForm"
 
-import MessageCreateForm from "../layout/create/MessageCreateForm"
 
-
-class MessageManager extends Component {
+class ClubManager extends Component {
 
     render() {
         return (
 
             <div>
                 <MenuManager />
-                <MessageCreateForm />
+                <ClubUpdateForm />
             </div>
         )
     }
 
 }
 
-export default MessageManager
+export default ClubManager

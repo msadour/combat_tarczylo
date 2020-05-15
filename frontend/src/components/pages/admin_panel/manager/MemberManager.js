@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 
 import MenuManager from "../manager/MenuManager"
+import MemberUpdateForm from "../layout/update/MemberUpdateForm"
 
-import InternshipCreateForm from "../layout/create/InternshipCreateForm"
 
-
-class InternshipManager extends Component {
+class MemberManager extends Component {
 
     render() {
         return (
-
             <div>
                 <MenuManager />
-                <InternshipCreateForm />
+                <MemberUpdateForm />
             </div>
+
         )
     }
 
 }
 
-export default InternshipManager
+export default MemberManager

@@ -35,7 +35,7 @@ class CourseViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Course.objects.all()
+        queryset = Course.objects.all().order_by('id')
         serializer = CourseSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -85,7 +85,7 @@ class InternshipViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Internship.objects.all()
+        queryset = Internship.objects.all().order_by('id')
         serializer = InternshipSerializer(queryset, many=True)
         return Response(serializer.data)
 

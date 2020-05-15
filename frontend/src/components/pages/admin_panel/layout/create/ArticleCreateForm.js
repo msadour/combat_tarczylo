@@ -18,6 +18,7 @@ class ArticleCreateForm extends Component {
         this.onSubmit.bind(this);
     }
 
+
     onSubmit = e => {
         e.preventDefault();
         axios.post('/api_tct/article/', { "title": this.state.title,

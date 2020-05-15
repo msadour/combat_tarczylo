@@ -18,7 +18,7 @@ class TimeTableViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = TimeTable.objects.all()
+        queryset = TimeTable.objects.all().order_by('id')
         serializer = TimeTableSerializer(queryset, many=True)
         return Response(serializer.data)
 

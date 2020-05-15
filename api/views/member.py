@@ -68,7 +68,7 @@ class MemberViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Member.objects.all()
+        queryset = Member.objects.all().order_by('id')
         serializer = MemberSerializer(queryset, many=True)
         return Response(serializer.data)
 

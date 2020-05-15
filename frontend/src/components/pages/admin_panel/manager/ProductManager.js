@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MenuManager from "../manager/MenuManager"
 
 import ProductCreateForm from "../layout/create/ProductCreateForm"
+import ProductUpdateForm from "../layout/update/ProductUpdateForm"
 
 
 class ProductManager extends Component {
@@ -13,6 +14,7 @@ class ProductManager extends Component {
             <div>
                 <MenuManager />
                 <ProductCreateForm />
+                <ProductUpdateForm />
             </div>
         )
     }

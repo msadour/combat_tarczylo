@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 
 import MenuManager from "../manager/MenuManager"
+import PresentationUpdateForm from "../layout/update/PresentationUpdateForm"
 
 
-class MemberManager extends Component {
+class PresentationManager extends Component {
 
     render() {
         return (
+
             <div>
                 <MenuManager />
-                Member
+                <PresentationUpdateForm />
             </div>
-
         )
     }
-
 }
 
-export default MemberManager
+export default PresentationManager

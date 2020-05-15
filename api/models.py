@@ -113,6 +113,9 @@ class Category(models.Model):
     def get_products(self):
         return [model_to_dict(product) for product in self.product_set.all()]
 
+    def delete_all_products(self):
+        self.product_set.all().delete()
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255, blank=True)

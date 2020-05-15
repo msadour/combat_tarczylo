@@ -21,7 +21,7 @@ class BookViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = BookAdviced.objects.all()
+        queryset = BookAdviced.objects.all().order_by('id')
         serializer = BookAdvicedSerializer(queryset, many=True)
         return Response(serializer.data)
 

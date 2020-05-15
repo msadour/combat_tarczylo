@@ -26,7 +26,7 @@ class OrderViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = Order.objects.all()
+        queryset = Order.objects.all().order_by('id')
         serializer = OrderSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -66,7 +66,7 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = Product.objects.all()
+        queryset = Product.objects.all().order_by('id')
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -105,7 +105,7 @@ class CategoryViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = Category.objects.all()
+        queryset = Category.objects.all().order_by('id')
         serializer = CategorySerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -126,6 +126,8 @@ class CategoryViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def delete(self, request, pk=None, *args, **kwargs):
-        Category.objects.get(id=pk).delete()
+        category = Category.objects.get(id=pk)
+        category.delete_all_products()
+        category.delete()
 
         return Response({"message": "Category deleted"}, status=status.HTTP_200_OK)
