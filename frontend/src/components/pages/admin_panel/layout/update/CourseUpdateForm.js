@@ -12,6 +12,8 @@ class CourseUpdateForm extends Component {
         this.state = {
             courses: []
         }
+
+        this.build_timetable.bind(this)
     }
 
     componentDidMount(){
@@ -24,9 +26,15 @@ class CourseUpdateForm extends Component {
         });
     }
 
-    handleRemove(id) {
+    handleRemove(id, model) {
+        if (model == 'time_table') {
+            var url = '/api_tct/time_table/'
+        } else{
+            var url = '/api_tct/course/'
+        }
+
         event.preventDefault();
-        axios.delete('/api_tct/course/' + id + '/')
+        axios.delete(url + id + '/')
         .then(res => {
             window.location.reload();
         })
@@ -34,6 +42,22 @@ class CourseUpdateForm extends Component {
             console.log(err);
         });
         return false
+    }
+
+    build_timetable(course){
+        var list_timetable_component = []
+
+        var time_tables = course.time_table
+        time_tables.forEach( time_table => {
+            list_timetable_component.push(
+                <div key={time_table.id}>
+                    <h2>{time_table.name}</h2>
+                    <FormField model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                    <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
+                </div>
+            )
+        })
+        return list_timetable_component
     }
 
 
@@ -51,7 +75,9 @@ class CourseUpdateForm extends Component {
                     <FormField model="course" id={course.id} field="place" label="place" value={course.place} />
                     <FormField model="course" id={course.id} field="level" label="level" value={course.level} />
                     <FormField model="course" id={course.id} field="category" label="category" value={course.category} />
-                    <button type="button" onClick={() => this.handleRemove(course.id)}>Remove</button>
+                    {this.build_timetable(course)}
+                    <button type="button" onClick={() => this.handleRemove(course.id, 'course')}>Remove course</button>
+                    <br /><br />
                 </div>
             )
         })

@@ -40,6 +40,9 @@ class TimeTable(models.Model):
     to_hour = models.TimeField()
     year = models.IntegerField(default=datetime.datetime.now().year)
 
+    def display_as_str(self):
+        return str(self.day) + " " + str(self.from_hour) + " " + str(self.to_hour)
+
 
 class Club(models.Model):
     name = models.CharField(max_length=255, blank=True)

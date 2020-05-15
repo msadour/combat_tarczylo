@@ -38,6 +38,8 @@ class PresentationSerializer(serializers.ModelSerializer):
 
 class TimeTableSerializer(serializers.ModelSerializer):
 
+    time_table_str = serializers.CharField(source='display_as_str')
+
     class Meta:
         model = TimeTable
         fields = '__all__'
