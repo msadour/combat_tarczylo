@@ -1,3 +1,5 @@
+import re
+
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
@@ -40,7 +42,15 @@ class ClubViewSet(viewsets.ViewSet):
         datas = request.data
         club = Club.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(club, attr, value)
+            if attr == 'add_time_table':
+                for time_table in value:
+                    if isinstance(time_table, str):
+                        info = re.split(r'\s', time_table)
+                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
+                        new_time_table = TimeTable.objects.create(**info_time_table)
+                        club.time_table.add(new_time_table)
+            else:
+                setattr(club, attr, value)
         club.save()
         serializer = ClubSerializer(club)
 

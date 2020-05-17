@@ -173,7 +173,6 @@ class CourseCreateForm extends Component {
                                 </div>
                             )
                         })
-
                       }
 
                       <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
