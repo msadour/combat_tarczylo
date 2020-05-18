@@ -75,9 +75,9 @@ class ClubTestCase(APITestCase):
     def test_delete(self):
         ClubFactory().save()
 
-        response = self.client.delete(url_club, data={'id': str(self.club.id)})
+        response = self.client.delete(url_club + str(self.club.id) + '/')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
 
@@ -126,9 +126,9 @@ class PresentationTestCase(APITestCase):
 
         PresentationFactory().save()
 
-        response = self.client.delete(url_presentation, data={'id': str(self.presentation.id)})
+        response = self.client.delete(url_presentation + str(self.presentation.id) + '/')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update(self):
 
@@ -174,7 +174,7 @@ class ImportantMessageTestCase(APITestCase):
     def test_delete(self):
         ImportantMessageFactory().save()
 
-        response = self.client.delete(url_message, data={'id': str(self.message.id)})
+        response = self.client.delete(url_message + str(self.message.id) + '/')
 
         self.assertEqual(response.status_code, 200)
 

@@ -15,6 +15,11 @@ class CustomUserManager(BaseUserManager):
         password = fields.get('password')
         if not email:
             raise ValueError(_('The Email must be set'))
+
+        if 'password_again' in fields.keys():
+            if password != fields['password_again']:
+                raise ValueError(_('The two password are different.'))
+        fields.pop('password_again', None)
         email = self.normalize_email(email)
         user = self.model(**fields)
         user.username = email

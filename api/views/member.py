@@ -44,10 +44,8 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validate(attrs=request.data)
 
         token, created = Token.objects.get_or_create(user=user)
-        # member = Member.objects.get(user=user)
         return Response({
             'token': token.key,
-            # 'user_id': user.pk,
             'username': user.username,
             'member_id': user.id
         })
@@ -62,7 +60,7 @@ class MemberViewSet(viewsets.ViewSet):
         datas = request.data
         new_id = max([member.id for member in Member.objects.all()]) + 1
         datas['id'] = new_id
-        new_member = Member.objects.create(**datas)
+        new_member = Member.objects.create_user(**datas)
         new_member.save()
 
         serializer = MemberSerializer(new_member, many=False)
@@ -70,7 +68,7 @@ class MemberViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Member.objects.all()
+        queryset = Member.objects.all().order_by('id')
         serializer = MemberSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -84,18 +82,19 @@ class MemberViewSet(viewsets.ViewSet):
         datas = request.data
         member = Member.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(member, attr, value)
+            if attr == "password":
+                member.set_password(value)
+            else:
+                setattr(member, attr, value)
         member.save()
         serializer = MemberSerializer(member)
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        member = Member.objects.get(id=id)
-        member.delete()
+    def delete(self, request, pk=None):
+        Member.objects.get(id=pk).delete()
 
-        return Response({"message": "Member deleted"})
+        return Response({"message": "Member deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
@@ -133,12 +132,10 @@ class InstructorViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        instructor = Instructor.objects.get(id=id)
-        instructor.delete()
+    def delete(self, request, pk=None):
+        Instructor.objects.get(id=pk).delete()
 
-        return Response({"message": "Instructor deleted"})
+        return Response({"message": "Instructor deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))

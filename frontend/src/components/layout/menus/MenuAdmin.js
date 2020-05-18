@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import MemberProfile from "../../pages/member/MemberProfile"
 
-class MenuMember extends Component {
+class MenuAdmin extends Component {
 
     constructor(props){
         super(props);
@@ -32,6 +32,12 @@ class MenuMember extends Component {
                       <li className="nav-item active">
                           <Link to='/' className="nav-link">
                             <p className="nav-link">Home</p>
+                        </Link>
+                      </li>
+
+                      <li className="nav-item active">
+                        <Link to='/admin_panel_member' className="nav-link">
+                            <p className="nav-link">Admin panel</p>
                         </Link>
                       </li>
 
@@ -91,4 +97,4 @@ class MenuMember extends Component {
     }
 }
 
-export default MenuMember
+export default MenuAdmin

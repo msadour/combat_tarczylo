@@ -1,3 +1,5 @@
+import re
+
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import get_object_or_404
@@ -12,13 +14,19 @@ class TimeTableViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        new_article = TimeTable.objects.create(**datas)
-        serializer = TimeTableSerializer(new_article, many=False)
+        if 'time_table_str' in datas.keys():
+            time_table = datas['time_table_str']
+            info = re.split(r'\s', time_table)
+            info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
+            new_time_table = TimeTable.objects.create(**info_time_table)
+        else:
+            new_time_table = TimeTable.objects.create(**datas)
+        serializer = TimeTableSerializer(new_time_table, many=False)
 
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = TimeTable.objects.all()
+        queryset = TimeTable.objects.all().order_by('id')
         serializer = TimeTableSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -30,17 +38,22 @@ class TimeTableViewSet(viewsets.ViewSet):
 
     def patch(self, request, pk=None):
         datas = request.data
-        article = TimeTable.objects.get(id=pk)
+        time_table = TimeTable.objects.get(id=pk)
+
         for attr, value in datas.items():
-            setattr(article, attr, value)
-        article.save()
-        serializer = TimeTableSerializer(article)
+            if attr == 'time_table_str':
+                info = re.split(r'\s', value)
+                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
+                for attr_tt, value_tt in info_time_table.items():
+                    setattr(time_table, attr_tt, value_tt)
+            else:
+                setattr(time_table, attr, value)
+        time_table.save()
+        serializer = TimeTableSerializer(time_table)
 
         return Response(serializer.data)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data["id"]
-        article = TimeTable.objects.get(id=id)
-        article.delete()
+    def delete(self, request, pk=None):
+        TimeTable.objects.get(id=pk).delete()
 
-        return Response({"message": "Article deleted"}, status=status.HTTP_200_OK)
+        return Response({"message": "TimeTable deleted"}, status=status.HTTP_200_OK)
