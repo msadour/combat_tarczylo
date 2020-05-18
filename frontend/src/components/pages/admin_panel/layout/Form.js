@@ -9,10 +9,115 @@ class FormField extends Component {
 
         this.state = {
             new_value: "",
+            value_possible: [],
+            input: "",
         }
 
         this.onChange.bind(this)
         this.onSubmit.bind(this)
+        this.buildInput.bind(this)
+    }
+
+    componentDidMount(){
+        if (this.props.model_value_possible){
+            axios.get('/api_tct/' + this.props.model_value_possible + '/')
+            .then(res => {
+                this.setState({value_possible: res.data});
+            })
+            .catch(err => {
+                alert('error');
+            });
+        }
+    }
+
+    buildInput(){
+
+        switch(this.props.type_input){
+            case "text":
+                return (
+                    <div>
+                        <input
+                            type="text"
+                            name="new_value"
+                            onChange={e => this.onChange(e)}
+                            placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
+            case "choice":
+                let optionTemplate = [<option key={0} value={0}></option>]
+
+                this.state.value_possible.forEach(value => {
+                    optionTemplate.push(<option key={value.id} value={value.id}>{value.full_name}</option>)
+                })
+                console.log(optionTemplate)
+                return (
+                    <div>
+                      <select
+                          name="new_value"
+                          type="select"
+                          onChange={e => this.onChange(e)}
+                      >
+                        {optionTemplate}
+                      </select>
+                    </div>
+                )
+
+
+            break;
+
+            case "radio_button":
+                let option_radio_item = []
+
+                this.props.options_radio.forEach(option => {
+                    option_radio_item.push(
+                        <div>
+                            <input type="radio" name="{option.name}" value="{option.value}" onChange={e => this.onChange(e)} />
+                            <label > {option.label} </label><br />
+                        </div>
+                    )
+                })
+
+                return (
+                    <div>
+                        {optionTemplate}
+                    </div>
+                )
+
+            break;
+
+            case "price":
+                return (
+                    <div>
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="new_value"
+                            onChange={e => this.onChange(e)}
+                            placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
+            case "number":
+                return (
+                    <div>
+                        <input
+                            type="number"
+                            step="1"
+                            name="new_value"
+                            onChange={e => this.onChange(e)}
+                            placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
+        }
+
     }
 
     onSubmit = e => {
@@ -40,12 +145,7 @@ class FormField extends Component {
             <div>
                 <form onSubmit={e => this.onSubmit(e)}>
                   <label >{this.props.label}: </label>
-                  <input
-                        type="text"
-                        name="new_value"
-                        onChange={e => this.onChange(e)}
-                        placeholder={this.props.value}
-                   />
+                  {this.buildInput()}
                   <button type="submit" value="Submit"> Update </button>
                 </form>
                 <br />

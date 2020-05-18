@@ -84,7 +84,7 @@ class InternshipUpdateForm extends Component {
             list_timetable_component.push(
                 <div key={time_table.id}>
                     <h2>{time_table.name}</h2>
-                    <FormField model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
                     <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
                 </div>
             )
@@ -102,15 +102,17 @@ class InternshipUpdateForm extends Component {
             list_internship_component.push(
                 <div key={internship.id}>
                     <h2>{internship.name}</h2>
-                    <FormField model="internship" id={internship.id} field="name" label="name" value={internship.name} />
-                    <FormField model="internship" id={internship.id} field="description" label="description" value={internship.description} />
-                    <FormField model="internship" id={internship.id} field="place" label="place" value={internship.place} />
-                    <FormField model="internship" id={internship.id} field="level" label="level" value={internship.level} />
-                    <FormField model="internship" id={internship.id} field="category" label="category" value={internship.category} />
-                    <FormField model="internship" id={internship.id} field="date_begin" label="date_begin" value={internship.description} />
-                    <FormField model="internship" id={internship.id} field="date_end" label="date_end" value={internship.place} />
-                    <FormField model="internship" id={internship.id} field="price" label="price" value={internship.level} />
-                    <FormField model="internship" id={internship.id} field="theme" label="theme" value={internship.category} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="name" label="name" value={internship.name} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="description" label="description" value={internship.description} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="place" label="place" value={internship.place} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="level" label="level" value={internship.level} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="category" label="category" value={internship.category} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="date_begin" label="date_begin" value={internship.description} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="date_end" label="date_end" value={internship.place} />
+                    <FormField type_input="price" model="internship" id={internship.id} field="price" label="price" value={internship.price} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="theme" label="theme" value={internship.category} />
+                    <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="instructor" value={internship.instructor} />
+
                     {this.build_timetable(internship)}
                     <button type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>Remove</button> <br /><br />
                                     <div className="form-group">

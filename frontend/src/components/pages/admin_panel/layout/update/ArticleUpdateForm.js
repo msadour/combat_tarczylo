@@ -45,9 +45,9 @@ class ArticleUpdateForm extends Component {
             list_article_component.push(
                 <div key={article.id}>
                     <h2>{article.title}</h2>
-                    <FormField model="article" id={article.id} field="title" label="title" value={article.title} />
-                    <FormField model="article" id={article.id} field="content" label="content" value={article.content} />
-                    <FormField model="article" id={article.id} field="category" label="category" value={article.category} />
+                    <FormField type_input="text" model="article" id={article.id} field="title" label="title" value={article.title} />
+                    <FormField type_input="text" model="article" id={article.id} field="content" label="content" value={article.content} />
+                    <FormField type_input="text" model="article" id={article.id} field="category" label="category" value={article.category} />
                     <button type="button" onClick={() => this.handleRemove(article.id)}>Remove</button> <br /><br />
                 </div>
             )
