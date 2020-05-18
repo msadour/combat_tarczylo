@@ -21,7 +21,7 @@ class ArticleViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=201)
 
     def list(self, request):
-        queryset = Article.objects.all()
+        queryset = Article.objects.all().order_by('id')
         serializer = ArticleSerializer(queryset, many=True)
         return Response(serializer.data)
 

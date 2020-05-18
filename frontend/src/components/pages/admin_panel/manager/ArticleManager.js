@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MenuManager from "../manager/MenuManager"
 
 import ArticleCreateForm from "../layout/create/ArticleCreateForm"
+import ArticleUpdateForm from "../layout/update/ArticleUpdateForm"
 
 
 class ArticleManager extends Component {
@@ -14,6 +15,8 @@ class ArticleManager extends Component {
                 <MenuManager />
 
                 <ArticleCreateForm />
+
+                <ArticleUpdateForm />
             </div>
         )
     }

@@ -35,7 +35,7 @@ class CourseViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Course.objects.all()
+        queryset = Course.objects.all().order_by('id')
         serializer = CourseSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -49,7 +49,15 @@ class CourseViewSet(viewsets.ViewSet):
         datas = request.data
         course = Course.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(course, attr, value)
+            if attr == 'add_time_table':
+                for time_table in value:
+                    if isinstance(time_table, str):
+                        info = re.split(r'\s', time_table)
+                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
+                        new_time_table = TimeTable.objects.create(**info_time_table)
+                        course.time_table.add(new_time_table)
+            else:
+                setattr(course, attr, value)
         course.save()
         serializer = CourseSerializer(course)
 
@@ -85,7 +93,7 @@ class InternshipViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        queryset = Internship.objects.all()
+        queryset = Internship.objects.all().order_by('id')
         serializer = InternshipSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -99,7 +107,15 @@ class InternshipViewSet(viewsets.ViewSet):
         datas = request.data
         internship = Internship.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(internship, attr, value)
+            if attr == 'add_time_table':
+                for time_table in value:
+                    if isinstance(time_table, str):
+                        info = re.split(r'\s', time_table)
+                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
+                        new_time_table = TimeTable.objects.create(**info_time_table)
+                        internship.time_table.add(new_time_table)
+            else:
+                setattr(internship, attr, value)
         internship.save()
         serializer = InternshipSerializer(internship)
 
