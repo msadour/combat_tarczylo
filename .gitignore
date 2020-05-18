@@ -5,6 +5,7 @@ node_modules
 *.pot
 *.pyc
 __pycache__/
+combat_tarczylo/__pycache__/settings.cpython-37.pyc
 local_settings.py
 db.sqlite3
 media
