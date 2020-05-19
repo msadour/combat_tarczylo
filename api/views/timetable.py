@@ -1,6 +1,6 @@
 import re
 
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 
@@ -24,3 +24,13 @@ class TimeTableViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=201)
 
+    def update(self, request, pk=None, *args, **kwargs):
+        time_table = request.data
+        time_table_object = TimeTable.objects.get(id=pk)
+        time_table_str = re.split(r'\s', time_table['time_table_str'])
+        info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+        for attr, value in info_time_table.items():
+            setattr(time_table_object, attr, value)
+        time_table_object.save()
+
+        return Response(status=status.HTTP_200_OK)

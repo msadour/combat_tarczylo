@@ -93,14 +93,14 @@ class CourseUpdateForm extends Component {
 
 
     render() {
-    
+
         var list_course_component = []
 
         this.state.courses.forEach( course => {
 
             list_course_component.push(
                 <div key={course.id}>
-                    <h2>{course.name}</h2>
+                    <h2>{course.description}</h2>
                     <FormField type_input="text" model="course" id={course.id} field="name" label="name" value={course.name} />
                     <FormField type_input="text" model="course" id={course.id} field="description" label="description" value={course.description} />
                     <FormField type_input="text" model="course" id={course.id} field="place" label="place" value={course.place} />

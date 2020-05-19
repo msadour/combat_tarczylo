@@ -15,6 +15,12 @@ class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
+    def list(self, request, *args, **kwargs):
+        club = Club.objects.all()[0]
+        serializer = ClubSerializer(club, many=False)
+
+        return Response(serializer.data, status.HTTP_201_CREATED)
+
     def create(self, request, *args, **kwargs):
         datas = request.data
         datas['id'] = get_max_id('Club')
@@ -30,7 +36,7 @@ class ClubViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
-    def patch(self, request, pk=None):
+    def update(self, request, pk=None, *args, **kwargs):
         datas = request.data
         club = Club.objects.get(id=pk)
         for attr, value in datas.items():
@@ -53,8 +59,20 @@ class PresentationViewSet(viewsets.ModelViewSet):
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
+    def list(self, request, *args, **kwargs):
+        presentation = Presentation.objects.all()[0]
+        serializer = PresentationSerializer(presentation, many=False)
+
+        return Response(serializer.data, status.HTTP_201_CREATED)
+
 
 @permission_classes((permissions.AllowAny,))
 class ImportantMessageViewSet(viewsets.ModelViewSet):
     queryset = ImportantMessage.objects.all()
     serializer_class = ImportantMessageSerializer
+
+    def list(self, request, *args, **kwargs):
+        message = ImportantMessage.objects.all()[0]
+        serializer = ImportantMessageSerializer(message, many=False)
+
+        return Response(serializer.data, status.HTTP_201_CREATED)

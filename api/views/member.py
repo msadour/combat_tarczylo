@@ -34,7 +34,7 @@ class CustomAuthToken(ObtainAuthToken):
 
 @permission_classes((permissions.AllowAny,))
 class MemberViewSet(viewsets.ModelViewSet):
-    queryset = Member.objects.all()
+    queryset = Member.objects.all().order_by('id')
     serializer_class = MemberSerializer
 
     def create(self, request, *args, **kwargs):
@@ -46,7 +46,7 @@ class MemberViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def patch(self, request, pk=None):
+    def update(self, request, pk=None, *args, **kwargs):
         datas = request.data
         member = Member.objects.get(id=pk)
         for attr, value in datas.items():
@@ -57,12 +57,12 @@ class MemberViewSet(viewsets.ModelViewSet):
         member.save()
         serializer = MemberSerializer(member)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
 class InstructorViewSet(viewsets.ModelViewSet):
-    queryset = Instructor.objects.all()
+    queryset = Instructor.objects.all().order_by('id')
     serializer_class = InstructorSerializer
 
     def create(self, request, *args, **kwargs):
@@ -74,7 +74,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def patch(self, request, pk=None):
+    def update(self, request, pk=None, *args, **kwargs):
         datas = request.data
         instructor = Instructor.objects.get(id=pk)
         for attr, value in datas.items():

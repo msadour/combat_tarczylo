@@ -2,7 +2,6 @@ import re
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api.features import get_max_id
@@ -12,7 +11,7 @@ from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 @permission_classes((permissions.AllowAny,))
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by('id')
     serializer_class = CourseSerializer
 
     def create(self, request, *args, **kwargs):
@@ -33,9 +32,10 @@ class CourseViewSet(viewsets.ModelViewSet):
         serializer = CourseSerializer(new_course, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def patch(self, request, pk=None):
+    def update(self, request, pk=None, *args, **kwargs):
         datas = request.data
         course = Course.objects.get(id=pk)
+        print(datas.items())
         for attr, value in datas.items():
             if attr == 'add_time_table':
                 for time_table in value:
@@ -53,7 +53,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ModelViewSet):
-    queryset = Internship.objects.all()
+    queryset = Internship.objects.all().order_by('id')
     serializer_class = InternshipSerializer
 
     def create(self, request, *args, **kwargs):
@@ -74,7 +74,7 @@ class InternshipViewSet(viewsets.ModelViewSet):
         serializer = InternshipSerializer(new_internship, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def patch(self, request, pk=None):
+    def update(self, request, pk=None, *args, **kwargs):
         datas = request.data
         internship = Internship.objects.get(id=pk)
         for attr, value in datas.items():

@@ -56,11 +56,13 @@ class ClubSerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
 
     full_name = serializers.CharField(source="get_full_name")
+    is_active = serializers.BooleanField()
 
     class Meta:
         model = Member
-        fields = ['id', 'email', 'username','password', 'first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
-                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'full_name', 'is_active']
+        fields = '__all__'
+        # fields = ['id', 'email', 'username','password', 'first_name', 'last_name', 'postal_code', 'city', 'street',
+        #           'country', 'phone', 'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'full_name', 'is_active']
 
 
 class InstructorSerializer(serializers.ModelSerializer):

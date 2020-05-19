@@ -5,7 +5,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils import timezone
 from django.forms.models import model_to_dict
 from django.db import models
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
+from django.contrib.auth.models import PermissionsMixin
 
 from api.managers import CustomUserManager
 
@@ -21,7 +21,6 @@ class Article(models.Model):
     title = models.CharField(max_length=255, blank=True)
     content = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
-    #photo field
 
 
 class ImportantMessage(models.Model):

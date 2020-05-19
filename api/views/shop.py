@@ -29,7 +29,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
 
     def create(self, request, *args, **kwargs):
@@ -45,7 +45,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('id')
     serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):

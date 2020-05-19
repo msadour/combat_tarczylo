@@ -58,7 +58,6 @@ class TimeTableTestCase(APITestCase):
             year="2020"
         )
 
-        request = self.client.patch(url + str(time_table.id) + '/', data={'day': 'wednesday'})
+        request = self.client.patch(url + str(time_table.id) + '/', data={'time_table_str': 'Wednesday: 11:00:00 15:30:00'})
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(request.data['day'], 'wednesday')
