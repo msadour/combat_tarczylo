@@ -1,6 +1,5 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api.features import get_max_id
@@ -9,7 +8,9 @@ from api.serializers import ProductSerializer, OrderSerializer, CategorySerializ
 
 
 @permission_classes((permissions.AllowAny,))
-class OrderViewSet(viewsets.ViewSet):
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
@@ -25,35 +26,11 @@ class OrderViewSet(viewsets.ViewSet):
 
         return Response(serializer.data, status=201)
 
-    def list(self, request):
-        queryset = Order.objects.all().order_by('id')
-        serializer = OrderSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Order.objects.all()
-        order = get_object_or_404(queryset, pk=pk)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        order = Order.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(order, attr, value)
-        order.save()
-        serializer = OrderSerializer(order)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Order.objects.get(id=pk).delete()
-
-        return Response({"message": "Order deleted"}, status=status.HTTP_200_OK)
-
 
 @permission_classes((permissions.AllowAny,))
-class ProductViewSet(viewsets.ViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
@@ -65,35 +42,11 @@ class ProductViewSet(viewsets.ViewSet):
 
         return Response(serializer.data, status=201)
 
-    def list(self, request):
-        queryset = Product.objects.all().order_by('id')
-        serializer = ProductSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Product.objects.all()
-        product = get_object_or_404(queryset, pk=pk)
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        product = Product.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(product, attr, value)
-        product.save()
-        serializer = ProductSerializer(product)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Product.objects.get(id=pk).delete()
-
-        return Response({"message": "Product deleted"}, status=status.HTTP_200_OK)
-
 
 @permission_classes((permissions.AllowAny,))
-class CategoryViewSet(viewsets.ViewSet):
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
@@ -103,31 +56,3 @@ class CategoryViewSet(viewsets.ViewSet):
         serializer = CategorySerializer(new_category, many=False)
 
         return Response(serializer.data, status=201)
-
-    def list(self, request):
-        queryset = Category.objects.all().order_by('id')
-        serializer = CategorySerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Category.objects.all()
-        category = get_object_or_404(queryset, pk=pk)
-        serializer = CategorySerializer(category)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        category = Category.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(category, attr, value)
-        category.save()
-        serializer = CategorySerializer(category)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None, *args, **kwargs):
-        category = Category.objects.get(id=pk)
-        category.delete_all_products()
-        category.delete()
-
-        return Response({"message": "Category deleted"}, status=status.HTTP_200_OK)

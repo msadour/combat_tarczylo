@@ -1,11 +1,3 @@
-
-from django.contrib.auth import (
-    logout as django_logout, authenticate, get_user_model
-)
-from django.conf import settings
-
-from django.core.exceptions import ObjectDoesNotExist
-
 from django.contrib.auth import (
     logout as django_logout
 )
@@ -16,23 +8,12 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-from rest_framework.views import APIView
 
+from api.features import get_max_id
 from api.models import Member, Instructor
 from api.serializers import MemberSerializer, InstructorSerializer, AuthTokenSerializer
-
-
-#
-# class MemberDetailViewSet(APIView):
-#
-#     def post(self, request, *args, **kwargs):
-#         user = Token.objects.get(key=request.data['jwt']).user
-#         print(user)
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -52,31 +33,18 @@ class CustomAuthToken(ObtainAuthToken):
 
 
 @permission_classes((permissions.AllowAny,))
-class MemberViewSet(viewsets.ViewSet):
-
-    authentication_classes = (TokenAuthentication,)
+class MemberViewSet(viewsets.ModelViewSet):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        new_id = max([member.id for member in Member.objects.all()]) + 1
-        datas['id'] = new_id
+        datas['id'] = get_max_id('Member')
         new_member = Member.objects.create_user(**datas)
-        new_member.save()
 
         serializer = MemberSerializer(new_member, many=False)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = Member.objects.all().order_by('id')
-        serializer = MemberSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None, username=None):
-        queryset = Member.objects.all()
-        member = get_object_or_404(queryset, pk=pk)
-        serializer = MemberSerializer(member)
-        return Response(serializer.data)
 
     def patch(self, request, pk=None):
         datas = request.data
@@ -91,51 +59,33 @@ class MemberViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, pk=None):
-        Member.objects.get(id=pk).delete()
-
-        return Response({"message": "Member deleted"}, status=status.HTTP_200_OK)
-
 
 @permission_classes((permissions.AllowAny,))
-class InstructorViewSet(viewsets.ViewSet):
+class InstructorViewSet(viewsets.ModelViewSet):
+    queryset = Instructor.objects.all()
+    serializer_class = InstructorSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        new_id = max([instructor.id for instructor in Instructor.objects.all()]) + 1
-        datas['id'] = new_id
+        datas['id'] = get_max_id('Member')
         new_instructor = Instructor.objects.create(**datas)
-        new_instructor.save()
 
-        serializer = MemberSerializer(new_instructor, many=False)
+        serializer = InstructorSerializer(new_instructor, many=False)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = Instructor.objects.all()
-        serializer = InstructorSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Instructor.objects.all()
-        instructor = get_object_or_404(queryset, pk=pk)
-        serializer = InstructorSerializer(instructor)
-        return Response(serializer.data)
 
     def patch(self, request, pk=None):
         datas = request.data
         instructor = Instructor.objects.get(id=pk)
         for attr, value in datas.items():
-            setattr(instructor, attr, value)
+            if attr == "password":
+                instructor.set_password(value)
+            else:
+                setattr(instructor, attr, value)
         instructor.save()
         serializer = InstructorSerializer(instructor)
 
         return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Instructor.objects.get(id=pk).delete()
-
-        return Response({"message": "Instructor deleted"}, status=status.HTTP_200_OK)
 
 
 @permission_classes((permissions.AllowAny,))
@@ -154,8 +104,5 @@ class LogoutViewSet(viewsets.ViewSet):
             django_logout(request)
 
         response = Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
-        # if getattr(settings, 'REST_USE_JWT', False):
-        #     from rest_framework_jwt.settings import api_settings as jwt_settings
-        #     if jwt_settings.JWT_AUTH_COOKIE:
-        #         response.delete_cookie(jwt_settings.JWT_AUTH_COOKIE)
+
         return response

@@ -11,7 +11,9 @@ from api.serializers import ClubSerializer, PresentationSerializer, ImportantMes
 
 
 @permission_classes((permissions.AllowAny,))
-class ClubViewSet(viewsets.ViewSet):
+class ClubViewSet(viewsets.ModelViewSet):
+    queryset = Club.objects.all()
+    serializer_class = ClubSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
@@ -27,17 +29,6 @@ class ClubViewSet(viewsets.ViewSet):
         serializer = ClubSerializer(new_club, many=False)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = Club.objects.all()[0]
-        serializer = ClubSerializer(queryset, many=False)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Club.objects.all()
-        club = get_object_or_404(queryset, pk=pk)
-        serializer = ClubSerializer(club)
-        return Response(serializer.data)
 
     def patch(self, request, pk=None):
         datas = request.data
@@ -56,85 +47,14 @@ class ClubViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, pk=None):
-        Club.objects.get(id=pk).delete()
 
-        return Response({"message": "Club deleted"}, status=status.HTTP_200_OK)
+@permission_classes((permissions.AllowAny,))
+class PresentationViewSet(viewsets.ModelViewSet):
+    queryset = Presentation.objects.all()
+    serializer_class = PresentationSerializer
 
 
 @permission_classes((permissions.AllowAny,))
-class PresentationViewSet(viewsets.ViewSet):
-
-    def create(self, request, *args, **kwargs):
-        datas = request.data
-        datas['id'] = get_max_id('Presentation')
-        new_presentation = Presentation.objects.create(**datas)
-
-        serializer = PresentationSerializer(new_presentation, many=False)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = Presentation.objects.all()[0]
-        serializer = PresentationSerializer(queryset, many=False)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Presentation.objects.all()
-        presentation = get_object_or_404(queryset, pk=pk)
-        serializer = ImportantMessageSerializer(presentation)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        presentation = Presentation.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(presentation, attr, value)
-        presentation.save()
-        serializer = PresentationSerializer(presentation)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Presentation.objects.get(id=pk).delete()
-
-        return Response({"message": "Presentation deleted"}, status=status.HTTP_200_OK)
-
-
-@permission_classes((permissions.AllowAny,))
-class ImportantMessageViewSet(viewsets.ViewSet):
-
-    def create(self, request, *args, **kwargs):
-        ImportantMessage.objects.get(id=1).delete()
-        datas = request.data
-        datas['id'] = 1
-        new_message = ImportantMessage.objects.create(**datas)
-        serializer = ImportantMessageSerializer(new_message, many=False)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = ImportantMessage.objects.all()[0]
-        serializer = ImportantMessageSerializer(queryset, many=False)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = ImportantMessage.objects.all()
-        message = get_object_or_404(queryset, pk=pk)
-        serializer = ImportantMessageSerializer(message)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        important_message = ImportantMessage.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(important_message, attr, value)
-        important_message.save()
-        serializer = ImportantMessageSerializer(important_message)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        ImportantMessage.objects.get(id=pk).delete()
-
-        return Response({"message": "Message deleted"}, status=status.HTTP_200_OK)
+class ImportantMessageViewSet(viewsets.ModelViewSet):
+    queryset = ImportantMessage.objects.all()
+    serializer_class = ImportantMessageSerializer

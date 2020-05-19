@@ -52,7 +52,7 @@ class BookAdvicedTestCase(APITestCase):
 
         response = self.client.delete(url + str(self.book.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
         # Create a book

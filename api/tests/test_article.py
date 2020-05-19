@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 import os
 
-from api.models import Member
 from api.tests.factories.member import MemberFactory
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
@@ -53,7 +52,7 @@ class ArticleTestCase(APITestCase):
 
         response = self.client.delete(url + str(article.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
         # Create a book

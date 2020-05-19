@@ -47,7 +47,7 @@ class TimeTableTestCase(APITestCase):
 
         response = self.client.delete(url + str(self.time_table.id) + '/')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 

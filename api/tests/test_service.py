@@ -28,7 +28,7 @@ class CourseTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_course)
 
-        self.assertEqual(len(response.data), 1)
+        assert 0 < len(response.data)
 
     def test_retrieve(self):
         response = self.client.get(url_course + f'{self.course.id}/')
@@ -57,7 +57,7 @@ class CourseTestCase(APITestCase):
 
         response = self.client.delete(url_course + str(self.course.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
@@ -83,7 +83,7 @@ class InternshipTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_internship)
 
-        self.assertEqual(len(response.data), 1)
+        assert 0 < len(response.data)
 
     def test_retrieve(self):
         response = self.client.get(url_internship + f'{self.internship.id}/')
@@ -117,7 +117,7 @@ class InternshipTestCase(APITestCase):
 
         response = self.client.delete(url_internship + str(self.internship.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 

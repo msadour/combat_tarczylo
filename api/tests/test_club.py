@@ -11,7 +11,6 @@ django.setup()
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from api.tests.factories.user import UserFactory
 from api.tests.factories.timetable import TimeTableFactory
 from api.tests.factories.club import ClubFactory, PresentationFactory, ImportantMessageFactory
 
@@ -36,7 +35,7 @@ class ClubTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_club)
 
-        assert len(response.data) > 1
+        assert len(response.data) > 0
 
     def test_retrieve(self):
         response = self.client.get(url_club + f'{self.club.id}/')
@@ -68,7 +67,7 @@ class ClubTestCase(APITestCase):
 
         response = self.client.delete(url_club + str(self.club.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
@@ -94,7 +93,7 @@ class PresentationTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_presentation)
 
-        assert len(response.data) > 1
+        assert len(response.data) > 0
 
     def test_retrieve(self):
         response = self.client.get(url_presentation + f'{self.presentation.id}/')
@@ -119,7 +118,7 @@ class PresentationTestCase(APITestCase):
 
         response = self.client.delete(url_presentation + str(self.presentation.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
@@ -145,7 +144,7 @@ class ImportantMessageTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_message)
 
-        assert len(response.data) > 1
+        assert len(response.data) > 0
 
     def test_retrieve(self):
         response = self.client.get(url_message + f'{self.message.id}/')
@@ -167,7 +166,7 @@ class ImportantMessageTestCase(APITestCase):
 
         response = self.client.delete(url_message + str(self.message.id) + '/')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 

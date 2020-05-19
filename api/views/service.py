@@ -11,9 +11,11 @@ from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 
 @permission_classes((permissions.AllowAny,))
-class CourseViewSet(viewsets.ViewSet):
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
 
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         datas = request.data
         instructor_id = datas.pop('instructor')
         time_tables = datas.pop('time_table')
@@ -30,17 +32,6 @@ class CourseViewSet(viewsets.ViewSet):
 
         serializer = CourseSerializer(new_course, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def list(self, request):
-        queryset = Course.objects.all().order_by('id')
-        serializer = CourseSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Course.objects.all()
-        course = get_object_or_404(queryset, pk=pk)
-        serializer = CourseSerializer(course)
-        return Response(serializer.data)
 
     def patch(self, request, pk=None):
         datas = request.data
@@ -59,15 +50,13 @@ class CourseViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, pk=None):
-        Course.objects.get(id=pk).delete()
-        return Response({"message": "Course deleted"}, status=status.HTTP_200_OK)
-
 
 @permission_classes((permissions.AllowAny,))
-class InternshipViewSet(viewsets.ViewSet):
+class InternshipViewSet(viewsets.ModelViewSet):
+    queryset = Internship.objects.all()
+    serializer_class = InternshipSerializer
 
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         datas = request.data
         datas['id'] = get_max_id('Internship')
         instructor_id = datas.pop('instructor')
@@ -85,17 +74,6 @@ class InternshipViewSet(viewsets.ViewSet):
         serializer = InternshipSerializer(new_internship, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def list(self, request):
-        queryset = Internship.objects.all().order_by('id')
-        serializer = InternshipSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Internship.objects.all()
-        internship = get_object_or_404(queryset, pk=pk)
-        serializer = InternshipSerializer(internship)
-        return Response(serializer.data)
-
     def patch(self, request, pk=None):
         datas = request.data
         internship = Internship.objects.get(id=pk)
@@ -112,7 +90,3 @@ class InternshipViewSet(viewsets.ViewSet):
         serializer = InternshipSerializer(internship)
 
         return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Internship.objects.get(id=pk).delete()
-        return Response({"message": "Internship deleted"}, status=status.HTTP_200_OK)

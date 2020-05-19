@@ -14,7 +14,6 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 from api.tests.factories.member import MemberFactory
-from api.tests.factories.user import UserFactory
 from api.tests.factories.shop import CategoryFactory, ProductFactory, OrderFactory
 
 client = APIClient()
@@ -35,7 +34,7 @@ class CategoryTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_category)
 
-        self.assertEqual(len(response.data), 1)
+        assert 0 < len(response.data)
 
     def test_retrieve(self):
         response = self.client.get(url_category + f'{self.category.id}/')
@@ -44,7 +43,9 @@ class CategoryTestCase(APITestCase):
 
     def test_create(self):
 
-        data_category = '''{"name": "test name"}'''
+        data_category = '''{
+            "name": "test name"
+        }'''
 
         response = client.post(url_category, data=data_category, content_type='application/json')
 
@@ -54,7 +55,7 @@ class CategoryTestCase(APITestCase):
 
         response = self.client.delete(url_category + str(self.category.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
         # Create a book
@@ -83,7 +84,7 @@ class ProductTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_product)
 
-        self.assertEqual(len(response.data), 1)
+        assert 0 < len(response.data)
 
     def test_retrieve(self):
         response = self.client.get(url_product + f'{self.product.id}/')
@@ -110,7 +111,7 @@ class ProductTestCase(APITestCase):
 
         response = self.client.delete(url_product + str(self.product.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
@@ -142,7 +143,7 @@ class OrderTestCase(APITestCase):
     def test_list(self):
         response = self.client.get(url_order)
 
-        self.assertEqual(len(response.data), 1)
+        assert 0 < len(response.data)
 
     def test_retrieve(self):
         response = self.client.get(url_order + f'{self.order.id}/')
@@ -168,7 +169,7 @@ class OrderTestCase(APITestCase):
 
         response = self.client.delete(url_order + str(self.order.id) + '/')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
         # Create a book
