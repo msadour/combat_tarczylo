@@ -9,7 +9,6 @@ import django ; django.setup()
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from api.tests.factories.user import UserFactory
 from api.tests.factories.timetable import TimeTableFactory
 
 client = APIClient()
@@ -38,10 +37,7 @@ class TimeTableTestCase(APITestCase):
     def test_create(self):
 
         data_article = '''{
-            "day": "tuesday",
-            "from_hour": "11:00:00",
-            "to_hour": "15:30:00",
-            "year": "2020"
+            "time_table" : "tuesday 11:00:00 15:30:00"
         }'''
         response = client.post(url, data=data_article, content_type='application/json')
 

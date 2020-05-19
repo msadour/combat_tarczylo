@@ -12,28 +12,28 @@ class BookAdvicedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BookAdviced
-        fields = ['id', 'name', 'author', 'category', 'url']
+        fields = '__all__'
 
 
 class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'content', 'category']
+        fields = '__all__'
 
 
 class ImportantMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ImportantMessage
-        fields = ['id', 'content', 'date_creation']
+        fields = '__all__'
 
 
 class PresentationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Presentation
-        fields = ['id', 'tct', 'darius', 'technical']
+        fields = '__all__'
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -127,7 +127,7 @@ class PendingSubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PendingSubscription
-        fields = ['id', 'email', 'first_name', 'last_name', 'birthday', 'sex', 'date_creation']
+        fields = '__all__'
 
 
 class AuthTokenSerializer(serializers.Serializer):

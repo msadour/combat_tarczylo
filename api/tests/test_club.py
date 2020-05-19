@@ -54,20 +54,11 @@ class ClubTestCase(APITestCase):
             "city": "test city",
             "country": "test country",
             "time_table": [
-                {
-                    "day": "monday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "18:00:00",
-                    "year": "2020"
-                },
-                {
-                    "day": "saturday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "17:00:00",
-                    "year": "2020"
-                }
+                "monday 10:00:00 18:00:00",
+                "saturday 10:00:00 17:00:00"
             ]
         }'''
+
         response = client.post(url_club, data=data_club, content_type='application/json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

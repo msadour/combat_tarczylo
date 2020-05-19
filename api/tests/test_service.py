@@ -45,18 +45,8 @@ class CourseTestCase(APITestCase):
             "category": "men",
             "instructor": ''' + str(instructor.id) + ''',
             "time_table": [
-                {
-                    "day": "monday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "18:00:00",
-                    "year": "2020"
-                },
-                {
-                    "day": "saturday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "17:00:00",
-                    "year": "2020"
-                }
+                "monday 10:00:00 18:00:00",
+                "saturday 10:00:00 17:00:00"
             ]
         }'''
         response = client.post(url_course, data=data_course, content_type='application/json')
@@ -115,18 +105,8 @@ class InternshipTestCase(APITestCase):
             "theme": "knife",
             "instructor": ''' + str(instructor.id) + ''',
             "time_table": [
-                {
-                    "day": "monday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "18:00:00",
-                    "year": "2020"
-                },
-                {
-                    "day": "saturday",
-                    "from_hour": "10:00:00",
-                    "to_hour": "17:00:00",
-                    "year": "2020"
-                }
+                "monday 10:00:00 18:00:00",
+                "saturday 10:00:00 17:00:00"
             ]
         }'''
         response = client.post(url_internship, data=data_internship, content_type='application/json')
@@ -151,8 +131,7 @@ class InternshipTestCase(APITestCase):
             price=100,
             theme="knife"
         )
-        # internship.time_table.add(monday)
-        # internship.time_table.add(saturday)
+
         internship.instructor = InstructorFactory()
         internship.save()
 

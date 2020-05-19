@@ -23,12 +23,9 @@ class CourseViewSet(viewsets.ViewSet):
         new_course = Course.objects.create(**datas)
 
         for time_table in time_tables:
-            if isinstance(time_table, str):
-                info = re.split(r'\s', time_table)
-                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                new_time_table = TimeTable.objects.create(**info_time_table)
-            else:
-                new_time_table = TimeTable.objects.create(**time_table)
+            time_table_str = re.split(r'\s', time_table)
+            info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+            new_time_table = TimeTable.objects.create(**info_time_table)
             new_course.time_table.add(new_time_table)
 
         serializer = CourseSerializer(new_course, many=False)
@@ -51,11 +48,10 @@ class CourseViewSet(viewsets.ViewSet):
         for attr, value in datas.items():
             if attr == 'add_time_table':
                 for time_table in value:
-                    if isinstance(time_table, str):
-                        info = re.split(r'\s', time_table)
-                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                        new_time_table = TimeTable.objects.create(**info_time_table)
-                        course.time_table.add(new_time_table)
+                    time_table_str = re.split(r'\s', time_table)
+                    info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+                    new_time_table = TimeTable.objects.create(**info_time_table)
+                    course.time_table.add(new_time_table)
             else:
                 setattr(course, attr, value)
         course.save()
@@ -81,12 +77,9 @@ class InternshipViewSet(viewsets.ViewSet):
         new_internship = Internship.objects.create(**datas)
 
         for time_table in time_tables:
-            if isinstance(time_table, str):
-                info = re.split(r'\s', time_table)
-                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                new_time_table = TimeTable.objects.create(**info_time_table)
-            else:
-                new_time_table = TimeTable.objects.create(**time_table)
+            time_table_str = re.split(r'\s', time_table)
+            info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+            new_time_table = TimeTable.objects.create(**info_time_table)
             new_internship.time_table.add(new_time_table)
 
         serializer = InternshipSerializer(new_internship, many=False)
@@ -109,11 +102,10 @@ class InternshipViewSet(viewsets.ViewSet):
         for attr, value in datas.items():
             if attr == 'add_time_table':
                 for time_table in value:
-                    if isinstance(time_table, str):
-                        info = re.split(r'\s', time_table)
-                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                        new_time_table = TimeTable.objects.create(**info_time_table)
-                        internship.time_table.add(new_time_table)
+                    time_table_str = re.split(r'\s', time_table)
+                    info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+                    new_time_table = TimeTable.objects.create(**info_time_table)
+                    internship.time_table.add(new_time_table)
             else:
                 setattr(internship, attr, value)
         internship.save()

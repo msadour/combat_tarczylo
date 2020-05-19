@@ -14,13 +14,11 @@ class TimeTableViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        if 'time_table_str' in datas.keys():
-            time_table = datas['time_table_str']
-            info = re.split(r'\s', time_table)
-            info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-            new_time_table = TimeTable.objects.create(**info_time_table)
-        else:
-            new_time_table = TimeTable.objects.create(**datas)
+        time_table = datas['time_table']
+        time_table_str = re.split(r'\s', time_table)
+        info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+        new_time_table = TimeTable.objects.create(**info_time_table)
+
         serializer = TimeTableSerializer(new_time_table, many=False)
 
         return Response(serializer.data, status=201)
@@ -41,13 +39,8 @@ class TimeTableViewSet(viewsets.ViewSet):
         time_table = TimeTable.objects.get(id=pk)
 
         for attr, value in datas.items():
-            if attr == 'time_table_str':
-                info = re.split(r'\s', value)
-                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                for attr_tt, value_tt in info_time_table.items():
-                    setattr(time_table, attr_tt, value_tt)
-            else:
-                setattr(time_table, attr, value)
+            setattr(time_table, attr, value)
+
         time_table.save()
         serializer = TimeTableSerializer(time_table)
 

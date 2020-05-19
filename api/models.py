@@ -26,6 +26,7 @@ class Article(models.Model):
 class ImportantMessage(models.Model):
     content = models.CharField(max_length=255, blank=True)
     date_creation = models.DateTimeField(null=True, blank=True, default=timezone.now)
+    is_active = models.BooleanField(default=False)
 
 
 class Presentation(models.Model):
