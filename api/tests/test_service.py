@@ -1,9 +1,6 @@
 from __future__ import absolute_import
-
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
 import django
-django.setup()
+import os
 
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
@@ -11,14 +8,17 @@ from rest_framework.test import APIClient, APITestCase
 from api.tests.factories.member import InstructorFactory, MemberFactory
 from api.tests.factories.service import CourseFactory, InternshipFactory
 
+os.environ["DJANGO_SETTINGS_MODULE"] = "combat_tarczylo.settings"
+
+django.setup()
+
 client = APIClient()
 
-url_course = '/api_tct/course/'
-url_internship = '/api_tct/internship/'
+url_course = "/api_tct/course/"
+url_internship = "/api_tct/internship/"
 
 
 class CourseTestCase(APITestCase):
-
     def setUp(self):
         self.client = APIClient()
         self.user_test = MemberFactory()
@@ -31,49 +31,54 @@ class CourseTestCase(APITestCase):
         assert 0 < len(response.data)
 
     def test_retrieve(self):
-        response = self.client.get(url_course + f'{self.course.id}/')
+        response = self.client.get(url_course + f"{self.course.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
         instructor = InstructorFactory()
 
-        data_course = '''{
+        data_course = (
+            """{
             "name": "fight",
             "description": "fight hand and foot",
             "level": "white",
             "category": "men",
-            "instructor": ''' + str(instructor.id) + ''',
+            "instructor": """
+            + str(instructor.id)
+            + """,
             "time_table": [
                 "monday 10:00:00 18:00:00",
                 "saturday 10:00:00 17:00:00"
             ]
-        }'''
-        response = client.post(url_course, data=data_course, content_type='application/json')
+        }"""
+        )
+        response = client.post(
+            url_course, data=data_course, content_type="application/json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
 
-        response = self.client.delete(url_course + str(self.course.id) + '/')
+        response = self.client.delete(url_course + str(self.course.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
-        course = CourseFactory.create(
-            name='test name',
-        )
+        course = CourseFactory.create(name="test name",)
         course.save()
 
-        request = self.client.patch(url_course + str(course.id) + '/', data={'name': 'new name'})
+        request = self.client.patch(
+            url_course + str(course.id) + "/", data={"name": "new name"}
+        )
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(request.data['name'], 'new name')
+        self.assertEqual(request.data["name"], "new name")
 
 
 class InternshipTestCase(APITestCase):
-
     def setUp(self):
         self.client = APIClient()
         self.user_test = MemberFactory()
@@ -86,7 +91,7 @@ class InternshipTestCase(APITestCase):
         assert 0 < len(response.data)
 
     def test_retrieve(self):
-        response = self.client.get(url_internship + f'{self.internship.id}/')
+        response = self.client.get(url_internship + f"{self.internship.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -94,7 +99,8 @@ class InternshipTestCase(APITestCase):
 
         instructor = InstructorFactory()
 
-        data_internship = '''{
+        data_internship = (
+            """{
             "name": "fight",
             "description": "fight hand and foot",
             "level": "white",
@@ -103,39 +109,46 @@ class InternshipTestCase(APITestCase):
             "date_end": "2020-04-20 10:00:00",
             "price": 100,
             "theme": "knife",
-            "instructor": ''' + str(instructor.id) + ''',
+            "instructor": """
+            + str(instructor.id)
+            + """,
             "time_table": [
                 "monday 10:00:00 18:00:00",
                 "saturday 10:00:00 17:00:00"
             ]
-        }'''
-        response = client.post(url_internship, data=data_internship, content_type='application/json')
+        }"""
+        )
+        response = client.post(
+            url_internship, data=data_internship, content_type="application/json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
 
-        response = self.client.delete(url_internship + str(self.internship.id) + '/')
+        response = self.client.delete(url_internship + str(self.internship.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
 
         internship = InternshipFactory.create(
-            name='test name',
+            name="test name",
             description="fight hand and foot",
             level="white",
             category="men",
             date_begin="2020-04-20 10:00:00",
             date_end="2020-04-20 10:00:00",
             price=100,
-            theme="knife"
+            theme="knife",
         )
 
         internship.instructor = InstructorFactory()
         internship.save()
 
-        request = self.client.patch(url_internship + str(internship.id) + '/', data={'name': 'new name'})
+        request = self.client.patch(
+            url_internship + str(internship.id) + "/", data={"name": "new name"}
+        )
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(request.data['name'], 'new name')
+        self.assertEqual(request.data["name"], "new name")

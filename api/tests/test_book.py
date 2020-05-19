@@ -1,25 +1,22 @@
 from __future__ import absolute_import
-
 import os
-
-from api.tests.factories.member import MemberFactory
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'combat_tarczylo.settings'
 import django
-django.setup()
 
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
+from api.tests.factories.member import MemberFactory
 from api.tests.factories.book import BookAdvicedFactory
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "combat_tarczylo.settings"
+django.setup()
 
 client = APIClient()
 
-url = '/api_tct/book/'
+url = "/api_tct/book/"
 
 
 class BookAdvicedTestCase(APITestCase):
-
     def setUp(self):
         self.client = APIClient()
         self.user_test = MemberFactory()
@@ -32,25 +29,25 @@ class BookAdvicedTestCase(APITestCase):
         self.assertEqual(len(response.data), 1)
 
     def test_retrieve(self):
-        response = self.client.get(url + f'{self.book.id}/')
+        response = self.client.get(url + f"{self.book.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
 
-        data_book = '''{
+        data_book = """{
             "name": "test name",
             "author": "test author",
             "category": "test category",
              "url": "test url"
-        }'''
-        response = client.post(url, data=data_book, content_type='application/json')
+        }"""
+        response = client.post(url, data=data_book, content_type="application/json")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
 
-        response = self.client.delete(url + str(self.book.id) + '/')
+        response = self.client.delete(url + str(self.book.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -60,14 +57,14 @@ class BookAdvicedTestCase(APITestCase):
         # Check if the title has been updated
 
         book = BookAdvicedFactory.create(
-            name='test name',
-            author='test author',
-            category='test category',
-            url='test url'
+            name="test name",
+            author="test author",
+            category="test category",
+            url="test url",
         )
         book.save()
 
-        request = self.client.patch(url + str(book.id) + '/', data={'name': 'new name'})
+        request = self.client.patch(url + str(book.id) + "/", data={"name": "new name"})
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(request.data['name'], 'new name')
+        self.assertEqual(request.data["name"], "new name")

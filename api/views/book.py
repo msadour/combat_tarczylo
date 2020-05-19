@@ -7,5 +7,5 @@ from api.serializers import BookAdvicedSerializer
 
 @permission_classes((permissions.AllowAny,))
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = BookAdviced.objects.all().order_by('id')
+    queryset = BookAdviced.objects.all().order_by("id")
     serializer_class = BookAdvicedSerializer

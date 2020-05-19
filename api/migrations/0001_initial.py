@@ -11,178 +11,357 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0011_update_proxy_permissions'),
+        ("auth", "0011_update_proxy_permissions"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Member',
+            name="Member",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('email', models.EmailField(max_length=255, unique=True)),
-                ('username', models.CharField(max_length=255, unique=True)),
-                ('postal_code', models.CharField(blank=True, max_length=255)),
-                ('first_name', models.CharField(blank=True, max_length=255)),
-                ('last_name', models.CharField(blank=True, max_length=255)),
-                ('city', models.CharField(blank=True, max_length=255)),
-                ('street', models.CharField(blank=True, max_length=255)),
-                ('country', models.CharField(blank=True, max_length=255)),
-                ('phone', models.CharField(blank=True, max_length=255)),
-                ('insurance_name', models.CharField(blank=True, max_length=255)),
-                ('insurance_number', models.CharField(blank=True, max_length=255)),
-                ('birthday', models.CharField(blank=True, max_length=255)),
-                ('sex', models.CharField(blank=True, max_length=255)),
-                ('level', models.CharField(blank=True, max_length=255)),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=255, unique=True)),
+                ("username", models.CharField(max_length=255, unique=True)),
+                ("postal_code", models.CharField(blank=True, max_length=255)),
+                ("first_name", models.CharField(blank=True, max_length=255)),
+                ("last_name", models.CharField(blank=True, max_length=255)),
+                ("city", models.CharField(blank=True, max_length=255)),
+                ("street", models.CharField(blank=True, max_length=255)),
+                ("country", models.CharField(blank=True, max_length=255)),
+                ("phone", models.CharField(blank=True, max_length=255)),
+                ("insurance_name", models.CharField(blank=True, max_length=255)),
+                ("insurance_number", models.CharField(blank=True, max_length=255)),
+                ("birthday", models.CharField(blank=True, max_length=255)),
+                ("sex", models.CharField(blank=True, max_length=255)),
+                ("level", models.CharField(blank=True, max_length=255)),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Group",
+                        verbose_name="groups",
+                    ),
+                ),
+                (
+                    "user_permissions",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Specific permissions for this user.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Permission",
+                        verbose_name="user permissions",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(blank=True, max_length=255)),
-                ('content', models.CharField(blank=True, max_length=255)),
-                ('category', models.CharField(blank=True, max_length=255)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='BookAdviced',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-                ('author', models.CharField(blank=True, max_length=255)),
-                ('category', models.CharField(blank=True, max_length=255)),
-                ('url', models.CharField(blank=True, max_length=255)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Category',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='ImportantMessage',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.CharField(blank=True, max_length=255)),
-                ('date_creation', models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='PendingSubscription',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254)),
-                ('first_name', models.CharField(blank=True, max_length=255)),
-                ('last_name', models.CharField(blank=True, max_length=255)),
-                ('birthday', models.DateTimeField()),
-                ('sex', models.CharField(blank=True, max_length=255)),
-                ('date_creation', models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True)),
-                ('is_pending', models.BooleanField(default=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Presentation',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tct', models.CharField(blank=True, max_length=255)),
-                ('darius', models.CharField(blank=True, max_length=255)),
-                ('technical', models.CharField(blank=True, max_length=255)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='TimeTable',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('day', models.CharField(blank=True, max_length=255)),
-                ('from_hour', models.TimeField()),
-                ('to_hour', models.TimeField()),
-                ('year', models.IntegerField(default=2020)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(blank=True, max_length=255)),
+                ("content", models.CharField(blank=True, max_length=255)),
+                ("category", models.CharField(blank=True, max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Instructor',
+            name="BookAdviced",
             fields=[
-                ('member_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('biography', models.CharField(blank=True, max_length=255)),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=('api.member',),
-        ),
-        migrations.CreateModel(
-            name='Product',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('quantity_available', models.IntegerField()),
-                ('size', models.CharField(blank=True, max_length=255)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Category')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
+                ("author", models.CharField(blank=True, max_length=255)),
+                ("category", models.CharField(blank=True, max_length=255)),
+                ("url", models.CharField(blank=True, max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Order',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_bought', models.BooleanField(default=False)),
-                ('date_creation', models.DateTimeField(blank=True, default=django.utils.timezone.now, null=True)),
-                ('member', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('products', models.ManyToManyField(to='api.Product')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Club',
+            name="ImportantMessage",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-                ('description', models.CharField(blank=True, max_length=255)),
-                ('street', models.CharField(blank=True, max_length=255)),
-                ('number', models.CharField(blank=True, max_length=255)),
-                ('zip_code', models.CharField(blank=True, max_length=255)),
-                ('city', models.CharField(blank=True, max_length=255)),
-                ('country', models.CharField(blank=True, max_length=255)),
-                ('time_table', models.ManyToManyField(to='api.TimeTable')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("content", models.CharField(blank=True, max_length=255)),
+                (
+                    "date_creation",
+                    models.DateTimeField(
+                        blank=True, default=django.utils.timezone.now, null=True
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Internship',
+            name="PendingSubscription",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-                ('description', models.CharField(blank=True, max_length=255)),
-                ('place', models.CharField(blank=True, max_length=255)),
-                ('level', models.CharField(blank=True, max_length=255)),
-                ('category', models.CharField(blank=True, max_length=255)),
-                ('date_begin', models.DateTimeField(blank=True, null=True)),
-                ('date_end', models.DateTimeField(blank=True, null=True)),
-                ('price', models.DecimalField(decimal_places=5, max_digits=10)),
-                ('theme', models.CharField(blank=True, max_length=255)),
-                ('time_table', models.ManyToManyField(to='api.TimeTable')),
-                ('instructor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Instructor')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254)),
+                ("first_name", models.CharField(blank=True, max_length=255)),
+                ("last_name", models.CharField(blank=True, max_length=255)),
+                ("birthday", models.DateTimeField()),
+                ("sex", models.CharField(blank=True, max_length=255)),
+                (
+                    "date_creation",
+                    models.DateTimeField(
+                        blank=True, default=django.utils.timezone.now, null=True
+                    ),
+                ),
+                ("is_pending", models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Course',
+            name="Presentation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=255)),
-                ('description', models.CharField(blank=True, max_length=255)),
-                ('place', models.CharField(blank=True, max_length=255)),
-                ('level', models.CharField(blank=True, max_length=255)),
-                ('category', models.CharField(blank=True, max_length=255)),
-                ('time_table', models.ManyToManyField(to='api.TimeTable')),
-                ('instructor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Instructor')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("tct", models.CharField(blank=True, max_length=255)),
+                ("darius", models.CharField(blank=True, max_length=255)),
+                ("technical", models.CharField(blank=True, max_length=255)),
+            ],
+        ),
+        migrations.CreateModel(
+            name="TimeTable",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("day", models.CharField(blank=True, max_length=255)),
+                ("from_hour", models.TimeField()),
+                ("to_hour", models.TimeField()),
+                ("year", models.IntegerField(default=2020)),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Instructor",
+            fields=[
+                (
+                    "member_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("biography", models.CharField(blank=True, max_length=255)),
+            ],
+            options={"abstract": False,},
+            bases=("api.member",),
+        ),
+        migrations.CreateModel(
+            name="Product",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("quantity_available", models.IntegerField()),
+                ("size", models.CharField(blank=True, max_length=255)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="api.Category"
+                    ),
+                ),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Order",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("is_bought", models.BooleanField(default=False)),
+                (
+                    "date_creation",
+                    models.DateTimeField(
+                        blank=True, default=django.utils.timezone.now, null=True
+                    ),
+                ),
+                (
+                    "member",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("products", models.ManyToManyField(to="api.Product")),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Club",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
+                ("description", models.CharField(blank=True, max_length=255)),
+                ("street", models.CharField(blank=True, max_length=255)),
+                ("number", models.CharField(blank=True, max_length=255)),
+                ("zip_code", models.CharField(blank=True, max_length=255)),
+                ("city", models.CharField(blank=True, max_length=255)),
+                ("country", models.CharField(blank=True, max_length=255)),
+                ("time_table", models.ManyToManyField(to="api.TimeTable")),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Internship",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
+                ("description", models.CharField(blank=True, max_length=255)),
+                ("place", models.CharField(blank=True, max_length=255)),
+                ("level", models.CharField(blank=True, max_length=255)),
+                ("category", models.CharField(blank=True, max_length=255)),
+                ("date_begin", models.DateTimeField(blank=True, null=True)),
+                ("date_end", models.DateTimeField(blank=True, null=True)),
+                ("price", models.DecimalField(decimal_places=5, max_digits=10)),
+                ("theme", models.CharField(blank=True, max_length=255)),
+                ("time_table", models.ManyToManyField(to="api.TimeTable")),
+                (
+                    "instructor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="api.Instructor"
+                    ),
+                ),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Course",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=255)),
+                ("description", models.CharField(blank=True, max_length=255)),
+                ("place", models.CharField(blank=True, max_length=255)),
+                ("level", models.CharField(blank=True, max_length=255)),
+                ("category", models.CharField(blank=True, max_length=255)),
+                ("time_table", models.ManyToManyField(to="api.TimeTable")),
+                (
+                    "instructor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="api.Instructor"
+                    ),
+                ),
             ],
         ),
     ]

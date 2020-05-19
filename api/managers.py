@@ -7,19 +7,20 @@ class CustomUserManager(BaseUserManager):
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
+
     def create_user(self, **fields):
         """
         Create and save a User with the given email and password.
         """
-        email = fields.get('email')
-        password = fields.get('password')
+        email = fields.get("email")
+        password = fields.get("password")
         if not email:
-            raise ValueError(_('The Email must be set'))
+            raise ValueError(_("The Email must be set"))
 
-        if 'password_again' in fields.keys():
-            if password != fields['password_again']:
-                raise ValueError(_('The two password are different.'))
-        fields.pop('password_again', None)
+        if "password_again" in fields.keys():
+            if password != fields["password_again"]:
+                raise ValueError(_("The two password are different."))
+        fields.pop("password_again", None)
         email = self.normalize_email(email)
         user = self.model(**fields)
         user.username = email
@@ -31,12 +32,12 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a SuperUser with the given email and password.
         """
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError(_('Superuser must have is_staff=True.'))
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError(_('Superuser must have is_superuser=True.'))
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(_("Superuser must have is_staff=True."))
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)

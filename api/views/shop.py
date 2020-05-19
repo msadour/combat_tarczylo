@@ -14,8 +14,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        member = int(datas.pop('member'))
-        products = datas.pop('products')
+        member = int(datas.pop("member"))
+        products = datas.pop("products")
         new_order = Order.objects.create(**datas)
         new_order.member = Member.objects.get(id=member)
         for product in products:
@@ -29,14 +29,14 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all().order_by('id')
+    queryset = Product.objects.all().order_by("id")
     serializer_class = ProductSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        datas['id'] = get_max_id('Product')
-        category_id = datas.pop('category')
-        datas['category'] = Category.objects.get(id=category_id)
+        datas["id"] = get_max_id("Product")
+        category_id = datas.pop("category")
+        datas["category"] = Category.objects.get(id=category_id)
         new_product = Product.objects.create(**datas)
         serializer = ProductSerializer(new_product, many=False)
 
@@ -45,12 +45,12 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all().order_by('id')
+    queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        datas['id'] = get_max_id('Category')
+        datas["id"] = get_max_id("Category")
         new_category = Category.objects.create(**datas)
 
         serializer = CategorySerializer(new_category, many=False)

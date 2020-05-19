@@ -1,48 +1,56 @@
-from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import authenticate
+
 from rest_framework import serializers
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-from .models import *
+from .models import (
+    BookAdviced,
+    Article,
+    ImportantMessage,
+    Presentation,
+    TimeTable,
+    Club,
+    Member,
+    Instructor,
+    Course,
+    Order,
+    PendingSubscription,
+    Internship,
+    Category,
+    Product,
+)
 
 
 class BookAdvicedSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = BookAdviced
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ImportantMessageSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ImportantMessage
-        fields = '__all__'
+        fields = "__all__"
 
 
 class PresentationSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Presentation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
 
-    time_table_str = serializers.CharField(source='display_as_str')
+    time_table_str = serializers.CharField(source="display_as_str")
 
     class Meta:
         model = TimeTable
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ClubSerializer(serializers.ModelSerializer):
@@ -50,7 +58,17 @@ class ClubSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Club
-        fields = ['id', 'name', 'description', 'street', 'number', 'zip_code', 'city', 'country', 'time_table']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "street",
+            "number",
+            "zip_code",
+            "city",
+            "country",
+            "time_table",
+        ]
 
 
 class MemberSerializer(serializers.ModelSerializer):
@@ -60,9 +78,7 @@ class MemberSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = '__all__'
-        # fields = ['id', 'email', 'username','password', 'first_name', 'last_name', 'postal_code', 'city', 'street',
-        #           'country', 'phone', 'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'full_name', 'is_active']
+        fields = "__all__"
 
 
 class InstructorSerializer(serializers.ModelSerializer):
@@ -71,9 +87,26 @@ class InstructorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Instructor
-        fields = ['id', 'email', 'password','first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
-                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'biography', 'full_name',
-                  'is_active']
+        fields = [
+            "id",
+            "email",
+            "password",
+            "first_name",
+            "last_name",
+            "postal_code",
+            "city",
+            "street",
+            "country",
+            "phone",
+            "insurance_name",
+            "insurance_number",
+            "birthday",
+            "sex",
+            "level",
+            "biography",
+            "full_name",
+            "is_active",
+        ]
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -83,7 +116,16 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'description', 'place', 'level', 'category', 'time_table', 'instructor']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "place",
+            "level",
+            "category",
+            "time_table",
+            "instructor",
+        ]
 
 
 class InternshipSerializer(serializers.ModelSerializer):
@@ -93,26 +135,38 @@ class InternshipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Internship
-        fields = ['id', 'name', 'description', 'place', 'level', 'category', 'time_table', 'instructor',
-                  'date_begin', 'date_end', 'price', 'theme']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "place",
+            "level",
+            "category",
+            "time_table",
+            "instructor",
+            "date_begin",
+            "date_end",
+            "price",
+            "theme",
+        ]
 
 
 class CategorySerializer(serializers.ModelSerializer):
 
-    products = serializers.CharField(source='get_products')
+    products = serializers.CharField(source="get_products")
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'products']
+        fields = ["id", "name", "products"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    category = serializers.CharField(source='get_category')
+    category = serializers.CharField(source="get_category")
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'quantity_available', 'size', 'category']
+        fields = ["id", "name", "price", "quantity_available", "size", "category"]
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -122,14 +176,13 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'member', 'products', 'is_bought']
+        fields = ["id", "member", "products", "is_bought"]
 
 
 class PendingSubscriptionSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = PendingSubscription
-        fields = '__all__'
+        fields = "__all__"
 
 
 class AuthTokenSerializer(serializers.Serializer):
@@ -141,7 +194,9 @@ class AuthTokenSerializer(serializers.Serializer):
     """
 
     username = serializers.CharField()
-    password = serializers.CharField(style={"input_type": "password"}, trim_whitespace=False)
+    password = serializers.CharField(
+        style={"input_type": "password"}, trim_whitespace=False
+    )
 
     def authenticate_user(self, username=None, password=None):
         try:
@@ -152,7 +207,7 @@ class AuthTokenSerializer(serializers.Serializer):
                 return user
             else:
                 return None
-        except:
+        except Exception:
             return None
 
     def validate(self, attrs):

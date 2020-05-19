@@ -11,21 +11,21 @@ from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 @permission_classes((permissions.AllowAny,))
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all().order_by('id')
+    queryset = Course.objects.all().order_by("id")
     serializer_class = CourseSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        instructor_id = datas.pop('instructor')
-        time_tables = datas.pop('time_table')
+        instructor_id = datas.pop("instructor")
+        time_tables = datas.pop("time_table")
         instructor = Instructor.objects.get(id=int(instructor_id))
-        datas['instructor'] = instructor
-        datas['id'] = get_max_id('Course')
+        datas["instructor"] = instructor
+        datas["id"] = get_max_id("Course")
         new_course = Course.objects.create(**datas)
 
         for time_table in time_tables:
-            time_table_str = re.split(r'\s', time_table)
-            info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+            info = re.split(r"\s", time_table)
+            info_time_table = {"day": info[0], "from_hour": info[1], "to_hour": info[2]}
             new_time_table = TimeTable.objects.create(**info_time_table)
             new_course.time_table.add(new_time_table)
 
@@ -37,10 +37,14 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = Course.objects.get(id=pk)
         print(datas.items())
         for attr, value in datas.items():
-            if attr == 'add_time_table':
+            if attr == "add_time_table":
                 for time_table in value:
-                    time_table_str = re.split(r'\s', time_table)
-                    info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+                    time_table_str = re.split(r"\s", time_table)
+                    info_time_table = {
+                        "day": time_table_str[0],
+                        "from_hour": time_table_str[1],
+                        "to_hour": time_table_str[2],
+                    }
                     new_time_table = TimeTable.objects.create(**info_time_table)
                     course.time_table.add(new_time_table)
             else:
@@ -53,21 +57,21 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ModelViewSet):
-    queryset = Internship.objects.all().order_by('id')
+    queryset = Internship.objects.all().order_by("id")
     serializer_class = InternshipSerializer
 
     def create(self, request, *args, **kwargs):
         datas = request.data
-        datas['id'] = get_max_id('Internship')
-        instructor_id = datas.pop('instructor')
+        datas["id"] = get_max_id("Internship")
+        instructor_id = datas.pop("instructor")
         instructor = Instructor.objects.get(id=instructor_id)
-        datas['instructor_id'] = instructor.id
-        time_tables = datas.pop('time_table')
+        datas["instructor_id"] = instructor.id
+        time_tables = datas.pop("time_table")
         new_internship = Internship.objects.create(**datas)
 
         for time_table in time_tables:
-            time_table_str = re.split(r'\s', time_table)
-            info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+            info = re.split(r"\s", time_table)
+            info_time_table = {"day": info[0], "from_hour": info[1], "to_hour": info[2]}
             new_time_table = TimeTable.objects.create(**info_time_table)
             new_internship.time_table.add(new_time_table)
 
@@ -78,10 +82,14 @@ class InternshipViewSet(viewsets.ModelViewSet):
         datas = request.data
         internship = Internship.objects.get(id=pk)
         for attr, value in datas.items():
-            if attr == 'add_time_table':
+            if attr == "add_time_table":
                 for time_table in value:
-                    time_table_str = re.split(r'\s', time_table)
-                    info_time_table = {'day': time_table_str[0], 'from_hour': time_table_str[1], 'to_hour': time_table_str[2]}
+                    time_table_str = re.split(r"\s", time_table)
+                    info_time_table = {
+                        "day": time_table_str[0],
+                        "from_hour": time_table_str[1],
+                        "to_hour": time_table_str[2],
+                    }
                     new_time_table = TimeTable.objects.create(**info_time_table)
                     internship.time_table.add(new_time_table)
             else:

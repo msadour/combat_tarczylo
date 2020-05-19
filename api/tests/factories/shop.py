@@ -5,17 +5,17 @@ from api.tests.factories.member import MemberFactory
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
-    name = 'test category name'
+    name = "test category name"
 
     class Meta:
         model = Category
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
-    name = 'test product name'
+    name = "test product name"
     price = 10.00
     quantity_available = 10
-    size = 'L'
+    size = "L"
     category = factory.SubFactory(CategoryFactory)
 
     class Meta:
@@ -25,7 +25,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
 class OrderFactory(factory.django.DjangoModelFactory):
     date_creation = "2020-04-20 10:00:00"
     member = factory.SubFactory(MemberFactory)
-    products = (factory.SubFactory(ProductFactory), )
+    products = (factory.SubFactory(ProductFactory),)
     is_bought = False
 
     @factory.post_generation

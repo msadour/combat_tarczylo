@@ -72,7 +72,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     sex = models.CharField(max_length=255, blank=True)
     level = models.CharField(max_length=255, blank=True)
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = "username"
 
     objects = CustomUserManager()
 
@@ -94,7 +94,7 @@ class Course(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
 
     def get_full_name_instructor(self):
-        return {'id': self.instructor.id, 'full_name': self.instructor.get_full_name()}
+        return {"id": self.instructor.id, "full_name": self.instructor.get_full_name()}
 
 
 class Internship(models.Model):
@@ -109,6 +109,12 @@ class Internship(models.Model):
     date_end = models.DateTimeField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=5)
     theme = models.CharField(max_length=255, blank=True)
+
+    def add_time_table(self, time_tables):
+        for time_table in time_tables:
+            time_table_str = re.split(r"\s", time_table)
+            new_time_table = TimeTable(time_table_str=time_table_str)
+            self.time_table.add(new_time_table)
 
 
 class Category(models.Model):
@@ -129,7 +135,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def get_category(self):
-        return model_to_dict(self.category, fields=['id', 'name'])
+        return model_to_dict(self.category, fields=["id", "name"])
 
 
 class Order(models.Model):
