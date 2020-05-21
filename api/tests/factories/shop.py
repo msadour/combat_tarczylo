@@ -1,4 +1,5 @@
 """Shop module."""
+from typing import Any
 
 import factory
 
@@ -37,11 +38,10 @@ class OrderFactory(factory.django.DjangoModelFactory):
 
     date_creation = "2020-04-20 10:00:00"
     member = factory.SubFactory(MemberFactory)
-    products = (factory.SubFactory(ProductFactory),)
     is_bought = False
 
     @factory.post_generation
-    def products(self, create, extracted, **kwargs):
+    def products(self, create: Any, extracted: Any, **kwargs: Any) -> Any:
         """Add product in an order.
 
         Args:

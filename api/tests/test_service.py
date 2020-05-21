@@ -23,14 +23,14 @@ url_internship = "/api_tct/internship/"
 class CourseTestCase(APITestCase):
     """Class CourseTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.course = CourseFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of course.
 
         Raises:
@@ -40,7 +40,7 @@ class CourseTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve a course.
 
         Raises:
@@ -50,7 +50,7 @@ class CourseTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create a course.
 
         Raises:
@@ -79,7 +79,7 @@ class CourseTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete a course.
 
         Raises:
@@ -89,7 +89,7 @@ class CourseTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update a course.
 
         Raises:
@@ -109,14 +109,14 @@ class CourseTestCase(APITestCase):
 class InternshipTestCase(APITestCase):
     """class InternshipTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.internship = InternshipFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of intenrship.
 
         Raises:
@@ -126,7 +126,7 @@ class InternshipTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve an internship.
 
         Raises:
@@ -136,7 +136,7 @@ class InternshipTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create an internship.
 
         Raises:
@@ -169,7 +169,7 @@ class InternshipTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete an internship.
 
         Raises:
@@ -179,7 +179,7 @@ class InternshipTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update an internship.
 
         Raises:

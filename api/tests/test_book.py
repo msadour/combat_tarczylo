@@ -21,14 +21,14 @@ url = "/api_tct/book/"
 class BookAdvicedTestCase(APITestCase):
     """class BookAdvicedTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.book = BookAdvicedFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """
         Test list of books.
 
@@ -39,7 +39,7 @@ class BookAdvicedTestCase(APITestCase):
 
         self.assertEqual(len(response.data), 1)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """
         Test retrieve an book.
 
@@ -50,7 +50,7 @@ class BookAdvicedTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """
         Test create a book.
 
@@ -67,7 +67,7 @@ class BookAdvicedTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """
         Test delete a book.
 
@@ -78,7 +78,7 @@ class BookAdvicedTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """
         Test update a book.
 

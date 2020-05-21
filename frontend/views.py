@@ -1,9 +1,9 @@
 """Views module."""
-
+from django.http import HttpResponse
 from django.shortcuts import render
 
 
-def index(request, page=""):
+def index(request, page: str = "") -> HttpResponse:
     """Render to frontend page.
 
     Args:

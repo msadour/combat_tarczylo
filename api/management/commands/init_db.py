@@ -2,6 +2,7 @@
 
 import json
 import os
+from typing import Any
 
 from django.core.management.base import BaseCommand
 from django.apps import apps
@@ -29,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Command(BaseCommand):
     """Class command."""
 
-    def handle(self, *args, **options):
+    def handle(self, *args: Any, **options: Any) -> None:
         """Execute the command that create book(s).
 
         Args:
@@ -37,7 +38,7 @@ class Command(BaseCommand):
             options: Arbitrary keyword arguments.
         """
 
-        def delete_data():
+        def delete_data() -> None:
             BookAdviced.objects.all().delete()
             Article.objects.all().delete()
             ImportantMessage.objects.all().delete()

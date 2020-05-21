@@ -23,14 +23,14 @@ url_product = "/api_tct/product/"
 class CategoryTestCase(APITestCase):
     """class CategoryTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.category = CategoryFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of categories.
 
         Raises:
@@ -40,7 +40,7 @@ class CategoryTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve an category.
 
         Raises:
@@ -50,7 +50,7 @@ class CategoryTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create an category.
 
         Raises:
@@ -66,7 +66,7 @@ class CategoryTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete an category.
 
         Raises:
@@ -76,7 +76,7 @@ class CategoryTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update an category.
 
         Raises:
@@ -96,14 +96,14 @@ class CategoryTestCase(APITestCase):
 class ProductTestCase(APITestCase):
     """class ProductTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.product = ProductFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of products.
 
         Raises:
@@ -113,7 +113,7 @@ class ProductTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve a product.
 
         Raises:
@@ -123,7 +123,7 @@ class ProductTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create a product.
 
         Raises:
@@ -149,7 +149,7 @@ class ProductTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete a product.
 
         Raises:
@@ -159,7 +159,7 @@ class ProductTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update a product.
 
         Raises:
@@ -185,7 +185,7 @@ class ProductTestCase(APITestCase):
 class OrderTestCase(APITestCase):
     """class OrderTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
@@ -194,7 +194,7 @@ class OrderTestCase(APITestCase):
         self.order.products.add(ProductFactory())
         self.order.products.add(ProductFactory())
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of orders.
 
         Raises:
@@ -204,7 +204,7 @@ class OrderTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve an order.
 
         Raises:
@@ -214,7 +214,7 @@ class OrderTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create an order.
 
         Raises:
@@ -244,7 +244,7 @@ class OrderTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete an order.
 
         Raises:
@@ -254,7 +254,7 @@ class OrderTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test delete an order.
 
         Raises:

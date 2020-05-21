@@ -21,14 +21,14 @@ url = "/api_tct/article/"
 class ArticleTestCase(APITestCase):
     """class ArticleTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.article = ArticleFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of articles.
 
         Raises:
@@ -38,7 +38,7 @@ class ArticleTestCase(APITestCase):
 
         self.assertEqual(len(response.data), 1)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve an article.
 
         Raises:
@@ -48,7 +48,7 @@ class ArticleTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """
         Test creation of an article.
 
@@ -64,7 +64,7 @@ class ArticleTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """
         Test delete of article.
 
@@ -77,7 +77,7 @@ class ArticleTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """
         Test update of an article.
 

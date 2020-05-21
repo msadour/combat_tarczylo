@@ -29,14 +29,14 @@ url_message = "/api_tct/important_message/"
 class ClubTestCase(APITestCase):
     """class ClubTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.club = ClubFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of club.
 
         Raises:
@@ -46,7 +46,7 @@ class ClubTestCase(APITestCase):
 
         assert len(response.data) > 0
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve of club.
 
         Raises:
@@ -56,7 +56,7 @@ class ClubTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create of club.
 
         Raises:
@@ -82,7 +82,7 @@ class ClubTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete of club.
 
         Raises:
@@ -94,7 +94,7 @@ class ClubTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update of club.
 
         Raises:
@@ -114,14 +114,14 @@ class ClubTestCase(APITestCase):
 class PresentationTestCase(APITestCase):
     """class BookAdvicedTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.presentation = PresentationFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of presentations.
 
         Raises:
@@ -131,7 +131,7 @@ class PresentationTestCase(APITestCase):
 
         assert len(response.data) > 0
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve an presentation.
 
         Raises:
@@ -141,7 +141,7 @@ class PresentationTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create an presentation.
 
         Raises:
@@ -158,7 +158,7 @@ class PresentationTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete an presentation.
 
         Raises:
@@ -172,7 +172,7 @@ class PresentationTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update an presentation.
 
         Raises:
@@ -192,14 +192,14 @@ class PresentationTestCase(APITestCase):
 class ImportantMessageTestCase(APITestCase):
     """class ImportantMessageTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.message = ImportantMessageFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of message.
 
         Raises:
@@ -209,7 +209,7 @@ class ImportantMessageTestCase(APITestCase):
 
         assert len(response.data) > 0
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve a message.
 
         Raises:
@@ -219,7 +219,7 @@ class ImportantMessageTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create a message.
 
         Raises:
@@ -234,7 +234,7 @@ class ImportantMessageTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete a message.
 
         Raises:
@@ -246,7 +246,7 @@ class ImportantMessageTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update a message.
 
         Raises:

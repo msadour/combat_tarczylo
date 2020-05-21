@@ -22,13 +22,13 @@ url_instructor = "/api_tct/instructor/"
 class MemberTestCase(APITestCase):
     """class MemberTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.member = MemberFactory()
         self.client.force_authenticate(user=self.member)
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of members.
 
         Raises:
@@ -38,7 +38,7 @@ class MemberTestCase(APITestCase):
 
         assert len(response.data) > 0
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve a member.
 
         Raises:
@@ -48,7 +48,7 @@ class MemberTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create a member.
 
         Raises:
@@ -77,7 +77,7 @@ class MemberTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete a member.
 
         Raises:
@@ -87,7 +87,7 @@ class MemberTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update a member.
 
         Raises:
@@ -107,14 +107,14 @@ class MemberTestCase(APITestCase):
 class InstructorTestCase(APITestCase):
     """class InstructorTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.instructor = InstructorFactory()
 
-    def test_list(self):
+    def test_list(self) -> None:
         """
         Test list of instructor.
 
@@ -125,7 +125,7 @@ class InstructorTestCase(APITestCase):
 
         assert 0 < len(response.data)
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """
         Test retrieve an instructor.
 
@@ -136,7 +136,7 @@ class InstructorTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """
         Test create an instructor.
 
@@ -167,7 +167,7 @@ class InstructorTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """
         Test delete an instructor.
 
@@ -178,7 +178,7 @@ class InstructorTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """
         Test update an instructor.
 

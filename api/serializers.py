@@ -1,6 +1,8 @@
 """Serializers module."""
+from typing import Any, Dict
 
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
@@ -243,7 +245,7 @@ class AuthTokenSerializer(serializers.Serializer):
         style={"input_type": "password"}, trim_whitespace=False
     )
 
-    def authenticate_user(self, username=None, password=None):
+    def authenticate_user(self, username: str = None, password: str = None) -> Any:
         """Authenticate a user.
 
         Args:
@@ -264,7 +266,7 @@ class AuthTokenSerializer(serializers.Serializer):
         except Exception:
             return None
 
-    def validate(self, attrs):
+    def validate(self, attrs: Dict) -> User:
         """Validate a user.
 
         Args:

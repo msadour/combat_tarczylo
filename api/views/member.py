@@ -1,4 +1,5 @@
 """Member module."""
+from typing import Any
 
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
@@ -8,6 +9,7 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import permission_classes
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
@@ -21,7 +23,7 @@ class CustomAuthToken(ObtainAuthToken):
 
     authentication_classes = [TokenAuthentication]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create token for authentication.
 
         Args:
@@ -48,7 +50,7 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all().order_by("id")
     serializer_class = MemberSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a course.
 
         Args:
@@ -67,7 +69,9 @@ class MemberViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """Update a course.
 
         Args:
@@ -99,7 +103,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
     queryset = Instructor.objects.all().order_by("id")
     serializer_class = InstructorSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
         Create an instructor.
 
@@ -119,7 +123,9 @@ class InstructorViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """
         Update an instructor.
 
@@ -149,7 +155,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
 class LogoutViewSet(viewsets.ViewSet):
     """Class LogoutViewSet."""
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
         Log out.
 
@@ -163,7 +169,7 @@ class LogoutViewSet(viewsets.ViewSet):
         """
         return self.logout(request)
 
-    def logout(self, request):
+    def logout(self, request: Request) -> Response:
         """
         Log out.
 

@@ -1,9 +1,11 @@
 """Time table module."""
 
 import re
+from typing import Any
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.models import TimeTable
@@ -17,7 +19,7 @@ class TimeTableViewSet(viewsets.ModelViewSet):
     queryset = TimeTable.objects.all()
     serializer_class = TimeTableSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a timetable.
 
         Args:
@@ -42,7 +44,9 @@ class TimeTableViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=201)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """Update a timetable.
 
         Args:

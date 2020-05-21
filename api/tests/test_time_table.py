@@ -22,7 +22,7 @@ url = "/api_tct/time_table/"
 class TimeTableTestCase(APITestCase):
     """class TimeTableTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
@@ -31,7 +31,7 @@ class TimeTableTestCase(APITestCase):
             day="saturday", from_hour="10:00:00", to_hour="17:00:00", year=2020
         )
 
-    def test_list(self):
+    def test_list(self) -> None:
         """Test list of time tables.
 
         Raises:
@@ -41,7 +41,7 @@ class TimeTableTestCase(APITestCase):
 
         assert len(response.data) > 0
 
-    def test_retrieve(self):
+    def test_retrieve(self) -> None:
         """Test retrieve a timetable.
 
         Raises:
@@ -51,7 +51,7 @@ class TimeTableTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create(self):
+    def test_create(self) -> None:
         """Test create a timetable.
 
         Raises:
@@ -64,7 +64,7 @@ class TimeTableTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         """Test delete a timetable.
 
         Raises:
@@ -74,7 +74,7 @@ class TimeTableTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_partial_update(self):
+    def test_partial_update(self) -> None:
         """Test update a timetable.
 
         Raises:

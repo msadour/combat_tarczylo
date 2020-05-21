@@ -1,9 +1,11 @@
 """Club module."""
 
 import re
+from typing import Any
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
@@ -22,7 +24,7 @@ class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the club.
 
         Args:
@@ -38,7 +40,7 @@ class ClubViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create the club.
 
         Args:
@@ -64,7 +66,9 @@ class ClubViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """Update the club.
 
         Args:
@@ -104,7 +108,7 @@ class PresentationViewSet(viewsets.ModelViewSet):
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the current presentation.
 
         Args:
@@ -128,7 +132,7 @@ class ImportantMessageViewSet(viewsets.ModelViewSet):
     queryset = ImportantMessage.objects.all()
     serializer_class = ImportantMessageSerializer
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the current important message.
 
         Args:

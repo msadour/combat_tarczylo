@@ -1,4 +1,5 @@
 """Member module."""
+from typing import Any
 
 import factory
 from factory.faker import faker
@@ -8,7 +9,7 @@ from api.models import Member, Instructor
 FAKE = faker.Faker()
 
 
-def generate_username(*args):
+def generate_username(*args: Any) -> Any:
     """Return a random username.
 
     Args:

@@ -1,6 +1,7 @@
 """Models module."""
 
 import datetime
+from typing import List, Dict, Any
 
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils import timezone
@@ -52,7 +53,7 @@ class TimeTable(models.Model):
     to_hour = models.TimeField()
     year = models.IntegerField(default=datetime.datetime.now().year)
 
-    def display_as_str(self):
+    def display_as_str(self) -> str:
         """Return a time table as the format 'DAY HH:HH:HH HH:HH:HH'.
 
         Returns:
@@ -96,7 +97,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    def get_full_name(self):
+    def get_full_name(self) -> Any:
         """Return the fullname.
 
         Returns:
@@ -122,7 +123,7 @@ class Course(models.Model):
     time_table = models.ManyToManyField(TimeTable)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
 
-    def get_full_name_instructor(self):
+    def get_full_name_instructor(self) -> Dict:
         """Return the fullname.
 
         Returns:
@@ -152,7 +153,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=255, blank=True)
 
-    def get_products(self):
+    def get_products(self) -> List:
         """Return all product of this category.
 
         Returns:
@@ -160,7 +161,7 @@ class Category(models.Model):
         """
         return [model_to_dict(product) for product in self.product_set.all()]
 
-    def delete_all_products(self):
+    def delete_all_products(self) -> None:
         """Delete all product of this category."""
         self.product_set.all().delete()
 
@@ -174,7 +175,7 @@ class Product(models.Model):
     size = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    def get_category(self):
+    def get_category(self) -> Any:
         """Return the category of this product.
 
         Returns:

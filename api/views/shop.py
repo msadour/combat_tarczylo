@@ -1,7 +1,9 @@
 """Shop module."""
+from typing import Any
 
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
@@ -16,7 +18,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create an order.
 
         Args:
@@ -48,7 +50,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by("id")
     serializer_class = ProductSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a product.
 
         Args:
@@ -76,7 +78,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a category.
 
         Args:

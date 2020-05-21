@@ -1,9 +1,11 @@
 """Service module."""
 
 import re
+from typing import Any
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import permission_classes
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
@@ -18,7 +20,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all().order_by("id")
     serializer_class = CourseSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
         Create a course.
 
@@ -47,7 +49,9 @@ class CourseViewSet(viewsets.ModelViewSet):
         serializer = CourseSerializer(new_course, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """
         Update a course.
 
@@ -88,7 +92,7 @@ class InternshipViewSet(viewsets.ModelViewSet):
     queryset = Internship.objects.all().order_by("id")
     serializer_class = InternshipSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
         Create an internship.
 
@@ -117,7 +121,9 @@ class InternshipViewSet(viewsets.ModelViewSet):
         serializer = InternshipSerializer(new_internship, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def update(self, request, pk=None, *args, **kwargs):
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
         """
         Update an internship.
 
