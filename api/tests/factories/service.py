@@ -1,3 +1,5 @@
+"""Service module."""
+
 import factory
 
 from api.models import Course, Internship
@@ -5,6 +7,7 @@ from .member import InstructorFactory
 
 
 class CourseFactory(factory.django.DjangoModelFactory):
+    """class CourseFactory."""
 
     name = "test name"
     description = "test description"
@@ -14,10 +17,13 @@ class CourseFactory(factory.django.DjangoModelFactory):
     instructor = factory.SubFactory(InstructorFactory)
 
     class Meta:
+        """class Meta."""
+
         model = Course
 
 
 class InternshipFactory(factory.django.DjangoModelFactory):
+    """class InternshipFactory."""
 
     name = "test name"
     description = "test description"
@@ -31,4 +37,6 @@ class InternshipFactory(factory.django.DjangoModelFactory):
     theme = "theme test"
 
     class Meta:
+        """class Meta."""
+
         model = Internship

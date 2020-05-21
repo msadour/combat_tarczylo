@@ -1,3 +1,5 @@
+"""Book module."""
+
 import factory
 from factory.faker import faker
 
@@ -7,6 +9,7 @@ FAKE = faker.Faker()
 
 
 class BookAdvicedFactory(factory.django.DjangoModelFactory):
+    """class BookAdvicedFactory."""
 
     name = "test book name"
     author = "test author"
@@ -14,4 +17,6 @@ class BookAdvicedFactory(factory.django.DjangoModelFactory):
     url = "test url"
 
     class Meta:
+        """class BookAdvicedFactory."""
+
         model = BookAdviced

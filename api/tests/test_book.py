@@ -1,3 +1,5 @@
+"""Test book module."""
+
 from __future__ import absolute_import
 import os
 import django
@@ -17,24 +19,44 @@ url = "/api_tct/book/"
 
 
 class BookAdvicedTestCase(APITestCase):
+    """class BookAdvicedTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.book = BookAdvicedFactory()
 
     def test_list(self):
+        """
+        Test list of books.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url)
 
         self.assertEqual(len(response.data), 1)
 
     def test_retrieve(self):
+        """
+        Test retrieve an book.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url + f"{self.book.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """
+        Test create a book.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_book = """{
             "name": "test name",
             "author": "test author",
@@ -46,16 +68,23 @@ class BookAdvicedTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """
+        Test delete a book.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url + str(self.book.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
-        # Create a book
-        # request our API to update his title with 'new title'
-        # Check if the title has been updated
+        """
+        Test update a book.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         book = BookAdvicedFactory.create(
             name="test name",
             author="test author",

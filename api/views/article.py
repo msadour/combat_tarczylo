@@ -1,3 +1,5 @@
+"""article module."""
+
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
 
@@ -7,5 +9,7 @@ from api.serializers import ArticleSerializer
 
 @permission_classes((permissions.AllowAny,))
 class ArticleViewSet(viewsets.ModelViewSet):
+    """Class ArticleViewSet."""
+
     queryset = Article.objects.all().order_by("id")
     serializer_class = ArticleSerializer

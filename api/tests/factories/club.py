@@ -1,3 +1,5 @@
+"""Club module."""
+
 import factory
 from factory.faker import faker
 
@@ -7,6 +9,7 @@ FAKE = faker.Faker()
 
 
 class ClubFactory(factory.django.DjangoModelFactory):
+    """class ClubFactory."""
 
     name = "test name"
     description = "test description"
@@ -17,22 +20,30 @@ class ClubFactory(factory.django.DjangoModelFactory):
     country = "test country"
 
     class Meta:
+        """class Meta."""
+
         model = Club
 
 
 class PresentationFactory(factory.django.DjangoModelFactory):
+    """class PresentationFactory."""
 
     tct = "test tct"
     darius = "content darius"
     technical = "test technical"
 
     class Meta:
+        """class Meta."""
+
         model = Presentation
 
 
 class ImportantMessageFactory(factory.django.DjangoModelFactory):
+    """class BookAdvicedFactory."""
 
     content = "test content"
 
     class Meta:
+        """class Meta."""
+
         model = ImportantMessage

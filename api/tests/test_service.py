@@ -1,3 +1,5 @@
+"""Test service module."""
+
 from __future__ import absolute_import
 import django
 import os
@@ -19,23 +21,41 @@ url_internship = "/api_tct/internship/"
 
 
 class CourseTestCase(APITestCase):
+    """Class CourseTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.course = CourseFactory()
 
     def test_list(self):
+        """Test list of course.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_course)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """Test retrieve a course.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_course + f"{self.course.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create a course.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         instructor = InstructorFactory()
 
         data_course = (
@@ -60,13 +80,21 @@ class CourseTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete a course.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_course + str(self.course.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update a course.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         course = CourseFactory.create(name="test name",)
         course.save()
 
@@ -79,24 +107,41 @@ class CourseTestCase(APITestCase):
 
 
 class InternshipTestCase(APITestCase):
+    """class InternshipTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.internship = InternshipFactory()
 
     def test_list(self):
+        """Test list of intenrship.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_internship)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """Test retrieve an internship.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_internship + f"{self.internship.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create an internship.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         instructor = InstructorFactory()
 
         data_internship = (
@@ -125,13 +170,21 @@ class InternshipTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete an internship.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_internship + str(self.internship.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update an internship.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         internship = InternshipFactory.create(
             name="test name",
             description="fight hand and foot",

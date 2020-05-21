@@ -1,3 +1,5 @@
+"""Shop module."""
+
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
@@ -9,10 +11,22 @@ from api.serializers import ProductSerializer, OrderSerializer, CategorySerializ
 
 @permission_classes((permissions.AllowAny,))
 class OrderViewSet(viewsets.ModelViewSet):
+    """Class OrderViewSet."""
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
     def create(self, request, *args, **kwargs):
+        """Create an order.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         member = int(datas.pop("member"))
         products = datas.pop("products")
@@ -29,10 +43,22 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class ProductViewSet(viewsets.ModelViewSet):
+    """Class ProductViewSet."""
+
     queryset = Product.objects.all().order_by("id")
     serializer_class = ProductSerializer
 
     def create(self, request, *args, **kwargs):
+        """Create a product.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Product")
         category_id = datas.pop("category")
@@ -45,10 +71,22 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class CategoryViewSet(viewsets.ModelViewSet):
+    """Class CategoryViewSet."""
+
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
+        """Create a category.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Category")
         new_category = Category.objects.create(**datas)

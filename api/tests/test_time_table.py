@@ -1,3 +1,5 @@
+"""Test time table module."""
+
 from __future__ import absolute_import
 import os
 import django
@@ -18,7 +20,10 @@ url = "/api_tct/time_table/"
 
 
 class TimeTableTestCase(APITestCase):
+    """class TimeTableTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
@@ -27,17 +32,31 @@ class TimeTableTestCase(APITestCase):
         )
 
     def test_list(self):
+        """Test list of time tables.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url)
 
         assert len(response.data) > 0
 
     def test_retrieve(self):
+        """Test retrieve a timetable.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url + f"{self.time_table.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create a timetable.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_article = """{
             "time_table" : "tuesday 11:00:00 15:30:00"
         }"""
@@ -46,13 +65,21 @@ class TimeTableTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete a timetable.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url + str(self.time_table.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update a timetable.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         time_table = TimeTableFactory(
             day="tuesday", from_hour="11:00:00", to_hour="15:30:00", year="2020"
         )

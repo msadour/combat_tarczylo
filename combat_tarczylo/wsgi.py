@@ -1,5 +1,4 @@
-"""
-WSGI config for combat_tarczylo project.
+"""WSGI config for combat_tarczylo project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

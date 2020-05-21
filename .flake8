@@ -1,5 +1,5 @@
 [flake8]
 max_line_length = 120
-ignore = W503,C814,T000,VNE001, E231, RST304
+ignore = A003, W503
 inline-quotes = double
 exclude = **/migrations/*

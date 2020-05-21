@@ -1,3 +1,5 @@
+"""Service module."""
+
 import re
 
 from rest_framework import viewsets, permissions, status
@@ -11,10 +13,23 @@ from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 @permission_classes((permissions.AllowAny,))
 class CourseViewSet(viewsets.ModelViewSet):
+    """Class CourseViewSet."""
+
     queryset = Course.objects.all().order_by("id")
     serializer_class = CourseSerializer
 
     def create(self, request, *args, **kwargs):
+        """
+        Create a course.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         instructor_id = datas.pop("instructor")
         time_tables = datas.pop("time_table")
@@ -33,9 +48,20 @@ class CourseViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """
+        Update a course.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         course = Course.objects.get(id=pk)
-        print(datas.items())
         for attr, value in datas.items():
             if attr == "add_time_table":
                 for time_table in value:
@@ -57,10 +83,23 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ModelViewSet):
+    """Class InternshipViewSet."""
+
     queryset = Internship.objects.all().order_by("id")
     serializer_class = InternshipSerializer
 
     def create(self, request, *args, **kwargs):
+        """
+        Create an internship.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Internship")
         instructor_id = datas.pop("instructor")
@@ -79,6 +118,18 @@ class InternshipViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """
+        Update an internship.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         internship = Internship.objects.get(id=pk)
         for attr, value in datas.items():

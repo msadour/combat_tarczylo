@@ -1,3 +1,5 @@
+"""Member module."""
+
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
 
@@ -15,10 +17,21 @@ from api.serializers import MemberSerializer, InstructorSerializer, AuthTokenSer
 
 
 class CustomAuthToken(ObtainAuthToken):
+    """Class CustomAuthToken."""
+
     authentication_classes = [TokenAuthentication]
 
     def post(self, request, *args, **kwargs):
+        """Create token for authentication.
 
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         serializer = AuthTokenSerializer()
         user = serializer.validate(attrs=request.data)
 
@@ -30,10 +43,22 @@ class CustomAuthToken(ObtainAuthToken):
 
 @permission_classes((permissions.AllowAny,))
 class MemberViewSet(viewsets.ModelViewSet):
+    """Class MemberViewSet."""
+
     queryset = Member.objects.all().order_by("id")
     serializer_class = MemberSerializer
 
     def create(self, request, *args, **kwargs):
+        """Create a course.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Member")
         new_member = Member.objects.create_user(**datas)
@@ -43,6 +68,17 @@ class MemberViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """Update a course.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         member = Member.objects.get(id=pk)
         for attr, value in datas.items():
@@ -58,10 +94,23 @@ class MemberViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class InstructorViewSet(viewsets.ModelViewSet):
+    """Class InstructorViewSet."""
+
     queryset = Instructor.objects.all().order_by("id")
     serializer_class = InstructorSerializer
 
     def create(self, request, *args, **kwargs):
+        """
+        Create an instructor.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Member")
         new_instructor = Instructor.objects.create(**datas)
@@ -71,6 +120,18 @@ class InstructorViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """
+        Update an instructor.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         instructor = Instructor.objects.get(id=pk)
         for attr, value in datas.items():
@@ -86,11 +147,34 @@ class InstructorViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class LogoutViewSet(viewsets.ViewSet):
+    """Class LogoutViewSet."""
+
     def create(self, request, *args, **kwargs):
+        """
+        Log out.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         return self.logout(request)
 
     def logout(self, request):
+        """
+        Log out.
 
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         try:
             request.user.auth_token.delete()
         except (AttributeError, ObjectDoesNotExist):

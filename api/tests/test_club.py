@@ -1,3 +1,5 @@
+"""Test club module."""
+
 from __future__ import absolute_import
 import django
 import os
@@ -25,24 +27,41 @@ url_message = "/api_tct/important_message/"
 
 
 class ClubTestCase(APITestCase):
+    """class ClubTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.club = ClubFactory()
 
     def test_list(self):
+        """Test list of club.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_club)
 
         assert len(response.data) > 0
 
     def test_retrieve(self):
+        """Test retrieve of club.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_club + f"{self.club.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create of club.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_club = """{
             "name": "test name",
             "description": "test description",
@@ -64,6 +83,11 @@ class ClubTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete of club.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         ClubFactory().save()
 
         response = self.client.delete(url_club + str(self.club.id) + "/")
@@ -71,7 +95,11 @@ class ClubTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update of club.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         club = ClubFactory.create(name="test name",)
         club.save()
 
@@ -84,24 +112,41 @@ class ClubTestCase(APITestCase):
 
 
 class PresentationTestCase(APITestCase):
+    """class BookAdvicedTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.presentation = PresentationFactory()
 
     def test_list(self):
+        """Test list of presentations.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_presentation)
 
         assert len(response.data) > 0
 
     def test_retrieve(self):
+        """Test retrieve an presentation.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_presentation + f"{self.presentation.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create an presentation.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_presentation = """{
                 "tct": "test tct",
                 "darius": "test darius'",
@@ -114,7 +159,11 @@ class PresentationTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete an presentation.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         PresentationFactory().save()
 
         response = self.client.delete(
@@ -124,7 +173,11 @@ class PresentationTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update an presentation.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         presentation = PresentationFactory.create(tct="test tct",)
         presentation.save()
 
@@ -137,24 +190,41 @@ class PresentationTestCase(APITestCase):
 
 
 class ImportantMessageTestCase(APITestCase):
+    """class ImportantMessageTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.message = ImportantMessageFactory()
 
     def test_list(self):
+        """Test list of message.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_message)
 
         assert len(response.data) > 0
 
     def test_retrieve(self):
+        """Test retrieve a message.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_message + f"{self.message.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create a message.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_message = """{
                 "content": "test content create"
             }"""
@@ -165,6 +235,11 @@ class ImportantMessageTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete a message.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         ImportantMessageFactory().save()
 
         response = self.client.delete(url_message + str(self.message.id) + "/")
@@ -172,7 +247,11 @@ class ImportantMessageTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update a message.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         message = ImportantMessageFactory.create(content="test content",)
         message.save()
 

@@ -1,3 +1,5 @@
+"""Member module."""
+
 import factory
 from factory.faker import faker
 
@@ -7,11 +9,19 @@ FAKE = faker.Faker()
 
 
 def generate_username(*args):
-    """ returns a random username """
+    """Return a random username.
+
+    Args:
+        args: Variable length argument list.
+
+    Returns:
+        A fake username.
+    """
     return FAKE.profile(fields=["username"])["username"]
 
 
 class MemberFactory(factory.django.DjangoModelFactory):
+    """class MemberFactory."""
 
     username = factory.LazyAttribute(generate_username)
     email = factory.LazyAttribute(generate_username)
@@ -28,10 +38,13 @@ class MemberFactory(factory.django.DjangoModelFactory):
     level = "blue"
 
     class Meta:
+        """class Meta."""
+
         model = Member
 
 
 class InstructorFactory(factory.django.DjangoModelFactory):
+    """class InstructorFactory."""
 
     username = factory.LazyAttribute(generate_username)
     email = factory.LazyAttribute(generate_username)
@@ -49,4 +62,6 @@ class InstructorFactory(factory.django.DjangoModelFactory):
     biography = "biography test"
 
     class Meta:
+        """class Meta."""
+
         model = Instructor

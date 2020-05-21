@@ -1,5 +1,6 @@
+"""Models module."""
+
 import datetime
-import re
 
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils import timezone
@@ -11,6 +12,8 @@ from api.managers import CustomUserManager
 
 
 class BookAdviced(models.Model):
+    """Class BookAdviced."""
+
     name = models.CharField(max_length=255, blank=True)
     author = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
@@ -18,34 +21,49 @@ class BookAdviced(models.Model):
 
 
 class Article(models.Model):
+    """Class Article."""
+
     title = models.CharField(max_length=255, blank=True)
     content = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
 
 
 class ImportantMessage(models.Model):
+    """Class ImportantMessage."""
+
     content = models.CharField(max_length=255, blank=True)
     date_creation = models.DateTimeField(null=True, blank=True, default=timezone.now)
     is_active = models.BooleanField(default=False)
 
 
 class Presentation(models.Model):
+    """Class Presentation."""
+
     tct = models.CharField(max_length=255, blank=True)
     darius = models.CharField(max_length=255, blank=True)
     technical = models.CharField(max_length=255, blank=True)
 
 
 class TimeTable(models.Model):
+    """Class TimeTable."""
+
     day = models.CharField(max_length=255, blank=True)
     from_hour = models.TimeField()
     to_hour = models.TimeField()
     year = models.IntegerField(default=datetime.datetime.now().year)
 
     def display_as_str(self):
+        """Return a time table as the format 'DAY HH:HH:HH HH:HH:HH'.
+
+        Returns:
+            This is a description of what is returned.
+        """
         return str(self.day) + " " + str(self.from_hour) + " " + str(self.to_hour)
 
 
 class Club(models.Model):
+    """Class Club."""
+
     name = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
     street = models.CharField(max_length=255, blank=True)
@@ -57,6 +75,8 @@ class Club(models.Model):
 
 
 class Member(AbstractBaseUser, PermissionsMixin):
+    """Class Member."""
+
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
     postal_code = models.CharField(max_length=255, blank=True)
@@ -77,14 +97,23 @@ class Member(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def get_full_name(self):
+        """Return the fullname.
+
+        Returns:
+            Full name
+        """
         return self.first_name + " " + self.last_name
 
 
 class Instructor(Member):
+    """Class Instructor."""
+
     biography = models.CharField(max_length=255, blank=True)
 
 
 class Course(models.Model):
+    """Class Course."""
+
     name = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
     place = models.CharField(max_length=255, blank=True)
@@ -94,10 +123,17 @@ class Course(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
 
     def get_full_name_instructor(self):
+        """Return the fullname.
+
+        Returns:
+            Full name
+        """
         return {"id": self.instructor.id, "full_name": self.instructor.get_full_name()}
 
 
 class Internship(models.Model):
+    """Class Internship."""
+
     name = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
     place = models.CharField(max_length=255, blank=True)
@@ -110,24 +146,28 @@ class Internship(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=5)
     theme = models.CharField(max_length=255, blank=True)
 
-    def add_time_table(self, time_tables):
-        for time_table in time_tables:
-            time_table_str = re.split(r"\s", time_table)
-            new_time_table = TimeTable(time_table_str=time_table_str)
-            self.time_table.add(new_time_table)
-
 
 class Category(models.Model):
+    """Class Category."""
+
     name = models.CharField(max_length=255, blank=True)
 
     def get_products(self):
+        """Return all product of this category.
+
+        Returns:
+            List of products.
+        """
         return [model_to_dict(product) for product in self.product_set.all()]
 
     def delete_all_products(self):
+        """Delete all product of this category."""
         self.product_set.all().delete()
 
 
 class Product(models.Model):
+    """Class Product."""
+
     name = models.CharField(max_length=255, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity_available = models.IntegerField()
@@ -135,10 +175,17 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def get_category(self):
+        """Return the category of this product.
+
+        Returns:
+            Category object.
+        """
         return model_to_dict(self.category, fields=["id", "name"])
 
 
 class Order(models.Model):
+    """Class Order."""
+
     member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product)
     is_bought = models.BooleanField(default=False)
@@ -146,6 +193,8 @@ class Order(models.Model):
 
 
 class PendingSubscription(models.Model):
+    """Class PendingSubscription."""
+
     email = models.EmailField()
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)

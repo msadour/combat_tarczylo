@@ -1,6 +1,5 @@
-"""
-Command for init the databases.
-"""
+"""Command for init the databases."""
+
 import json
 import os
 
@@ -28,15 +27,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Command(BaseCommand):
-    """
-    Class command.
-    """
-
-    help = "Init database"
+    """Class command."""
 
     def handle(self, *args, **options):
-        """
-        Execute the command that create book(s).
+        """Execute the command that create book(s).
+
+        Args:
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
         """
 
         def delete_data():

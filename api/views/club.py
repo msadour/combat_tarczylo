@@ -1,3 +1,5 @@
+"""Club module."""
+
 import re
 
 from rest_framework import viewsets, permissions, status
@@ -15,16 +17,38 @@ from api.serializers import (
 
 @permission_classes((permissions.AllowAny,))
 class ClubViewSet(viewsets.ModelViewSet):
+    """Class ClubViewSet."""
+
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
 
     def list(self, request, *args, **kwargs):
+        """Retrieve the club.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         club = Club.objects.all()[0]
         serializer = ClubSerializer(club, many=False)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
     def create(self, request, *args, **kwargs):
+        """Create the club.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         datas["id"] = get_max_id("Club")
         time_tables = datas.pop("time_table")
@@ -41,6 +65,17 @@ class ClubViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status.HTTP_201_CREATED)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """Update the club.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         club = Club.objects.get(id=pk)
         for attr, value in datas.items():
@@ -64,10 +99,22 @@ class ClubViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class PresentationViewSet(viewsets.ModelViewSet):
+    """Class PresentationViewSet."""
+
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
     def list(self, request, *args, **kwargs):
+        """Retrieve the current presentation.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         presentation = Presentation.objects.all()[0]
         serializer = PresentationSerializer(presentation, many=False)
 
@@ -76,10 +123,22 @@ class PresentationViewSet(viewsets.ModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class ImportantMessageViewSet(viewsets.ModelViewSet):
+    """Class ImportantMessageViewSet."""
+
     queryset = ImportantMessage.objects.all()
     serializer_class = ImportantMessageSerializer
 
     def list(self, request, *args, **kwargs):
+        """Retrieve the current important message.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         message = ImportantMessage.objects.all()[0]
         serializer = ImportantMessageSerializer(message, many=False)
 

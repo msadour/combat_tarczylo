@@ -1,3 +1,5 @@
+"""Time table module."""
+
 import re
 
 from rest_framework import viewsets, permissions, status
@@ -10,10 +12,22 @@ from api.serializers import TimeTableSerializer
 
 @permission_classes((permissions.AllowAny,))
 class TimeTableViewSet(viewsets.ModelViewSet):
+    """Class TimeTableViewSet."""
+
     queryset = TimeTable.objects.all()
     serializer_class = TimeTableSerializer
 
     def create(self, request, *args, **kwargs):
+        """Create a timetable.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         time_table = datas["time_table"]
         time_table_str = re.split(r"\s", time_table)
@@ -29,6 +43,17 @@ class TimeTableViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
     def update(self, request, pk=None, *args, **kwargs):
+        """Update a timetable.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         time_table = request.data
         time_table_object = TimeTable.objects.get(id=pk)
         time_table_str = re.split(r"\s", time_table["time_table_str"])

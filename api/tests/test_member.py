@@ -1,3 +1,5 @@
+"""Test member module."""
+
 from __future__ import absolute_import
 import django
 import os
@@ -18,23 +20,40 @@ url_instructor = "/api_tct/instructor/"
 
 
 class MemberTestCase(APITestCase):
+    """class MemberTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.member = MemberFactory()
         self.client.force_authenticate(user=self.member)
 
     def test_list(self):
+        """Test list of members.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_member)
 
         assert len(response.data) > 0
 
     def test_retrieve(self):
+        """Test retrieve a member.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_member + f"{self.member.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create a member.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_member = """{
           "username": "member7@gmail.com",
           "email": "member7@gmail.com",
@@ -59,13 +78,21 @@ class MemberTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete a member.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_member + str(self.member.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update a member.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         member = MemberFactory.create(city="paris",)
         member.save()
 
@@ -78,24 +105,44 @@ class MemberTestCase(APITestCase):
 
 
 class InstructorTestCase(APITestCase):
+    """class InstructorTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.instructor = InstructorFactory()
 
     def test_list(self):
+        """
+        Test list of instructor.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_instructor)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """
+        Test retrieve an instructor.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_instructor + f"{self.instructor.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """
+        Test create an instructor.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_instructor = """{
             "username": "instructor@gmail.com",
             "email": "instructor@gmail.com",
@@ -121,13 +168,23 @@ class InstructorTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """
+        Test delete an instructor.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_instructor + str(self.instructor.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """
+        Test update an instructor.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         instructor = InstructorFactory.create(city="paris",)
         instructor.save()
 

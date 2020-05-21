@@ -1,3 +1,5 @@
+"""Constant module."""
+
 LEVEL = [
     ("White", "White"),
     ("Yellow", "Yellow"),

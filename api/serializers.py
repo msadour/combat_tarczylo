@@ -1,3 +1,5 @@
+"""Serializers module."""
+
 from django.contrib.auth.hashers import check_password
 
 from rest_framework import serializers
@@ -21,42 +23,65 @@ from .models import (
 
 
 class BookAdvicedSerializer(serializers.ModelSerializer):
+    """Class BookAdvicedSerializer."""
+
     class Meta:
+        """Class Meta."""
+
         model = BookAdviced
         fields = "__all__"
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    """Class ArticleSerializer."""
+
     class Meta:
+        """Class Meta."""
+
         model = Article
         fields = "__all__"
 
 
 class ImportantMessageSerializer(serializers.ModelSerializer):
+    """Class ImportantMessageSerializer."""
+
     class Meta:
+        """Class Meta."""
+
         model = ImportantMessage
         fields = "__all__"
 
 
 class PresentationSerializer(serializers.ModelSerializer):
+    """Class PresentationSerializer."""
+
     class Meta:
+        """Class Meta."""
+
         model = Presentation
         fields = "__all__"
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
+    """Class TimeTableSerializer."""
 
     time_table_str = serializers.CharField(source="display_as_str")
 
     class Meta:
+        """Class Meta."""
+
         model = TimeTable
         fields = "__all__"
 
 
 class ClubSerializer(serializers.ModelSerializer):
+    """Class ClubSerializer."""
+
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Club
         fields = [
             "id",
@@ -72,20 +97,26 @@ class ClubSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    """Class MemberSerializer."""
 
     full_name = serializers.CharField(source="get_full_name")
     is_active = serializers.BooleanField()
 
     class Meta:
+        """Class Meta."""
+
         model = Member
         fields = "__all__"
 
 
 class InstructorSerializer(serializers.ModelSerializer):
+    """Class InstructorSerializer."""
 
     full_name = serializers.CharField(source="get_full_name")
 
     class Meta:
+        """Class Meta."""
+
         model = Instructor
         fields = [
             "id",
@@ -110,11 +141,14 @@ class InstructorSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    """Class CourseSerializer."""
 
     instructor = serializers.CharField(source="get_full_name_instructor")
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Course
         fields = [
             "id",
@@ -129,11 +163,14 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class InternshipSerializer(serializers.ModelSerializer):
+    """Class InternshipSerializer."""
 
     instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Internship
         fields = [
             "id",
@@ -152,46 +189,54 @@ class InternshipSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    """Class CategorySerializer."""
 
     products = serializers.CharField(source="get_products")
 
     class Meta:
+        """Class Meta."""
+
         model = Category
         fields = ["id", "name", "products"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """Class ProductSerializer."""
 
     category = serializers.CharField(source="get_category")
 
     class Meta:
+        """Class Meta."""
+
         model = Product
         fields = ["id", "name", "price", "quantity_available", "size", "category"]
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    """Class OrderSerializer."""
 
     member = MemberSerializer(many=False)
     products = ProductSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Order
         fields = ["id", "member", "products", "is_bought"]
 
 
 class PendingSubscriptionSerializer(serializers.ModelSerializer):
+    """Class PendingSubscriptionSerializer."""
+
     class Meta:
+        """Class Meta."""
+
         model = PendingSubscription
         fields = "__all__"
 
 
 class AuthTokenSerializer(serializers.Serializer):
-    """Serializer for the user authentication object.
-
-    Attributes:
-        email (str):
-        password (str):
-    """
+    """class AuthTokenSerializer."""
 
     username = serializers.CharField()
     password = serializers.CharField(
@@ -199,6 +244,15 @@ class AuthTokenSerializer(serializers.Serializer):
     )
 
     def authenticate_user(self, username=None, password=None):
+        """Authenticate a user.
+
+        Args:
+            username:
+            password:
+
+        Returns:
+            User.
+        """
         try:
             # Try to find a user matching your username
             user = Member.objects.get(username=username)
@@ -211,7 +265,14 @@ class AuthTokenSerializer(serializers.Serializer):
             return None
 
     def validate(self, attrs):
+        """Validate a user.
 
+        Args:
+            attrs: Arbitrary keyword arguments.
+
+        Returns:
+            User.
+        """
         username = attrs.get("username")
         password = attrs.get("password")
 

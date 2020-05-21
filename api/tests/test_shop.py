@@ -1,3 +1,5 @@
+"""Test shop module."""
+
 from __future__ import absolute_import
 import django
 import os
@@ -19,24 +21,41 @@ url_product = "/api_tct/product/"
 
 
 class CategoryTestCase(APITestCase):
+    """class CategoryTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.category = CategoryFactory()
 
     def test_list(self):
+        """Test list of categories.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_category)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """Test retrieve an category.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_category + f"{self.category.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create an category.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         data_category = """{
             "name": "test name"
         }"""
@@ -48,16 +67,21 @@ class CategoryTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete an category.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_category + str(self.category.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
-        # Create a book
-        # request our API to update his title with 'new title'
-        # Check if the title has been updated
+        """Test update an category.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         category = CategoryFactory.create(name="test name",)
         category.save()
 
@@ -70,24 +94,41 @@ class CategoryTestCase(APITestCase):
 
 
 class ProductTestCase(APITestCase):
+    """class ProductTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
         self.product = ProductFactory()
 
     def test_list(self):
+        """Test list of products.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_product)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """Test retrieve a product.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_product + f"{self.product.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create a product.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         category = CategoryFactory(name="test category name")
 
         data_product = (
@@ -109,13 +150,21 @@ class ProductTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete a product.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_product + str(self.product.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
+        """Test update a product.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         product = ProductFactory.create(
             name="test name",
             price=15.00,
@@ -134,7 +183,10 @@ class ProductTestCase(APITestCase):
 
 
 class OrderTestCase(APITestCase):
+    """class OrderTestCase."""
+
     def setUp(self):
+        """Set up attributes for tests."""
         self.client = APIClient()
         self.user_test = MemberFactory()
         self.client.force_authenticate(user=self.user_test)
@@ -143,16 +195,31 @@ class OrderTestCase(APITestCase):
         self.order.products.add(ProductFactory())
 
     def test_list(self):
+        """Test list of orders.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_order)
 
         assert 0 < len(response.data)
 
     def test_retrieve(self):
+        """Test retrieve an order.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.get(url_order + f"{self.order.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create(self):
+        """Test create an order.
+
+        Raises:
+            AssertError: Assertion failed.
+        """
         member = MemberFactory()
         product_one = ProductFactory()
         product_two = ProductFactory()
@@ -178,16 +245,21 @@ class OrderTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_delete(self):
+        """Test delete an order.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         response = self.client.delete(url_order + str(self.order.id) + "/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_partial_update(self):
-        # Create a book
-        # request our API to update his title with 'new title'
-        # Check if the title has been updated
+        """Test delete an order.
 
+        Raises:
+            AssertError: Assertion failed.
+        """
         order = OrderFactory.create(
             date_creation="2020-04-20 10:00:00",
             member=MemberFactory(),
