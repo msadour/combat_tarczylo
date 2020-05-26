@@ -27,6 +27,20 @@ class MemberViewSet(viewsets.ModelViewSet):
     serializer_class = MemberSerializer
     permission_classes = (UserPermission,)
 
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """
+        List of member.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)
+
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a member.
 
@@ -80,6 +94,20 @@ class InstructorViewSet(viewsets.ModelViewSet):
     queryset = Instructor.objects.all().order_by("id")
     serializer_class = InstructorSerializer
     permission_classes = (UserPermission, IsAuthenticated)
+
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """
+        List of instructor.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create an instructor.
