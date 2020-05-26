@@ -5,6 +5,7 @@ from typing import Any
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.query import QuerySet
 from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -26,6 +27,19 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all().order_by("id")
     serializer_class = MemberSerializer
     permission_classes = (UserPermission,)
+
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -95,9 +109,21 @@ class InstructorViewSet(viewsets.ModelViewSet):
     serializer_class = InstructorSerializer
     permission_classes = (UserPermission, IsAuthenticated)
 
-    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
         """
-        List of instructor.
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """List of instructor.
 
         Args:
             request: request sent by the client.

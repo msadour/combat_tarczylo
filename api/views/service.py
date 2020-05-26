@@ -5,6 +5,7 @@ from typing import Any
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.db.models.query import QuerySet
 from rest_framework import viewsets, status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -22,10 +23,22 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = (ReadPermission,)
 
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
     @method_decorator(cache_page(60 * 60 * 12))
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """
-        List of course.
+        """List of course.
 
         Args:
             request: request sent by the client.
@@ -38,8 +51,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """
-        Create a course.
+        """Create a course.
 
         Args:
             request: request sent by the client.
@@ -69,8 +81,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     def update(
         self, request: Request, pk: int = None, *args: Any, **kwargs: Any
     ) -> Response:
-        """
-        Update a course.
+        """Update a course.
 
         Args:
             request: request sent by the client.
@@ -109,10 +120,22 @@ class InternshipViewSet(viewsets.ModelViewSet):
     serializer_class = InternshipSerializer
     permission_classes = (ReadPermission,)
 
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
     @method_decorator(cache_page(60 * 60 * 12))
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """
-        List of internship.
+        """List of internship.
 
         Args:
             request: request sent by the client.
@@ -125,8 +148,7 @@ class InternshipViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """
-        Create an internship.
+        """Create an internship.
 
         Args:
             request: request sent by the client.
@@ -156,8 +178,7 @@ class InternshipViewSet(viewsets.ModelViewSet):
     def update(
         self, request: Request, pk: int = None, *args: Any, **kwargs: Any
     ) -> Response:
-        """
-        Update an internship.
+        """Update an internship.
 
         Args:
             request: request sent by the client.
