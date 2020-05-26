@@ -60,7 +60,9 @@ class ArticleTestCase(APITestCase):
             "content": "test content",
             "category": "test category"
         }"""
-        response = client.post(url, data=data_article, content_type="application/json")
+        response = self.client.post(
+            url, data=data_article, content_type="application/json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

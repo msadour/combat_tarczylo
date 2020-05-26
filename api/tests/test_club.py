@@ -76,7 +76,7 @@ class ClubTestCase(APITestCase):
             ]
         }"""
 
-        response = client.post(
+        response = self.client.post(
             url_club, data=data_club, content_type="application/json"
         )
 
@@ -152,7 +152,7 @@ class PresentationTestCase(APITestCase):
                 "darius": "test darius'",
                 "technical": "test technical"
             }"""
-        response = client.post(
+        response = self.client.post(
             url_presentation, data=data_presentation, content_type="application/json"
         )
 
@@ -228,7 +228,7 @@ class ImportantMessageTestCase(APITestCase):
         data_message = """{
                 "content": "test content create"
             }"""
-        response = client.post(
+        response = self.client.post(
             url_message, data=data_message, content_type="application/json"
         )
 

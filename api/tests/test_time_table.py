@@ -60,7 +60,9 @@ class TimeTableTestCase(APITestCase):
         data_article = """{
             "time_table" : "tuesday 11:00:00 15:30:00"
         }"""
-        response = client.post(url, data=data_article, content_type="application/json")
+        response = self.client.post(
+            url, data=data_article, content_type="application/json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

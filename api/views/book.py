@@ -1,15 +1,15 @@
 """Book module."""
 
-from rest_framework import viewsets, permissions
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets
 
 from api.models import BookAdviced
+from api.permissions import ReadPermission
 from api.serializers import BookAdvicedSerializer
 
 
-@permission_classes((permissions.AllowAny,))
 class BookViewSet(viewsets.ModelViewSet):
     """Class BookViewSet."""
 
     queryset = BookAdviced.objects.all().order_by("id")
     serializer_class = BookAdvicedSerializer
+    permission_classes = (ReadPermission,)

@@ -63,7 +63,9 @@ class BookAdvicedTestCase(APITestCase):
             "category": "test category",
              "url": "test url"
         }"""
-        response = client.post(url, data=data_book, content_type="application/json")
+        response = self.client.post(
+            url, data=data_book, content_type="application/json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

@@ -60,7 +60,7 @@ class CategoryTestCase(APITestCase):
             "name": "test name"
         }"""
 
-        response = client.post(
+        response = self.client.post(
             url_category, data=data_category, content_type="application/json"
         )
 
@@ -143,7 +143,7 @@ class ProductTestCase(APITestCase):
         }"""
         )
 
-        response = client.post(
+        response = self.client.post(
             url_product, data=data_product, content_type="application/json"
         )
 
@@ -238,7 +238,7 @@ class OrderTestCase(APITestCase):
         }"""
         )
 
-        response = client.post(
+        response = self.client.post(
             url_order, data=data_order, content_type="application/json"
         )
 

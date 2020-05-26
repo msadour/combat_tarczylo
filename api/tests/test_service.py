@@ -73,7 +73,7 @@ class CourseTestCase(APITestCase):
             ]
         }"""
         )
-        response = client.post(
+        response = self.client.post(
             url_course, data=data_course, content_type="application/json"
         )
 
@@ -163,7 +163,7 @@ class InternshipTestCase(APITestCase):
             ]
         }"""
         )
-        response = client.post(
+        response = self.client.post(
             url_internship, data=data_internship, content_type="application/json"
         )
 

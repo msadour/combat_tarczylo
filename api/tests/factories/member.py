@@ -37,6 +37,7 @@ class MemberFactory(factory.django.DjangoModelFactory):
     birthday = ""
     sex = "man"
     level = "blue"
+    is_superuser = True
 
     class Meta:
         """class Meta."""

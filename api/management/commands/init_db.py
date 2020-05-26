@@ -55,7 +55,7 @@ class Command(BaseCommand):
             PendingSubscription.objects.all().delete()
 
         datas_files = BASE_DIR + "/commands/data/data.json"
-        # delete_data()
+
         with open(datas_files) as json_file:
             try:
                 datas_list = json.load(json_file)

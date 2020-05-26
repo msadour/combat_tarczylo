@@ -71,7 +71,7 @@ class MemberTestCase(APITestCase):
           "sex": "male",
           "level": "white"
         }"""
-        response = client.post(
+        response = self.client.post(
             url_member, data=data_member, content_type="application/json"
         )
 
@@ -93,11 +93,8 @@ class MemberTestCase(APITestCase):
         Raises:
             AssertError: Assertion failed.
         """
-        member = MemberFactory.create(city="paris",)
-        member.save()
-
         request = self.client.patch(
-            url_member + str(member.id) + "/", data={"city": "berlin"}
+            url_member + str(self.member.id) + "/", data={"city": "berlin"}
         )
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
@@ -161,7 +158,7 @@ class InstructorTestCase(APITestCase):
             "level": "black",
             "biography": "biography test"
         }"""
-        response = client.post(
+        response = self.client.post(
             url_instructor, data=data_instructor, content_type="application/json"
         )
 

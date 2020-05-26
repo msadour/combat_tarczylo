@@ -3,13 +3,14 @@
 import re
 from typing import Any
 
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Club, Presentation, ImportantMessage, TimeTable
+from api.permissions import ReadPermission
 from api.serializers import (
     ClubSerializer,
     PresentationSerializer,
@@ -17,12 +18,12 @@ from api.serializers import (
 )
 
 
-@permission_classes((permissions.AllowAny,))
 class ClubViewSet(viewsets.ModelViewSet):
     """Class ClubViewSet."""
 
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
+    permission_classes = (ReadPermission,)
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the club.
@@ -101,12 +102,12 @@ class ClubViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-@permission_classes((permissions.AllowAny,))
 class PresentationViewSet(viewsets.ModelViewSet):
     """Class PresentationViewSet."""
 
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
+    permission_classes = (ReadPermission,)
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the current presentation.
@@ -125,12 +126,12 @@ class PresentationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 
-@permission_classes((permissions.AllowAny,))
 class ImportantMessageViewSet(viewsets.ModelViewSet):
     """Class ImportantMessageViewSet."""
 
     queryset = ImportantMessage.objects.all()
     serializer_class = ImportantMessageSerializer
+    permission_classes = (ReadPermission, IsAuthenticated)
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Retrieve the current important message.

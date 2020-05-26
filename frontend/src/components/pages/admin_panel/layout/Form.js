@@ -125,7 +125,11 @@ class FormField extends Component {
         const member_id = localStorage.getItem("member_id");
         var data = {}
         data[this.props.field] = this.state.new_value
-        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/',  data)
+        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/',
+            { headers: {
+                'Authorization': 'Token ' + localStorage.getItem('token')
+            }, },
+        data)
         .then(res => {
             window.location.reload();
         })

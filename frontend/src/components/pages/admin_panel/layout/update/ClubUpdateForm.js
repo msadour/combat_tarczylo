@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import FormField from "../Form";
 
+import header from "../../../../header";
+
 class ClubUpdateForm extends Component {
 
     constructor(props) {
@@ -19,7 +21,9 @@ class ClubUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/club/')
+        axios.get('/api_tct/club/',
+            header
+        )
         .then(res => {
             this.setState({club: res.data});
         })

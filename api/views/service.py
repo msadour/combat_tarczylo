@@ -3,22 +3,22 @@
 import re
 from typing import Any
 
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets, status
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Course, Internship, Instructor
+from api.permissions import ReadPermission
 from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 
-@permission_classes((permissions.AllowAny,))
 class CourseViewSet(viewsets.ModelViewSet):
     """Class CourseViewSet."""
 
     queryset = Course.objects.all().order_by("id")
     serializer_class = CourseSerializer
+    permission_classes = (ReadPermission,)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -85,12 +85,12 @@ class CourseViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-@permission_classes((permissions.AllowAny,))
 class InternshipViewSet(viewsets.ModelViewSet):
     """Class InternshipViewSet."""
 
     queryset = Internship.objects.all().order_by("id")
     serializer_class = InternshipSerializer
+    permission_classes = (ReadPermission,)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """

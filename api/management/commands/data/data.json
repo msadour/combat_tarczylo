@@ -169,7 +169,8 @@
       "birthday": "20/05/1990 10:00:00",
       "sex": "male",
       "level": "black",
-      "biography": "biography instructor"
+      "biography": "biography instructor",
+      "is_superuser": true
     }
   ],
 

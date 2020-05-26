@@ -1,17 +1,17 @@
 """Shop module."""
+
 from typing import Any
 
-from rest_framework import viewsets, permissions
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Product, Order, Category, Member
+from api.permissions import ReadPermission
 from api.serializers import ProductSerializer, OrderSerializer, CategorySerializer
 
 
-@permission_classes((permissions.AllowAny,))
 class OrderViewSet(viewsets.ModelViewSet):
     """Class OrderViewSet."""
 
@@ -43,12 +43,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
 
-@permission_classes((permissions.AllowAny,))
 class ProductViewSet(viewsets.ModelViewSet):
     """Class ProductViewSet."""
 
     queryset = Product.objects.all().order_by("id")
     serializer_class = ProductSerializer
+    permission_classes = (ReadPermission,)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a product.
@@ -71,12 +71,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
 
-@permission_classes((permissions.AllowAny,))
 class CategoryViewSet(viewsets.ModelViewSet):
     """Class CategoryViewSet."""
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
+    permission_classes = (ReadPermission,)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a category.

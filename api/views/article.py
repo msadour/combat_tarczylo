@@ -1,15 +1,16 @@
 """article module."""
 
-from rest_framework import viewsets, permissions
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from api.models import Article
+from api.permissions import ReadPermission
 from api.serializers import ArticleSerializer
 
 
-@permission_classes((permissions.AllowAny,))
 class ArticleViewSet(viewsets.ModelViewSet):
     """Class ArticleViewSet."""
 
     queryset = Article.objects.all().order_by("id")
     serializer_class = ArticleSerializer
+    permission_classes = (ReadPermission, IsAuthenticated)

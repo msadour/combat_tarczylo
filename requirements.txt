@@ -7,6 +7,7 @@ Faker<=3.0.0
 mypy
 pre-commit
 psycopg2==2.8.5
+pydocstyle
 pylint
 pytest==5.4.1
 pytz==2019.3

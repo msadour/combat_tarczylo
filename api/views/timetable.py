@@ -3,8 +3,7 @@
 import re
 from typing import Any
 
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
+from rest_framework import viewsets, status
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -12,7 +11,6 @@ from api.models import TimeTable
 from api.serializers import TimeTableSerializer
 
 
-@permission_classes((permissions.AllowAny,))
 class TimeTableViewSet(viewsets.ModelViewSet):
     """Class TimeTableViewSet."""
 
