@@ -148,6 +148,26 @@
       "birthday": "20/05/1992 10:00:00",
       "sex": "male",
       "level": "brown"
+    },
+
+        {
+      "id": 4,
+      "email": "member_paid@gmail.com",
+      "username": "member_paid@gmail.com",
+      "password": "qwertz",
+      "first_name": "Member",
+      "last_name": "Paid",
+      "postal_code": "88888",
+      "city": "London",
+      "street": "street paid",
+      "country": "UK",
+      "phone": "0366111111",
+      "insurance_name": "insurencemember1",
+      "insurance_number": "123456",
+      "birthday": "20/06/1992 10:00:00",
+      "sex": "female",
+      "level": "white",
+      "have_paid": false
     }
   ],
 
@@ -169,7 +189,9 @@
       "birthday": "20/05/1990 10:00:00",
       "sex": "male",
       "level": "black",
-      "biography": "biography instructor"
+      "biography": "biography instructor",
+      "is_superuser": true,
+      "have_paid": false
     }
   ],
 

@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class ArticleCreateForm extends Component {
 
     constructor(props) {
@@ -25,7 +27,9 @@ class ArticleCreateForm extends Component {
                                         "content": this.state.content,
                                         "category": this.state.category,
 
-        })
+        },
+           header
+        )
         .then(res => {
             alert("Article created.")
         })

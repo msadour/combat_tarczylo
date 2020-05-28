@@ -1,147 +1,268 @@
-from django.contrib.auth import authenticate
+"""Serializers module."""
+from typing import Any, Dict
+
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
 from rest_framework import serializers
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-from .models import *
+from .models import (
+    BookAdviced,
+    Article,
+    ImportantMessage,
+    Presentation,
+    TimeTable,
+    Club,
+    Member,
+    Instructor,
+    Course,
+    Order,
+    PendingSubscription,
+    Internship,
+    Category,
+    Product,
+)
 
 
 class BookAdvicedSerializer(serializers.ModelSerializer):
+    """Class BookAdvicedSerializer."""
 
     class Meta:
+        """Class Meta."""
+
         model = BookAdviced
-        fields = ['id', 'name', 'author', 'category', 'url']
+        fields = "__all__"
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    """Class ArticleSerializer."""
 
     class Meta:
+        """Class Meta."""
+
         model = Article
-        fields = ['id', 'title', 'content', 'category']
+        fields = "__all__"
 
 
 class ImportantMessageSerializer(serializers.ModelSerializer):
+    """Class ImportantMessageSerializer."""
 
     class Meta:
+        """Class Meta."""
+
         model = ImportantMessage
-        fields = ['id', 'content', 'date_creation']
+        fields = "__all__"
 
 
 class PresentationSerializer(serializers.ModelSerializer):
+    """Class PresentationSerializer."""
 
     class Meta:
+        """Class Meta."""
+
         model = Presentation
-        fields = ['id', 'tct', 'darius', 'technical']
+        fields = "__all__"
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
+    """Class TimeTableSerializer."""
 
-    time_table_str = serializers.CharField(source='display_as_str')
+    time_table_str = serializers.CharField(source="display_as_str")
 
     class Meta:
+        """Class Meta."""
+
         model = TimeTable
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ClubSerializer(serializers.ModelSerializer):
+    """Class ClubSerializer."""
+
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Club
-        fields = ['id', 'name', 'description', 'street', 'number', 'zip_code', 'city', 'country', 'time_table']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "street",
+            "number",
+            "zip_code",
+            "city",
+            "country",
+            "time_table",
+        ]
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    """Class MemberSerializer."""
 
     full_name = serializers.CharField(source="get_full_name")
+    is_active = serializers.BooleanField()
 
     class Meta:
+        """Class Meta."""
+
         model = Member
-        fields = ['id', 'email', 'username','password', 'first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
-                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'full_name', 'is_active']
+        fields = "__all__"
 
 
 class InstructorSerializer(serializers.ModelSerializer):
+    """Class InstructorSerializer."""
 
     full_name = serializers.CharField(source="get_full_name")
 
     class Meta:
+        """Class Meta."""
+
         model = Instructor
-        fields = ['id', 'email', 'password','first_name', 'last_name', 'postal_code', 'city', 'street', 'country', 'phone',
-                  'insurance_name', 'insurance_number', 'birthday', 'sex', 'level', 'biography', 'full_name',
-                  'is_active']
+        fields = [
+            "id",
+            "email",
+            "password",
+            "first_name",
+            "last_name",
+            "postal_code",
+            "city",
+            "street",
+            "country",
+            "phone",
+            "insurance_name",
+            "insurance_number",
+            "birthday",
+            "sex",
+            "level",
+            "biography",
+            "full_name",
+            "is_active",
+        ]
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    """Class CourseSerializer."""
 
     instructor = serializers.CharField(source="get_full_name_instructor")
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Course
-        fields = ['id', 'name', 'description', 'place', 'level', 'category', 'time_table', 'instructor']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "place",
+            "level",
+            "category",
+            "time_table",
+            "instructor",
+        ]
 
 
 class InternshipSerializer(serializers.ModelSerializer):
+    """Class InternshipSerializer."""
 
     instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Internship
-        fields = ['id', 'name', 'description', 'place', 'level', 'category', 'time_table', 'instructor',
-                  'date_begin', 'date_end', 'price', 'theme']
+        fields = [
+            "id",
+            "name",
+            "description",
+            "place",
+            "level",
+            "category",
+            "time_table",
+            "instructor",
+            "date_begin",
+            "date_end",
+            "price",
+            "theme",
+        ]
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    """Class CategorySerializer."""
 
-    products = serializers.CharField(source='get_products')
+    products = serializers.CharField(source="get_products")
 
     class Meta:
+        """Class Meta."""
+
         model = Category
-        fields = ['id', 'name', 'products']
+        fields = ["id", "name", "products"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """Class ProductSerializer."""
 
-    category = serializers.CharField(source='get_category')
+    category = serializers.CharField(source="get_category")
 
     class Meta:
+        """Class Meta."""
+
         model = Product
-        fields = ['id', 'name', 'price', 'quantity_available', 'size', 'category']
+        fields = [
+            "id",
+            "name",
+            "price",
+            "quantity_available",
+            "size",
+            "category",
+            "picture",
+        ]
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    """Class OrderSerializer."""
 
     member = MemberSerializer(many=False)
     products = ProductSerializer(many=True)
 
     class Meta:
+        """Class Meta."""
+
         model = Order
-        fields = ['id', 'member', 'products', 'is_bought']
+        fields = ["id", "member", "products", "is_bought"]
 
 
 class PendingSubscriptionSerializer(serializers.ModelSerializer):
+    """Class PendingSubscriptionSerializer."""
 
     class Meta:
+        """Class Meta."""
+
         model = PendingSubscription
-        fields = ['id', 'email', 'first_name', 'last_name', 'birthday', 'sex', 'date_creation']
+        fields = "__all__"
 
 
 class AuthTokenSerializer(serializers.Serializer):
-    """Serializer for the user authentication object.
-
-    Attributes:
-        email (str):
-        password (str):
-    """
+    """class AuthTokenSerializer."""
 
     username = serializers.CharField()
-    password = serializers.CharField(style={"input_type": "password"}, trim_whitespace=False)
+    password = serializers.CharField(
+        style={"input_type": "password"}, trim_whitespace=False
+    )
 
-    def authenticate_user(self, username=None, password=None):
+    def authenticate_user(self, username: str = None, password: str = None) -> Any:
+        """Authenticate a user.
+
+        Args:
+            username:
+            password:
+
+        Returns:
+            User.
+        """
         try:
             # Try to find a user matching your username
             user = Member.objects.get(username=username)
@@ -150,11 +271,18 @@ class AuthTokenSerializer(serializers.Serializer):
                 return user
             else:
                 return None
-        except:
+        except Exception:
             return None
 
-    def validate(self, attrs):
+    def validate(self, attrs: Dict) -> User:
+        """Validate a user.
 
+        Args:
+            attrs: Arbitrary keyword arguments.
+
+        Returns:
+            User.
+        """
         username = attrs.get("username")
         password = attrs.get("password")
 

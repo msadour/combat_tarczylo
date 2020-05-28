@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
+import axios from "axios";
 
 import Menu from "./layout/Menu";
 import Footer from "./layout/Footer";
@@ -28,9 +29,11 @@ import MessageManager from "./pages/admin_panel/manager/MessageManager"
 import PresentationManager from "./pages/admin_panel/manager/PresentationManager"
 import ProductManager from "./pages/admin_panel/manager/ProductManager"
 
-
-
 import './style.css';
+
+axios.defaults.headers.common = {
+    'Authorization': 'Token ' + localStorage.getItem('token')
+};
 
 class App extends Component {
     render() {

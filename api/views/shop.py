@@ -1,20 +1,41 @@
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
+"""Shop module."""
+import os
+from typing import Any
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.db.models.query import QuerySet
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Product, Order, Category, Member
+from api.permissions import ReadPermission
 from api.serializers import ProductSerializer, OrderSerializer, CategorySerializer
 
 
-@permission_classes((permissions.AllowAny,))
-class OrderViewSet(viewsets.ViewSet):
+class OrderViewSet(viewsets.ModelViewSet):
+    """Class OrderViewSet."""
 
-    def create(self, request, *args, **kwargs):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Create an order.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
-        member = int(datas.pop('member'))
-        products = datas.pop('products')
+        member = int(datas.pop("member"))
+        products = datas.pop("products")
         new_order = Order.objects.create(**datas)
         new_order.member = Member.objects.get(id=member)
         for product in products:
@@ -25,109 +46,114 @@ class OrderViewSet(viewsets.ViewSet):
 
         return Response(serializer.data, status=201)
 
-    def list(self, request):
-        queryset = Order.objects.all().order_by('id')
-        serializer = OrderSerializer(queryset, many=True)
-        return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        queryset = Order.objects.all()
-        order = get_object_or_404(queryset, pk=pk)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)
+class ProductViewSet(viewsets.ModelViewSet):
+    """Class ProductViewSet."""
 
-    def patch(self, request, pk=None):
+    queryset = Product.objects.all().order_by("id")
+    serializer_class = ProductSerializer
+    permission_classes = (ReadPermission,)
+
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
+    @action(detail=True, methods=["PATCH"])
+    def upload(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Upload a picture.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        product = Product.objects.get(id=pk)
+
+        if product.picture == "default.png":
+            product.picture = None
+        else:
+            os.remove("media/" + product.picture.name)
+        picture = request.data.get("picture")
+        filename = "product_{}.{}".format(product.pk, "png")
+        picture.name = filename
+
+        product.picture = picture
+        product.save()
+
+        return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
+
+    @method_decorator(cache_page(60 * 60 * 12))
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """List of product.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Create a product.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
-        order = Order.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(order, attr, value)
-        order.save()
-        serializer = OrderSerializer(order)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Order.objects.get(id=pk).delete()
-
-        return Response({"message": "Order deleted"}, status=status.HTTP_200_OK)
-
-
-@permission_classes((permissions.AllowAny,))
-class ProductViewSet(viewsets.ViewSet):
-
-    def create(self, request, *args, **kwargs):
-        datas = request.data
-        datas['id'] = get_max_id('Product')
-        category_id = datas.pop('category')
-        datas['category'] = Category.objects.get(id=category_id)
+        datas["id"] = get_max_id("Product")
+        category_id = datas.pop("category")
+        datas["category"] = Category.objects.get(id=category_id)
         new_product = Product.objects.create(**datas)
         serializer = ProductSerializer(new_product, many=False)
 
         return Response(serializer.data, status=201)
 
-    def list(self, request):
-        queryset = Product.objects.all().order_by('id')
-        serializer = ProductSerializer(queryset, many=True)
-        return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        queryset = Product.objects.all()
-        product = get_object_or_404(queryset, pk=pk)
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
+class CategoryViewSet(viewsets.ModelViewSet):
+    """Class CategoryViewSet."""
 
-    def patch(self, request, pk=None):
+    queryset = Category.objects.all().order_by("id")
+    serializer_class = CategorySerializer
+    permission_classes = (ReadPermission,)
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Create a category.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
-        product = Product.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(product, attr, value)
-        product.save()
-        serializer = ProductSerializer(product)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Product.objects.get(id=pk).delete()
-
-        return Response({"message": "Product deleted"}, status=status.HTTP_200_OK)
-
-
-@permission_classes((permissions.AllowAny,))
-class CategoryViewSet(viewsets.ViewSet):
-
-    def create(self, request, *args, **kwargs):
-        datas = request.data
-        datas['id'] = get_max_id('Category')
+        datas["id"] = get_max_id("Category")
         new_category = Category.objects.create(**datas)
 
         serializer = CategorySerializer(new_category, many=False)
 
         return Response(serializer.data, status=201)
-
-    def list(self, request):
-        queryset = Category.objects.all().order_by('id')
-        serializer = CategorySerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Category.objects.all()
-        category = get_object_or_404(queryset, pk=pk)
-        serializer = CategorySerializer(category)
-        return Response(serializer.data)
-
-    def patch(self, request, pk=None):
-        datas = request.data
-        category = Category.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(category, attr, value)
-        category.save()
-        serializer = CategorySerializer(category)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None, *args, **kwargs):
-        category = Category.objects.get(id=pk)
-        category.delete_all_products()
-        category.delete()
-
-        return Response({"message": "Category deleted"}, status=status.HTTP_200_OK)

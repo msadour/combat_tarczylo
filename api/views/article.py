@@ -1,46 +1,49 @@
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
+"""article module."""
+from typing import Any
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.db.models.query import QuerySet
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.models import Article
+from api.permissions import ReadPermission
 from api.serializers import ArticleSerializer
-from api.features import get_max_id
 
 
-@permission_classes((permissions.AllowAny,))
-class ArticleViewSet(viewsets.ViewSet):
+class ArticleViewSet(viewsets.ModelViewSet):
+    """Class ArticleViewSet."""
 
-    def create(self, request, *args, **kwargs):
+    queryset = Article.objects.all().order_by("id")
+    serializer_class = ArticleSerializer
+    permission_classes = (ReadPermission, IsAuthenticated)
 
-        datas = request.data
-        datas['id'] = get_max_id('Article')
-        new_article = Article.objects.create(**datas)
-        serializer = ArticleSerializer(new_article, many=False)
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
 
-        return Response(serializer.data, status=201)
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
 
-    def list(self, request):
-        queryset = Article.objects.all().order_by('id')
-        serializer = ArticleSerializer(queryset, many=True)
-        return Response(serializer.data)
+    @method_decorator(cache_page(60 * 60 * 12))
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """List of article.
 
-    def retrieve(self, request, pk=None):
-        queryset = Article.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = ArticleSerializer(user)
-        return Response(serializer.data)
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
 
-    def patch(self, request, pk=None):
-        datas = request.data
-        article = Article.objects.get(id=pk)
-        for attr, value in datas.items():
-            setattr(article, attr, value)
-        article.save()
-        serializer = ArticleSerializer(article)
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Article.objects.get(id=pk).delete()
-        return Response({"message": "Article deleted"}, status=status.HTTP_200_OK)
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)

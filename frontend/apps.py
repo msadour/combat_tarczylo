@@ -1,5 +1,9 @@
+"""App module."""
+
 from django.apps import AppConfig
 
 
 class FrontendConfig(AppConfig):
-    name = 'frontend'
+    """class FrontendConfig."""
+
+    name = "frontend"

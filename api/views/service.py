@@ -1,61 +1,110 @@
-import re
+"""Service module."""
 
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import permission_classes
-from rest_framework.generics import get_object_or_404
+import re
+from typing import Any
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.db.models.query import QuerySet
+from rest_framework import viewsets, status
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Course, Internship, Instructor
+from api.permissions import ReadPermission
 from api.serializers import CourseSerializer, InternshipSerializer, TimeTable
 
 
-@permission_classes((permissions.AllowAny,))
-class CourseViewSet(viewsets.ViewSet):
+class CourseViewSet(viewsets.ModelViewSet):
+    """Class CourseViewSet."""
 
-    def create(self, request):
+    queryset = Course.objects.all().order_by("id")
+    serializer_class = CourseSerializer
+    permission_classes = (ReadPermission,)
+
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
+    @method_decorator(cache_page(60 * 60 * 12))
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """List of course.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Create a course.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
-        instructor_id = datas.pop('instructor')
-        time_tables = datas.pop('time_table')
+        instructor_id = datas.pop("instructor")
+        time_tables = datas.pop("time_table")
         instructor = Instructor.objects.get(id=int(instructor_id))
-        datas['instructor'] = instructor
-        datas['id'] = get_max_id('Course')
+        datas["instructor"] = instructor
+        datas["id"] = get_max_id("Course")
         new_course = Course.objects.create(**datas)
 
         for time_table in time_tables:
-            if isinstance(time_table, str):
-                info = re.split(r'\s', time_table)
-                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                new_time_table = TimeTable.objects.create(**info_time_table)
-            else:
-                new_time_table = TimeTable.objects.create(**time_table)
+            info = re.split(r"\s", time_table)
+            info_time_table = {"day": info[0], "from_hour": info[1], "to_hour": info[2]}
+            new_time_table = TimeTable.objects.create(**info_time_table)
             new_course.time_table.add(new_time_table)
 
         serializer = CourseSerializer(new_course, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def list(self, request):
-        queryset = Course.objects.all().order_by('id')
-        serializer = CourseSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Update a course.
 
-    def retrieve(self, request, pk=None):
-        queryset = Course.objects.all()
-        course = get_object_or_404(queryset, pk=pk)
-        serializer = CourseSerializer(course)
-        return Response(serializer.data)
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
 
-    def patch(self, request, pk=None):
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         course = Course.objects.get(id=pk)
         for attr, value in datas.items():
-            if attr == 'add_time_table':
+            if attr == "add_time_table":
                 for time_table in value:
-                    if isinstance(time_table, str):
-                        info = re.split(r'\s', time_table)
-                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                        new_time_table = TimeTable.objects.create(**info_time_table)
-                        course.time_table.add(new_time_table)
+                    time_table_str = re.split(r"\s", time_table)
+                    info_time_table = {
+                        "day": time_table_str[0],
+                        "from_hour": time_table_str[1],
+                        "to_hour": time_table_str[2],
+                    }
+                    new_time_table = TimeTable.objects.create(**info_time_table)
+                    course.time_table.add(new_time_table)
             else:
                 setattr(course, attr, value)
         course.save()
@@ -63,64 +112,99 @@ class CourseViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
-    def delete(self, request, pk=None):
-        Course.objects.get(id=pk).delete()
-        return Response({"message": "Course deleted"}, status=status.HTTP_200_OK)
 
+class InternshipViewSet(viewsets.ModelViewSet):
+    """Class InternshipViewSet."""
 
-@permission_classes((permissions.AllowAny,))
-class InternshipViewSet(viewsets.ViewSet):
+    queryset = Internship.objects.all().order_by("id")
+    serializer_class = InternshipSerializer
+    permission_classes = (ReadPermission,)
 
-    def create(self, request):
+    def get_queryset(self) -> QuerySet:
+        """Filter against a criteria and value query parameter in the URL.
+
+        Returns:
+            Queryset filtered.
+        """
+        queryset = self.queryset
+        criteria = self.request.query_params.get("criteria", None)
+        value = self.request.query_params.get("value", None)
+        if criteria and value:
+            queryset = queryset.filter(**{criteria: value})
+        return queryset
+
+    @method_decorator(cache_page(60 * 60 * 12))
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """List of internship.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        return super().list(request, *args, **kwargs)
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """Create an internship.
+
+        Args:
+            request: request sent by the client.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
         datas = request.data
-        datas['id'] = get_max_id('Internship')
-        instructor_id = datas.pop('instructor')
+        datas["id"] = get_max_id("Internship")
+        instructor_id = datas.pop("instructor")
         instructor = Instructor.objects.get(id=instructor_id)
-        datas['instructor_id'] = instructor.id
-        time_tables = datas.pop('time_table')
+        datas["instructor_id"] = instructor.id
+        time_tables = datas.pop("time_table")
         new_internship = Internship.objects.create(**datas)
 
         for time_table in time_tables:
-            if isinstance(time_table, str):
-                info = re.split(r'\s', time_table)
-                info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                new_time_table = TimeTable.objects.create(**info_time_table)
-            else:
-                new_time_table = TimeTable.objects.create(**time_table)
+            info = re.split(r"\s", time_table)
+            info_time_table = {"day": info[0], "from_hour": info[1], "to_hour": info[2]}
+            new_time_table = TimeTable.objects.create(**info_time_table)
             new_internship.time_table.add(new_time_table)
 
         serializer = InternshipSerializer(new_internship, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def list(self, request):
-        queryset = Internship.objects.all().order_by('id')
-        serializer = InternshipSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def update(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Update an internship.
 
-    def retrieve(self, request, pk=None):
-        queryset = Internship.objects.all()
-        internship = get_object_or_404(queryset, pk=pk)
-        serializer = InternshipSerializer(internship)
-        return Response(serializer.data)
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
 
-    def patch(self, request, pk=None):
+        Returns:
+            Response from the server.
+        """
         datas = request.data
         internship = Internship.objects.get(id=pk)
         for attr, value in datas.items():
-            if attr == 'add_time_table':
+            if attr == "add_time_table":
                 for time_table in value:
-                    if isinstance(time_table, str):
-                        info = re.split(r'\s', time_table)
-                        info_time_table = {'day': info[0], 'from_hour': info[1], 'to_hour': info[2]}
-                        new_time_table = TimeTable.objects.create(**info_time_table)
-                        internship.time_table.add(new_time_table)
+                    time_table_str = re.split(r"\s", time_table)
+                    info_time_table = {
+                        "day": time_table_str[0],
+                        "from_hour": time_table_str[1],
+                        "to_hour": time_table_str[2],
+                    }
+                    new_time_table = TimeTable.objects.create(**info_time_table)
+                    internship.time_table.add(new_time_table)
             else:
                 setattr(internship, attr, value)
         internship.save()
         serializer = InternshipSerializer(internship)
 
         return Response(serializer.data)
-
-    def delete(self, request, pk=None):
-        Internship.objects.get(id=pk).delete()
-        return Response({"message": "Internship deleted"}, status=status.HTTP_200_OK)

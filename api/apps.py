@@ -1,5 +1,9 @@
+"""App module."""
+
 from django.apps import AppConfig
 
 
 class ApiConfig(AppConfig):
-    name = 'api'
+    """Class api."""
+
+    name = "api"
