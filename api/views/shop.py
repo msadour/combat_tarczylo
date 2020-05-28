@@ -84,7 +84,9 @@ class ProductViewSet(viewsets.ModelViewSet):
         """
         product = Product.objects.get(id=pk)
 
-        if product.picture:
+        if product.picture == "default.png":
+            product.picture = None
+        else:
             os.remove("media/" + product.picture.name)
         picture = request.data.get("picture")
         filename = "product_{}.{}".format(product.pk, "png")

@@ -93,7 +93,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     sex = models.CharField(max_length=255, blank=True)
     level = models.CharField(max_length=255, blank=True)
     have_paid = models.BooleanField(default=False)
-    picture = models.ImageField(upload_to="", null=True)
+    picture = models.ImageField(upload_to="", default="default.png")
 
     USERNAME_FIELD = "username"
 
@@ -156,6 +156,7 @@ class Internship(models.Model):
     date_end = models.DateTimeField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=5)
     theme = models.CharField(max_length=255, blank=True)
+    picture = models.ImageField(upload_to="", default="default.png")
 
 
 class Category(models.Model):
@@ -184,7 +185,7 @@ class Product(models.Model):
     quantity_available = models.IntegerField()
     size = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to="", null=True)
+    picture = models.ImageField(upload_to="", default="default.png")
 
     def get_category(self) -> Any:
         """Return the category of this product.

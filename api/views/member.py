@@ -119,7 +119,9 @@ class MemberViewSet(viewsets.ModelViewSet):
         """
         member = Member.objects.get(id=pk)
 
-        if member.picture:
+        if member.picture.name == "default.png":
+            member.picture = None
+        else:
             os.remove("media/" + member.picture.name)
         picture = request.data.get("picture")
         filename = "member_{}.{}".format(member.pk, "png")
@@ -226,7 +228,9 @@ class InstructorViewSet(viewsets.ModelViewSet):
         """
         instructor = Instructor.objects.get(id=pk)
 
-        if instructor.picture:
+        if instructor.picture == "default.png":
+            instructor.picture = None
+        else:
             os.remove("media/" + instructor.picture.name)
         picture = request.data.get("picture")
         filename = "instructor_{}.{}".format(instructor.pk, "png")
