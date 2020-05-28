@@ -92,6 +92,8 @@ class Member(AbstractBaseUser, PermissionsMixin):
     birthday = models.CharField(max_length=255, blank=True)
     sex = models.CharField(max_length=255, blank=True)
     level = models.CharField(max_length=255, blank=True)
+    have_paid = models.BooleanField(default=False)
+    picture = models.ImageField(upload_to="", null=True)
 
     USERNAME_FIELD = "username"
 
@@ -104,6 +106,14 @@ class Member(AbstractBaseUser, PermissionsMixin):
             Full name
         """
         return self.first_name + " " + self.last_name
+
+    def get_image_file(self) -> str:
+        """Return the image file name.
+
+        Returns:
+            Image file name
+        """
+        return "member_" + self.id
 
 
 class Instructor(Member):
@@ -174,6 +184,7 @@ class Product(models.Model):
     quantity_available = models.IntegerField()
     size = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="", null=True)
 
     def get_category(self) -> Any:
         """Return the category of this product.

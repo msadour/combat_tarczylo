@@ -1,11 +1,12 @@
 """Shop module."""
-
+import os
 from typing import Any
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.db.models.query import QuerySet
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -65,6 +66,34 @@ class ProductViewSet(viewsets.ModelViewSet):
         if criteria and value:
             queryset = queryset.filter(**{criteria: value})
         return queryset
+
+    @action(detail=True, methods=["PATCH"])
+    def upload(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Upload a picture.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        product = Product.objects.get(id=pk)
+
+        if product.picture:
+            os.remove("media/" + product.picture.name)
+        picture = request.data.get("picture")
+        filename = "product_{}.{}".format(product.pk, "png")
+        picture.name = filename
+
+        product.picture = picture
+        product.save()
+
+        return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
 
     @method_decorator(cache_page(60 * 60 * 12))
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:

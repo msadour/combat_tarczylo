@@ -1,5 +1,6 @@
 """Member module."""
 
+import os
 from typing import Any
 
 from django.contrib.auth import logout as django_logout
@@ -9,7 +10,7 @@ from django.db.models.query import QuerySet
 from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -101,6 +102,34 @@ class MemberViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=["PATCH"])
+    def upload(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Upload a profile picture.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        member = Member.objects.get(id=pk)
+
+        if member.picture:
+            os.remove("media/" + member.picture.name)
+        picture = request.data.get("picture")
+        filename = "member_{}.{}".format(member.pk, "png")
+        picture.name = filename
+
+        member.picture = picture
+        member.save()
+
+        return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
+
 
 class InstructorViewSet(viewsets.ModelViewSet):
     """Class InstructorViewSet."""
@@ -179,6 +208,34 @@ class InstructorViewSet(viewsets.ModelViewSet):
         serializer = InstructorSerializer(instructor)
 
         return Response(serializer.data)
+
+    @action(detail=True, methods=["PATCH"])
+    def upload(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Upload a profile picture.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        instructor = Instructor.objects.get(id=pk)
+
+        if instructor.picture:
+            os.remove("media/" + instructor.picture.name)
+        picture = request.data.get("picture")
+        filename = "instructor_{}.{}".format(instructor.pk, "png")
+        picture.name = filename
+
+        instructor.picture = picture
+        instructor.save()
+
+        return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
 
 
 class CustomAuthToken(ObtainAuthToken):
