@@ -6,7 +6,6 @@ from typing import Any
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.query import QuerySet
 from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -28,19 +27,6 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all().order_by("id")
     serializer_class = MemberSerializer
     permission_classes = (UserPermission,)
-
-    def get_queryset(self) -> QuerySet:
-        """Filter against a criteria and value query parameter in the URL.
-
-        Returns:
-            Queryset filtered.
-        """
-        queryset = self.queryset
-        criteria = self.request.query_params.get("criteria", None)
-        value = self.request.query_params.get("value", None)
-        if criteria and value:
-            queryset = queryset.filter(**{criteria: value})
-        return queryset
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -140,19 +126,6 @@ class InstructorViewSet(viewsets.ModelViewSet):
     serializer_class = InstructorSerializer
     permission_classes = (UserPermission, IsAuthenticated)
 
-    def get_queryset(self) -> QuerySet:
-        """Filter against a criteria and value query parameter in the URL.
-
-        Returns:
-            Queryset filtered.
-        """
-        queryset = self.queryset
-        criteria = self.request.query_params.get("criteria", None)
-        value = self.request.query_params.get("value", None)
-        if criteria and value:
-            queryset = queryset.filter(**{criteria: value})
-        return queryset
-
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """List of instructor.
 
@@ -242,6 +215,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
         return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
 
 
+@permission_classes((permissions.AllowAny,))
 class CustomAuthToken(ObtainAuthToken):
     """Class CustomAuthToken."""
 
@@ -259,11 +233,16 @@ class CustomAuthToken(ObtainAuthToken):
             Response from the server.
         """
         serializer = AuthTokenSerializer()
-        user = serializer.validate(attrs=request.data)
+
+        try:
+            user = serializer.validate(attrs=request.data)
+        except Exception:
+            return Response(status=404)
 
         request.user = user
 
         token, created = Token.objects.get_or_create(user=user)
+
         return Response(
             {"token": token.key, "username": user.username, "member_id": user.id}
         )
@@ -305,7 +284,9 @@ class LogoutViewSet(viewsets.ViewSet):
             django_logout(request)
 
         response = Response(
-            {"detail": "Successfully logged out."}, status=status.HTTP_200_OK
+            {"detail": "Successfully logged out."},
+            status=status.HTTP_200_OK,
+            headers={"Access-Control-Allow-Credentials": True},
         )
 
         return response

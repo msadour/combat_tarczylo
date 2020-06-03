@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class MemberUpdateForm extends Component {
 
@@ -15,7 +16,7 @@ class MemberUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/member/')
+        axios.get('/api_tct/member/', header)
         .then(res => {
             this.setState({members: res.data});
         })
@@ -26,13 +27,16 @@ class MemberUpdateForm extends Component {
 
     onSubmit(e, id){
         event.preventDefault();
-        axios.delete('/api_tct/member/' + id + '/', {data: {'id': id}})
-            .then(res => {
-                window.location.reload();
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        fetch('/api_tct/member/' + id + '/', {
+            method: "DELETE",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
+        .then(res => {
+            window.location.reload();
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
 

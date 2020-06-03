@@ -23,15 +23,16 @@ class ArticleCreateForm extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+
         axios.post('/api_tct/article/', { "title": this.state.title,
                                         "content": this.state.content,
                                         "category": this.state.category,
-
         },
            header
         )
         .then(res => {
-            alert("Article created.")
+            alert("Article created.");
+            window.location.reload();
         })
         .catch(err => {
             console.log(err)

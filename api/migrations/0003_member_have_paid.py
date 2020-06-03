@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0002_importantmessage_is_active'),
+        ("api", "0002_importantmessage_is_active"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='member',
-            name='have_paid',
+            model_name="member",
+            name="have_paid",
             field=models.BooleanField(default=False),
         ),
     ]

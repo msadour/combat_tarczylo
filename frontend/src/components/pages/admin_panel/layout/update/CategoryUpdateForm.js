@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class CategoryUpdateForm extends Component {
 
@@ -15,7 +16,7 @@ class CategoryUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/category/')
+        axios.get('/api_tct/category/', header)
         .then(res => {
             this.setState({categories: res.data});
         })
@@ -26,7 +27,7 @@ class CategoryUpdateForm extends Component {
 
     handleRemove(id) {
         event.preventDefault();
-        axios.delete('/api_tct/category/' + id + '/')
+        axios.delete('/api_tct/category/' + id + '/', header)
         .then(res => {
             window.location.reload();
         })

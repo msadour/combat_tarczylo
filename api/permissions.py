@@ -50,6 +50,7 @@ class UserPermission(permissions.BasePermission):
         Args:
             request: request sent by the client.
             view: Variable length argument list.
+            obj:
 
         Returns:
             Boolean that check if user has permission for CRUD.

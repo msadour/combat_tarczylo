@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
+import header from "../../../header";
+
 class FormField extends Component {
 
     constructor(props){
@@ -20,7 +22,7 @@ class FormField extends Component {
 
     componentDidMount(){
         if (this.props.model_value_possible){
-            axios.get('/api_tct/' + this.props.model_value_possible + '/')
+            axios.get('/api_tct/' + this.props.model_value_possible + '/', header)
             .then(res => {
                 this.setState({value_possible: res.data});
             })
@@ -121,23 +123,42 @@ class FormField extends Component {
     }
 
     onSubmit = e => {
+
         e.preventDefault();
         const member_id = localStorage.getItem("member_id");
         var data = {}
         data[this.props.field] = this.state.new_value
-        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/',
+        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/', data,
             { headers: {
                 'Authorization': 'Token ' + localStorage.getItem('token')
-            }, },
-        data)
+            }, }
+        )
         .then(res => {
             window.location.reload();
         })
         .catch(err => {
             console.log(err)
         });
-
     }
+//        e.preventDefault();
+//        const member_id = localStorage.getItem("member_id");
+//        var data = {}
+//        data[this.props.field] = this.state.new_value;
+//        fetch('/api_tct/' + this.props.model + '/' + this.props.id + '/', {
+//            method: "PATCH",
+//            headers: {
+//                'Authorization': 'Token ' + localStorage.getItem('token'),
+//                'Content-Type':'application/json'
+//            },
+//            body: JSON.stringify(data)
+//        })
+//        .then(res => {
+//            window.location.reload();
+//        })
+//        .catch(err => {
+//            console.log(err);
+//        });
+
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });

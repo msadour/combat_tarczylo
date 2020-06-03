@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class PresentationUpdateForm extends Component {
 
@@ -15,7 +16,7 @@ class PresentationUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/presentation/')
+        axios.get('/api_tct/presentation/', header)
         .then(res => {
             this.setState({presentation: res.data});
         })

@@ -3,34 +3,64 @@ import ReactDom from "react-dom";
 
 import Header from "./layout/Header";
 import Category from "./layout/Category";
-import Product from "./layout/Product";
+//import Product from "./layout/Product";
+import axios from 'axios';
+
+import header from "../../header";
 
 class Shop extends Component {
 
     constructor() {
         super()
         this.state = {
-            products: []
+            categories: []
         }
     }
 
     componentDidMount() {
-        fetch('http://0.0.0.0:8000/api/product')
-            .then(response => response.json())
-            .then((data) => {
-                this.setState({ products: data })
-            })
+
+        fetch('/api_tct/category/')
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({ categories: data })
+        })
+    }
+
+    build_list_products(category){
+
+        var list_product_component = []
+
+        var products = category.products
+        products.forEach( product => {
+            list_product_component.push(
+                <div key={product.id}>
+                    <h2>{product.name}</h2>
+                </div>
+            )
+        })
+
+        return list_product_component
     }
 
     render() {
+
+        var list_category_component = []
+
+        this.state.categories.forEach( category => {
+            list_category_component.push(
+                <div key={category.id}>
+                    <h5 >{category.name}</h5>
+                    {this.build_list_products(category)}
+                </div>
+            )
+        })
 
         return (
             <div>
                 <Header />
                 <br />
-                <Category />
-                <br />
-                <Product products={this.state.products} />
+                {list_category_component}
+
             </div>
 
         )

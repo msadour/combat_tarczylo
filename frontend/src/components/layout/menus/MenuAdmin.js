@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 import MemberProfile from "../../pages/member/MemberProfile"
@@ -14,14 +14,20 @@ class MenuAdmin extends Component {
 
     logout = e => {
         e.preventDefault();
-        axios.post('/api_tct/logout/')
+        fetch('/api_tct/logout/', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+        })
         .then(res => {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('member_id');
+            this.props.history.push("/");
+            window.location.reload();
         })
-        window.location.reload();
-        this.props.history.push("/");
+        .catch(err => {
+            alert(err)
+        });
     }
 
     render() {
@@ -97,4 +103,4 @@ class MenuAdmin extends Component {
     }
 }
 
-export default MenuAdmin
+export default withRouter(MenuAdmin)

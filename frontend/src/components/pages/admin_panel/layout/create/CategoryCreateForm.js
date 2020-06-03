@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class CategoryCreateForm extends Component {
 
     constructor(props) {
@@ -20,7 +22,9 @@ class CategoryCreateForm extends Component {
         e.preventDefault();
         axios.post('/api_tct/category/', { "name": this.state.name,
 
-        })
+        },
+           header
+        )
         .then(res => {
             alert("Your category is created.")
         })

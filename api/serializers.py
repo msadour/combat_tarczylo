@@ -190,22 +190,8 @@ class InternshipSerializer(serializers.ModelSerializer):
         ]
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    """Class CategorySerializer."""
-
-    products = serializers.CharField(source="get_products")
-
-    class Meta:
-        """Class Meta."""
-
-        model = Category
-        fields = ["id", "name", "products"]
-
-
 class ProductSerializer(serializers.ModelSerializer):
     """Class ProductSerializer."""
-
-    category = serializers.CharField(source="get_category")
 
     class Meta:
         """Class Meta."""
@@ -217,9 +203,20 @@ class ProductSerializer(serializers.ModelSerializer):
             "price",
             "quantity_available",
             "size",
-            "category",
             "picture",
         ]
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """Class CategorySerializer."""
+
+    products = ProductSerializer(source="get_products", many=True)
+
+    class Meta:
+        """Class Meta."""
+
+        model = Category
+        fields = ["id", "name", "products"]
 
 
 class OrderSerializer(serializers.ModelSerializer):

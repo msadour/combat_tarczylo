@@ -1,31 +1,22 @@
-import React, { Component } from "react";
-import ReactDom from "react-dom";
+import React from "react";
 
-import Product from "./Product"
+import Product from "./Product";
 
-class Category extends Component {
-    render() {
-        return (
-        <div>category</div>
-//            <table border={1}>
-//                <tbody>
-//                    <tr >
-//                        <td colSpan={5}>
-//                            image category product
-//                        </td>
-//                    </tr>
-//
-////                    <tr>
-////                        <td><Product /></td>
-////                        <td><Product /></td>
-////                        <td><Product /></td>
-////                        <td><Product /></td>
-////                        <td>...</td>
-////                    </tr>
-//                </tbody>
-//            </table>
-        )
-    }
-}
+const Category = ({ categories }) => {
+    return (
+        <div>
+            {categories.map((category) => (
+                <div key={category.id}>
+                    <h5 >{category.name}</h5>
+
+                    {
+                    JSON.parse(category.products.replace(/'/g,'"'))
+                    }
+                </div>
+
+            ))}
+        </div>
+    )
+};
 
 export default Category

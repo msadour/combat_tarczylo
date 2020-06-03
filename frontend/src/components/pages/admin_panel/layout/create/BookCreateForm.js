@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class Subscription extends Component {
 
     constructor(props) {
@@ -26,9 +28,12 @@ class Subscription extends Component {
                                         "category": this.state.category,
                                         "url": this.state.url,
 
-        })
+        },
+           header
+        )
         .then(res => {
-            alert("Book advice created.")
+            alert("Book advice created.");
+            window.location.reload();
         })
         .catch(err => {
             console.log(err)

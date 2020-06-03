@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class InternshipCreateForm extends Component {
 
     constructor(props) {
@@ -29,7 +31,7 @@ class InternshipCreateForm extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api_tct/instructor/')
+        axios.get('/api_tct/instructor/', header)
         .then(res => {
             this.setState({options_instructor: res.data});
         })
@@ -52,9 +54,10 @@ class InternshipCreateForm extends Component {
                                         "date_end": this.state.date_end,
                                         "price": this.state.price,
                                         "theme": this.state.theme,
-        })
+        }, header)
         .then(res => {
-            alert("Internship created.")
+            alert("Internship created.");
+            window.location.reload();
         })
         .catch(err => {
             console.log(err)

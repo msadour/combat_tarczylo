@@ -1,13 +1,17 @@
-import React, { Component } from "react";
-import ReactDom from "react-dom";
+import React from 'react'
 
-class CourseDetail extends Component {
-    render() {
-
-        return (
-            <div>course detail</div>
-        )
-    }
-}
+const CourseDetail = ({ courses }) => {
+  return (
+    <div>
+      <center><h1>Planning</h1></center>
+      {courses.map((course) => (
+        <div key={course.id}>
+            <h5 >{course.name}</h5>
+            {course.description}
+        </div>
+      ))}
+    </div>
+  )
+};
 
 export default CourseDetail

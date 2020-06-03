@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class ProductUpdateForm extends Component {
 
@@ -15,7 +16,10 @@ class ProductUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/product/')
+        console.log(localStorage.getItem('token'))
+        axios.get('/api_tct/product/', { headers: {
+        'Authorization': 'Token ' + localStorage.getItem('token')
+    }, })
         .then(res => {
             this.setState({products: res.data});
         })
@@ -26,7 +30,7 @@ class ProductUpdateForm extends Component {
 
     handleRemove(id) {
         event.preventDefault();
-        axios.delete('/api_tct/product/' + id + '/')
+        axios.delete('/api_tct/product/' + id + '/', header)
         .then(res => {
             window.location.reload();
         })

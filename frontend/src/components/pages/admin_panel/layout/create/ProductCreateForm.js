@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class ProductCreateForm extends Component {
 
     constructor(props) {
@@ -22,12 +24,25 @@ class ProductCreateForm extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api_tct/category/')
-        .then(res => {
-            this.setState({options_category: res.data});
+//        axios.get('/api_tct/category/')
+//        .then(res => {
+//            this.setState({options_category: res});
+//        })
+//        .catch(err => {
+//        console.log(res);
+//            alert('error');
+//
+//        });
+
+        fetch('/api_tct/category/')
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({options_category: data});
         })
         .catch(err => {
+        console.log(res);
             alert('error');
+
         });
     }
 
@@ -41,7 +56,8 @@ class ProductCreateForm extends Component {
 
         })
         .then(res => {
-            alert("Product created.")
+            alert("Product created.");
+            window.location.reload();
         })
         .catch(err => {
             console.log(err)

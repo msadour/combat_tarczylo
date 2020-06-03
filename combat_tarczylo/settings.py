@@ -53,6 +53,8 @@ MIDDLEWARE = [
     # 'middleware.middleware.AuthenticationTokenMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 ROOT_URLCONF = "combat_tarczylo.urls"
 
 TEMPLATES = [

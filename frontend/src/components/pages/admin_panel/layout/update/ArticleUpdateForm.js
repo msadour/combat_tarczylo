@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class ArticleUpdateForm extends Component {
 
@@ -15,18 +16,25 @@ class ArticleUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/article/')
-        .then(res => {
-            this.setState({articles: res.data});
+        fetch('/api_tct/article/', {
+            method: "GET",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({articles: data});
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
     }
 
     handleRemove(id) {
         event.preventDefault();
-        axios.delete('/api_tct/article/' + id + '/')
+        fetch('/api_tct/article/' + id + '/', {
+            method: "DELETE",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
         .then(res => {
             window.location.reload();
         })
@@ -41,7 +49,6 @@ class ArticleUpdateForm extends Component {
         var list_article_component = []
 
         this.state.articles.forEach( article => {
-
             list_article_component.push(
                 <div key={article.id}>
                     <h2>{article.title}</h2>

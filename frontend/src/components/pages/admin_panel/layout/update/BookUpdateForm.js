@@ -15,18 +15,22 @@ class BookUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/book/')
-        .then(res => {
-            this.setState({books: res.data});
+        fetch('/api_tct/book/', {
+            method: "GET",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({books: data});
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
     }
 
     handleRemove(id) {
         event.preventDefault();
-        axios.delete('/api_tct/book/' + id + '/')
+        axios.delete('/api_tct/book/' + id + '/' , header)
         .then(res => {
             window.location.reload();
         })
