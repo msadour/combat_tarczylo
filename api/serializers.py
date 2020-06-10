@@ -145,7 +145,7 @@ class InstructorSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     """Class CourseSerializer."""
 
-    instructor = serializers.CharField(source="get_full_name_instructor")
+    instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
 
     class Meta:

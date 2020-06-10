@@ -29,4 +29,9 @@ class BookViewSet(viewsets.ModelViewSet):
         Returns:
             Response from the server.
         """
+        if request.query_params:
+            search = {key: value for key, value in request.query_params.items()}
+            self.queryset = self.queryset.filter(**search)
+            serializer = BookAdvicedSerializer(self.queryset, many=True)
+            return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)

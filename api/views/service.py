@@ -31,6 +31,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         Returns:
             Response from the server.
         """
+        if request.query_params:
+            search = {key: value for key, value in request.query_params.items()}
+            self.queryset = self.queryset.filter(**search)
+            serializer = CourseSerializer(self.queryset, many=True)
+            return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
@@ -114,6 +119,11 @@ class InternshipViewSet(viewsets.ModelViewSet):
         Returns:
             Response from the server.
         """
+        if request.query_params:
+            search = {key: value for key, value in request.query_params.items()}
+            self.queryset = self.queryset.filter(**search)
+            serializer = InternshipSerializer(self.queryset, many=True)
+            return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 
 import Band from "./layout/Band";
-import Description from "./layout/Description";
 import ListCourse from "./layout/ListCourse";
+import Description from "../../layout/DescriptionClub";
 import CourseDetail from "./CourseDetail"
 
 class Course extends Component {

@@ -14,7 +14,7 @@ class Technical extends Component {
 
                             <td>
                                 <h1>What are technical that I teach?</h1>
-                                <p>Text....</p>
+                                <p>{this.props.text}</p>
 
                             </td>
                         </tr>

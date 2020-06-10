@@ -3,7 +3,8 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import header from "../../header";
-import TrainingDetail from "./TrainingDetail"
+import TrainingDetail from "./TrainingDetail";
+import Description from "../../layout/DescriptionClub";
 
 class Training extends Component {
 
@@ -25,11 +26,8 @@ class Training extends Component {
     render() {
         return (
             <div>
-                <h1> Description </h1>
-                text....
-
+                <Description />
                 <br />
-
                 <TrainingDetail trainings={this.state.trainings} />
 
             </div>

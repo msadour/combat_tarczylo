@@ -10,7 +10,6 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import permission_classes, action
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -124,7 +123,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
 
     queryset = Instructor.objects.all().order_by("id")
     serializer_class = InstructorSerializer
-    permission_classes = (UserPermission, IsAuthenticated)
+    permission_classes = (UserPermission,)  # IsAuthenticated)
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """List of instructor.
@@ -137,6 +136,11 @@ class InstructorViewSet(viewsets.ModelViewSet):
         Returns:
             Response from the server.
         """
+        if request.query_params:
+            search = {key: value for key, value in request.query_params.items()}
+            self.queryset = self.queryset.filter(**search)
+            serializer = InstructorSerializer(self.queryset, many=True)
+            return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:

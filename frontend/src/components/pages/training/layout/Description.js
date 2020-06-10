@@ -40,7 +40,7 @@ class Description extends Component {
                             <p> {this.state.club.description} </p>
                         </th>
 
-                        <th>
+                        <th rowspan="2">
                             photos
                         </th>
                     </tr>
@@ -49,13 +49,8 @@ class Description extends Component {
                         <th>
                             <h2>Where we are?</h2>
                            <p> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
-                        </th>
-
-                        <th>
-                            For the year of {new Date().getFullYear()} we are open in :
+                           For the year of {new Date().getFullYear()} we are open in :
                             {list_time_table}
-
-
                         </th>
 
                     </tr>

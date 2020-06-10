@@ -26,6 +26,24 @@ class ReadPermission(permissions.BasePermission):
             return request.user.is_superuser
         return False
 
+    def has_object_permission(
+        self, request: Request, view: ModelViewSet, obj: Any
+    ) -> Any:
+        """Check permission, for CRUD, for one object.
+
+        Args:
+            request: request sent by the client.
+            view: Variable length argument list.
+
+        Returns:
+            Boolean that check if user has permission for CRUD.
+        """
+        if request.method == "GET":
+            return True
+        elif request.method in ["POST", "DELETE", "PATCH"]:
+            return request.user.is_superuser
+        return False
+
 
 class UserPermission(permissions.BasePermission):
     """Class UserPermission."""

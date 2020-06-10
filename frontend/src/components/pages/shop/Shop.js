@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
+import axios from 'axios';
 
 import Header from "./layout/Header";
 import Category from "./layout/Category";
-//import Product from "./layout/Product";
-import axios from 'axios';
+import ProductsCategory from "./ProductsCategory";
+
 
 import header from "../../header";
 
@@ -57,9 +58,9 @@ class Shop extends Component {
 
         return (
             <div>
-                <Header />
+                <h1>Store (Available only in club)</h1>
                 <br />
-                {list_category_component}
+                <ProductsCategory categories={this.state.categories} />
 
             </div>
 
