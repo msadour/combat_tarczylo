@@ -1,29 +1,46 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
+import axios from 'axios';
+
+import Result from "./Result.js"
 
 class LookingFor extends Component {
 
     constructor(){
         super();
         this.state = {
-            result: [],
+            result_search: [],
+            value: "",
             criteria: "book",
-            value: ""
         }
         this.search.bind(this)
     }
 
-    search() {
+    search(e) {
+        e.preventDefault();
         const field = 'name'
         if (this.state.criteria == 'article'){
             field = 'title'
         }
-        alert('/api_tct/' + this.state.criteria + '?' + field + "=" + this.state.value)
-        fetch('/api_tct/' + this.state.criteria + '?' + field + "=" + this.state.value)
+        const url = '/api_tct/' + this.state.criteria + '?' + field + "=" + this.state.value
+        var list_component_result = []
+        fetch(url)
         .then(response => response.json())
         .then((data) => {
-            alert('work');
-            this.setState({ result: data })
+            if (data.length == 0){
+                list_component_result.push(<div key={1}>Nothing found</div>)
+            } else {
+                data.forEach(result => {
+                    list_component_result.push(
+                        <div key={result.id}>
+                            name: {result.name}
+                           <Result result={result} criteria={this.state.criteria}/>
+                        </div>
+                    )
+                })
+            }
+            this.setState({result_search: list_component_result})
+
         })
         .catch(err => {
             console.log(err)
@@ -38,7 +55,7 @@ class LookingFor extends Component {
             <div>
                 <h1>looking</h1>
 
-                <form onSubmit={e => this.search()}>
+                <form onSubmit={e => this.search(e)}>
                   <input
                     placeholder="Name, title...."
                     name="value"
@@ -47,6 +64,7 @@ class LookingFor extends Component {
 
                  <select
                       name="criteria"
+                      id="criteria"
                       onChange={e => this.onChange(e)}
                   >
                     <option value="book">Book</option>
@@ -56,7 +74,8 @@ class LookingFor extends Component {
 
                   <button type="submit" value="Submit"> Search </button>
                 </form>
-                <br />
+                <br /><br />
+                {this.state.result_search}
 
             </div>
         )
