@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class InternshipUpdateForm extends Component {
 
@@ -19,7 +20,7 @@ class InternshipUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/internship/')
+        axios.get('/api_tct/internship/', header)
         .then(res => {
             this.setState({internships: res.data});
         })
@@ -35,7 +36,7 @@ class InternshipUpdateForm extends Component {
     }
 
     updateTimeTable(id){
-        axios.patch('/api_tct/internship/' + id + '/', {'add_time_table' : this.state.time_table} )
+        axios.patch('/api_tct/internship/' + id + '/', {'add_time_table' : this.state.time_table}, header )
         .then(res => {
             alert("Time table updated.");
             window.location.reload();

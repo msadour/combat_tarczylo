@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
+import axios from 'axios';
 
-import Planning from "./layout/Planning"
+import header from "../../header";
+import TrainingDetail from "./TrainingDetail";
+import Description from "../../layout/DescriptionClub";
 
 class Training extends Component {
 
@@ -13,7 +16,7 @@ class Training extends Component {
     }
 
     componentDidMount() {
-        fetch('http://0.0.0.0:8000/api/course')
+        fetch('/api_tct/internship/')
             .then(response => response.json())
             .then((data) => {
                 this.setState({ trainings: data })
@@ -23,12 +26,9 @@ class Training extends Component {
     render() {
         return (
             <div>
-                <h1> Description </h1>
-                text....
-
+                <Description />
                 <br />
-
-                <Planning trainings={this.state.trainings} />
+                <TrainingDetail trainings={this.state.trainings} />
 
             </div>
         )

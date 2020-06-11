@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "./layout/Form";
+import header from "../../header";
 
 class MemberProfile extends Component {
 
@@ -15,15 +16,21 @@ class MemberProfile extends Component {
     }
 
     componentDidMount(){
-        const member_id = localStorage.getItem("member_id");
-        const jwt = localStorage.getItem("token");
-        axios.get('/api_tct/member/' + member_id)
-        .then(res => {
-            this.setState({info_member: res.data});
+        fetch('/api_tct/member/' + localStorage.getItem('member_id'), {
+            method: "GET",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data);
+            this.setState({info_member: data});
         })
         .catch(err => {
-            console.log(err)
+        console.log(res);
+            alert('error');
+
         });
+
     }
 
     render() {

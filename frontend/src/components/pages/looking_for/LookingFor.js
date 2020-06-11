@@ -1,11 +1,82 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
+import axios from 'axios';
+
+import Result from "./Result.js"
 
 class LookingFor extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            result_search: [],
+            value: "",
+            criteria: "book",
+        }
+        this.search.bind(this)
+    }
+
+    search(e) {
+        e.preventDefault();
+        const field = 'name'
+        if (this.state.criteria == 'article'){
+            field = 'title'
+        }
+        const url = '/api_tct/' + this.state.criteria + '?' + field + "=" + this.state.value
+        var list_component_result = []
+        fetch(url)
+        .then(response => response.json())
+        .then((data) => {
+            if (data.length == 0){
+                list_component_result.push(<div key={1}>Nothing found</div>)
+            } else {
+                data.forEach(result => {
+                    list_component_result.push(
+                        <div key={result.id}>
+                           <Result result={result} criteria={this.state.criteria}/>
+                        </div>
+                    )
+                })
+            }
+            this.setState({result_search: list_component_result})
+
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
+
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
+
     render() {
 
         return (
-            <div>looking</div>
+            <div>
+                <h1>looking</h1>
+
+                <form onSubmit={e => this.search(e)}>
+                  <input
+                    placeholder="Name, title...."
+                    name="value"
+                    onChange={e => this.onChange(e)}
+                  />
+
+                 <select
+                      name="criteria"
+                      id="criteria"
+                      onChange={e => this.onChange(e)}
+                  >
+                    <option value="book">Book</option>
+                    <option value="internship">Internships</option>
+                    <option value="course">Courses</option>
+                  </select>
+
+                  <button type="submit" value="Submit"> Search </button>
+                </form>
+                <br /><br />
+                {this.state.result_search}
+
+            </div>
         )
     }
 }

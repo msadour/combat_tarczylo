@@ -33,29 +33,34 @@ class Subscription extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        axios.post('/api_tct/member/', { "email": this.state.email,
-                                        "password": this.state.password,
-                                        "password_again": this.state.password_again,
-                                        "postal_code": this.state.postal_code,
-                                        "first_name": this.state.first_name,
-                                        "last_name": this.state.last_name,
-                                        "city": this.state.city,
-                                        "street": this.state.street,
-                                        "country": this.state.country,
-                                        "phone": this.state.phone,
-                                        "insurance_name": this.state.insurance_name,
-                                        "insurance_number": this.state.insurance_number,
-                                        "birthday": this.state.birthday,
-                                        "sex": this.state.sex,
-                                        "level": this.state.level,
-
+        fetch('/api_tct/member/', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "email": this.state.email,
+                "password": this.state.password,
+                "password_again": this.state.password_again,
+                "postal_code": this.state.postal_code,
+                "first_name": this.state.first_name,
+                "last_name": this.state.last_name,
+                "city": this.state.city,
+                "street": this.state.street,
+                "country": this.state.country,
+                "phone": this.state.phone,
+                "insurance_name": this.state.insurance_name,
+                "insurance_number": this.state.insurance_number,
+                "birthday": this.state.birthday,
+                "sex": this.state.sex,
+                "level": this.state.level
+            })
         })
-        .then(res => {
+        .then(response => response.json())
+        .then((data) => {
             alert("Your account is created. Log in if you want have an access to your account.")
         })
         .catch(err => {
             console.log(err)
-        });
+        })
     }
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });

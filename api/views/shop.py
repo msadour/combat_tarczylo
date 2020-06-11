@@ -1,18 +1,15 @@
 """Shop module."""
+
 import os
 from typing import Any
 
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.db.models.query import QuerySet
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
 from api.models import Product, Order, Category, Member
-from api.permissions import ReadPermission
 from api.serializers import ProductSerializer, OrderSerializer, CategorySerializer
 
 
@@ -52,20 +49,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     queryset = Product.objects.all().order_by("id")
     serializer_class = ProductSerializer
-    permission_classes = (ReadPermission,)
-
-    def get_queryset(self) -> QuerySet:
-        """Filter against a criteria and value query parameter in the URL.
-
-        Returns:
-            Queryset filtered.
-        """
-        queryset = self.queryset
-        criteria = self.request.query_params.get("criteria", None)
-        value = self.request.query_params.get("value", None)
-        if criteria and value:
-            queryset = queryset.filter(**{criteria: value})
-        return queryset
+    permission_classes = (permissions.AllowAny,)
 
     @action(detail=True, methods=["PATCH"])
     def upload(
@@ -97,14 +81,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
         return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)
 
-    @method_decorator(cache_page(60 * 60 * 12))
     def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """List of product.
 
         Args:
             request: request sent by the client.
             args: Variable length argument list.
-            options: Arbitrary keyword arguments.
+            kwargs: Arbitrary keyword arguments.
 
         Returns:
             Response from the server.
@@ -137,7 +120,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
-    permission_classes = (ReadPermission,)
+    permission_classes = (permissions.AllowAny,)
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """Create a category.

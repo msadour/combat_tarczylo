@@ -10,12 +10,11 @@ class Menu extends Component {
     render() {
 
         if (localStorage.getItem('token')) {
-            if (localStorage.getItem('username') == 'instructor@gmail.com'){
+            if (localStorage.getItem('is_admin') == 'true'){
                 return <MenuAdmin />
             } else {
                 return <MenuMember />
             }
-
         } else {
             return <MenuGuest />
         }

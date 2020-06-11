@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class CourseCreateForm extends Component {
 
     constructor(props) {
@@ -25,7 +27,7 @@ class CourseCreateForm extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api_tct/instructor/')
+        axios.get('/api_tct/instructor/', header)
         .then(res => {
             this.setState({options_instructor: res.data});
         })
@@ -44,9 +46,10 @@ class CourseCreateForm extends Component {
                                         "category": this.state.category,
                                         "instructor": this.state.instructor,
                                         "time_table": this.state.time_table,
-        })
+        }, header)
         .then(res => {
-            alert("Course created.")
+            alert("Course created.");
+            window.location.reload();
         })
         .catch(err => {
             console.log(err)

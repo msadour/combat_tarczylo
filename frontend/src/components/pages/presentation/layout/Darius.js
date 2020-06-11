@@ -10,7 +10,7 @@ class Darius extends Component {
                         <tr>
                             <td>
                                 <h1>Darius tarczylo</h1>
-                                <p>Text</p>
+                                <p>{this.props.text}</p>
                             </td>
 
                             <td>

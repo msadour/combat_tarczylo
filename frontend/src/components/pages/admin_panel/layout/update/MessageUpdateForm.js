@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
+import header from "../../../../header";
 
 class MessageUpdateForm extends Component {
 
@@ -15,7 +16,7 @@ class MessageUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/important_message/')
+        axios.get('/api_tct/important_message/', header)
         .then(res => {
             this.setState({message: res.data});
         })

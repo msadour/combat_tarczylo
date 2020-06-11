@@ -3,7 +3,6 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import FormField from "../Form";
-
 import header from "../../../../header";
 
 class ClubUpdateForm extends Component {
@@ -21,9 +20,7 @@ class ClubUpdateForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api_tct/club/',
-            header
-        )
+        axios.get('/api_tct/club/', header)
         .then(res => {
             this.setState({club: res.data});
         })
@@ -39,7 +36,7 @@ class ClubUpdateForm extends Component {
     }
 
     updateTimeTable(){
-        axios.patch('/api_tct/club/' + this.state.club.id + '/', {'add_time_table' : this.state.time_table} )
+        axios.patch('/api_tct/club/' + this.state.club.id + '/', {'add_time_table' : this.state.time_table}, header )
         .then(res => {
             alert("Tine table updated.");
             window.location.reload();

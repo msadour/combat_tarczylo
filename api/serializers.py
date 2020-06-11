@@ -145,7 +145,7 @@ class InstructorSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     """Class CourseSerializer."""
 
-    instructor = serializers.CharField(source="get_full_name_instructor")
+    instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
 
     class Meta:
@@ -169,6 +169,7 @@ class InternshipSerializer(serializers.ModelSerializer):
 
     instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
+    dates = serializers.CharField(source="display_date_as_str")
 
     class Meta:
         """Class Meta."""
@@ -187,25 +188,12 @@ class InternshipSerializer(serializers.ModelSerializer):
             "date_end",
             "price",
             "theme",
+            "dates",
         ]
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    """Class CategorySerializer."""
-
-    products = serializers.CharField(source="get_products")
-
-    class Meta:
-        """Class Meta."""
-
-        model = Category
-        fields = ["id", "name", "products"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
     """Class ProductSerializer."""
-
-    category = serializers.CharField(source="get_category")
 
     class Meta:
         """Class Meta."""
@@ -217,9 +205,20 @@ class ProductSerializer(serializers.ModelSerializer):
             "price",
             "quantity_available",
             "size",
-            "category",
             "picture",
         ]
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """Class CategorySerializer."""
+
+    products = ProductSerializer(source="get_products", many=True)
+
+    class Meta:
+        """Class Meta."""
+
+        model = Category
+        fields = ["id", "name", "products"]
 
 
 class OrderSerializer(serializers.ModelSerializer):

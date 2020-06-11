@@ -3,6 +3,8 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
+import header from "../../../../header";
+
 class MessageCreateForm extends Component {
 
     constructor(props) {
@@ -20,7 +22,9 @@ class MessageCreateForm extends Component {
         e.preventDefault();
         axios.post('/api_tct/important_message/', { "content": this.state.content,
 
-        })
+        },
+           header
+        )
         .then(res => {
             alert("Message created.")
         })

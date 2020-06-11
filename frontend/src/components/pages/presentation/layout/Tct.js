@@ -10,8 +10,7 @@ class Tct extends Component {
                         <tr>
                             <td>
                                 <h1>Presentation</h1>
-                                <p>Darius tarzcylo founder and instructor of TCT</p>
-                                <p>What is tct</p>
+                                <p>{this.props.text}</p>
                             </td>
 
                             <td>
