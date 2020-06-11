@@ -27,7 +27,7 @@ class Description extends Component {
 
         if(this.state.club.time_table != null){
             this.state.club.time_table.forEach(time_table => {
-                list_time_table.push(<p key={time_table.id}> {time_table.time_table_str} </p>)
+                list_time_table.push(<p key={time_table.id}> to {time_table.time_table_str} </p>)
             })
         }
 

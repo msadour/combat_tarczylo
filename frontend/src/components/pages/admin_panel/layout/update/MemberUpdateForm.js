@@ -13,6 +13,8 @@ class MemberUpdateForm extends Component {
         this.state = {
             members: []
         }
+
+        this.acceptMember.bind(this);
     }
 
     componentDidMount(){
@@ -39,6 +41,23 @@ class MemberUpdateForm extends Component {
         });
     }
 
+    acceptMember(e, id){
+        event.preventDefault();
+        fetch('/api_tct/member/' + id + '/', {
+            method: "PATCH",
+            headers: {
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"have_paid": true})
+        })
+        .then(res => {
+            window.location.reload();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     render() {
     
@@ -47,14 +66,27 @@ class MemberUpdateForm extends Component {
         this.state.members.forEach( member => {
 
             list_member_component.push(
+
+
                 <div key={member.id}>
-                    <h2>{member.full_name}</h2>
-                    <form onSubmit={e => this.onSubmit(e, member.id)}>
-                        <label> {member.email} </label><br />
-                        <label> {member.sex} </label><br />
-                        <label> {member.level} </label><br />
-                        <button type="submit" value="Submit"> Delete </button>
-                    </form><br />
+                    { member.is_superuser == false ? (
+                        <section>
+                            <h2>{member.full_name}</h2>
+                            <form onSubmit={e => this.onSubmit(e, member.id)}>
+                                <label> {member.email} </label><br />
+                                <label> {member.sex} </label><br />
+                                <label> {member.level} </label><br />
+                                <button type="submit" value="Submit"> Delete </button>
+                                {member.have_paid == false ? (
+                                    <button
+                                        type="submit"
+                                        value="Submit"
+                                        onClick={e => this.acceptMember(e, member.id)}
+                                    > Accept </button>
+                                ) : (<div></div>)}
+                            </form><br />
+                        </section>
+                    ): (<section></section>)}
                 </div>
             )
         })

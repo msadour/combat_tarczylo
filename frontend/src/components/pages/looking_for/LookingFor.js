@@ -33,7 +33,6 @@ class LookingFor extends Component {
                 data.forEach(result => {
                     list_component_result.push(
                         <div key={result.id}>
-                            name: {result.name}
                            <Result result={result} criteria={this.state.criteria}/>
                         </div>
                     )

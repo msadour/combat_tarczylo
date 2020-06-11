@@ -74,7 +74,7 @@ class UserPermission(permissions.BasePermission):
             Boolean that check if user has permission for CRUD.
         """
         if request.method == "PATCH":
-            return obj == request.user
+            return obj == request.user or request.user.is_superuser
         if request.method == "POST":
             return True
         return obj == request.user or request.user.is_superuser

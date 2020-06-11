@@ -169,6 +169,7 @@ class InternshipSerializer(serializers.ModelSerializer):
 
     instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
+    dates = serializers.CharField(source="display_date_as_str")
 
     class Meta:
         """Class Meta."""
@@ -187,6 +188,7 @@ class InternshipSerializer(serializers.ModelSerializer):
             "date_end",
             "price",
             "theme",
+            "dates",
         ]
 
 

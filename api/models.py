@@ -59,7 +59,10 @@ class TimeTable(models.Model):
         Returns:
             This is a description of what is returned.
         """
-        return str(self.day) + " " + str(self.from_hour) + " " + str(self.to_hour)
+        # import pdb ; pdb.set_trace()
+        from_hour_formated = self.from_hour.__format__("%H:%M")
+        to_hour_formated = self.to_hour.__format__("%H:%M")
+        return str(self.day) + " " + from_hour_formated + " - " + to_hour_formated
 
 
 class Club(models.Model):
@@ -157,6 +160,20 @@ class Internship(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=5)
     theme = models.CharField(max_length=255, blank=True)
     picture = models.ImageField(upload_to="", default="default.png")
+
+    def display_date_as_str(self) -> str:
+        """Return a time table as the format 'DAY HH:HH HH:HH'.
+
+        Returns:
+            This is a description of what is returned.
+        """
+        if self.date_begin:
+            date_begin_formated = self.date_begin.__format__("%d/%m/%Y")
+            if self.date_end:
+                date_end_formated = self.date_end.__format__("%d/%m/%Y")
+                return "From " + date_begin_formated + " to " + date_end_formated
+            else:
+                return date_begin_formated
 
 
 class Category(models.Model):

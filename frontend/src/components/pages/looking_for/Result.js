@@ -12,7 +12,6 @@ class Result extends Component {
                 {
                     this.props.criteria == "course" ? (
                         <section>
-                            Course :<br />
                             {this.props.result.name}<br />
                             {this.props.result.description}<br />
                             {this.props.result.place}<br />
@@ -22,7 +21,6 @@ class Result extends Component {
                         </section>
                      ): this.props.criteria == "internship" ?(
                         <section>
-                            Internship :<br />
                             {this.props.result.name}<br />
                             {this.props.result.description}<br />
                             {this.props.result.place}<br />
@@ -38,7 +36,6 @@ class Result extends Component {
 
                      : (
                         <section>
-                            Book :<br />
                             {this.props.result.name}<br />
                             {this.props.result.author}<br />
                             {this.props.result.category}<br />

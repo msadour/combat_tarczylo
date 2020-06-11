@@ -29,6 +29,7 @@ class Login extends Component {
         .then((data) => {
             localStorage.setItem('token', data["token"]);
             localStorage.setItem('member_id', data["member_id"]);
+            localStorage.setItem('is_admin', data["is_admin"]);
             localStorage.setItem('username', this.state.username);
             this.props.history.push("/")
             window.location.reload();

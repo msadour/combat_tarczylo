@@ -109,7 +109,8 @@
       "insurance_number": "123456",
       "birthday": "25/05/1992 10:00:00",
       "sex": "male",
-      "level": "white"
+      "level": "white",
+      "have_paid": true
     },
 
     {
@@ -128,7 +129,8 @@
       "insurance_number": "123456",
       "birthday": "20/05/1992 10:00:00",
       "sex": "female",
-      "level": "green"
+      "level": "green",
+      "have_paid": true
     },
 
     {
@@ -147,11 +149,12 @@
       "insurance_number": "123456",
       "birthday": "20/05/1992 10:00:00",
       "sex": "male",
-      "level": "brown"
+      "level": "brown",
+      "have_paid": true
     },
 
         {
-      "id": 4,
+      "id": 5,
       "email": "member_paid@gmail.com",
       "username": "member_paid@gmail.com",
       "password": "qwertz",
@@ -174,8 +177,8 @@
   "Instructor" : [
     {
       "id": 1,
-      "email": "instructor@gmail.com",
-      "username": "instructor@gmail.com",
+      "email": "dariustarczylo@gmail.com",
+      "username": "dariustarczylo@gmail.com",
       "password": "qwertz",
       "first_name": "Darius",
       "last_name": "Tarczylo",
@@ -191,7 +194,29 @@
       "level": "black",
       "biography": "biography instructor",
       "is_superuser": true,
-      "have_paid": false
+      "have_paid": true
+    },
+
+    {
+      "id": 6,
+      "email": "instructor@gmail.com",
+      "username": "instructor@gmail.com",
+      "password": "qwertz",
+      "first_name": "Marc",
+      "last_name": "Peletier",
+      "postal_code": "77777",
+      "city": "Berlin",
+      "street": "rue de l'instructor 2",
+      "country": "Germany",
+      "phone": "0366111199",
+      "insurance_name": "insurencemember12",
+      "insurance_number": "123456789",
+      "birthday": "20/05/1980 10:00:00",
+      "sex": "male",
+      "level": "black",
+      "biography": "biography instructor 2",
+      "is_superuser": false,
+      "have_paid": true
     }
   ],
 
@@ -350,8 +375,32 @@
       ],
       "instructor": 1,
       "date_begin": "2020-04-20 10:00:00",
-      "date_end": "2020-04-20 10:00:00",
+      "date_end": "2020-04-22 12:00:00",
       "price": 100,
+      "theme": "knife"
+    },
+
+    {
+      "name": "Extreme fight",
+      "description": "extreme fight description",
+      "level": "blue",
+      "category": "men",
+      "time_table": [
+        {
+          "day": "Monday",
+          "from_hour": "9:00:00",
+          "to_hour": "11:00:00"
+        },
+
+        {
+          "day": "saturday",
+          "from_hour": "12:00:00",
+          "to_hour": "16:00:00"
+        }
+      ],
+      "instructor": 1,
+      "date_begin": "2020-05-20 10:00:00",
+      "price": 150,
       "theme": "knife"
     }
   ],
