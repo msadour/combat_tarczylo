@@ -32,9 +32,13 @@ class Result extends Component {
                             {this.props.result.date_begin}<br />
                             {this.props.result.date_end}<br />
                         </section>
-                     )
-
-                     : (
+                     ) : this.props.criteria == "article" ?(
+                        <section>
+                            {this.props.result.title}<br />
+                            {this.props.result.content}<br />
+                            {this.props.result.category}<br />
+                        </section>
+                     ) : (
                         <section>
                             {this.props.result.name}<br />
                             {this.props.result.author}<br />

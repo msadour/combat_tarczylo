@@ -8,27 +8,22 @@ class MenuGuest extends Component {
             <nav className="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
               <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav mr-auto">
-                      <li className="nav-item active">
-                          <Link to='/' className="nav-link">
-                            <p className="nav-link">Home</p>
+
+                      <li className="nav-item">
+                        <Link to='/looking_for' className="nav-link">
+                            <p className="nav-link">Looking for</p>
                         </Link>
                       </li>
 
                       <li className="nav-item">
-                        <Link to='/presentation' className="nav-link">
-                            <p className="nav-link">Presentation</p>
+                        <Link to='/contact' className="nav-link">
+                            <p className="nav-link">Contact</p>
                         </Link>
                       </li>
 
                       <li className="nav-item">
-                        <Link to='/training' className="nav-link">
-                            <p className="nav-link">Trainings</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to='/shop' className="nav-link">
-                            <p className="nav-link">Store</p>
+                        <Link to='/authentication' className="nav-link">
+                            <p className="nav-link">Access Member</p>
                         </Link>
                       </li>
 

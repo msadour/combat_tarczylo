@@ -40,6 +40,7 @@ class ImportantMessage(models.Model):
 class Presentation(models.Model):
     """Class Presentation."""
 
+    name_club = models.CharField(max_length=255, blank=True)
     tct = models.CharField(max_length=255, blank=True)
     darius = models.CharField(max_length=255, blank=True)
     technical = models.CharField(max_length=255, blank=True)
@@ -59,17 +60,14 @@ class TimeTable(models.Model):
         Returns:
             This is a description of what is returned.
         """
-        # import pdb ; pdb.set_trace()
         from_hour_formated = self.from_hour.__format__("%H:%M")
         to_hour_formated = self.to_hour.__format__("%H:%M")
         return str(self.day) + " " + from_hour_formated + " - " + to_hour_formated
 
 
-class Club(models.Model):
+class ClubInformation(models.Model):
     """Class Club."""
 
-    name = models.CharField(max_length=255, blank=True)
-    description = models.CharField(max_length=255, blank=True)
     street = models.CharField(max_length=255, blank=True)
     number = models.CharField(max_length=255, blank=True)
     zip_code = models.CharField(max_length=255, blank=True)
@@ -155,9 +153,9 @@ class Internship(models.Model):
     category = models.CharField(max_length=255, blank=True)
     time_table = models.ManyToManyField(TimeTable)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    date_begin = models.DateTimeField(null=True, blank=True)
+    date_begin = models.DateTimeField(blank=True, default=datetime.datetime.now())
     date_end = models.DateTimeField(null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=5)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     theme = models.CharField(max_length=255, blank=True)
     picture = models.ImageField(upload_to="", default="default.png")
 
@@ -174,6 +172,23 @@ class Internship(models.Model):
                 return "From " + date_begin_formated + " to " + date_end_formated
             else:
                 return date_begin_formated
+
+    def get_date_begin_formated(self) -> str:
+        """Make format begining date as YYYY-MM-DD.
+
+        Returns:
+            Date formated.
+        """
+        return self.date_begin.__format__("%Y-%m-%d")
+
+    def get_date_end_formated(self) -> str:
+        """Make format end date as YYYY-MM-DD.
+
+        Returns:
+            Date formated.
+        """
+        if self.date_end:
+            return self.date_end.__format__("%Y-%m-%d")
 
 
 class Category(models.Model):

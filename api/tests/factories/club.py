@@ -3,7 +3,7 @@
 import factory
 from factory.faker import faker
 
-from api.models import Club, Presentation, ImportantMessage
+from api.models import ClubInformation, Presentation, ImportantMessage
 
 FAKE = faker.Faker()
 
@@ -11,8 +11,6 @@ FAKE = faker.Faker()
 class ClubFactory(factory.django.DjangoModelFactory):
     """class ClubFactory."""
 
-    name = "test name"
-    description = "test description"
     street = "test street"
     number = "test number"
     zip_code = "test zip code"
@@ -22,7 +20,7 @@ class ClubFactory(factory.django.DjangoModelFactory):
     class Meta:
         """class Meta."""
 
-        model = Club
+        model = ClubInformation
 
 
 class PresentationFactory(factory.django.DjangoModelFactory):

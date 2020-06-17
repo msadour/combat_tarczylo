@@ -4,6 +4,8 @@ import { BrowserRouter, Link } from "react-router-dom";
 
 import MenuGuest from "./menus/MenuGuest"
 import MenuMember from "./menus/MenuMember"
+import MenuGuestTop from "./menus/MenuGuestTop"
+import MenuMemberTop from "./menus/MenuMemberTop"
 import MenuAdmin from "./menus/MenuAdmin"
 
 class Menu extends Component {
@@ -11,12 +13,31 @@ class Menu extends Component {
 
         if (localStorage.getItem('token')) {
             if (localStorage.getItem('is_admin') == 'true'){
-                return <MenuAdmin />
+                return (
+                    <div>
+                        <MenuMemberTop />
+                        <br /><br />
+                        <MenuAdmin />
+                    </div>
+                )
             } else {
-                return <MenuMember />
-            }
+                return (
+                    <div>
+                        <MenuMemberTop />
+                        <br /><br />
+                        <MenuMember />
+                    </div>
+                )
+                            }
         } else {
-            return <MenuGuest />
+            return (
+                <div>
+                    <MenuGuestTop />
+                    <br /><br />
+                    <MenuGuest />
+                </div>
+
+            )
         }
     }
 }

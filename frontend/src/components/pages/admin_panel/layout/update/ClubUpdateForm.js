@@ -95,13 +95,13 @@ class ClubUpdateForm extends Component {
         return (
             <div>
                 <h2>{this.state.club.name}</h2>
-                <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="name" value={this.state.club.name} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="description" label="description" value={this.state.club.description} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="street" value={this.state.club.street} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="number" label="number" value={this.state.club.number} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="zip_code" label="zip_code" value={this.state.club.zip_code} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="city" label="city" value={this.state.club.city} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="country" label="country" value={this.state.club.country} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="Name" value={this.state.club.name} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="description" label="Description" value={this.state.club.description} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="Street" value={this.state.club.street} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="number" label="Number" value={this.state.club.number} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="zip_code" label="ZIP Code" value={this.state.club.zip_code} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="city" label="City" value={this.state.club.city} />
+                <FormField type_input="text" model="club" id={this.state.club.id} field="country" label="Country" value={this.state.club.country} />
 
                 {this.build_timetable(this.state.club.time_table)}
 

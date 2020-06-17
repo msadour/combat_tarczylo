@@ -32,9 +32,9 @@ class PresentationUpdateForm extends Component {
             <div>
 
                 <div >
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="tct" label="tct" value={this.state.presentation.tct} />
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="darius" label="darius" value={this.state.presentation.darius} />
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="technical" label="technical" value={this.state.presentation.technical} />
+                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="tct" label="TCT" value={this.state.presentation.tct} />
+                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="darius" label="Darius" value={this.state.presentation.darius} />
+                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="technical" label="Technical" value={this.state.presentation.technical} />
                 </div>
 
             </div>

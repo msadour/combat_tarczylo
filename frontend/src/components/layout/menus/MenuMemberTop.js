@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import MemberProfile from "../../pages/member/MemberProfile"
 
-class MenuAdmin extends Component {
+class MenuMember extends Component {
 
     constructor(props){
         super(props);
@@ -26,7 +26,8 @@ class MenuAdmin extends Component {
             window.location.reload();
         })
         .catch(err => {
-            alert(err)
+            alert(err);
+            console.log(err)
         });
     }
 
@@ -35,42 +36,6 @@ class MenuAdmin extends Component {
             <nav className="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
               <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav mr-auto">
-                      <li className="nav-item active">
-                          <Link to='/' className="nav-link">
-                            <p className="nav-link">Home</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item active">
-                        <Link to='/admin_panel_member' className="nav-link">
-                            <p className="nav-link">Admin panel</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item active">
-                        <Link to='/member_profile' className="nav-link">
-                            <p className="nav-link">Profile</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to='/presentation' className="nav-link">
-                            <p className="nav-link">Presentation</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to='/training' className="nav-link">
-                            <p className="nav-link">Trainings</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to='/shop' className="nav-link">
-                            <p className="nav-link">Store</p>
-                        </Link>
-                      </li>
-
 
                       <li className="nav-item">
                         <Link to='/looking_for' className="nav-link">
@@ -97,4 +62,4 @@ class MenuAdmin extends Component {
     }
 }
 
-export default withRouter(MenuAdmin)
+export default withRouter(MenuMember)

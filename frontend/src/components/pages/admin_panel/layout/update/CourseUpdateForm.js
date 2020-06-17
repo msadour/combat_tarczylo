@@ -84,7 +84,7 @@ class CourseUpdateForm extends Component {
             list_timetable_component.push(
                 <div key={time_table.id}>
                     <h2>{time_table.name}</h2>
-                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="Time table" value={time_table.time_table_str} />
                     <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
                 </div>
             )
@@ -102,13 +102,13 @@ class CourseUpdateForm extends Component {
             list_course_component.push(
                 <div key={course.id}>
                     <h2>{course.description}</h2>
-                    <FormField type_input="text" model="course" id={course.id} field="name" label="name" value={course.name} />
-                    <FormField type_input="text" model="course" id={course.id} field="description" label="description" value={course.description} />
-                    <FormField type_input="text" model="course" id={course.id} field="place" label="place" value={course.place} />
-                    <FormField type_input="text" model="course" id={course.id} field="level" label="level" value={course.level} />
-                    <FormField type_input="text" model="course" id={course.id} field="category" label="category" value={course.category} />
+                    <FormField type_input="text" model="course" id={course.id} field="name" label="Name" value={course.name} />
+                    <FormField type_input="text" model="course" id={course.id} field="description" label="Description" value={course.description} />
+                    <FormField type_input="text" model="course" id={course.id} field="place" label="Place" value={course.place} />
+                    <FormField type_input="text" model="course" id={course.id} field="level" label="Level" value={course.level} />
+                    <FormField type_input="text" model="course" id={course.id} field="category" label="Category" value={course.category} />
 
-                    <FormField type_input="choice" model_value_possible="instructor" model="course" id={course.id} field="instructor" label="instructor" value={course.instructor} />
+                    <FormField type_input="choice" model_value_possible="instructor" model="course" id={course.id} field="instructor" label="Instructor" value={course.instructor} />
 
                     {this.build_timetable(course)}
 

@@ -35,17 +35,7 @@ class Description extends Component {
             <table border="1">
                 <tbody>
                     <tr >
-                        <th>
-                            <h1>{this.state.club.name}</h1>
-                            <p> {this.state.club.description} </p>
-                        </th>
 
-                        <th rowSpan="2">
-                            photos
-                        </th>
-                    </tr>
-
-                    <tr >
                         <th>
                             <h2>Where we are?</h2>
                            <p> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
@@ -53,7 +43,11 @@ class Description extends Component {
                             {list_time_table}
                         </th>
 
+                        <th >
+                            photos
+                        </th>
                     </tr>
+
                 </tbody>
 
             </table>

@@ -63,8 +63,6 @@ class ClubTestCase(APITestCase):
             AssertError: Assertion failed.
         """
         data_club = """{
-            "name": "test name",
-            "description": "test description",
             "street": "test street",
             "number": "test number",
             "zip_code": "test zip code",
@@ -100,15 +98,15 @@ class ClubTestCase(APITestCase):
         Raises:
             AssertError: Assertion failed.
         """
-        club = ClubFactory.create(name="test name",)
+        club = ClubFactory.create(street="test street",)
         club.save()
 
         request = self.client.patch(
-            url_club + str(club.id) + "/", data={"name": "new name"}
+            url_club + str(club.id) + "/", data={"street": "new street"}
         )
 
         self.assertEqual(request.status_code, status.HTTP_200_OK)
-        self.assertEqual(request.data["name"], "new name")
+        self.assertEqual(request.data["street"], "new street")
 
 
 class PresentationTestCase(APITestCase):

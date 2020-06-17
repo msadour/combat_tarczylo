@@ -20,7 +20,6 @@ class Presentation extends Component {
         fetch('/api_tct/presentation/')
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
             this.setState({presentation: data});
         })
         .catch(err => {
@@ -33,7 +32,7 @@ class Presentation extends Component {
     render() {
         return (
             <div>
-                <Tct text={this.state.presentation.tct} />
+                <Tct name={this.state.presentation.name_club} text={this.state.presentation.tct} />
                 <br />
                 <Darius text={this.state.presentation.darius} />
                 <br />

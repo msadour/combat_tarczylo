@@ -54,7 +54,6 @@ class FormField extends Component {
                 this.state.value_possible.forEach(value => {
                     optionTemplate.push(<option key={value.id} value={value.id}>{value.full_name}</option>)
                 })
-                console.log(optionTemplate)
                 return (
                     <div>
                       <select
@@ -118,6 +117,35 @@ class FormField extends Component {
                 )
             break;
 
+            case "date":
+                if (this.props.value){
+                    return (
+                        <div>
+                            <input
+                                type="date"
+                                name="new_value"
+                                placeholder="DD/MM/YYYY"
+                                onChange={e => this.onChange(e)}
+                                value={this.props.value}
+                            />
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div>
+                            <input
+                                type="date"
+                                name="new_value"
+                                placeholder="DD/MM/YYYY"
+                                onChange={e => this.onChange(e)}
+                                value="0000-00-00"
+                            />
+                        </div>
+                    )
+                }
+
+            break;
+
         }
 
     }
@@ -140,25 +168,6 @@ class FormField extends Component {
             console.log(err)
         });
     }
-//        e.preventDefault();
-//        const member_id = localStorage.getItem("member_id");
-//        var data = {}
-//        data[this.props.field] = this.state.new_value;
-//        fetch('/api_tct/' + this.props.model + '/' + this.props.id + '/', {
-//            method: "PATCH",
-//            headers: {
-//                'Authorization': 'Token ' + localStorage.getItem('token'),
-//                'Content-Type':'application/json'
-//            },
-//            body: JSON.stringify(data)
-//        })
-//        .then(res => {
-//            window.location.reload();
-//        })
-//        .catch(err => {
-//            console.log(err);
-//        });
-
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });

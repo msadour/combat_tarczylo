@@ -50,10 +50,10 @@ class ProductUpdateForm extends Component {
             list_product_component.push(
                 <div key={product.id}>
                     <h2>{product.name}</h2>
-                    <FormField type_input="text" model="product" id={product.id} field="name" label="name" value={product.name} />
-                    <FormField type_input="price" model="product" id={product.id} field="price" label="price" value={product.price} />
-                    <FormField type_input="number" model="product" id={product.id} field="quantity_available" label="quantity_available" value={product.quantity_available} />
-                    <FormField type_input="text" model="product" id={product.id} field="size" label="size" value={product.size} />
+                    <FormField type_input="text" model="product" id={product.id} field="name" label="Name" value={product.name} />
+                    <FormField type_input="price" model="product" id={product.id} field="price" label="Price" value={product.price} />
+                    <FormField type_input="number" model="product" id={product.id} field="quantity_available" label="Quantity_available" value={product.quantity_available} />
+                    <FormField type_input="text" model="product" id={product.id} field="size" label="Size" value={product.size} />
                     <button type="button" onClick={() => this.handleRemove(product.id)}>Remove</button>
                 </div>
             )

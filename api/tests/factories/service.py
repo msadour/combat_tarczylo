@@ -31,8 +31,8 @@ class InternshipFactory(factory.django.DjangoModelFactory):
     level = "test level"
     category = "test category"
     instructor = factory.SubFactory(InstructorFactory)
-    date_begin = "2020-04-20 10:00:00"
-    date_end = "2020-04-20 10:00:00"
+    date_begin = "2020-04-20"
+    date_end = "2020-04-20"
     price = 100.00
     theme = "theme test"
 

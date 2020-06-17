@@ -1,6 +1,7 @@
 """Book module."""
 from typing import Any
 
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -30,8 +31,13 @@ class BookViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         if request.query_params:
-            search = {key: value for key, value in request.query_params.items()}
-            self.queryset = self.queryset.filter(**search)
+            search = request.query_params
+            self.queryset = self.queryset.filter(
+                Q(name__contains=search["search"])
+                | Q(author__contains=search["search"])
+                | Q(category=search["search"])
+                | Q(url=search["search"])
+            )
             serializer = BookAdvicedSerializer(self.queryset, many=True)
             return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)

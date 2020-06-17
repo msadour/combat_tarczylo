@@ -9,7 +9,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from api.features import get_max_id
-from api.models import Club, Presentation, ImportantMessage, TimeTable
+from api.models import ClubInformation, Presentation, ImportantMessage, TimeTable
 from api.permissions import ReadPermission
 from api.serializers import (
     ClubSerializer,
@@ -21,7 +21,7 @@ from api.serializers import (
 class ClubViewSet(viewsets.ModelViewSet):
     """Class ClubViewSet."""
 
-    queryset = Club.objects.all()
+    queryset = ClubInformation.objects.all()
     serializer_class = ClubSerializer
     permission_classes = (ReadPermission,)
 
@@ -36,7 +36,7 @@ class ClubViewSet(viewsets.ModelViewSet):
         Returns:
             Response from the server.
         """
-        club = Club.objects.all()[0]
+        club = ClubInformation.objects.all()[0]
         serializer = ClubSerializer(club, many=False)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
@@ -53,9 +53,9 @@ class ClubViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         datas = request.data
-        datas["id"] = get_max_id("Club")
+        datas["id"] = get_max_id("ClubInformation")
         time_tables = datas.pop("time_table")
-        new_club = Club.objects.create(**datas)
+        new_club = ClubInformation.objects.create(**datas)
 
         for time_table in time_tables:
             info = re.split(r"\s", time_table)
@@ -82,7 +82,7 @@ class ClubViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         datas = request.data
-        club = Club.objects.get(id=pk)
+        club = ClubInformation.objects.get(id=pk)
         for attr, value in datas.items():
             if attr == "add_time_table":
                 for time_table in value:

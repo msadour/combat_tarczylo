@@ -144,9 +144,6 @@ class InternshipTestCase(APITestCase):
         """
         instructor = InstructorFactory()
 
-        # "date_begin": "2020-04-20 10:00:00",
-        # "date_end": "2020-04-20 10:00:00",
-
         data_internship = (
             """{
             "name": "fight",

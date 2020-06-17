@@ -9,7 +9,7 @@ class Tct extends Component {
                     <tbody>
                         <tr>
                             <td>
-                                <h1>Presentation</h1>
+                                <h1>{this.props.name}</h1>
                                 <p>{this.props.text}</p>
                             </td>
 

@@ -60,34 +60,9 @@ class MenuMember extends Component {
                         </Link>
                       </li>
 
-                    <li className="nav-item">
-                        <Link to='/course' className="nav-link">
-                            <p className="nav-link">Course</p>
-                        </Link>
-                      </li>
-
                       <li className="nav-item">
                         <Link to='/shop' className="nav-link">
                             <p className="nav-link">Store</p>
-                        </Link>
-                      </li>
-
-
-                      <li className="nav-item">
-                        <Link to='/looking_for' className="nav-link">
-                            <p className="nav-link">Looking for</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link to='/contact' className="nav-link">
-                            <p className="nav-link">Contact</p>
-                        </Link>
-                      </li>
-
-                      <li className="nav-item active">
-                        <Link to='/' className="nav-link">
-                            <p className="nav-link" onClick={this.logout}>Logout</p>
                         </Link>
                       </li>
 

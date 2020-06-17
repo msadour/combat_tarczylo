@@ -1,6 +1,7 @@
 """article module."""
 from typing import Any
 
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
@@ -31,8 +32,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         if request.query_params:
-            search = {key: value for key, value in request.query_params.items()}
-            self.queryset = self.queryset.filter(**search)
+            search = request.query_params
+            self.queryset = self.queryset.filter(
+                Q(title__contains=search["search"])
+                | Q(content__contains=search["search"])
+                | Q(category=search["search"])
+            )
             serializer = ArticleSerializer(self.queryset, many=True)
             return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)

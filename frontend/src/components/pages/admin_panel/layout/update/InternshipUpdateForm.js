@@ -103,16 +103,16 @@ class InternshipUpdateForm extends Component {
             list_internship_component.push(
                 <div key={internship.id}>
                     <h2>{internship.name}</h2>
-                    <FormField type_input="text" model="internship" id={internship.id} field="name" label="name" value={internship.name} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="description" label="description" value={internship.description} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="place" label="place" value={internship.place} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="level" label="level" value={internship.level} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="category" label="category" value={internship.category} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="date_begin" label="date_begin" value={internship.description} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="date_end" label="date_end" value={internship.place} />
-                    <FormField type_input="price" model="internship" id={internship.id} field="price" label="price" value={internship.price} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="theme" label="theme" value={internship.category} />
-                    <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="instructor" value={internship.instructor} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="description" label="Description" value={internship.description} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="place" label="Place" value={internship.place} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="level" label="Level" value={internship.level} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="category" label="Category" value={internship.category} />
+                    <FormField type_input="date" model="internship" id={internship.id} field="date_begin" label="Date begin" value={internship.date_begin_formated} />
+                    <FormField type_input="date" model="internship" id={internship.id} field="date_end" label="Date end" value={internship.date_end_formated} />
+                    <FormField type_input="price" model="internship" id={internship.id} field="price" label="Price" value={internship.price} />
+                    <FormField type_input="text" model="internship" id={internship.id} field="theme" label="Theme" value={internship.theme} />
+                    <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="Instructor" value={internship.instructor} />
 
                     {this.build_timetable(internship)}
                     <button type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>Remove</button> <br /><br />
