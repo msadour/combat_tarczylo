@@ -37,7 +37,8 @@ class MemberProfile extends Component {
 
         return (
             <div>
-                <h2>Hello {this.state.info_member.full_name}</h2>
+                <br />
+                <h2><center>Hello {this.state.info_member.full_name}</center></h2> <br />
 
                 <FormField field="first_name" label="First name" value={this.state.info_member.first_name} />
 
@@ -60,6 +61,7 @@ class MemberProfile extends Component {
                 <FormField field="insurance_name" label="Insurance name" value={this.state.info_member.insurance_name} />
 
                 <FormField field="insurance_number" label="Insurance number" value={this.state.info_member.insurance_number} />
+                <br />
             </div>
         )
     }

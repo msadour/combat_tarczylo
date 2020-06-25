@@ -33,31 +33,33 @@ class MenuMember extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
-              <div className="collapse navbar-collapse" id="navbarText">
-                <ul className="navbar-nav mr-auto">
+            <div>
+                <table style={{float: "right"}}>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <Link to='/looking_for'>
+                                    <p className="nav-link">Looking for</p>
+                                </Link>
+                            </th>
 
-                      <li className="nav-item">
-                        <Link to='/looking_for' className="nav-link">
-                            <p className="nav-link">Looking for</p>
-                        </Link>
-                      </li>
+                            <th>
+                                <Link to='/contact'>
+                                    <p className="nav-link">Contact</p>
+                                </Link>
 
-                      <li className="nav-item">
-                        <Link to='/contact' className="nav-link">
-                            <p className="nav-link">Contact</p>
-                        </Link>
-                      </li>
+                            </th>
 
-                      <li className="nav-item active">
-                        <Link to='/' className="nav-link">
-                            <p className="nav-link" onClick={this.logout}>Logout</p>
-                        </Link>
-                      </li>
+                            <th>
+                                <Link to='/'>
+                                    <p className="nav-link" onClick={this.logout}>Logout</p>
+                                </Link>
+                            </th>
 
-                </ul>
-              </div>
-            </nav>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

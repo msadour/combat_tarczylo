@@ -7,3 +7,31 @@
   color: white;
   text-align: center;
 }
+
+#img_tct, #img_darius, #img_technical {
+    width: 100%;
+}
+
+#img_tct, #img_darius {
+    float: right;
+}
+
+#menuAdmin {
+    background-color: red;
+}
+
+#img_desc_club {
+    float: right;
+    width: 100%;
+}
+
+#header_menu {
+    background-image: url("/media/presentation.png")
+}
+
+#hr_menu {
+    width: 100%;
+    background-color: white;
+    height: 0.5px;
+    margin-top: 0%;
+}

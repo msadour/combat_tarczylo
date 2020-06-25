@@ -32,25 +32,25 @@ class Description extends Component {
         }
 
         return (
-            <table border="1">
-                <tbody>
-                    <tr >
+            <div>
+                <table border="1" style={{width: '90%'}}>
+                    <tbody>
+                        <tr>
 
-                        <th>
-                            <h2>Where we are?</h2>
-                           <p> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
-                           <h2>For the year of {new Date().getFullYear()} we are open :</h2>
-                            {list_time_table}
-                        </th>
+                            <th>
+                                <h2>Where we are?</h2>
+                               <p> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
+                               <h2>For the year of {new Date().getFullYear()} we are open :</h2>
+                                {list_time_table}
+                            </th>
 
-                        <th >
-                            photos
-                        </th>
-                    </tr>
-
-                </tbody>
-
-            </table>
+                            <th style={{width: '40%'}}>
+                                <img id="img_desc_club" src="../../../media/club_photo.png" />
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

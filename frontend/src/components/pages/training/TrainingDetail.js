@@ -14,16 +14,18 @@ function get_list_time_table(time_table){
 const TrainingDetail = ({ trainings }) => {
   return (
     <div>
-      <center><h1>Next internship(s)</h1></center>
-        <table border="1">
+        <br />
+        <table border="1" style={{width: '90%'}}>
         <tbody>
             <tr>
+                <th colSpan={trainings.length}><center><h1>Next internship</h1></center></th>
+            </tr>
+            <tr>
                 {trainings.map((training) => (
-                    <th key={training.id}>
+                    <th key={training.id} >
                         <h1>{training.name}</h1>
                         {training.description} <br />
-                        Begin : {training.date_begin} <br />
-                        End : {training.date_end} <br />
+                        Date : {training.dates} <br />
                         Price : {training.price} <br />
                         Theme : {training.price} <br />
                         Instructor : {training.instructor.full_name} <br />
@@ -38,6 +40,7 @@ const TrainingDetail = ({ trainings }) => {
             </tr>
         </tbody>
       </table>
+      <br />
     </div>
   )
 };

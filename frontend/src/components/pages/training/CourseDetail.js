@@ -14,9 +14,12 @@ function get_list_time_table(time_table){
 const CourseDetail = ({ courses }) => {
   return (
     <div>
-      <center><h1>Course</h1></center>
-      <table border="1">
+      <br />
+      <table border="1" style={{width: '90%'}}>
         <tbody>
+            <tr>
+                <th colSpan={courses.length}><center><h1>Course</h1></center></th>
+            </tr>
             <tr>
                 {courses.map((course) => (
                     <th key={course.id}>
@@ -33,6 +36,7 @@ const CourseDetail = ({ courses }) => {
             </tr>
         </tbody>
       </table>
+      <br />
     </div>
   )
 };

@@ -189,21 +189,23 @@ class InternshipCreateForm extends Component {
                     <div className="form-group">
                       <label>Date begin</label>
                       <input
-                        type="text"
-                        className="form-control"
-                        name="date_begin"
-                        onChange={e => this.onChange(e)}
-                      />
+                            type="date"
+                            name="date_begin"
+                            placeholder="DD/MM/YYYY"
+                            onChange={e => this.onChange(e)}
+//                            value="0000-00-00"
+                        />
                     </div>
 
                     <div className="form-group">
                       <label>Date end</label>
                       <input
-                        type="text"
-                        className="form-control"
+                        type="date"
                         name="date_end"
+                        placeholder="DD/MM/YYYY"
                         onChange={e => this.onChange(e)}
-                      />
+                        value={undefined}
+                    />
                     </div>
 
                     <div className="form-group">

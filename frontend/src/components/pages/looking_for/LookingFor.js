@@ -52,30 +52,42 @@ class LookingFor extends Component {
 
         return (
             <div>
-                <h1>looking</h1>
-
+                <br />
                 <form onSubmit={e => this.search(e)}>
-                  <input
-                    placeholder="Name, title...."
-                    name="value"
-                    onChange={e => this.onChange(e)}
-                  />
+                    <table border="1" style={{width: '90%'}}>
 
-                 <select
-                      name="criteria"
-                      id="criteria"
-                      onChange={e => this.onChange(e)}
-                  >
-                    <option value="book">Book</option>
-                    <option value="internship">Internships</option>
-                    <option value="course">Courses</option>
-                    {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
-                  </select>
+                        <tr>
+                            <th>
+                                  <input
+                                    placeholder="Name, title...."
+                                    name="value"
+                                    style={{width: '40%'}}
+                                    onChange={e => this.onChange(e)}
+                                  />
 
-                  <button type="submit" value="Submit"> Search </button>
+                             <select
+                                  name="criteria"
+                                  id="criteria"
+                                  onChange={e => this.onChange(e)}
+                              >
+                                <option value="book">Book</option>
+                                <option value="internship">Internships</option>
+                                <option value="course">Courses</option>
+                                {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
+                              </select>
+                              <button type="submit" value="Submit"> Search </button>
+
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th> {this.state.result_search} </th>
+                        </tr>
+
+                    </table>
                 </form>
-                <br /><br />
-                {this.state.result_search}
+                <br />
+
 
             </div>
         )

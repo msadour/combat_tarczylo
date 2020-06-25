@@ -128,7 +128,7 @@ class Course(models.Model):
 
     name = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
-    place = models.CharField(max_length=255, blank=True)
+    place = models.CharField(max_length=255, blank=True, default="In club")
     level = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
     time_table = models.ManyToManyField(TimeTable)
@@ -148,7 +148,7 @@ class Internship(models.Model):
 
     name = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
-    place = models.CharField(max_length=255, blank=True)
+    place = models.CharField(max_length=255, blank=True, default="In club")
     level = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
     time_table = models.ManyToManyField(TimeTable)

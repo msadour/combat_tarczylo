@@ -18,16 +18,16 @@ import TrainingPage from "./pages/training/TrainingPage";
 import LookingFor from "./pages/looking_for/LookingFor";
 import AdminPanel from "./pages/admin_panel/AdminPanel";
 
-import ArticleManager from "./pages/admin_panel/manager/ArticleManager"
-import BookManager from "./pages/admin_panel/manager/BookManager"
-import CategoryManager from "./pages/admin_panel/manager/CategoryManager"
-import ClubManager from "./pages/admin_panel/manager/ClubManager"
-import CourseManager from "./pages/admin_panel/manager/CourseManager"
-import InternshipManager from "./pages/admin_panel/manager/InternshipManager"
-import MemberManager from "./pages/admin_panel/manager/MemberManager"
-import MessageManager from "./pages/admin_panel/manager/MessageManager"
-import PresentationManager from "./pages/admin_panel/manager/PresentationManager"
-import ProductManager from "./pages/admin_panel/manager/ProductManager"
+import ArticleManager from "./pages/admin_panel/manager/ArticleManager";
+import BookManager from "./pages/admin_panel/manager/BookManager";
+import CategoryManager from "./pages/admin_panel/manager/CategoryManager";
+import ClubManager from "./pages/admin_panel/manager/ClubManager";
+import CourseManager from "./pages/admin_panel/manager/CourseManager";
+import InternshipManager from "./pages/admin_panel/manager/InternshipManager";
+import MemberManager from "./pages/admin_panel/manager/MemberManager";
+import MessageManager from "./pages/admin_panel/manager/MessageManager";
+import PresentationManager from "./pages/admin_panel/manager/PresentationManager";
+import ProductManager from "./pages/admin_panel/manager/ProductManager";
 
 import './style.css';
 

@@ -5,21 +5,23 @@ class Tct extends Component {
     render() {
         return (
             <div>
-                <table border="1">
+                <br />
+                <table border="1" style={{width:"90%"}}>
                     <tbody>
                         <tr>
-                            <td>
+                            <td style={{width:"70%"}}>
                                 <h1>{this.props.name}</h1>
                                 <p>{this.props.text}</p>
                             </td>
 
                             <td>
-                                Photo
+                                <img id="img_tct" src="../../../../media/club_tct.png" />
                             </td>
 
                         </tr>
                     </tbody>
                 </table>
+                <br />
             </div>
         )
     }

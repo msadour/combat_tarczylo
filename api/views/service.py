@@ -1,7 +1,7 @@
 """Service module."""
 
 import re
-import datetime
+from datetime import datetime
 from typing import Any
 
 from django.db.models import Q
@@ -154,6 +154,12 @@ class InternshipViewSet(viewsets.ModelViewSet):
         """
         datas = request.data
         datas["id"] = get_max_id("Internship")
+        datas["date_end"] = (
+            None
+            if datas["date_end"]
+            else datetime.strptime(datas["date_end"], "%Y-%m-%d")
+        )
+        datas["date_begin"] = datetime.strptime(datas["date_begin"], "%Y-%m-%d")
         instructor_id = datas.pop("instructor")
         instructor = Instructor.objects.get(id=instructor_id)
         datas["instructor_id"] = instructor.id
