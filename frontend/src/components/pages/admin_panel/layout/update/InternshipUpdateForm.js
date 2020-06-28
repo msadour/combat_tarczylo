@@ -81,15 +81,25 @@ class InternshipUpdateForm extends Component {
         var list_timetable_component = []
 
         var time_tables = internship.time_table
-        time_tables.forEach( time_table => {
-            list_timetable_component.push(
-                <div key={time_table.id}>
-                    <h2>{time_table.name}</h2>
-                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
-                    <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
-                </div>
-            )
-        })
+            time_tables.forEach( time_table => {
+                list_timetable_component.push(
+                    <div key={time_table.id}>
+                        <table style={{width: "80%"}}>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                                    </th>
+
+                                    <th>
+                                        <button type="button" onClick={() => this.handleRemove(time_table.id)}>Remove time table</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            })
         return list_timetable_component
     }
 
@@ -116,8 +126,8 @@ class InternshipUpdateForm extends Component {
                         <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="Instructor" value={internship.instructor} />
 
                         {this.build_timetable(internship)}
-                        <button type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>Remove</button> <br /><br />
-                                        <div className="form-group">
+                         <br /><br />
+                        <div className="form-group">
                           {
                             this.state.time_table.map((timetable, index) =>{
                                 return (
@@ -137,7 +147,8 @@ class InternshipUpdateForm extends Component {
                             })
                           }
 
-                          <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                          <button onClick={(e) => this.addTimeTable(e)}>Add time table</button> <br /><br />
+                          <button type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>Remove</button>
                         </div>
                     </div>
                 </div>

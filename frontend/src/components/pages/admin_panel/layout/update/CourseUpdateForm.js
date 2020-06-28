@@ -80,15 +80,25 @@ class CourseUpdateForm extends Component {
         var list_timetable_component = []
 
         var time_tables = course.time_table
-        time_tables.forEach( time_table => {
-            list_timetable_component.push(
-                <div key={time_table.id}>
-                    <h2>{time_table.name}</h2>
-                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="Time table" value={time_table.time_table_str} />
-                    <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
-                </div>
-            )
-        })
+            time_tables.forEach( time_table => {
+                list_timetable_component.push(
+                    <div key={time_table.id}>
+                        <table style={{width: "80%"}}>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                                    </th>
+
+                                    <th>
+                                        <button type="button" onClick={() => this.handleRemove(time_table.id)}>Remove time table</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            })
         return list_timetable_component
     }
 

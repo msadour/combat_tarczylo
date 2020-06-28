@@ -64,7 +64,8 @@ class ArticleCreateForm extends Component {
 
                     <div className="form-group">
                       <label>Content</label>
-                      <input
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="content"

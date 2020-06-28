@@ -46,7 +46,8 @@ class MessageCreateForm extends Component {
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
                       <label>Message</label>
-                      <input
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="content"

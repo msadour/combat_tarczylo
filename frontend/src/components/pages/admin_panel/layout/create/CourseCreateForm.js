@@ -104,7 +104,8 @@ class CourseCreateForm extends Component {
 
                     <div className="form-group">
                       <label>Description</label>
-                      <input
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="description"
@@ -146,7 +147,7 @@ class CourseCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Instructor</label>
+                      <label>Instructor </label>
 
                       <select
                           name="instructor"
@@ -159,7 +160,7 @@ class CourseCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Time table</label>
+                      <label>Time table </label>
                       {
                         this.state.time_table.map((timetable, index) =>{
                             return (

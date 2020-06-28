@@ -111,7 +111,8 @@ class InternshipCreateForm extends Component {
 
                     <div className="form-group">
                       <label>Description</label>
-                      <input
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="description"
