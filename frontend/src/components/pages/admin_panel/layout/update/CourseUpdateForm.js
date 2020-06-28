@@ -100,42 +100,44 @@ class CourseUpdateForm extends Component {
         this.state.courses.forEach( course => {
 
             list_course_component.push(
-                <div key={course.id}>
-                    <h2>{course.description}</h2>
-                    <FormField type_input="text" model="course" id={course.id} field="name" label="Name" value={course.name} />
-                    <FormField type_input="text" model="course" id={course.id} field="description" label="Description" value={course.description} />
-                    <FormField type_input="text" model="course" id={course.id} field="place" label="Place" value={course.place} />
-                    <FormField type_input="text" model="course" id={course.id} field="level" label="Level" value={course.level} />
-                    <FormField type_input="text" model="course" id={course.id} field="category" label="Category" value={course.category} />
+                <div key={course.id} className="col-md-6 m-auto">
+                    <div className="card card-body mt-5">
+                        <h2 className="text-center">{course.description}</h2>
+                        <FormField type_input="text" model="course" id={course.id} field="name" label="Name" value={course.name} />
+                        <FormField type_input="textarea" model="course" id={course.id} field="description" label="Description" value={course.description} />
+                        <FormField type_input="text" model="course" id={course.id} field="place" label="Place" value={course.place} />
+                        <FormField type_input="text" model="course" id={course.id} field="level" label="Level" value={course.level} />
+                        <FormField type_input="text" model="course" id={course.id} field="category" label="Category" value={course.category} />
 
-                    <FormField type_input="choice" model_value_possible="instructor" model="course" id={course.id} field="instructor" label="Instructor" value={course.instructor} />
+                        <FormField type_input="choice" model_value_possible="instructor" model="course" id={course.id} field="instructor" label="Instructor" value={course.instructor} />
 
-                    {this.build_timetable(course)}
+                        {this.build_timetable(course)}
 
-                <div className="form-group">
-                  {
-                    this.state.time_table.map((timetable, index) =>{
-                        return (
-                            <div key={index}>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="time_table"
-                                    placeholder="Monday 10:00:00 12:30:00"
-                                    value={timetable}
-                                    onChange={e => this.handleChange(e, index)}
-                                  />
-                                  <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
-                                  <button type="button" onClick={() => this.updateTimeTable(course.id)}>Update news time table</button>)
-                            </div>
-                        )
-                    })
-                  }
+                        <div className="form-group">
+                          {
+                            this.state.time_table.map((timetable, index) =>{
+                                return (
+                                    <div key={index}>
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            name="time_table"
+                                            placeholder="Monday 10:00:00 12:30:00"
+                                            value={timetable}
+                                            onChange={e => this.handleChange(e, index)}
+                                          />
+                                          <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
+                                          <button type="button" onClick={() => this.updateTimeTable(course.id)}>Update news time table</button>)
+                                    </div>
+                                )
+                            })
+                          }
 
-                  <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
-                </div>
-                    <button type="button" onClick={() => this.handleRemove(course.id, 'course')}>Remove course</button>
-                    <br /><br />
+                          <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                        </div>
+                        <button type="button" onClick={() => this.handleRemove(course.id, 'course')}>Remove course</button>
+                        <br /><br />
+                    </div>
                 </div>
             )
         })
@@ -143,6 +145,7 @@ class CourseUpdateForm extends Component {
         return (
             <div>
                 {list_course_component}
+                <br /><br />
             </div>
         )
     }

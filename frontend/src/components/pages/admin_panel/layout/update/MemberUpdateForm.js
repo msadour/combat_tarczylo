@@ -66,24 +66,43 @@ class MemberUpdateForm extends Component {
         this.state.members.forEach( member => {
 
             list_member_component.push(
-
-
-                <div key={member.id}>
+                <div key={member.id} className="col-md-6 m-auto">
                     { member.is_superuser == false ? (
-                        <section>
-                            <h2>{member.full_name}</h2>
+                        <section className="card card-body mt-5">
+                            <h2 className="text-center">{member.full_name}</h2>
                             <form onSubmit={e => this.onSubmit(e, member.id)}>
-                                <label> {member.email} </label><br />
-                                <label> {member.sex} </label><br />
-                                <label> {member.level} </label><br />
-                                <button type="submit" value="Submit"> Delete </button>
-                                {member.have_paid == false ? (
-                                    <button
-                                        type="submit"
-                                        value="Submit"
-                                        onClick={e => this.acceptMember(e, member.id)}
-                                    > Accept </button>
-                                ) : (<div></div>)}
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Email :</th>
+                                            <th>{member.email}</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Sex :</th>
+                                            <th>{member.sex}</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Level :</th>
+                                            <th>{member.level}</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><button type="submit" value="Submit"> Delete </button></th>
+
+                                            <th>
+                                                {member.have_paid == false ? (
+                                                    <button
+                                                        type="submit"
+                                                        value="Submit"
+                                                        onClick={e => this.acceptMember(e, member.id)}
+                                                    > Accept </button>
+                                                ) : (<div></div>)}
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </form><br />
                         </section>
                     ): (<section></section>)}
@@ -94,6 +113,7 @@ class MemberUpdateForm extends Component {
         return (
             <div>
                 {list_member_component}
+                <br /><br />
             </div>
         )
     }

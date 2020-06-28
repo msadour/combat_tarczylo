@@ -48,6 +48,20 @@ class FormField extends Component {
                 )
             break;
 
+            case "textarea":
+                return (
+                    <div>
+                        <textarea
+                            type="text"
+                            name="new_value"
+                            cols="50"
+                            onChange={e => this.onChange(e)}
+                            placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
             case "choice":
                 let optionTemplate = [<option key={0} value={0}></option>]
 
@@ -176,11 +190,25 @@ class FormField extends Component {
     render() {
 
         return (
-            <div>
+            <div className="col-md-6 m-auto">
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <label >{this.props.label}: </label>
-                  {this.buildInput()}
-                  <button type="submit" value="Submit"> Update </button>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>
+                            <label >{this.props.label}: </label>
+                        </th>
+
+                        <th>
+                            {this.buildInput()}
+                        </th>
+
+                        <th>
+                            <button type="submit" value="Submit"> Update </button>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
                 </form>
                 <br />
             </div>

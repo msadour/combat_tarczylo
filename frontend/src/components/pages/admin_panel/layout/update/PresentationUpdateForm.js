@@ -29,12 +29,13 @@ class PresentationUpdateForm extends Component {
     render() {
 
         return (
-            <div>
+            <div className="col-md-6 m-auto">
 
-                <div >
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="tct" label="TCT" value={this.state.presentation.tct} />
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="darius" label="Darius" value={this.state.presentation.darius} />
-                    <FormField type_input="text" model="presentation" id={this.state.presentation.id} field="technical" label="Technical" value={this.state.presentation.technical} />
+                <div className="card card-body mt-5">
+                    <h2 className="text-center">Presentation</h2>
+                    <FormField type_input="textarea" model="presentation" id={this.state.presentation.id} field="tct" label="TCT" value={this.state.presentation.tct} />
+                    <FormField type_input="textarea" model="presentation" id={this.state.presentation.id} field="darius" label="Darius" value={this.state.presentation.darius} />
+                    <FormField type_input="textarea" model="presentation" id={this.state.presentation.id} field="technical" label="Technical" value={this.state.presentation.technical} />
                 </div>
 
             </div>

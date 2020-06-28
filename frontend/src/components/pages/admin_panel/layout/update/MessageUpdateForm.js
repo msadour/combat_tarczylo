@@ -29,10 +29,11 @@ class MessageUpdateForm extends Component {
     render() {
 
         return (
-            <div>
+            <div className="col-md-6 m-auto">
 
-                <div >
-                    <FormField type_input="text" model="important_message" id={this.state.message.id} field="content" label="Content" value={this.state.message.content} />
+                <div className="card card-body mt-5">
+                    <h2 className="text-center" className="text-center">Important message</h2>
+                    <FormField type_input="textarea" model="important_message" id={this.state.message.id} field="content" label="Content" value={this.state.message.content} />
                 </div>
 
             </div>
