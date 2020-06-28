@@ -13,7 +13,7 @@ from api.models import (
     ImportantMessage,
     Presentation,
     TimeTable,
-    Club,
+    ClubInformation,
     Member,
     Instructor,
     Course,
@@ -44,7 +44,7 @@ class Command(BaseCommand):
             ImportantMessage.objects.all().delete()
             Presentation.objects.all().delete()
             TimeTable.objects.all().delete()
-            Club.objects.all().delete()
+            ClubInformation.objects.all().delete()
             Member.objects.all().delete()
             Instructor.objects.all().delete()
             Course.objects.all().delete()
@@ -61,7 +61,7 @@ class Command(BaseCommand):
                 datas_list = json.load(json_file)
                 for model, list_datas in datas_list.items():
                     for datas in list_datas:
-                        if model == "Club":
+                        if model == "ClubInformation":
                             time_tables = datas.pop("time_table")
                             new_object = apps.get_model("api", model)(**datas)
                             new_object.save()

@@ -5,7 +5,6 @@ import Subscription from "./layout/Subscription";
 
 class Authentication extends Component {
     render() {
-
         return (
         <div>
             <Login />

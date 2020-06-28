@@ -18,16 +18,16 @@ class LookingFor extends Component {
 
     search(e) {
         e.preventDefault();
-        const field = 'name'
-        if (this.state.criteria == 'article'){
-            field = 'title'
-        }
-        const url = '/api_tct/' + this.state.criteria + '?' + field + "=" + this.state.value
+        const url = '/api_tct/' + this.state.criteria + '?search=' + this.state.value
+        const header = localStorage.getItem('token') == null ? {} : { 'Authorization': 'Token ' + localStorage.getItem('token')}
         var list_component_result = []
-        fetch(url)
+        fetch(url, {
+            method: "GET",
+            headers: header,
+        })
         .then(response => response.json())
         .then((data) => {
-            if (data.length == 0){
+            if (data.length == 0 || this.state.value == ""){
                 list_component_result.push(<div key={1}>Nothing found</div>)
             } else {
                 data.forEach(result => {
@@ -52,29 +52,42 @@ class LookingFor extends Component {
 
         return (
             <div>
-                <h1>looking</h1>
-
+                <br />
                 <form onSubmit={e => this.search(e)}>
-                  <input
-                    placeholder="Name, title...."
-                    name="value"
-                    onChange={e => this.onChange(e)}
-                  />
+                    <table border="1" style={{width: '90%'}}>
 
-                 <select
-                      name="criteria"
-                      id="criteria"
-                      onChange={e => this.onChange(e)}
-                  >
-                    <option value="book">Book</option>
-                    <option value="internship">Internships</option>
-                    <option value="course">Courses</option>
-                  </select>
+                        <tr>
+                            <th>
+                                  <input
+                                    placeholder="Name, title...."
+                                    name="value"
+                                    style={{width: '40%'}}
+                                    onChange={e => this.onChange(e)}
+                                  />
 
-                  <button type="submit" value="Submit"> Search </button>
+                             <select
+                                  name="criteria"
+                                  id="criteria"
+                                  onChange={e => this.onChange(e)}
+                              >
+                                <option value="book">Book</option>
+                                <option value="internship">Internships</option>
+                                <option value="course">Courses</option>
+                                {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
+                              </select>
+                              <button type="submit" value="Submit"> Search </button>
+
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th> {this.state.result_search} </th>
+                        </tr>
+
+                    </table>
                 </form>
-                <br /><br />
-                {this.state.result_search}
+                <br />
+
 
             </div>
         )

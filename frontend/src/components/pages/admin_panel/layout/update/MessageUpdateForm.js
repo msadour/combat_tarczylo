@@ -32,7 +32,7 @@ class MessageUpdateForm extends Component {
             <div>
 
                 <div >
-                    <FormField type_input="text" model="important_message" id={this.state.message.id} field="content" label="content" value={this.state.message.content} />
+                    <FormField type_input="text" model="important_message" id={this.state.message.id} field="content" label="Content" value={this.state.message.content} />
                 </div>
 
             </div>

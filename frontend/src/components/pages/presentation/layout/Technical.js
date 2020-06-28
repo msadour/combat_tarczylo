@@ -5,11 +5,12 @@ class Technical extends Component {
     render() {
         return (
             <div>
-                <table border="1">
+                <br />
+                <table border="1" style={{width:"90%"}}>
                     <tbody>
                         <tr>
                             <td>
-                                Photo
+                                <img id="img_technical" src="../../../../media/technical.png" />
                             </td>
 
                             <td>
@@ -20,6 +21,7 @@ class Technical extends Component {
                         </tr>
                     </tbody>
                 </table>
+                <br />
             </div>
         )
     }

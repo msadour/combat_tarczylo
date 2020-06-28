@@ -49,10 +49,10 @@ class BookUpdateForm extends Component {
             list_book_component.push(
                 <div key={book.id}>
                     <h2>{book.name}</h2>
-                    <FormField type_input="text" model="book" id={book.id} field="name" label="name" value={book.name} />
-                    <FormField type_input="text" model="book" id={book.id} field="author" label="author" value={book.author} />
-                    <FormField type_input="text" model="book" id={book.id} field="category" label="category" value={book.category} />
-                    <FormField type_input="text" model="book" id={book.id} field="url" label="url" value={book.url} />
+                    <FormField type_input="text" model="book" id={book.id} field="name" label="Name" value={book.name} />
+                    <FormField type_input="text" model="book" id={book.id} field="author" label="Author" value={book.author} />
+                    <FormField type_input="text" model="book" id={book.id} field="category" label="Category" value={book.category} />
+                    <FormField type_input="text" model="book" id={book.id} field="url" label="URL" value={book.url} />
                     <button type="button" onClick={() => this.handleRemove(book.id)}>Remove</button>
                 </div>
 

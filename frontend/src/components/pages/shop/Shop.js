@@ -58,7 +58,6 @@ class Shop extends Component {
 
         return (
             <div>
-                <h1>Store (Available only in club)</h1>
                 <br />
                 <ProductsCategory categories={this.state.categories} />
 

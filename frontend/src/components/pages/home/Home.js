@@ -29,9 +29,15 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>home page</h1>
+                <br />
+                <center><h1>home page</h1></center>
+                <table>
 
-                <p>{this.state.message != null? this.state.message.content : "" }</p>
+                    <tr>
+                        <th><p>{this.state.message != null? this.state.message.content : "" }</p></th>
+                    </tr>
+
+                </table>
             </div>
 
         )

@@ -1,8 +1,10 @@
 """Service module."""
 
 import re
+from datetime import datetime
 from typing import Any
 
+from django.db.models import Q
 from rest_framework import viewsets, status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -32,8 +34,14 @@ class CourseViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         if request.query_params:
-            search = {key: value for key, value in request.query_params.items()}
-            self.queryset = self.queryset.filter(**search)
+            search = request.query_params
+            self.queryset = self.queryset.filter(
+                Q(name__contains=search["search"])
+                | Q(description__contains=search["search"])
+                | Q(place=search["search"])
+                | Q(level=search["search"])
+                | Q(category=search["search"])
+            )
             serializer = CourseSerializer(self.queryset, many=True)
             return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)
@@ -120,8 +128,15 @@ class InternshipViewSet(viewsets.ModelViewSet):
             Response from the server.
         """
         if request.query_params:
-            search = {key: value for key, value in request.query_params.items()}
-            self.queryset = self.queryset.filter(**search)
+            search = request.query_params
+            self.queryset = self.queryset.filter(
+                Q(name__contains=search["search"])
+                | Q(description__contains=search["search"])
+                | Q(place=search["search"])
+                | Q(level=search["search"])
+                | Q(theme=search["search"])
+                | Q(category=search["search"])
+            )
             serializer = InternshipSerializer(self.queryset, many=True)
             return Response(serializer.data, status=200)
         return super().list(request, *args, **kwargs)
@@ -139,6 +154,12 @@ class InternshipViewSet(viewsets.ModelViewSet):
         """
         datas = request.data
         datas["id"] = get_max_id("Internship")
+        datas["date_end"] = (
+            None
+            if "date_end" not in datas.keys()
+            else datetime.strptime(datas["date_end"], "%Y-%m-%d")
+        )
+        datas["date_begin"] = datetime.strptime(datas["date_begin"], "%Y-%m-%d")
         instructor_id = datas.pop("instructor")
         instructor = Instructor.objects.get(id=instructor_id)
         datas["instructor_id"] = instructor.id
@@ -182,6 +203,8 @@ class InternshipViewSet(viewsets.ModelViewSet):
                     new_time_table = TimeTable.objects.create(**info_time_table)
                     internship.time_table.add(new_time_table)
             else:
+                if attr in ["date_begin", "date_end"]:
+                    value = datetime.datetime.strptime(value, "%Y-%m-%d")
                 setattr(internship, attr, value)
         internship.save()
         serializer = InternshipSerializer(internship)

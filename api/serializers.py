@@ -12,7 +12,7 @@ from .models import (
     ImportantMessage,
     Presentation,
     TimeTable,
-    Club,
+    ClubInformation,
     Member,
     Instructor,
     Course,
@@ -84,11 +84,9 @@ class ClubSerializer(serializers.ModelSerializer):
     class Meta:
         """Class Meta."""
 
-        model = Club
+        model = ClubInformation
         fields = [
             "id",
-            "name",
-            "description",
             "street",
             "number",
             "zip_code",
@@ -169,6 +167,10 @@ class InternshipSerializer(serializers.ModelSerializer):
 
     instructor = InstructorSerializer(many=False)
     time_table = TimeTableSerializer(many=True)
+    date_begin = serializers.DateTimeField(format="%d/%m/%Y")
+    date_end = serializers.DateTimeField(format="%d/%m/%Y")
+    date_begin_formated = serializers.CharField(source="get_date_begin_formated")
+    date_end_formated = serializers.CharField(source="get_date_end_formated")
     dates = serializers.CharField(source="display_date_as_str")
 
     class Meta:
@@ -189,6 +191,8 @@ class InternshipSerializer(serializers.ModelSerializer):
             "price",
             "theme",
             "dates",
+            "date_begin_formated",
+            "date_end_formated",
         ]
 
 

@@ -6,10 +6,10 @@ const ProductsCategory = ({ categories }) => {
     <div>
         {categories.map((category) => (
             <div key={category.id}>
-                <h1>{category.name}</h1>
 
-                <table border="1">
+                <table border="1" style={{width: '90%'}}>
                     <tbody>
+                        <tr> <h1 colSpan={category.products.length}>{category.name}</h1> </tr>
                         <tr>
                             {category.products.map((product) => (
                                 <th key={product.id}>
@@ -22,6 +22,7 @@ const ProductsCategory = ({ categories }) => {
                         </tr>
                     </tbody>
                 </table>
+                <br />
             </div>
         ))}
     </div>
