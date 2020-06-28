@@ -156,7 +156,7 @@ class InternshipViewSet(viewsets.ModelViewSet):
         datas["id"] = get_max_id("Internship")
         datas["date_end"] = (
             None
-            if datas["date_end"]
+            if "date_end" not in datas.keys()
             else datetime.strptime(datas["date_end"], "%Y-%m-%d")
         )
         datas["date_begin"] = datetime.strptime(datas["date_begin"], "%Y-%m-%d")

@@ -152,7 +152,7 @@ class InternshipTestCase(APITestCase):
             "category": "men",
             "price": 100,
             "theme": "knife",
-            "date_begin": "20/04/2020",
+            "date_begin": "2020-04-20",
             "instructor": """
             + str(instructor.id)
             + """,
