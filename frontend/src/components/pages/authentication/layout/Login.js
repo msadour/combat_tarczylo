@@ -38,6 +38,7 @@ class Login extends Component {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('member_id');
+            alert("Login or password is wrong, or your account is not activate.");
             this.props.history.push("/authentication");
         });
     }

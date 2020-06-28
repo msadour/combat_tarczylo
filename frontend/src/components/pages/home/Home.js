@@ -32,11 +32,11 @@ class Home extends Component {
                 <br />
                 <center><h1>home page</h1></center>
                 <table>
-
-                    <tr>
-                        <th><p>{this.state.message != null? this.state.message.content : "" }</p></th>
-                    </tr>
-
+                    <tbody>
+                        <tr>
+                            <th><p>{this.state.message != null? this.state.message.content : "" }</p></th>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
