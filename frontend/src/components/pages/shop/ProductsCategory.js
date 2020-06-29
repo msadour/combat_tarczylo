@@ -7,7 +7,7 @@ const ProductsCategory = ({ categories }) => {
         {categories.map((category) => (
             <div key={category.id}>
 
-                <table border="1" style={{width: '90%'}}>
+                <table border="1" style={{width: '90%'}} className="page_content">
                     <tbody>
                         <tr><th colSpan={categories.length}> <h1 className="text-center text_jl" colSpan={category.products.length}>{category.name}</h1> </th></tr>
                         <tr>

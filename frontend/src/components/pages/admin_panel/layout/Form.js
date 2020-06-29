@@ -88,8 +88,8 @@ class FormField extends Component {
 
                 this.props.options_radio.forEach(option => {
                     option_radio_item.push(
-                        <div>
-                            <input type="radio" name="{option.name}" value="{option.value}" onChange={e => this.onChange(e)} />
+                        <div key={option.name}>
+                            <input type="radio" name="new_value" value={option.value} onChange={e => this.onChange(e)} />
                             <label className="text_jl"> {option.label} </label><br />
                         </div>
                     )
@@ -97,10 +97,9 @@ class FormField extends Component {
 
                 return (
                     <div>
-                        {optionTemplate}
+                        {option_radio_item}
                     </div>
                 )
-
             break;
 
             case "price":
@@ -181,6 +180,9 @@ class FormField extends Component {
         const member_id = localStorage.getItem("member_id");
         var data = {}
         data[this.props.field] = this.state.new_value
+        console.log('-------------------------------')
+        console.log(data)
+        console.log('-------------------------------')
         var url = '/api_tct/' + this.props.model + '/' + this.props.id + '/';
         if (e.target[0].type == 'file'){
             url += 'upload/';

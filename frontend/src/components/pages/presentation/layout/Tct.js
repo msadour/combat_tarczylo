@@ -6,7 +6,7 @@ class Tct extends Component {
         return (
             <div>
                 <br />
-                <table border="1" style={{width:"90%"}}>
+                <table border="1" style={{width:"90%"}} className="page_content">
                     <tbody>
                         <tr>
                             <td style={{width:"70%"}}>

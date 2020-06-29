@@ -15,7 +15,7 @@ const CourseDetail = ({ courses }) => {
   return (
     <div>
       <br />
-      <table border="1" style={{width: '90%'}}>
+      <table border="1" style={{width: '90%'}} className="page_content">
         <tbody>
             <tr>
                 <th colSpan={courses.length}><center><h1 className="text_jl">Course</h1></center></th>

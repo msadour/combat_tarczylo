@@ -27,6 +27,10 @@ class MessageUpdateForm extends Component {
 
 
     render() {
+        var options_radio = [
+            {'name': 'false', 'value': true, 'label': 'Yes'},
+            {'name': 'true', 'value': false, 'label': 'No'}
+        ]
 
         return (
             <div className="col-md-6 m-auto">
@@ -34,6 +38,7 @@ class MessageUpdateForm extends Component {
                 <div className="card card-body mt-5">
                     <h2 className="text-center text_jl">Important message</h2>
                     <FormField type_input="textarea" model="important_message" id={this.state.message.id} field="content" label="Content" value={this.state.message.content} />
+                    <FormField type_input="radio_button" model="important_message" id={this.state.message.id} field="is_active" label="Is active?" options_radio={options_radio} />
                 </div>
 
             </div>

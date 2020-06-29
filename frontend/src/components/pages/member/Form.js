@@ -134,7 +134,7 @@ class FormField extends Component {
         return (
             <div>
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <table border="1" style={{width: '30%'}}>
+                  <table border="1" style={{width: '30%'}} className="page_content">
                     <tbody>
                         <tr>
                             <th style={{width: '30%'}}> <label className="text_jl">{this.props.label}: </label> </th>

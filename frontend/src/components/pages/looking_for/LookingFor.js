@@ -54,14 +54,14 @@ class LookingFor extends Component {
             <div>
                 <br />
                 <form onSubmit={e => this.search(e)}>
-                    <table border="1" style={{width: '90%'}}>
+                    <table border="1" style={{width: '40%'}} className="page_content">
                         <tbody>
                             <tr>
                                 <th>
                                       <input
                                         placeholder="Name, title...."
                                         name="value"
-                                        style={{width: '40%'}}
+                                        style={{width: '30%'}}
                                         onChange={e => this.onChange(e)}
                                       />
 

@@ -28,7 +28,7 @@ class BookAdviced extends Component {
         return (
             <div>
               <br />
-              <table border="1" style={{width: "90%"}}>
+              <table border="1" style={{width: "90%"}} className="page_content">
                 <tbody>
                     <tr>
                         {this.state.books.map((book) => (
