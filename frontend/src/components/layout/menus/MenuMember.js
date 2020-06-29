@@ -67,6 +67,11 @@ class MenuMember extends Component {
                                 </Link>
                             </th>
 
+                            <th>
+                                <Link to='/book'>
+                                    <p className="nav-link">Books</p>
+                                </Link>
+                            </th>
                         </tr>
                     </tbody>
                 </table>

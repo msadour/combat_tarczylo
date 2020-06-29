@@ -17,6 +17,7 @@ import MemberPage from "./pages/member/MemberPage";
 import MemberProfile from "./pages/member/MemberProfile";
 import Presentation from "./pages/presentation/Presentation";
 import Shop from "./pages/shop/Shop";
+import BookAdviced from "./pages/book/BookAdviced";
 import TrainingPage from "./pages/training/TrainingPage";
 import LookingFor from "./pages/looking_for/LookingFor";
 import AdminPanel from "./pages/admin_panel/AdminPanel";
@@ -58,6 +59,7 @@ class App extends Component {
                                 <Route exact path='/shop' component={Shop} />
                                 <Route exact path='/looking_for' component={LookingFor} />
                                 <Route exact path='/training' component={TrainingPage} />
+                                <Route exact path='/book' component={BookAdviced} />
 
                                 <Route exact path='/admin_panel_member' component={MemberManager} />
                                 <Route exact path='/admin_panel_article' component={ArticleManager} />
