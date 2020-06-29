@@ -114,6 +114,7 @@ class InternshipUpdateForm extends Component {
                 <div key={internship.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
                         <h2 className="text-center">{internship.name}</h2>
+                        <img style={{width:"50%"}} src={internship.picture} /><br />
                         <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
                         <FormField type_input="textarea" model="internship" id={internship.id} field="description" label="Description" value={internship.description} />
                         <FormField type_input="text" model="internship" id={internship.id} field="place" label="Place" value={internship.place} />
@@ -124,7 +125,7 @@ class InternshipUpdateForm extends Component {
                         <FormField type_input="price" model="internship" id={internship.id} field="price" label="Price" value={internship.price} />
                         <FormField type_input="text" model="internship" id={internship.id} field="theme" label="Theme" value={internship.theme} />
                         <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="Instructor" value={internship.instructor} />
-
+                        <FormField type_input="image" model="internship" id={internship.id} field="picture" label="Picture" />
                         {this.build_timetable(internship)}
                          <br /><br />
                         <div className="form-group">

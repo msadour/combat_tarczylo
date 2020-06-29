@@ -99,6 +99,26 @@ class FormField extends Component {
              });
              break;
 
+
+              case "picture":
+                const formData = new FormData();
+
+                formData.append(
+                    this.props.field,
+                    e.target[0].files[0],
+                    e.target[0].files[0].name
+                );
+                axios.patch('/api_tct/member/' + member_id + '/upload/', formData,
+                    { headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                        'Content-Disposition': 'attachment; filename=pics.png'
+                    }, }
+                )
+                .then(res => {
+                    window.location.reload();
+                })
+             break;
+
              default :
                 alert('error');
         }
@@ -119,13 +139,22 @@ class FormField extends Component {
                         <tr>
                             <th style={{width: '30%'}}> <label >{this.props.label}: </label> </th>
                             <th>
-                                <input
-                                    type="text"
-                                    name="new_value"
-                                    style={{width: '100%'}}
-                                    onChange={e => this.onChange(e)}
-                                    placeholder={this.props.value}
-                                 />
+                                { this.props.type_input == "image" ? (
+                                    <input
+                                        type='file'
+                                        style={{width: '100%'}}
+                                        onChange={e => this.onChange(e)}
+                                     />
+                                ) : (
+                                    <input
+                                        type='text'
+                                        name="new_value"
+                                        style={{width: '100%'}}
+                                        onChange={e => this.onChange(e)}
+                                        placeholder={this.props.value}
+                                     />
+                                )}
+
                             </th>
                             <th> <button type="submit" value="Submit"> Update </button> </th>
                         </tr>

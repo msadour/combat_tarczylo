@@ -193,6 +193,7 @@ class InternshipSerializer(serializers.ModelSerializer):
             "dates",
             "date_begin_formated",
             "date_end_formated",
+            "picture",
         ]
 
 

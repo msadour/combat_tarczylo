@@ -40,27 +40,31 @@ class MemberProfile extends Component {
                 <br />
                 <h2><center>Hello {this.state.info_member.full_name}</center></h2> <br />
 
-                <FormField field="first_name" label="First name" value={this.state.info_member.first_name} />
+                <img style={{width:"50%"}} src={this.state.info_member.picture} /><br />
 
-                <FormField field="last_name" label="Last name" value={this.state.info_member.last_name} />
+                <FormField type_input="text" field="first_name" label="First name" value={this.state.info_member.first_name} />
 
-                <FormField field="email" label="Email" value={this.state.info_member.email} />
+                <FormField type_input="text" field="last_name" label="Last name" value={this.state.info_member.last_name} />
 
-                <FormField field="password" label="Password" value="" />
+                <FormField type_input="text" field="email" label="Email" value={this.state.info_member.email} />
 
-                <FormField field="postal_code" label="Postal code" value={this.state.info_member.postal_code} />
+                <FormField type_input="text" field="password" label="Password" value="" />
 
-                <FormField field="city" label="City" value={this.state.info_member.city} />
+                <FormField type_input="text" field="postal_code" label="Postal code" value={this.state.info_member.postal_code} />
 
-                <FormField field="street" label="Street" value={this.state.info_member.street} />
+                <FormField type_input="text" field="city" label="City" value={this.state.info_member.city} />
 
-                <FormField field="country" label="Country" value={this.state.info_member.country} />
+                <FormField type_input="text" field="street" label="Street" value={this.state.info_member.street} />
 
-                <FormField field="phone" label="Phone" value={this.state.info_member.phone} />
+                <FormField type_input="text" field="country" label="Country" value={this.state.info_member.country} />
 
-                <FormField field="insurance_name" label="Insurance name" value={this.state.info_member.insurance_name} />
+                <FormField type_input="text" field="phone" label="Phone" value={this.state.info_member.phone} />
 
-                <FormField field="insurance_number" label="Insurance number" value={this.state.info_member.insurance_number} />
+                <FormField type_input="text" field="insurance_name" label="Insurance name" value={this.state.info_member.insurance_name} />
+
+                <FormField type_input="text" field="insurance_number" label="Insurance number" value={this.state.info_member.insurance_number} />
+
+                <FormField type_input="image" field="picture" label="Profile picture" />
                 <br />
             </div>
         )

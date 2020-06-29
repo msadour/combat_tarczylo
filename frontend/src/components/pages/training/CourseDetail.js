@@ -23,7 +23,7 @@ const CourseDetail = ({ courses }) => {
             <tr>
                 {courses.map((course) => (
                     <th key={course.id}>
-                        <h1>{course.name}</h1>
+                        <h2>{course.name}</h2>
                         {course.description} <br />
                         Open to :{course.category} <br />
                         Level : {course.level} <br />

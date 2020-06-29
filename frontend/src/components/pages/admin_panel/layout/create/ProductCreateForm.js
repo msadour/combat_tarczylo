@@ -16,6 +16,7 @@ class ProductCreateForm extends Component {
             quantity_available: "",
             size: "",
             category: 0,
+            picture: null,
             options_category: [],
         }
 
@@ -24,15 +25,6 @@ class ProductCreateForm extends Component {
     }
 
     componentDidMount() {
-//        axios.get('/api_tct/category/')
-//        .then(res => {
-//            this.setState({options_category: res});
-//        })
-//        .catch(err => {
-//        console.log(res);
-//            alert('error');
-//
-//        });
 
         fetch('/api_tct/category/')
         .then(response => response.json())
@@ -56,7 +48,7 @@ class ProductCreateForm extends Component {
 
         })
         .then(res => {
-            alert("Product created.");
+            alert('Product created')
             window.location.reload();
         })
         .catch(err => {
@@ -96,7 +88,8 @@ class ProductCreateForm extends Component {
                     <div className="form-group">
                       <label>Price</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="0.01"
                         className="form-control"
                         name="price"
                         onChange={e => this.onChange(e)}
@@ -107,7 +100,8 @@ class ProductCreateForm extends Component {
                     <div className="form-group">
                       <label>Quantity available</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="1"
                         className="form-control"
                         name="quantity_available"
                         onChange={e => this.onChange(e)}
@@ -136,6 +130,17 @@ class ProductCreateForm extends Component {
                       >
                         {optionTemplate}
                       </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Picture</label>
+
+                      <input
+                        type="file"
+                        className="form-control"
+                        name="picture"
+                        onChange={e => this.onChange(e)}
+                      />
                     </div>
 
 

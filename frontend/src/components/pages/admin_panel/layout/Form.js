@@ -131,6 +131,18 @@ class FormField extends Component {
                 )
             break;
 
+            case "image":
+                return (
+                    <div>
+                        <input
+                            type="file"
+                            name="new_value"
+                            onChange={e => this.onChange(e)}
+                        />
+                    </div>
+                )
+            break;
+
             case "date":
                 if (this.props.value){
                     return (
@@ -157,7 +169,6 @@ class FormField extends Component {
                         </div>
                     )
                 }
-
             break;
 
         }
@@ -170,17 +181,42 @@ class FormField extends Component {
         const member_id = localStorage.getItem("member_id");
         var data = {}
         data[this.props.field] = this.state.new_value
-        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/', data,
-            { headers: {
-                'Authorization': 'Token ' + localStorage.getItem('token')
-            }, }
-        )
-        .then(res => {
-            window.location.reload();
-        })
-        .catch(err => {
-            console.log(err)
-        });
+        var url = '/api_tct/' + this.props.model + '/' + this.props.id + '/';
+        if (e.target[0].type == 'file'){
+            url += 'upload/';
+            const formData = new FormData();
+
+            formData.append(
+                this.props.field,
+                e.target[0].files[0],
+                e.target[0].files[0].name
+              );
+            axios.patch(url, formData,
+                { headers: {
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                    'Content-Disposition': 'attachment; filename=pics.png'
+                }, }
+            )
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        } else {
+                axios.patch(url, data,
+                    { headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token')
+                    }, }
+                )
+                .then(res => {
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+
+        }
     }
 
     onChange = e => {

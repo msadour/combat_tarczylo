@@ -50,11 +50,13 @@ class ProductUpdateForm extends Component {
             list_product_component.push(
                 <div key={product.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
+                        <img style={{width:"50%"}} src={product.picture} /><br />
                         <h2 className="text-center">{product.name}</h2>
                         <FormField type_input="text" model="product" id={product.id} field="name" label="Name" value={product.name} />
                         <FormField type_input="price" model="product" id={product.id} field="price" label="Price" value={product.price} />
                         <FormField type_input="number" model="product" id={product.id} field="quantity_available" label="Quantity_available" value={product.quantity_available} />
                         <FormField type_input="text" model="product" id={product.id} field="size" label="Size" value={product.size} />
+                        <FormField type_input="image" model="product" id={product.id} field="picture" label="Picture" />
                         <button type="button" onClick={() => this.handleRemove(product.id)}>Remove</button>
                     </div>
                 </div>

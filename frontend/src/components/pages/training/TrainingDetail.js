@@ -23,7 +23,8 @@ const TrainingDetail = ({ trainings }) => {
             <tr>
                 {trainings.map((training) => (
                     <th key={training.id} >
-                        <h1>{training.name}</h1>
+                        <h2>{training.name}</h2>
+                        <img style={{width:"20%"}} src={training.picture} /><br />
                         {training.description} <br />
                         Date : {training.dates} <br />
                         Price : {training.price} <br />

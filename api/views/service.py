@@ -1,11 +1,12 @@
 """Service module."""
-
+import os
 import re
 from datetime import datetime
 from typing import Any
 
 from django.db.models import Q
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -210,3 +211,33 @@ class InternshipViewSet(viewsets.ModelViewSet):
         serializer = InternshipSerializer(internship)
 
         return Response(serializer.data)
+
+    @action(detail=True, methods=["PATCH"])
+    def upload(
+        self, request: Request, pk: int = None, *args: Any, **kwargs: Any
+    ) -> Response:
+        """Upload a picture.
+
+        Args:
+            request: request sent by the client.
+            pk: id of the object to be updated.
+            args: Variable length argument list.
+            options: Arbitrary keyword arguments.
+
+        Returns:
+            Response from the server.
+        """
+        internship = Internship.objects.get(id=pk)
+
+        if internship.picture == "default.png":
+            internship.picture = None
+        else:
+            os.remove("media/" + internship.picture.name)
+        picture = request.data.get("picture")
+        filename = "internship_{}.{}".format(internship.pk, "png")
+        picture.name = filename
+
+        internship.picture = picture
+        internship.save()
+
+        return Response({"message": "Picture uploaded"}, status=status.HTTP_200_OK)

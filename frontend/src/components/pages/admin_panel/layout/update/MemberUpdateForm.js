@@ -73,6 +73,11 @@ class MemberUpdateForm extends Component {
                             <form onSubmit={e => this.onSubmit(e, member.id)}>
                                 <table>
                                     <tbody>
+
+                                        <tr>
+                                            <th><img style={{width:"50%"}} src={member.picture} /></th>
+                                        </tr>
+
                                         <tr>
                                             <th>Email :</th>
                                             <th>{member.email}</th>

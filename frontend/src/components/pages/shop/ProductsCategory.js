@@ -9,10 +9,11 @@ const ProductsCategory = ({ categories }) => {
 
                 <table border="1" style={{width: '90%'}}>
                     <tbody>
-                        <tr> <h1 colSpan={category.products.length}>{category.name}</h1> </tr>
+                        <tr><th colSpan={categories.length}> <h1 className="text-center" colSpan={category.products.length}>{category.name}</h1> </th></tr>
                         <tr>
                             {category.products.map((product) => (
                                 <th key={product.id}>
+                                    <img style={{width:"50%"}} src={product.picture} /><br />
                                     <h2>{product.name}</h2>
                                     price : {product.price} €<br />
                                     Quantity available : {product.quantity_available} <br />
