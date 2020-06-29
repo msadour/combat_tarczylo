@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
-import {OPTION_TEMPLATE_LEVEL} from "../../../layout/ChoiceSelect";
+import {OPTION_TEMPLATE_LEVEL} from "../../layout/ChoiceSelect";
 
 class Subscription extends Component {
 

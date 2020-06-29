@@ -4,6 +4,8 @@ import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
 import header from "../../../../header";
+import {OPTION_TEMPLATE_SIZE, OPTION_TEMPLATES_CATEGORY_PRODUCT} from "../../../../layout/ChoiceSelect";
+
 
 class ProductCreateForm extends Component {
 
@@ -60,10 +62,10 @@ class ProductCreateForm extends Component {
 
     render() {
 
-        let optionTemplate = [<option key={0} value={0}></option>]
+        let optionTemplateCategory = [<option key={0} value={0}></option>]
 
         this.state.options_category.forEach(category => {
-            optionTemplate.push(<option key={category.id} value={category.id}>{category.name}</option>)
+            optionTemplateCategory.push(<option key={category.id} value={category.id}>{category.name}</option>)
         })
 
         return (
@@ -111,12 +113,14 @@ class ProductCreateForm extends Component {
 
                     <div className="form-group">
                       <label>Size</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="size"
-                        onChange={e => this.onChange(e)}
-                      />
+                      <select
+                          name="size"
+                          type="select"
+                          className="form-control"
+                          onChange={e => this.onChange(e)}
+                      >
+                        {OPTION_TEMPLATE_SIZE}
+                      </select>
                     </div>
 
 
@@ -126,21 +130,11 @@ class ProductCreateForm extends Component {
                       <select
                           name="category"
                           type="select"
+                          className="form-control"
                           onChange={e => this.onChange(e)}
                       >
-                        {optionTemplate}
+                        {optionTemplateCategory}
                       </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label>Picture</label>
-
-                      <input
-                        type="file"
-                        className="form-control"
-                        name="picture"
-                        onChange={e => this.onChange(e)}
-                      />
                     </div>
 
 

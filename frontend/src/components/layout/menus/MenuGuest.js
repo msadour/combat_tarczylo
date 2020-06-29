@@ -33,6 +33,12 @@ class MenuGuest extends Component {
                                 </Link>
                             </th>
 
+                            <th>
+                                <Link to='/subscription' >
+                                    <p className="nav-link">Join us</p>
+                                </Link>
+                            </th>
+
                         </tr>
                     </tbody>
                 </table>

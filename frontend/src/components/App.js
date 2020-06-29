@@ -6,7 +6,10 @@ import axios from "axios";
 import Menu from "./layout/Menu";
 import Footer from "./layout/Footer";
 import Home from "./pages/home/Home";
-import Authentication from "./pages/authentication/Authentication";
+//import Authentication from "./pages/authentication/Authentication";
+
+import Login from "./pages/authentication/Login";
+import Subscription from "./pages/authentication/Subscription";
 
 import Contact from "./pages/contact/Contact";
 import CoursePage from "./pages/course/CoursePage";
@@ -45,7 +48,8 @@ class App extends Component {
                         <div>
                             <Switch>
                                 <Route exact path='/' component={Home} />
-                                <Route exact path='/authentication' component={Authentication} />
+                                <Route exact path='/authentication' component={Login} />
+                                <Route exact path='/subscription' component={Subscription} />
                                 <Route exact path='/contact' component={Contact} />
                                 <Route exact path='/course' component={CoursePage} />
                                 <Route exact path='/member' component={MemberPage} />

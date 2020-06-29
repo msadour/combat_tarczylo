@@ -34,9 +34,11 @@ class Training extends Component {
     render() {
         return (
             <div>
+                <br />
                 <Description />
                 <CourseDetail courses={this.state.courses} />
                 <TrainingDetail trainings={this.state.trainings} />
+                <br />
             </div>
         )
     }

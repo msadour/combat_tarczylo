@@ -4,6 +4,7 @@ import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
 import header from "../../../../header";
+import {OPTION_TEMPLATE_LEVEL, OPTION_TEMPLATES_TRAINING_OPEN} from "../../../../layout/ChoiceSelect";
 
 class InternshipCreateForm extends Component {
 
@@ -132,22 +133,26 @@ class InternshipCreateForm extends Component {
 
                     <div className="form-group">
                       <label>Category</label>
-                      <input
+                      <select
                         type="text"
                         className="form-control"
                         name="category"
                         onChange={e => this.onChange(e)}
-                      />
+                      >
+                        {OPTION_TEMPLATES_TRAINING_OPEN}
+                      </select>
                     </div>
 
                     <div className="form-group">
                       <label>Level</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="level"
-                        onChange={e => this.onChange(e)}
-                      />
+                      <select
+                          name="level"
+                          className="form-control"
+                          type="select"
+                          onChange={e => this.onChange(e)}
+                      >
+                        {OPTION_TEMPLATE_LEVEL}
+                      </select>
                     </div>
 
                     <div className="form-group">
@@ -156,6 +161,7 @@ class InternshipCreateForm extends Component {
                       <select
                           name="instructor"
                           type="select"
+                          className="form-control"
                           onChange={e => this.onChange(e)}
                       >
                         {optionTemplate}
@@ -194,7 +200,6 @@ class InternshipCreateForm extends Component {
                             name="date_begin"
                             placeholder="DD/MM/YYYY"
                             onChange={e => this.onChange(e)}
-//                            value="0000-00-00"
                         />
                     </div>
 
@@ -212,7 +217,8 @@ class InternshipCreateForm extends Component {
                     <div className="form-group">
                       <label>Price</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="0.01"
                         className="form-control"
                         name="price"
                         onChange={e => this.onChange(e)}
