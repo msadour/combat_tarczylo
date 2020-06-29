@@ -49,7 +49,7 @@ class BookUpdateForm extends Component {
             list_book_component.push(
                 <div key={book.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
-                        <h2 className="text-center">{book.name}</h2>
+                        <h2 className="text-center text_jl">{book.name}</h2>
                         <FormField type_input="text" model="book" id={book.id} field="name" label="Name" value={book.name} />
                         <FormField type_input="text" model="book" id={book.id} field="author" label="Author" value={book.author} />
                         <FormField type_input="text" model="book" id={book.id} field="category" label="Category" value={book.category} />

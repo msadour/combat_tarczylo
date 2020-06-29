@@ -55,35 +55,35 @@ class LookingFor extends Component {
                 <br />
                 <form onSubmit={e => this.search(e)}>
                     <table border="1" style={{width: '90%'}}>
+                        <tbody>
+                            <tr>
+                                <th>
+                                      <input
+                                        placeholder="Name, title...."
+                                        name="value"
+                                        style={{width: '40%'}}
+                                        onChange={e => this.onChange(e)}
+                                      />
 
-                        <tr>
-                            <th>
-                                  <input
-                                    placeholder="Name, title...."
-                                    name="value"
-                                    style={{width: '40%'}}
-                                    onChange={e => this.onChange(e)}
-                                  />
+                                 <select
+                                      name="criteria"
+                                      id="criteria"
+                                      onChange={e => this.onChange(e)}
+                                  >
+                                    <option value="book">Book</option>
+                                    <option value="internship">Internships</option>
+                                    <option value="course">Courses</option>
+                                    {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
+                                  </select>
+                                  <button type="submit" value="Submit"> Search </button>
 
-                             <select
-                                  name="criteria"
-                                  id="criteria"
-                                  onChange={e => this.onChange(e)}
-                              >
-                                <option value="book">Book</option>
-                                <option value="internship">Internships</option>
-                                <option value="course">Courses</option>
-                                {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
-                              </select>
-                              <button type="submit" value="Submit"> Search </button>
+                                </th>
+                            </tr>
 
-                            </th>
-                        </tr>
-
-                        <tr>
-                            <th> {this.state.result_search} </th>
-                        </tr>
-
+                            <tr>
+                                <th> {this.state.result_search} </th>
+                            </tr>
+                        </tbody>
                     </table>
                 </form>
                 <br />

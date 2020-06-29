@@ -69,28 +69,28 @@ class MemberUpdateForm extends Component {
                 <div key={member.id} className="col-md-6 m-auto">
                     { member.is_superuser == false ? (
                         <section className="card card-body mt-5">
-                            <h2 className="text-center">{member.full_name}</h2>
+                            <h2 className="text-center text_jl">{member.full_name}</h2>
                             <form onSubmit={e => this.onSubmit(e, member.id)}>
                                 <table>
                                     <tbody>
 
                                         <tr>
-                                            <th><img style={{width:"50%"}} src={member.picture} /></th>
+                                            <th colSpan={2}><img style={{width:"50%"}} src={member.picture} /></th>
                                         </tr>
 
                                         <tr>
-                                            <th>Email :</th>
-                                            <th>{member.email}</th>
+                                            <th><p className="text_jl">Email :</p></th>
+                                            <th><p className="text_jl">{member.email}</p></th>
                                         </tr>
 
                                         <tr>
-                                            <th>Sex :</th>
-                                            <th>{member.sex}</th>
+                                            <th><p className="text_jl">Sex :</p></th>
+                                            <th><p className="text_jl">{member.sex}</p></th>
                                         </tr>
 
                                         <tr>
-                                            <th>Level :</th>
-                                            <th>{member.level}</th>
+                                            <th><p className="text_jl">Level :</p></th>
+                                            <th><p className="text_jl">{member.level}</p></th>
                                         </tr>
 
                                         <tr>

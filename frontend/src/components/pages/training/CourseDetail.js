@@ -5,7 +5,7 @@ function get_list_time_table(time_table){
 
     if(time_table != null){
         time_table.forEach(time_table => {
-            list_time_table.push(<p key={time_table.id}> {time_table.time_table_str} </p>)
+            list_time_table.push(<p key={time_table.id} className="text_jl"> {time_table.time_table_str} </p>)
         })
     }
     return list_time_table
@@ -18,18 +18,18 @@ const CourseDetail = ({ courses }) => {
       <table border="1" style={{width: '90%'}}>
         <tbody>
             <tr>
-                <th colSpan={courses.length}><center><h1>Course</h1></center></th>
+                <th colSpan={courses.length}><center><h1 className="text_jl">Course</h1></center></th>
             </tr>
             <tr>
                 {courses.map((course) => (
                     <th key={course.id}>
-                        <h2>{course.name}</h2>
-                        {course.description} <br />
-                        Open to :{course.category} <br />
-                        Level : {course.level} <br />
-                        Instructor : {course.instructor.full_name} <br /><br />
+                        <h2 className="text_jl">{course.name}</h2>
+                        <p className="text_jl">{course.description}</p> <br />
+                        <p className="text_jl">Open to :{course.category}</p> <br />
+                        <p className="text_jl"> Level : {course.level}</p> <br />
+                        <p className="text_jl">Instructor : {course.instructor.full_name}</p> <br /><br />
 
-                        Availabilities : <br />
+                        <p className="text_jl">Availabilities :</p> <br />
                         {get_list_time_table(course.time_table)}
                     </th>
                 ))}

@@ -35,3 +35,11 @@
     height: 0.5px;
     margin-top: 0%;
 }
+
+.text_jl {
+    font-family: Arial,sans-serif;
+    font-style: normal;
+    letter-spacing: 1.11px;
+    color: #2a2f32;
+    text-transform: uppercase;
+}

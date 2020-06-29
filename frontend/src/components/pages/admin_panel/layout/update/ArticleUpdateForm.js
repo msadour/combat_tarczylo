@@ -44,14 +44,13 @@ class ArticleUpdateForm extends Component {
         return false
     }
 
-
     render() {
         var list_article_component = []
         this.state.articles.forEach( article => {
             list_article_component.push(
                 <div key={article.id} className="col-md-6 m-auto">
                    <div className="card card-body mt-5">
-                        <h2 className="text-center">{article.title}</h2>
+                        <h2 className="text-center text_jl">{article.title}</h2>
                         <FormField type_input="text" model="article" id={article.id} field="title" label="Title" value={article.title} />
                         <FormField type_input="textarea" model="article" id={article.id} field="content" label="Content" value={article.content} />
                         <FormField type_input="text" model="article" id={article.id} field="category" label="Category" value={article.category} />

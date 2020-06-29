@@ -27,7 +27,7 @@ class Description extends Component {
 
         if(this.state.club.time_table != null){
             this.state.club.time_table.forEach(time_table => {
-                list_time_table.push(<p key={time_table.id}> {time_table.time_table_str} </p>)
+                list_time_table.push(<p key={time_table.id} className="text_jl"> {time_table.time_table_str} </p>)
             })
         }
 
@@ -38,9 +38,9 @@ class Description extends Component {
                         <tr>
 
                             <th>
-                                <h2>Where we are?</h2>
-                               <p> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
-                               <h2>For the year of {new Date().getFullYear()} we are open :</h2>
+                                <h2 className="text_jl">Where we are?</h2>
+                               <p className="text_jl"> {this.state.club.street} {this.state.club.street} {this.state.club.zip_code} {this.state.club.city} {this.state.club.country} </p>
+                               <h2 className="text_jl">For the year of {new Date().getFullYear()} we are open :</h2>
                                 {list_time_table}
                             </th>
 

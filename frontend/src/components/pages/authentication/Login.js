@@ -50,10 +50,10 @@ class Login extends Component {
         return (
           <div className="col-md-6 m-auto">
             <div className="card card-body mt-5">
-              <h2 className="text-center">Login</h2>
+              <h2 className="text-center text_jl">Login</h2>
               <form onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
-                  <label>Username</label>
+                  <label className="text_jl">Username</label>
                   <input
                     type="text"
                     className="form-control"
@@ -64,7 +64,7 @@ class Login extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Password</label>
+                  <label className="text_jl">Password</label>
                   <input
                     type="password"
                     className="form-control"

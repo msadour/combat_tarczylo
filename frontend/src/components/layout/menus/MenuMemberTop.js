@@ -39,20 +39,20 @@ class MenuMember extends Component {
                         <tr>
                             <th>
                                 <Link to='/looking_for'>
-                                    <p className="nav-link">Looking for</p>
+                                    <p className="nav-link text_jl">Looking for</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/contact'>
-                                    <p className="nav-link">Contact</p>
+                                    <p className="nav-link text_jl">Contact</p>
                                 </Link>
 
                             </th>
 
                             <th>
                                 <Link to='/'>
-                                    <p className="nav-link" onClick={this.logout}>Logout</p>
+                                    <p className="nav-link text_jl" onClick={this.logout}>Logout</p>
                                 </Link>
                             </th>
 

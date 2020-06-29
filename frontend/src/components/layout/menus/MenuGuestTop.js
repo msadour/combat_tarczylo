@@ -12,20 +12,20 @@ class MenuGuest extends Component {
                         <tr>
                             <th>
                                 <Link to='/looking_for'>
-                                    <p className="nav-link">Looking for</p>
+                                    <p className="nav-link text_jl">Looking for</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/contact'>
-                                    <p className="nav-link">Contact</p>
+                                    <p className="nav-link text_jl">Contact</p>
                                 </Link>
 
                             </th>
 
                             <th>
                                 <Link to='/authentication'>
-                                    <p className="nav-link">Access Member</p>
+                                    <p className="nav-link text_jl">Access Member</p>
                                 </Link>
                             </th>
 

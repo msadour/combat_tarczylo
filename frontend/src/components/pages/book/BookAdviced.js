@@ -9,8 +9,6 @@ class BookAdviced extends Component {
         this.state = {
             books: []
         }
-
-        this.openLink.bind(this)
     }
 
     componentDidMount(){
@@ -26,25 +24,19 @@ class BookAdviced extends Component {
         });
     }
 
-    openLink(link) {
-        var win = window.open(link, '_blank');
-        win.focus();
-      //window.open(link);
-    }
-
     render() {
         return (
             <div>
-              <center><h1>Book adviced</h1></center>
+              <br />
               <table border="1" style={{width: "90%"}}>
                 <tbody>
                     <tr>
                         {this.state.books.map((book) => (
                             <th key={book.id}>
-                                <h2>{book.name}</h2>
-                                Author : {book.author} <br />
-                                Kind of book :{book.category} <br />
-                                URL: {book.url} <br /><br />
+                                <h2 className="text_jl">{book.name}</h2>
+                                <p className="text_jl">Author : {book.author}</p><br />
+                                <p className="text_jl">Kind of book :{book.category}</p><br />
+                                <p className="text_jl">URL: {book.url}</p><br /><br />
                             </th>
                         ))}
                     </tr>

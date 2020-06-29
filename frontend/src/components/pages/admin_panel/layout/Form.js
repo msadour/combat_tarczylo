@@ -90,7 +90,7 @@ class FormField extends Component {
                     option_radio_item.push(
                         <div>
                             <input type="radio" name="{option.name}" value="{option.value}" onChange={e => this.onChange(e)} />
-                            <label > {option.label} </label><br />
+                            <label className="text_jl"> {option.label} </label><br />
                         </div>
                     )
                 })
@@ -232,7 +232,7 @@ class FormField extends Component {
                     <tbody>
                       <tr>
                         <th>
-                            <label >{this.props.label}: </label>
+                            <label className="text_jl">{this.props.label}: </label>
                         </th>
 
                         <th>

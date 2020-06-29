@@ -7,10 +7,10 @@ class Contact extends Component {
         return (
             <div className="col-md-6 m-auto">
             <div className="card card-body mt-5">
-              <h2 className="text-center">Do you want get in touch or have a question?</h2>
+              <h2 className="text-center text_jl">Do you want get in touch or have a question?</h2>
               <form >
                 <div className="form-group">
-                  <label>Full Name</label>
+                  <label className="text_jl">Full Name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -19,7 +19,7 @@ class Contact extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Email</label>
+                  <label className="text_jl">Email</label>
                   <input
                     type="text"
                     className="form-control"
@@ -28,7 +28,7 @@ class Contact extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Subject</label>
+                  <label className="text_jl">Subject</label>
                   <input
                     type="text"
                     className="form-control"
@@ -37,7 +37,7 @@ class Contact extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Message</label>
+                  <label className="text_jl">Message</label>
                   <textarea
                     type="text"
                     className="form-control"

@@ -40,12 +40,12 @@ class CategoryCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create category for products</h2>
+                  <h2 className="text-center text_jl">Create category for products</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Category</label>
+                      <label className="text_jl">Category</label>
                       <input
                         type="text"
                         className="form-control"

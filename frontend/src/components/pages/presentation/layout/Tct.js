@@ -10,8 +10,8 @@ class Tct extends Component {
                     <tbody>
                         <tr>
                             <td style={{width:"70%"}}>
-                                <h1>{this.props.name}</h1>
-                                <p>{this.props.text}</p>
+                                <h1 className="text_jl">{this.props.name}</h1>
+                                <p className="text_jl">{this.props.text}</p>
                             </td>
 
                             <td>

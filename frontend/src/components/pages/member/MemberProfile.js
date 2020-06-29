@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
-import FormField from "./layout/Form";
+import FormField from "./Form";
 import header from "../../header";
 
 class MemberProfile extends Component {
@@ -38,7 +38,7 @@ class MemberProfile extends Component {
         return (
             <div>
                 <br />
-                <h2><center>Hello {this.state.info_member.full_name}</center></h2> <br />
+                <h2 className="text_jl"><center>Hello {this.state.info_member.full_name}</center></h2> <br />
 
                 <img style={{width:"50%"}} src={this.state.info_member.picture} /><br />
 

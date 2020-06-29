@@ -28,7 +28,7 @@ class TimeTableForm extends Component {
         return (
             <div>
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <label> Day: </label>
+                  <label className="text_jl"> Day: </label>
                   <input
                         type="text"
                         name="day"
@@ -36,7 +36,7 @@ class TimeTableForm extends Component {
                         placeholder={this.props.value}
                    />
 
-                   <label> From (hour): </label>
+                   <label className="text_jl"> From (hour): </label>
                     <input
                         type="text"
                         name="from_hour"
@@ -44,7 +44,7 @@ class TimeTableForm extends Component {
                         placeholder={this.props.value}
                    />
 
-                   <label>To (hour): </label>
+                   <label className="text_jl">To (hour): </label>
                     <input
                         type="text"
                         name="to_hour"

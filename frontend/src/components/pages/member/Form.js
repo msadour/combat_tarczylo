@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
-import header from "../../../header";
+import header from "../../header";
 
 class FormField extends Component {
 
@@ -137,7 +137,7 @@ class FormField extends Component {
                   <table border="1" style={{width: '30%'}}>
                     <tbody>
                         <tr>
-                            <th style={{width: '30%'}}> <label >{this.props.label}: </label> </th>
+                            <th style={{width: '30%'}}> <label className="text_jl">{this.props.label}: </label> </th>
                             <th>
                                 { this.props.type_input == "image" ? (
                                     <input

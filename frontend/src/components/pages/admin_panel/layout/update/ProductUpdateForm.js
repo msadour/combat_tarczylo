@@ -51,7 +51,7 @@ class ProductUpdateForm extends Component {
                 <div key={product.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
                         <img style={{width:"50%"}} src={product.picture} /><br />
-                        <h2 className="text-center">{product.name}</h2>
+                        <h2 className="text-center text_jl">{product.name}</h2>
                         <FormField type_input="text" model="product" id={product.id} field="name" label="Name" value={product.name} />
                         <FormField type_input="price" model="product" id={product.id} field="price" label="Price" value={product.price} />
                         <FormField type_input="number" model="product" id={product.id} field="quantity_available" label="Quantity_available" value={product.quantity_available} />

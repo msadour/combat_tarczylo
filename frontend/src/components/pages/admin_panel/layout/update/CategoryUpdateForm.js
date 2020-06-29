@@ -46,7 +46,7 @@ class CategoryUpdateForm extends Component {
             list_category_component.push(
                 <div key={category.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
-                        <h2 className="text-center">{category.name}</h2>
+                        <h2 className="text-center text_jl">{category.name}</h2>
                         <FormField type_input="text" model="category" id={category.id} field="name" label="Name" value={category.name} />
                         <button style={{width:"10%"}} type="button" onClick={() => this.handleRemove(category.id)}>Remove</button>
                     </div>

@@ -90,12 +90,12 @@ class CourseCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create a course</h2>
+                  <h2 className="text-center text_jl">Create a course</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Name</label>
+                      <label className="text_jl">Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -105,7 +105,7 @@ class CourseCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Description</label>
+                      <label className="text_jl">Description</label>
                       <textarea
                         rows="5"
                         type="text"
@@ -117,7 +117,7 @@ class CourseCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Place</label>
+                      <label className="text_jl">Place</label>
                       <input
                         type="text"
                         className="form-control"
@@ -128,7 +128,7 @@ class CourseCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Category</label>
+                      <label className="text_jl">Category</label>
                       <select
                         type="text"
                         className="form-control"
@@ -140,7 +140,7 @@ class CourseCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Level</label>
+                      <label className="text_jl">Level</label>
                       <select
                           name="level"
                           className="form-control"
@@ -152,7 +152,7 @@ class CourseCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Instructor </label>
+                      <label className="text_jl">Instructor </label>
 
                       <select
                           name="instructor"
@@ -166,7 +166,7 @@ class CourseCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Time table </label>
+                      <label className="text_jl">Time table </label>
                       {
                         this.state.time_table.map((timetable, index) =>{
                             return (

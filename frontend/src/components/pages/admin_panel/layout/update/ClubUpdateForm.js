@@ -105,7 +105,7 @@ class ClubUpdateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                    <h2 className="text-center">Club information</h2>
+                    <h2 className="text-center text_jl">Club information</h2>
                     <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="Name" value={this.state.club.name} />
                     <FormField type_input="textarea" model="club" id={this.state.club.id} field="description" label="Description" value={this.state.club.description} />
                     <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="Street" value={this.state.club.street} />

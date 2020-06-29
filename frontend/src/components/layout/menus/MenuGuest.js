@@ -11,31 +11,31 @@ class MenuGuest extends Component {
                         <tr>
                             <th>
                                 <Link to='/'>
-                                    <p className="nav-link">Home</p>
+                                    <p className="nav-link text_jl">Home</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/presentation'>
-                                    <p className="nav-link">Presentation</p>
+                                    <p className="nav-link text_jl">Presentation</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/training'>
-                                    <p className="nav-link">Trainings</p>
+                                    <p className="nav-link text_jl">Trainings</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/shop' >
-                                    <p className="nav-link">Store</p>
+                                    <p className="nav-link text_jl">Store</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/subscription' >
-                                    <p className="nav-link">Join us</p>
+                                    <p className="nav-link text_jl">Join us</p>
                                 </Link>
                             </th>
 

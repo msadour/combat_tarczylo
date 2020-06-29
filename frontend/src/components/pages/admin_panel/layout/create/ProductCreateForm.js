@@ -71,13 +71,13 @@ class ProductCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create a product</h2>
+                  <h2 className="text-center text_jl">Create a product</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
 
                     <div className="form-group">
-                      <label>Name</label>
+                      <label className="text_jl">Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -88,7 +88,7 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Price</label>
+                      <label className="text_jl">Price</label>
                       <input
                         type="number"
                         step="0.01"
@@ -100,7 +100,7 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Quantity available</label>
+                      <label className="text_jl">Quantity available</label>
                       <input
                         type="number"
                         step="1"
@@ -112,7 +112,7 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Size</label>
+                      <label className="text_jl">Size</label>
                       <select
                           name="size"
                           type="select"
@@ -125,7 +125,7 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Category</label>
+                      <label className="text_jl">Category</label>
 
                       <select
                           name="category"

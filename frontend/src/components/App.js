@@ -6,14 +6,11 @@ import axios from "axios";
 import Menu from "./layout/Menu";
 import Footer from "./layout/Footer";
 import Home from "./pages/home/Home";
-//import Authentication from "./pages/authentication/Authentication";
 
 import Login from "./pages/authentication/Login";
 import Subscription from "./pages/authentication/Subscription";
 
 import Contact from "./pages/contact/Contact";
-import CoursePage from "./pages/course/CoursePage";
-import MemberPage from "./pages/member/MemberPage";
 import MemberProfile from "./pages/member/MemberProfile";
 import Presentation from "./pages/presentation/Presentation";
 import Shop from "./pages/shop/Shop";
@@ -52,8 +49,6 @@ class App extends Component {
                                 <Route exact path='/authentication' component={Login} />
                                 <Route exact path='/subscription' component={Subscription} />
                                 <Route exact path='/contact' component={Contact} />
-                                <Route exact path='/course' component={CoursePage} />
-                                <Route exact path='/member' component={MemberPage} />
                                 <Route exact path='/member_profile' component={MemberProfile} />
                                 <Route exact path='/presentation' component={Presentation} />
                                 <Route exact path='/shop' component={Shop} />

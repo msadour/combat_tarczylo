@@ -113,7 +113,7 @@ class InternshipUpdateForm extends Component {
             list_internship_component.push(
                 <div key={internship.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
-                        <h2 className="text-center">{internship.name}</h2>
+                        <h2 className="text-center text_jl">{internship.name}</h2>
                         <img style={{width:"50%"}} src={internship.picture} /><br />
                         <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
                         <FormField type_input="textarea" model="internship" id={internship.id} field="description" label="Description" value={internship.description} />

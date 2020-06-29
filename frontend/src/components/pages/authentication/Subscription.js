@@ -85,12 +85,12 @@ class Subscription extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Do you want join us?</h2>
+                  <h2 className="text-center text_jl">Do you want join us?</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Email</label>
+                      <label className="text_jl">Email</label>
                       <input
                         type="email"
                         className="form-control"
@@ -100,7 +100,7 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Password</label>
+                      <label className="text_jl">Password</label>
                       <input
                         type="password"
                         className="form-control"
@@ -111,7 +111,7 @@ class Subscription extends Component {
 
 
                     <div className="form-group">
-                      <label>Confirm Password</label>
+                      <label className="text_jl">Confirm Password</label>
                       <input
                         type="password"
                         className="form-control"
@@ -122,7 +122,7 @@ class Subscription extends Component {
 
 
                    <div className="form-group">
-                      <label>Postal code</label>
+                      <label className="text_jl">Postal code</label>
                       <input
                         type="text"
                         className="form-control"
@@ -133,7 +133,7 @@ class Subscription extends Component {
 
 
                     <div className="form-group">
-                      <label>First name</label>
+                      <label className="text_jl">First name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -143,7 +143,7 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Last name</label>
+                      <label className="text_jl">Last name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -153,7 +153,7 @@ class Subscription extends Component {
                     </div>
 
                    <div className="form-group">
-                      <label>City</label>
+                      <label className="text_jl">City</label>
                       <input
                         type="text"
                         className="form-control"
@@ -164,7 +164,7 @@ class Subscription extends Component {
 
 
                    <div className="form-group">
-                      <label>Street</label>
+                      <label className="text_jl">Street</label>
                       <input
                         type="text"
                         className="form-control"
@@ -174,7 +174,7 @@ class Subscription extends Component {
                     </div>
 
                    <div className="form-group">
-                      <label>Country</label>
+                      <label className="text_jl">Country</label>
                       <input
                         type="text"
                         className="form-control"
@@ -185,7 +185,7 @@ class Subscription extends Component {
 
 
                    <div className="form-group">
-                      <label>Phone</label>
+                      <label className="text_jl">Phone</label>
                       <input
                         type="text"
                         className="form-control"
@@ -195,7 +195,7 @@ class Subscription extends Component {
                     </div>
 
                    <div className="form-group">
-                      <label>Insurance name</label>
+                      <label className="text_jl">Insurance name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -206,7 +206,7 @@ class Subscription extends Component {
 
 
                    <div className="form-group">
-                      <label>Insurance number</label>
+                      <label className="text_jl">Insurance number</label>
                       <input
                         type="text"
                         className="form-control"
@@ -216,7 +216,7 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Birthday</label>
+                      <label className="text_jl">Birthday</label>
                       <input
                             type="date"
                             name="birthday"
@@ -227,16 +227,16 @@ class Subscription extends Component {
                     </div>
 
                    <div className="form-group">
-                      <p>Sex:</p>
+                      <p className="text_jl">Sex:</p>
 
                       <input type="radio" name="sex" value="male" onChange={e => this.onChange(e)} />
-                      <label >Male</label><br />
+                      <label className="text_jl">Male</label><br />
                       <input type="radio" name="sex" value="female" onChange={e => this.onChange(e)} />
-                      <label >Female</label><br />
+                      <label className="text_jl">Female</label><br />
                     </div>
 
                     <div className="form-group">
-                      <label>Level</label>
+                      <label className="text_jl">Level</label>
                       <select
                           name="level"
                           className="form-control"
