@@ -4,24 +4,28 @@ import ReactDom from "react-dom";
 class Technical extends Component {
     render() {
         return (
-            <div>
-                <br />
-                <table border="1" style={{width:"90%"}} className="page_content">
+            <div >
+                <table border="0" className="page_content" style={{'background-color': '#FFFFFF'}}>
                     <tbody>
                         <tr>
-                            <td>
-                                <img id="img_technical" src="../../../../media/technical.png" />
+
+                            <td style={{width:"60%"}}>
+                                <h3 className="text_jl">What are technical that I teach?</h3>
+                                <hr className="hr_presentation" style={{width: "35%"}} />
+                                <p className="text_presentation">{this.props.text}</p>
                             </td>
 
                             <td>
-                                <h1 className="text_jl">What are technical that I teach?</h1>
-                                <p className="text_jl">{this.props.text}</p>
-
+                                <img id="img_technical" src="../../../../media/technical.png" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <br />
             </div>
         )
     }

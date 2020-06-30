@@ -75,7 +75,9 @@ class LookingFor extends Component {
                                     <option value="course">Courses</option>
                                     {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
                                   </select>
-                                  <button type="submit" value="Submit"> Search </button>
+                                  <button className="button" type="submit" value="Submit">
+                                    <label className="text_jl_button">Search</label>
+                                   </button>
 
                                 </th>
                             </tr>

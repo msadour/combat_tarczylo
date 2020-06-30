@@ -179,19 +179,23 @@ class CourseCreateForm extends Component {
                                         value={timetable}
                                         onChange={e => this.handleChange(e, index)}
                                       />
-                                      <button type="button" onClick={() => this.handleRemove(index)}>Remove</button>
+                                      <button className="button" type="button" onClick={() => this.handleRemove(index)}>
+                                        <label className="text_jl_button">Remove</label>
+                                      </button>
                                 </div>
                             )
                         })
                       }
 
-                      <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                      <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                        <label className="text_jl_button">Add time table</label>
+                      </button>
                     </div>
 
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button type="submit" className="button">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

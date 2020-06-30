@@ -15,7 +15,7 @@ const TrainingDetail = ({ trainings }) => {
   return (
     <div>
         <br />
-        <table border="1" style={{width: '90%'}} className="page_content">
+        <table border="1" className="page_content">
         <tbody>
             <tr>
                 <th colSpan={trainings.length}><center><h1 className="text_jl">Next internship</h1></center></th>
@@ -24,16 +24,15 @@ const TrainingDetail = ({ trainings }) => {
                 {trainings.map((training) => (
                     <th key={training.id} >
                         <h2 className="text_jl">{training.name}</h2>
-                        <img style={{width:"20%"}} src={training.picture} /><br />
-                        <p className="text_jl">{training.description}</p> <br />
-                        <p className="text_jl">Date : {training.dates}</p> <br />
-                        <p className="text_jl">Price : {training.price} €</p> <br />
-                        <p className="text_jl">Theme : {training.theme}</p> <br />
-                        <p className="text_jl">Instructor : {training.instructor.full_name}</p> <br />
-                        <p className="text_jl">Open to :{training.category}</p> <br />
-                        <p className="text_jl">Level : {training.level}</p> <br /><br />
-
-                        <p className="text_jl">Availabilities :</p> <br />
+                        <img style={{width:"20%"}} src={training.picture} /> <br /><br />
+                        <p className="text_jl">{training.description}</p>
+                        <p className="text_jl">Date : {training.dates}</p>
+                        <p className="text_jl">Price : {training.price} €</p>
+                        <p className="text_jl">Theme : {training.theme}</p>
+                        <p className="text_jl">Instructor : {training.instructor.full_name}</p>
+                        <p className="text_jl">Open to :{training.category}</p>
+                        <p className="text_jl">Level : {training.level}</p> <br />
+                        <p className="text_jl">Availabilities :</p>
 
                         {get_list_time_table(training.time_table)}
                     </th>

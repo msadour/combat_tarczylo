@@ -1,9 +1,13 @@
+body {
+    background-color: #7f0101;
+}
+
 #footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: red;
+  background-color: #950a0a;
   color: white;
   text-align: center;
 }
@@ -12,8 +16,13 @@
     width: 100%;
 }
 
-#img_tct, #img_darius {
+#img_darius {
+    margin-left: 5%
+}
+
+#img_tct, #img_technical {
     float: right;
+    margin-right: 5%
 }
 
 #menuAdmin {
@@ -25,13 +34,9 @@
     width: 100%;
 }
 
-#header_menu {
-    background-image: url("/media/presentation.png")
-}
-
 #hr_menu {
     width: 100%;
-    background-color: white;
+    background-color: #8E6300;
     height: 0.5px;
     margin-top: 0%;
 }
@@ -40,10 +45,48 @@
     font-family: Arial,sans-serif;
     font-style: normal;
     letter-spacing: 1.11px;
-    color: #2a2f32;
+    color: #8E6300;
+    text-transform: uppercase;
+}
+
+.text_jl_button {
+    font-family: Arial,sans-serif;
+    font-style: normal;
+    letter-spacing: 1.11px;
+    color: #d49400;
     text-transform: uppercase;
 }
 
 .page_content {
     margin: 0 auto;
+    width: 100%;
+    text-align: center
+}
+
+.text_presentation{
+    font-family: "Arial";
+    font-weight: normal;
+    font-style: normal;
+    color: #000;
+    text-transform: none;
+    font-size: 12px;
+    line-height: 2;
+    margin-bottom: 1.25em;
+}
+
+.button {
+    background-color: #950a0a;
+    border: 1px solid #ebebeb;
+    font-size: 14px;
+    padding-top: 5px;
+    /*padding: 0px 100%;
+    transition: .3s ease #950a0a,.3s ease #e7b600;
+    font-weight: normal;
+    line-height: 300%;*/
+}
+
+.hr_presentation{
+    background-color: #8E6300;
+    height: 1px;
+    margin-top: 0%;
 }

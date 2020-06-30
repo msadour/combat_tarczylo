@@ -91,7 +91,9 @@ class CourseUpdateForm extends Component {
                                     </th>
 
                                     <th>
-                                        <button type="button" onClick={() => this.handleRemove(time_table.id)}>Remove time table</button>
+                                        <button className="button" type="button" onClick={() => this.handleRemove(time_table.id)}>
+                                            <label className="text_jl_button">Remove time table</label>
+                                        </button>
                                     </th>
                                 </tr>
                             </tbody>
@@ -136,16 +138,24 @@ class CourseUpdateForm extends Component {
                                             value={timetable}
                                             onChange={e => this.handleChange(e, index)}
                                           />
-                                          <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
-                                          <button type="button" onClick={() => this.updateTimeTable(course.id)}>Update news time table</button>)
+                                          <button className="button" type="button" onClick={() => this.handleRemoveTimeTable(index)}>
+                                            <label className="text_jl">Remove</label>
+                                          </button>
+                                          <button className="button" type="button" onClick={() => this.updateTimeTable(course.id)}>
+                                            <label className="text_jl_button">Update new times table</label>
+                                          </button>)
                                     </div>
                                 )
                             })
                           }
 
-                          <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                          <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                            <label className="text_jl">Add time table</label>
+                          </button>
                         </div>
-                        <button type="button" onClick={() => this.handleRemove(course.id, 'course')}>Remove course</button>
+                        <button className="button" type="button" onClick={() => this.handleRemove(course.id, 'course')}>
+                            <label className="text_jl_button">Remove course</label>
+                        </button>
                         <br /><br />
                     </div>
                 </div>

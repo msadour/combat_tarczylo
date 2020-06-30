@@ -33,7 +33,7 @@ class MenuAdmin extends Component {
     render() {
         return (
             <div>
-                <table>
+                <table className="page_content">
                     <tbody>
                         <tr>
                             <th>

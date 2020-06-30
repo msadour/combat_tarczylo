@@ -34,7 +34,7 @@ class Presentation extends Component {
             <div>
                 <Tct name={this.state.presentation.name_club} text={this.state.presentation.tct} />
                 <Darius text={this.state.presentation.darius} />
-                <Technical text={this.state.presentation.technical} /> <br /> <br />
+                <Technical text={this.state.presentation.technical} />
             </div>
         )
     }

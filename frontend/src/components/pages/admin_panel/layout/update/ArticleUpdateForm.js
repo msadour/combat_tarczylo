@@ -54,7 +54,9 @@ class ArticleUpdateForm extends Component {
                         <FormField type_input="text" model="article" id={article.id} field="title" label="Title" value={article.title} />
                         <FormField type_input="textarea" model="article" id={article.id} field="content" label="Content" value={article.content} />
                         <FormField type_input="text" model="article" id={article.id} field="category" label="Category" value={article.category} />
-                        <button style={{width:"10%"}} type="button" onClick={() => this.handleRemove(article.id)}>Remove</button> <br /><br />
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(article.id)}>
+                            <label className="text_jl_button">Remove</label>
+                        </button> <br /><br />
                     </div>
                 </div>
             )

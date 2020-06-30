@@ -4,24 +4,22 @@ import ReactDom from "react-dom";
 class Darius extends Component {
     render() {
         return (
-            <div>
-                <br />
-                <table border="1" style={{width:"90%"}} className="page_content">
+            <div >
+                <table border="0" className="page_content" style={{'background-color': '#FFFFFF'}}>
                     <tbody>
                         <tr>
-                            <td style={{width:"70%"}}>
-                                <h1 className="text_jl">Darius tarczylo</h1>
-                                <p className="text_jl">{this.props.text}</p>
-                            </td>
-
                             <td>
                                 <img id="img_darius" src="../../../../media/darius.png" />
+                            </td>
+                            <td style={{width:"60%"}}>
+                                <h3 className="text_jl">Darius tarczylo</h3>
+                                <hr className="hr_presentation" style={{width: "15%"}} />
+                                <p className="text_presentation">{this.props.text}</p>
                             </td>
 
                         </tr>
                     </tbody>
                 </table>
-                <br />
             </div>
         )
     }

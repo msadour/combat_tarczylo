@@ -7,17 +7,17 @@ const ProductsCategory = ({ categories }) => {
         {categories.map((category) => (
             <div key={category.id}>
 
-                <table border="1" style={{width: '90%'}} className="page_content">
+                <table border="0" className="page_content">
                     <tbody>
                         <tr><th colSpan={categories.length}> <h1 className="text-center text_jl" colSpan={category.products.length}>{category.name}</h1> </th></tr>
                         <tr>
                             {category.products.map((product) => (
                                 <th key={product.id}>
-                                    <img style={{width:"50%"}} src={product.picture} /><br />
+                                    <img style={{width:"50%"}} src={product.picture} />
                                     <h2 className="text_jl">{product.name}</h2>
-                                    <p className="text_jl"> price : {product.price} €</p> <br />
-                                    <p className="text_jl">Quantity available : {product.quantity_available} </p><br />
-                                    <p className="text_jl">size: {product.size} </p><br /><br />
+                                    <p className="text_jl"> price : {product.price} €</p>
+                                    <p className="text_jl">Quantity available : {product.quantity_available}</p>
+                                    <p className="text_jl">size: {product.size} </p>
                                 </th>
                             ))}
                         </tr>

@@ -33,7 +33,7 @@ class Description extends Component {
 
         return (
             <div>
-                <table border="1" style={{width: '90%'}} className="page_content">
+                <table className="page_content">
                     <tbody>
                         <tr>
 

@@ -93,8 +93,8 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button type="submit" className="button">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

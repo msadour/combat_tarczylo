@@ -48,7 +48,9 @@ class CategoryUpdateForm extends Component {
                     <div className="card card-body mt-5">
                         <h2 className="text-center text_jl">{category.name}</h2>
                         <FormField type_input="text" model="category" id={category.id} field="name" label="Name" value={category.name} />
-                        <button style={{width:"10%"}} type="button" onClick={() => this.handleRemove(category.id)}>Remove</button>
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(category.id)}>
+                            <label className="text_jl_button">Remove</label>
+                        </button>
                     </div>
                 </div>
 

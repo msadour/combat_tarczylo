@@ -51,7 +51,7 @@ class TimeTableForm extends Component {
                         onChange={e => this.onChange(e)}
                         placeholder={this.props.value}
                    />
-                  <button type="submit" value="Submit"> Update </button>
+                  <button type="submit" value="Submit" className="button"> <label className="text_jl_button">Update</label> </button>
                 </form>
                 <br />
             </div>

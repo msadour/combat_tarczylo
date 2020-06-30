@@ -14,7 +14,7 @@ class Menu extends Component {
         if (localStorage.getItem('token')) {
             if (localStorage.getItem('is_admin') == 'true'){
                 return (
-                    <div id="header_menu" >
+                    <div id="header_menu">
                         <MenuMemberTop />
                         <br /><br /><br /><br />
                         <MenuAdmin />
@@ -24,7 +24,7 @@ class Menu extends Component {
                 )
             } else {
                 return (
-                    <div id="header_menu">
+                    <div id="header_menu" >
                         <MenuMemberTop />
                         <br /><br /><br /><br />
                         <MenuMember />

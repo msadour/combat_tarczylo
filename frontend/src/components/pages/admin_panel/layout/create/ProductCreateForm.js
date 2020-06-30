@@ -139,8 +139,8 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button className="button" type="submit">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

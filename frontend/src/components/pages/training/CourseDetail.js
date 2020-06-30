@@ -15,7 +15,7 @@ const CourseDetail = ({ courses }) => {
   return (
     <div>
       <br />
-      <table border="1" style={{width: '90%'}} className="page_content">
+      <table className="page_content">
         <tbody>
             <tr>
                 <th colSpan={courses.length}><center><h1 className="text_jl">Course</h1></center></th>
@@ -24,12 +24,12 @@ const CourseDetail = ({ courses }) => {
                 {courses.map((course) => (
                     <th key={course.id}>
                         <h2 className="text_jl">{course.name}</h2>
-                        <p className="text_jl">{course.description}</p> <br />
-                        <p className="text_jl">Open to :{course.category}</p> <br />
-                        <p className="text_jl"> Level : {course.level}</p> <br />
-                        <p className="text_jl">Instructor : {course.instructor.full_name}</p> <br /><br />
+                        <p className="text_jl">{course.description}</p>
+                        <p className="text_jl">Open to :{course.category}</p>
+                        <p className="text_jl"> Level : {course.level}</p>
+                        <p className="text_jl">Instructor : {course.instructor.full_name}</p>
 
-                        <p className="text_jl">Availabilities :</p> <br />
+                        <p className="text_jl">Availabilities :</p>
                         {get_list_time_table(course.time_table)}
                     </th>
                 ))}

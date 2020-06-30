@@ -37,35 +37,82 @@ class MemberProfile extends Component {
 
         return (
             <div>
-                <br />
-                <h2 className="text_jl"><center>Hello {this.state.info_member.full_name}</center></h2> <br />
+                <br /><br /><br />
+                      <table className="page_content" style={{backgroundColor: "white", width:"70%"}}>
+                        <tbody>
 
-                <img style={{width:"50%"}} src={this.state.info_member.picture} /><br />
+                            <tr>
+                                <th><br /></th>
+                            </tr>
 
-                <FormField type_input="text" field="first_name" label="First name" value={this.state.info_member.first_name} />
+                            <tr>
+                                <th><center><h2 className="text_jl">Hello {this.state.info_member.full_name}</h2></center></th>
+                            </tr>
 
-                <FormField type_input="text" field="last_name" label="Last name" value={this.state.info_member.last_name} />
+                            <tr>
+                                <th><br /></th>
+                            </tr>
 
-                <FormField type_input="text" field="email" label="Email" value={this.state.info_member.email} />
+                            <tr>
+                                <th><img style={{width:"30%"}} src={this.state.info_member.picture} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="password" label="Password" value="" />
+                            <tr>
+                                <th><br /></th>
+                            </tr>
 
-                <FormField type_input="text" field="postal_code" label="Postal code" value={this.state.info_member.postal_code} />
+                            <tr>
+                                <th><FormField type_input="text" field="first_name" label="First name" value={this.state.info_member.first_name} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="city" label="City" value={this.state.info_member.city} />
+                            <tr>
+                                <th><FormField type_input="text" field="last_name" label="Last name" value={this.state.info_member.last_name} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="street" label="Street" value={this.state.info_member.street} />
+                            <tr>
+                                <th><FormField type_input="text" field="email" label="Email" value={this.state.info_member.email} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="country" label="Country" value={this.state.info_member.country} />
+                            <tr>
+                                <th><FormField type_input="text" field="password" label="Password" value="" /></th>
+                            </tr>
 
-                <FormField type_input="text" field="phone" label="Phone" value={this.state.info_member.phone} />
+                            <tr>
+                                <th><FormField type_input="text" field="postal_code" label="Postal code" value={this.state.info_member.postal_code} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="insurance_name" label="Insurance name" value={this.state.info_member.insurance_name} />
+                            <tr>
+                                <th><FormField type_input="text" field="city" label="City" value={this.state.info_member.city} /></th>
+                            </tr>
 
-                <FormField type_input="text" field="insurance_number" label="Insurance number" value={this.state.info_member.insurance_number} />
+                            <tr>
+                                <th><FormField type_input="text" field="street" label="Street" value={this.state.info_member.street} /></th>
+                            </tr>
 
-                <FormField type_input="image" field="picture" label="Profile picture" />
-                <br />
+                            <tr>
+                                <th><FormField type_input="text" field="country" label="Country" value={this.state.info_member.country} /></th>
+                            </tr>
+
+                            <tr>
+                                <th><FormField type_input="text" field="phone" label="Phone" value={this.state.info_member.phone} /></th>
+                            </tr>
+
+                            <tr>
+                                <th><FormField type_input="text" field="insurance_name" label="Insurance name" value={this.state.info_member.insurance_name} /></th>
+                            </tr>
+
+                            <tr>
+                                <th><FormField type_input="text" field="insurance_number" label="Insurance number" value={this.state.info_member.insurance_number} /></th>
+                            </tr>
+
+                            <tr>
+                                <th><FormField type_input="image" field="picture" label="Profile picture" /></th>
+                            </tr>
+
+
+                        </tbody>
+                      </table>
+                <br /><br /><br />
             </div>
         )
     }

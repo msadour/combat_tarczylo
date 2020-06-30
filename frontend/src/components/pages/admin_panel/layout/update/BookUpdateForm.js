@@ -54,7 +54,9 @@ class BookUpdateForm extends Component {
                         <FormField type_input="text" model="book" id={book.id} field="author" label="Author" value={book.author} />
                         <FormField type_input="text" model="book" id={book.id} field="category" label="Category" value={book.category} />
                         <FormField type_input="text" model="book" id={book.id} field="url" label="URL" value={book.url} />
-                        <button style={{width:"10%"}} type="button" onClick={() => this.handleRemove(book.id)}>Remove</button>
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(book.id)}>
+                            <label className="text_jl_button">Remove</label>
+                        </button>
                     </div>
                 </div>
 

@@ -242,7 +242,7 @@ class FormField extends Component {
                         </th>
 
                         <th>
-                            <button type="submit" value="Submit"> Update </button>
+                            <button type="submit" value="Submit" className="button"><label className="text_jl_button">Update</label> </button>
                         </th>
                       </tr>
                     </tbody>

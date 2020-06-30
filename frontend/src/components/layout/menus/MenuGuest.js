@@ -6,7 +6,7 @@ class MenuGuest extends Component {
     render() {
         return (
             <div>
-                <table >
+                <table className="page_content">
                     <tbody>
                         <tr>
                             <th>
@@ -17,7 +17,7 @@ class MenuGuest extends Component {
 
                             <th>
                                 <Link to='/presentation'>
-                                    <p className="nav-link text_jl">Presentation</p>
+                                    <p className="nav-link text_jl">Presentations</p>
                                 </Link>
                             </th>
 
@@ -35,7 +35,7 @@ class MenuGuest extends Component {
 
                             <th>
                                 <Link to='/subscription' >
-                                    <p className="nav-link text_jl">Join us</p>
+                                    <p className="nav-link text_jl">Registration</p>
                                 </Link>
                             </th>
 

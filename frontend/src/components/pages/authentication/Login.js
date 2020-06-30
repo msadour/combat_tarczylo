@@ -75,8 +75,8 @@ class Login extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary">
-                    Login
+                  <button className="button" type="submit" className="button" >
+                    <label className="text_jl_button">LOGIN</label>
                   </button>
                 </div>
               </form>

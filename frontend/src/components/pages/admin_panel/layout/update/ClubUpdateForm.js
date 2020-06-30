@@ -88,7 +88,9 @@ class ClubUpdateForm extends Component {
                                     </th>
 
                                     <th>
-                                        <button type="button" onClick={() => this.handleRemove(time_table.id)}>Remove time table</button>
+                                        <button className="button" type="button" onClick={() => this.handleRemove(time_table.id)}>
+                                            <label className="text_jl_button">Remove time table</label>
+                                        </button>
                                     </th>
                                 </tr>
                             </tbody>
@@ -129,8 +131,12 @@ class ClubUpdateForm extends Component {
                                         value={timetable}
                                         onChange={e => this.handleChange(e, index)}
                                       />
-                                      <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
-                                      <button type="button" onClick={() => this.updateTimeTable()}>Update news time table</button>)
+                                      <button className="button" type="button" onClick={() => this.handleRemoveTimeTable(index)}>
+                                        <label className="text_jl_button">Remove</label>
+                                      </button>
+                                      <button className="button" type="button" onClick={() => this.updateTimeTable()}>
+                                        <label className="text_jl_button">Update new time table</label>
+                                      </button>)
 
 
 
@@ -139,8 +145,12 @@ class ClubUpdateForm extends Component {
                         })
                       }
 
-                      <button onClick={(e) => this.addTimeTable(e)}>Add new time table</button>
-                      <button onClick={(e) => this.updateTimeTable(e)}>Save all new time tables</button>
+                      <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                        <label className="text_jl_button">Add new time table</label>
+                      </button>
+                      <button className="button" onClick={(e) => this.updateTimeTable(e)}>S
+                        <label className="text_jl_button">Save all new time table</label>
+                      </button>
                     </div>
                 </div>
             </div>

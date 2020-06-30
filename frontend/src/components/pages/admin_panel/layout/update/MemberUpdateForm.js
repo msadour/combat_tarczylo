@@ -94,15 +94,20 @@ class MemberUpdateForm extends Component {
                                         </tr>
 
                                         <tr>
-                                            <th><button type="submit" value="Submit"> Delete </button></th>
+                                            <th><button className="button" type="submit" value="Submit">
+                                                <label className="text_jl_button">Delete</label>
+                                             </button></th>
 
                                             <th>
                                                 {member.have_paid == false ? (
                                                     <button
+                                                        className="button"
                                                         type="submit"
                                                         value="Submit"
                                                         onClick={e => this.acceptMember(e, member.id)}
-                                                    > Accept </button>
+                                                    >
+                                                     <label className="text_jl_button">Accept</label>
+                                                     </button>
                                                 ) : (<div></div>)}
                                             </th>
                                         </tr>

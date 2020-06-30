@@ -46,8 +46,8 @@ class Contact extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary">
-                    Send
+                  <button type="submit" className="button">
+                    <label className="text_jl_button">Send</label>
                   </button>
                 </div>
               </form>
