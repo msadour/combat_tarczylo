@@ -1,10 +1,13 @@
+body {
+    background-color: #7f0101;
+}
+
 #footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: red;
-  color: white;
+  background-color: black;
   text-align: center;
 }
 
@@ -12,26 +15,80 @@
     width: 100%;
 }
 
-#img_tct, #img_darius {
-    float: right;
+#img_darius {
+    margin-left: 5%
 }
 
-#menuAdmin {
-    background-color: red;
+#img_tct, #img_technical {
+    float: right;
+    margin-right: 5%
+}
+
+.table_main_menu {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center
 }
 
 #img_desc_club {
     float: right;
     width: 100%;
-}
-
-#header_menu {
-    background-image: url("/media/presentation.png")
+    margin-right: 5%
 }
 
 #hr_menu {
     width: 100%;
-    background-color: white;
+    background-color: #8E6300;
     height: 0.5px;
     margin-top: 0%;
+}
+
+.text_jl {
+    font-family: Arial,sans-serif;
+    font-style: normal;
+    letter-spacing: 1.11px;
+    color: #8E6300;
+    text-transform: uppercase;
+}
+
+.text_jl_button {
+    font-family: Arial,sans-serif;
+    font-style: normal;
+    letter-spacing: 1.11px;
+    color: #d49400;
+    text-transform: uppercase;
+}
+
+.page_content {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center
+}
+
+.text_presentation{
+    font-family: "Arial";
+    font-weight: normal;
+    font-style: normal;
+    color: #000;
+    text-transform: none;
+    font-size: 12px;
+    line-height: 2;
+    margin-bottom: 1.25em;
+}
+
+.button {
+    background-color: #950a0a;
+    border: 1px solid #ebebeb;
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.hr_presentation{
+    background-color: #8E6300;
+    height: 1px;
+    margin-top: 0%;
+}
+
+.form_update_admin_panel{
+    margin-right: 30%
 }

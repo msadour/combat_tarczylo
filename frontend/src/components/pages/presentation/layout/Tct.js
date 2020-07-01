@@ -4,14 +4,14 @@ import ReactDom from "react-dom";
 class Tct extends Component {
     render() {
         return (
-            <div>
-                <br />
-                <table border="1" style={{width:"90%"}}>
+            <div >
+                <table border="0" className="page_content" style={{backgroundColor: '#FFFFFF'}}>
                     <tbody>
                         <tr>
-                            <td style={{width:"70%"}}>
-                                <h1>{this.props.name}</h1>
-                                <p>{this.props.text}</p>
+                            <td style={{width:"60%"}}>
+                                <h3 className="text_jl">{this.props.name}</h3>
+                                <hr className="hr_presentation" style={{width: "5%"}}/>
+                                <p className="text_presentation">{this.props.text}</p>
                             </td>
 
                             <td>
@@ -21,7 +21,6 @@ class Tct extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <br />
             </div>
         )
     }

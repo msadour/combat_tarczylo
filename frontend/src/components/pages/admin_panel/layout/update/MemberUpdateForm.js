@@ -66,24 +66,53 @@ class MemberUpdateForm extends Component {
         this.state.members.forEach( member => {
 
             list_member_component.push(
-
-
-                <div key={member.id}>
+                <div key={member.id} className="col-md-6 m-auto">
                     { member.is_superuser == false ? (
-                        <section>
-                            <h2>{member.full_name}</h2>
+                        <section className="card card-body mt-5">
+                            <h2 className="text-center text_jl">{member.full_name}</h2>
                             <form onSubmit={e => this.onSubmit(e, member.id)}>
-                                <label> {member.email} </label><br />
-                                <label> {member.sex} </label><br />
-                                <label> {member.level} </label><br />
-                                <button type="submit" value="Submit"> Delete </button>
-                                {member.have_paid == false ? (
-                                    <button
-                                        type="submit"
-                                        value="Submit"
-                                        onClick={e => this.acceptMember(e, member.id)}
-                                    > Accept </button>
-                                ) : (<div></div>)}
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <th colSpan={2}><img style={{width:"50%"}} src={member.picture} /></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><p className="text_jl">Email :</p></th>
+                                            <th><p className="text_jl">{member.email}</p></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><p className="text_jl">Sex :</p></th>
+                                            <th><p className="text_jl">{member.sex}</p></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><p className="text_jl">Level :</p></th>
+                                            <th><p className="text_jl">{member.level}</p></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><button className="button" type="submit" value="Submit">
+                                                <label className="text_jl_button">Delete</label>
+                                             </button></th>
+
+                                            <th>
+                                                {member.have_paid == false ? (
+                                                    <button
+                                                        className="button"
+                                                        type="submit"
+                                                        value="Submit"
+                                                        onClick={e => this.acceptMember(e, member.id)}
+                                                    >
+                                                     <label className="text_jl_button">Accept</label>
+                                                     </button>
+                                                ) : (<div></div>)}
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </form><br />
                         </section>
                     ): (<section></section>)}
@@ -94,6 +123,7 @@ class MemberUpdateForm extends Component {
         return (
             <div>
                 {list_member_component}
+                <br /><br />
             </div>
         )
     }

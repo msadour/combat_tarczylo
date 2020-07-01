@@ -5,7 +5,7 @@ function get_list_time_table(time_table){
 
     if(time_table != null){
         time_table.forEach(time_table => {
-            list_time_table.push(<p key={time_table.id}> {time_table.time_table_str} </p>)
+            list_time_table.push(<p key={time_table.id} className="text_presentation"> {time_table.time_table_str} </p>)
         })
     }
     return list_time_table
@@ -14,33 +14,41 @@ function get_list_time_table(time_table){
 const TrainingDetail = ({ trainings }) => {
   return (
     <div>
-        <br />
-        <table border="1" style={{width: '90%'}}>
+        <table border="0" className="page_content" style={{backgroundColor: "white"}}>
         <tbody>
             <tr>
-                <th colSpan={trainings.length}><center><h1>Next internship</h1></center></th>
+                <th colSpan={trainings.length}><center>
+                    <br />
+                    <h2 className="text_jl">Next internships</h2></center>
+                    <hr className="hr_presentation" style={{width: "12%"}}/>
+                </th>
             </tr>
             <tr>
                 {trainings.map((training) => (
                     <th key={training.id} >
-                        <h1>{training.name}</h1>
-                        {training.description} <br />
-                        Date : {training.dates} <br />
-                        Price : {training.price} <br />
-                        Theme : {training.price} <br />
-                        Instructor : {training.instructor.full_name} <br />
-                        Open to :{training.category} <br />
-                        Level : {training.level} <br /><br />
-
-                        Availabilities : <br />
-
-                        {get_list_time_table(training.time_table)}
+                        <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
+                            <br />
+                            <h3 className="text_jl">{training.name}</h3>
+                            <img style={{width:"20%"}} src={training.picture} /> <br />
+                            <p className="text_presentation">{training.description}</p>
+                            <p className="text_presentation">Date : {training.dates}</p>
+                            <p className="text_presentation">Price : {training.price} €</p>
+                            <p className="text_presentation">Theme : {training.theme}</p>
+                            <p className="text_presentation">Instructor : {training.instructor.full_name}</p>
+                            <p className="text_presentation">Open to :{training.category}</p>
+                            <p className="text_presentation">Level : {training.level}</p>
+                            <p className="text_presentation">Availabilities :</p>
+                            {get_list_time_table(training.time_table)}
+                            <br />
+                        </div>
                     </th>
                 ))}
             </tr>
+            <tr>
+                <th><br /></th>
+            </tr>
         </tbody>
       </table>
-      <br />
     </div>
   )
 };

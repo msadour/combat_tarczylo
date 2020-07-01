@@ -48,12 +48,12 @@ class ArticleCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create Article</h2>
+                  <h2 className="text-center text_jl">Create Article</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Title</label>
+                      <label className="text_jl">Title</label>
                       <input
                         type="text"
                         className="form-control"
@@ -63,8 +63,9 @@ class ArticleCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Content</label>
-                      <input
+                      <label className="text_jl">Content</label>
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="content"
@@ -74,7 +75,7 @@ class ArticleCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Category</label>
+                      <label className="text_jl">Category</label>
                       <input
                         type="text"
                         className="form-control"
@@ -83,12 +84,9 @@ class ArticleCreateForm extends Component {
                       />
                     </div>
 
-
-
-
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button type="submit" className="button">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

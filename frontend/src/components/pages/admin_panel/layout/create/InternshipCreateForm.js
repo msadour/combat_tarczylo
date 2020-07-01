@@ -4,6 +4,7 @@ import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
 import header from "../../../../header";
+import {OPTION_TEMPLATE_LEVEL, OPTION_TEMPLATES_TRAINING_OPEN} from "../../../../layout/ChoiceSelect";
 
 class InternshipCreateForm extends Component {
 
@@ -95,12 +96,12 @@ class InternshipCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create an internship</h2>
+                  <h2 className="text-center text_jl">Create an internship</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Name</label>
+                      <label className="text_jl">Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -110,8 +111,9 @@ class InternshipCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Description</label>
-                      <input
+                      <label className="text_jl">Description</label>
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="description"
@@ -120,7 +122,7 @@ class InternshipCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Place</label>
+                      <label className="text_jl">Place</label>
                       <input
                         type="text"
                         className="form-control"
@@ -130,31 +132,36 @@ class InternshipCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Category</label>
-                      <input
+                      <label className="text_jl">Category</label>
+                      <select
                         type="text"
                         className="form-control"
                         name="category"
                         onChange={e => this.onChange(e)}
-                      />
+                      >
+                        {OPTION_TEMPLATES_TRAINING_OPEN}
+                      </select>
                     </div>
 
                     <div className="form-group">
-                      <label>Level</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="level"
-                        onChange={e => this.onChange(e)}
-                      />
+                      <label className="text_jl">Level</label>
+                      <select
+                          name="level"
+                          className="form-control"
+                          type="select"
+                          onChange={e => this.onChange(e)}
+                      >
+                        {OPTION_TEMPLATE_LEVEL}
+                      </select>
                     </div>
 
                     <div className="form-group">
-                      <label>Instructor</label>
+                      <label className="text_jl">Instructor</label>
 
                       <select
                           name="instructor"
                           type="select"
+                          className="form-control"
                           onChange={e => this.onChange(e)}
                       >
                         {optionTemplate}
@@ -163,7 +170,7 @@ class InternshipCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Time table</label>
+                      <label className="text_jl">Time table</label>
                       {
                         this.state.time_table.map((timetable, index) =>{
                             return (
@@ -176,29 +183,32 @@ class InternshipCreateForm extends Component {
                                         value={timetable}
                                         onChange={e => this.handleChange(e, index)}
                                       />
-                                      <button type="button" onClick={() => this.handleRemove(index)}>Remove</button>
+                                      <button className="button" type="button" onClick={() => this.handleRemove(index)}>
+                                        <label className="text_jl_button">Remove</label>
+                                      </button>
                                 </div>
                             )
                         })
                       }
 
-                      <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                      <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                        <label className="text_jl_button">Add time table</label>
+                      </button>
                     </div>
 
 
                     <div className="form-group">
-                      <label>Date begin</label>
+                      <label className="text_jl">Date begin</label>
                       <input
                             type="date"
                             name="date_begin"
                             placeholder="DD/MM/YYYY"
                             onChange={e => this.onChange(e)}
-//                            value="0000-00-00"
                         />
                     </div>
 
                     <div className="form-group">
-                      <label>Date end</label>
+                      <label className="text_jl">Date end</label>
                       <input
                         type="date"
                         name="date_end"
@@ -209,9 +219,10 @@ class InternshipCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Price</label>
+                      <label className="text_jl">Price</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="0.01"
                         className="form-control"
                         name="price"
                         onChange={e => this.onChange(e)}
@@ -219,7 +230,7 @@ class InternshipCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Theme</label>
+                      <label className="text_jl">Theme</label>
                       <input
                         type="text"
                         className="form-control"
@@ -230,8 +241,8 @@ class InternshipCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button className="button" type="submit">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

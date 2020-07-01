@@ -15,32 +15,32 @@ class Result extends Component {
                             <table border="1">
                                 <tbody>
                                     <tr>
-                                        <th colSpan={2}>{this.props.result.name}</th>
+                                        <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Description :</th>
-                                        <th>{this.props.result.description}</th>
+                                        <th><p className="text_jl">Description :</p></th>
+                                        <th><p className="text_jl">{this.props.result.description}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Place :</th>
-                                        <th>{this.props.result.place}</th>
+                                        <th><p className="text_jl">Place :</p></th>
+                                        <th><p className="text_jl">{this.props.result.place}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Level :</th>
-                                        <th>{this.props.result.level}</th>
+                                        <th><p className="text_jl">Level :</p></th>
+                                        <th><p className="text_jl">{this.props.result.level}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Category :</th>
-                                        <th>{this.props.result.category}</th>
+                                        <th><p className="text_jl">Category :</p></th>
+                                        <th><p className="text_jl">{this.props.result.category}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Instructor :</th>
-                                        <th>{this.props.result.instructor.full_name}</th>
+                                        <th><p className="text_jl">Instructor :</p></th>
+                                        <th><p className="text_jl">{this.props.result.instructor.full_name}</p></th>
                                     </tr>
                                 </tbody>
                             </table> <br />
@@ -50,51 +50,51 @@ class Result extends Component {
                             <table border="1">
                                 <tbody>
                                     <tr>
-                                        <th colSpan={2}>{this.props.result.name}</th>
+                                        <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Description :</th>
-                                        <th>{this.props.result.description}</th>
+                                        <th><p className="text_jl">Description :</p></th>
+                                        <th><p className="text_jl">{this.props.result.description}</p></th>
                                     </tr>
 
 
                                     <tr>
-                                        <th>Place :</th>
-                                        <th>{this.props.result.place}</th>
+                                        <th><p className="text_jl">Place :</p></th>
+                                        <th><p className="text_jl">{this.props.result.place}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Level :</th>
-                                        <th>{this.props.result.level}</th>
+                                        <th><p className="text_jl">Level :</p></th>
+                                        <th><p className="text_jl">{this.props.result.level}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Category :</th>
-                                        <th>{this.props.result.category}</th>
+                                        <th><p className="text_jl">Category :</p></th>
+                                        <th><p className="text_jl">{this.props.result.category}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Instructor :</th>
-                                        <th>{this.props.result.instructor.full_name}</th>
+                                        <th><p className="text_jl">Instructor :</p></th>
+                                        <th><p className="text_jl">{this.props.result.instructor.full_name}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Price :</th>
-                                        <th>{this.props.result.price}</th>
+                                        <th><p className="text_jl">Price :</p></th>
+                                        <th><p className="text_jl">{this.props.result.price}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Theme :</th>
-                                        <th>{this.props.result.theme}</th>
+                                        <th><p className="text_jl">Theme :</p></th>
+                                        <th><p className="text_jl">{this.props.result.theme}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Date : </th>
+                                        <th><p className="text_jl">Date : </p></th>
                                         {this.props.result.date_end !== null ? (
-                                            <th>{this.props.result.dates}</th>
+                                            <th><p className="text_jl">{this.props.result.dates}</p></th>
                                         ) : (
-                                            <th>{this.props.result.date_begin}</th>
+                                            <th><p className="text_jl">{this.props.result.date_begin}</p></th>
                                         )}
 
                                     </tr>
@@ -106,17 +106,17 @@ class Result extends Component {
                             <table border="1">
                                 <tbody>
                                     <tr>
-                                        <th colSpan={2}>{this.props.result.title}</th>
+                                        <th colSpan={2}><p className="text_jl">{this.props.result.title}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Content :</th>
-                                        <th>{this.props.result.content}</th>
+                                        <th><p className="text_jl">Content :</p></th>
+                                        <th><p className="text_jl">{this.props.result.content}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Category :</th>
-                                        <th>{this.props.result.category}</th>
+                                        <th><p className="text_jl">Category :</p></th>
+                                        <th><p className="text_jl">{this.props.result.category}</p></th>
                                     </tr>
                                 </tbody>
                             </table> <br />
@@ -127,22 +127,22 @@ class Result extends Component {
                             <table border="1">
                                 <tbody>
                                     <tr>
-                                        <th colSpan={2}>{this.props.result.name}</th>
+                                        <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Author :</th>
-                                        <th>{this.props.result.author}</th>
+                                        <th><p className="text_jl">Author :</p></th>
+                                        <th><p className="text_jl">{this.props.result.author}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>Category :</th>
-                                        <th>{this.props.result.category}</th>
+                                        <th><p className="text_jl">Category :</p></th>
+                                        <th><p className="text_jl">{this.props.result.category}</p></th>
                                     </tr>
 
                                     <tr>
-                                        <th>URL :</th>
-                                        <th>{this.props.result.url}</th>
+                                        <th><p className="text_jl">URL :</p></th>
+                                        <th><p className="text_jl">{this.props.result.url}</p></th>
                                     </tr>
                                 </tbody>
                             </table> <br />

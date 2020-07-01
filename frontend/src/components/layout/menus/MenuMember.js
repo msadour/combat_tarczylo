@@ -33,40 +33,45 @@ class MenuMember extends Component {
 
     render() {
         return (
-            <div>
-                <table >
+            <div className="main_menu">
+                <table className="page_content table_main_menu">
                     <tbody>
                         <tr>
                             <th>
                                 <Link to='/'>
-                                    <p className="nav-link">Home</p>
+                                    <p className="nav-link text_jl">Home</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/member_profile'>
-                                    <p className="nav-link">Profile</p>
+                                    <p className="nav-link text_jl">Profile</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/presentation'>
-                                    <p className="nav-link">Presentation</p>
+                                    <p className="nav-link text_jl">Presentation</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/training'>
-                                    <p className="nav-link">Trainings</p>
+                                    <p className="nav-link text_jl">Trainings</p>
                                 </Link>
                             </th>
 
                             <th>
                                 <Link to='/shop'>
-                                    <p className="nav-link">Store</p>
+                                    <p className="nav-link text_jl">Store</p>
                                 </Link>
                             </th>
 
+                            <th>
+                                <Link to='/book'>
+                                    <p className="nav-link text_jl">Books</p>
+                                </Link>
+                            </th>
                         </tr>
                     </tbody>
                 </table>

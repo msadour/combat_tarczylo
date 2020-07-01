@@ -5,19 +5,19 @@
       "name": "Book 1",
       "author": "author 1",
       "category": "category 1",
-      "url": "cat1.com"
+      "url": "www.cat1.com"
     },
     {
       "name": "Book 2",
       "author": "author 2",
       "category": "category 2",
-      "url": "cat2.com"
+      "url": "www.cat2.com"
     },
     {
       "name": "Book 3",
       "author": "author 3",
       "category": "category 3",
-      "url": "cat3.com"
+      "url": "www.cat3.com"
     }
   ],
 

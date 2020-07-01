@@ -24,9 +24,9 @@ class MenuManager extends Component {
                       <li className="nav-item active">
                           <Link
                             to='admin_panel_member'
-                            className="nav-link"
+                            className="nav-link text_jl"
                           >
-                            <p className="nav-link" >Member</p>
+                            <p className="nav-link text_jl" >Member</p>
                         </Link>
                       </li>
 
@@ -34,55 +34,55 @@ class MenuManager extends Component {
                           <Link
                           to='admin_panel_article'
                           className="nav-link">
-                            <p className="nav-link" >Article</p>
+                            <p className="nav-link text_jl" >Article</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_presentation' className="nav-link">
-                            <p className="nav-link">Presentation</p>
+                            <p className="nav-link text_jl">Presentation</p>
                         </Link>
                       </li>
 
                     <li className="nav-item active">
                           <Link to='admin_panel_product' className="nav-link">
-                            <p className="nav-link">Product</p>
+                            <p className="nav-link text_jl">Product</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_product_category' className="nav-link">
-                            <p className="nav-link">Product category</p>
+                            <p className="nav-link text_jl">Product category</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_course' className="nav-link">
-                            <p className="nav-link">Course</p>
+                            <p className="nav-link text_jl">Course</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_internship' className="nav-link">
-                            <p className="nav-link">Internship</p>
+                            <p className="nav-link text_jl">Internship</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_important_message' className="nav-link">
-                            <p className="nav-link">Message</p>
+                            <p className="nav-link text_jl">Message</p>
                         </Link>
                       </li>
 
                     <li className="nav-item active">
                           <Link to='admin_panel_club' className="nav-link">
-                            <p className="nav-link">Club information</p>
+                            <p className="nav-link text_jl">Club information</p>
                         </Link>
                       </li>
 
                         <li className="nav-item active">
                           <Link to='admin_panel_book' className="nav-link">
-                            <p className="nav-link">Book</p>
+                            <p className="nav-link text_jl">Book</p>
                         </Link>
                       </li>
 

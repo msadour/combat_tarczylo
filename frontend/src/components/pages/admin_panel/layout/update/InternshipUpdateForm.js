@@ -81,15 +81,27 @@ class InternshipUpdateForm extends Component {
         var list_timetable_component = []
 
         var time_tables = internship.time_table
-        time_tables.forEach( time_table => {
-            list_timetable_component.push(
-                <div key={time_table.id}>
-                    <h2>{time_table.name}</h2>
-                    <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
-                    <button type="button" onClick={() => this.handleRemove(time_table.id, 'time_table')}>Remove time table</button>
-                </div>
-            )
-        })
+            time_tables.forEach( time_table => {
+                list_timetable_component.push(
+                    <div key={time_table.id}>
+                        <table style={{width: "80%"}}>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                                    </th>
+
+                                    <th>
+                                        <button className="button" type="button" onClick={() => this.handleRemove(time_table.id)}>
+                                            <label className="text_jl_button">Remove time table</label>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            })
         return list_timetable_component
     }
 
@@ -101,50 +113,63 @@ class InternshipUpdateForm extends Component {
         this.state.internships.forEach( internship => {
 
             list_internship_component.push(
-                <div key={internship.id}>
-                    <h2>{internship.name}</h2>
-                    <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="description" label="Description" value={internship.description} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="place" label="Place" value={internship.place} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="level" label="Level" value={internship.level} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="category" label="Category" value={internship.category} />
-                    <FormField type_input="date" model="internship" id={internship.id} field="date_begin" label="Date begin" value={internship.date_begin_formated} />
-                    <FormField type_input="date" model="internship" id={internship.id} field="date_end" label="Date end" value={internship.date_end_formated} />
-                    <FormField type_input="price" model="internship" id={internship.id} field="price" label="Price" value={internship.price} />
-                    <FormField type_input="text" model="internship" id={internship.id} field="theme" label="Theme" value={internship.theme} />
-                    <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="Instructor" value={internship.instructor} />
+                <div key={internship.id} className="col-md-6 m-auto">
+                    <div className="card card-body mt-5">
+                        <h2 className="text-center text_jl">{internship.name}</h2>
+                        <img style={{width:"50%"}} src={internship.picture} /><br />
+                        <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
+                        <FormField type_input="textarea" model="internship" id={internship.id} field="description" label="Description" value={internship.description} />
+                        <FormField type_input="text" model="internship" id={internship.id} field="place" label="Place" value={internship.place} />
+                        <FormField type_input="text" model="internship" id={internship.id} field="level" label="Level" value={internship.level} />
+                        <FormField type_input="text" model="internship" id={internship.id} field="category" label="Category" value={internship.category} />
+                        <FormField type_input="date" model="internship" id={internship.id} field="date_begin" label="Date begin" value={internship.date_begin_formated} />
+                        <FormField type_input="date" model="internship" id={internship.id} field="date_end" label="Date end" value={internship.date_end_formated} />
+                        <FormField type_input="price" model="internship" id={internship.id} field="price" label="Price" value={internship.price} />
+                        <FormField type_input="text" model="internship" id={internship.id} field="theme" label="Theme" value={internship.theme} />
+                        <FormField type_input="choice" model_value_possible="instructor" model="internship" id={internship.id} field="instructor" label="Instructor" value={internship.instructor} />
+                        <FormField type_input="image" model="internship" id={internship.id} field="picture" label="Picture" />
+                        {this.build_timetable(internship)}
+                         <br /><br />
+                        <div className="form-group">
+                          {
+                            this.state.time_table.map((timetable, index) =>{
+                                return (
+                                    <div key={index}>
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            name="time_table"
+                                            placeholder="Monday 10:00:00 12:30:00"
+                                            value={timetable}
+                                            onChange={e => this.handleChange(e, index)}
+                                          />
+                                          <button className="button" type="button" onClick={() => this.handleRemoveTimeTable(index)}>
+                                            <label className="text_jl">Remove</label>
+                                          </button>
+                                          <button className="button" type="button" onClick={() => this.updateTimeTable(internship.id)}>
+                                            <label className="text_jl_button">Update news time tables</label>
+                                          </button>)
+                                    </div>
+                                )
+                            })
+                          }
 
-                    {this.build_timetable(internship)}
-                    <button type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>Remove</button> <br /><br />
-                                    <div className="form-group">
-                  {
-                    this.state.time_table.map((timetable, index) =>{
-                        return (
-                            <div key={index}>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="time_table"
-                                    placeholder="Monday 10:00:00 12:30:00"
-                                    value={timetable}
-                                    onChange={e => this.handleChange(e, index)}
-                                  />
-                                  <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
-                                  <button type="button" onClick={() => this.updateTimeTable(internship.id)}>Update news time table</button>)
-                            </div>
-                        )
-                    })
-                  }
-
-                  <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
+                          <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                            <label className="text_jl_button">Add time table</label>
+                          </button> <br /><br />
+                          <button className="button" type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>
+                            <label className="text_jl_button">Remove</label>
+                          </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
             )
         })
 
         return (
             <div>
                 {list_internship_component}
+                <br /><br />
             </div>
         )
     }

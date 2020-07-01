@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
-import './style.css';
+//import './style.css';
 
 class Footer extends Component {
     render() {
 
         return (
-            <div className='footer'>footer</div>
+            <div id='footer'>
+                <br />
+                <p className="text_jl"> Darius Tarzylo - Club Technical Combative Tarczylo 2020 </p>
+                <br />
+            </div>
         )
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
-import header from "../../../header";
+import header from "../../header";
 
 class FormField extends Component {
 
@@ -99,6 +99,26 @@ class FormField extends Component {
              });
              break;
 
+
+              case "picture":
+                const formData = new FormData();
+
+                formData.append(
+                    this.props.field,
+                    e.target[0].files[0],
+                    e.target[0].files[0].name
+                );
+                axios.patch('/api_tct/member/' + member_id + '/upload/', formData,
+                    { headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                        'Content-Disposition': 'attachment; filename=pics.png'
+                    }, }
+                )
+                .then(res => {
+                    window.location.reload();
+                })
+             break;
+
              default :
                 alert('error');
         }
@@ -114,20 +134,31 @@ class FormField extends Component {
         return (
             <div>
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <table border="1" style={{width: '30%'}}>
+                  <table border="0" style={{width: '50%'}} className="page_content">
                     <tbody>
                         <tr>
-                            <th style={{width: '30%'}}> <label >{this.props.label}: </label> </th>
+                            <th style={{width: '30%'}}> <label className="text_jl">{this.props.label}: </label> </th>
                             <th>
-                                <input
-                                    type="text"
-                                    name="new_value"
-                                    style={{width: '100%'}}
-                                    onChange={e => this.onChange(e)}
-                                    placeholder={this.props.value}
-                                 />
+                                { this.props.type_input == "image" ? (
+                                    <input
+                                        type='file'
+                                        style={{width: '100%'}}
+                                        onChange={e => this.onChange(e)}
+                                     />
+                                ) : (
+                                    <input
+                                        type='text'
+                                        name="new_value"
+                                        style={{width: '100%'}}
+                                        onChange={e => this.onChange(e)}
+                                        placeholder={this.props.value}
+                                     />
+                                )}
+
                             </th>
-                            <th> <button type="submit" value="Submit"> Update </button> </th>
+                            <th> <button className="button" type="submit" value="Submit">
+                                <label className="text_jl_button">Update</label>
+                             </button> </th>
                         </tr>
 
                     </tbody>

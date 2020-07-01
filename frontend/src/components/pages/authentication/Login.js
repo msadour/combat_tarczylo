@@ -3,8 +3,6 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
-import { login } from '../actions/auth';
-
 class Login extends Component {
 
     constructor(props) {
@@ -38,6 +36,7 @@ class Login extends Component {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('member_id');
+            alert("Login or password is wrong, or your account is not activate.");
             this.props.history.push("/authentication");
         });
     }
@@ -51,10 +50,10 @@ class Login extends Component {
         return (
           <div className="col-md-6 m-auto">
             <div className="card card-body mt-5">
-              <h2 className="text-center">Do you have an account</h2>
+              <h2 className="text-center text_jl">Login</h2>
               <form onSubmit={e => this.onSubmit(e)}>
                 <div className="form-group">
-                  <label>Username</label>
+                  <label className="text_jl">Username</label>
                   <input
                     type="text"
                     className="form-control"
@@ -65,7 +64,7 @@ class Login extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label>Password</label>
+                  <label className="text_jl">Password</label>
                   <input
                     type="password"
                     className="form-control"
@@ -76,8 +75,8 @@ class Login extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary">
-                    Login
+                  <button className="button" type="submit" className="button" >
+                    <label className="text_jl_button">LOGIN</label>
                   </button>
                 </div>
               </form>

@@ -48,6 +48,20 @@ class FormField extends Component {
                 )
             break;
 
+            case "textarea":
+                return (
+                    <div>
+                        <textarea
+                            type="text"
+                            name="new_value"
+                            cols="50"
+                            onChange={e => this.onChange(e)}
+                            placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
             case "choice":
                 let optionTemplate = [<option key={0} value={0}></option>]
 
@@ -74,19 +88,18 @@ class FormField extends Component {
 
                 this.props.options_radio.forEach(option => {
                     option_radio_item.push(
-                        <div>
-                            <input type="radio" name="{option.name}" value="{option.value}" onChange={e => this.onChange(e)} />
-                            <label > {option.label} </label><br />
+                        <div key={option.name}>
+                            <input type="radio" name="new_value" value={option.value} onChange={e => this.onChange(e)} />
+                            <label className="text_jl"> {option.label} </label><br />
                         </div>
                     )
                 })
 
                 return (
                     <div>
-                        {optionTemplate}
+                        {option_radio_item}
                     </div>
                 )
-
             break;
 
             case "price":
@@ -112,6 +125,18 @@ class FormField extends Component {
                             name="new_value"
                             onChange={e => this.onChange(e)}
                             placeholder={this.props.value}
+                        />
+                    </div>
+                )
+            break;
+
+            case "image":
+                return (
+                    <div>
+                        <input
+                            type="file"
+                            name="new_value"
+                            onChange={e => this.onChange(e)}
                         />
                     </div>
                 )
@@ -143,7 +168,6 @@ class FormField extends Component {
                         </div>
                     )
                 }
-
             break;
 
         }
@@ -154,19 +178,44 @@ class FormField extends Component {
 
         e.preventDefault();
         const member_id = localStorage.getItem("member_id");
-        var data = {}
-        data[this.props.field] = this.state.new_value
-        axios.patch('/api_tct/' + this.props.model + '/' + this.props.id + '/', data,
-            { headers: {
-                'Authorization': 'Token ' + localStorage.getItem('token')
-            }, }
-        )
-        .then(res => {
-            window.location.reload();
-        })
-        .catch(err => {
-            console.log(err)
-        });
+        var data = {};
+        data[this.props.field] = this.state.new_value;
+        var url = '/api_tct/' + this.props.model + '/' + this.props.id + '/';
+        if (e.target[0].type == 'file'){
+            url += 'upload/';
+            const formData = new FormData();
+
+            formData.append(
+                this.props.field,
+                e.target[0].files[0],
+                e.target[0].files[0].name
+              );
+            axios.patch(url, formData,
+                { headers: {
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                    'Content-Disposition': 'attachment; filename=pics.png'
+                }, }
+            )
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        } else {
+                axios.patch(url, data,
+                    { headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token')
+                    }, }
+                )
+                .then(res => {
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+
+        }
     }
 
     onChange = e => {
@@ -176,11 +225,25 @@ class FormField extends Component {
     render() {
 
         return (
-            <div>
+            <div className="col-md-6 m-auto">
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <label >{this.props.label}: </label>
-                  {this.buildInput()}
-                  <button type="submit" value="Submit"> Update </button>
+                  <table className="form_update_admin_panel">
+                    <tbody>
+                      <tr>
+                        <th>
+                            <label className="text_jl">{this.props.label}: </label>
+                        </th>
+
+                        <th>
+                            {this.buildInput()}
+                        </th>
+
+                        <th>
+                            <button type="submit" value="Submit" className="button"><label className="text_jl_button">Update</label> </button>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
                 </form>
                 <br />
             </div>

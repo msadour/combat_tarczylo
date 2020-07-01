@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
-import header from "../../header";
 import TrainingDetail from "./TrainingDetail";
 import Description from "../../layout/DescriptionClub";
 import CourseDetail from "./CourseDetail"
@@ -34,6 +33,7 @@ class Training extends Component {
     render() {
         return (
             <div>
+                <br />
                 <Description />
                 <CourseDetail courses={this.state.courses} />
                 <TrainingDetail trainings={this.state.trainings} />

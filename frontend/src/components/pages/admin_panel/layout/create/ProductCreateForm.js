@@ -4,6 +4,8 @@ import axios from "axios";
 import {withRouter} from 'react-router-dom';
 
 import header from "../../../../header";
+import {OPTION_TEMPLATE_SIZE, OPTION_TEMPLATES_CATEGORY_PRODUCT} from "../../../../layout/ChoiceSelect";
+
 
 class ProductCreateForm extends Component {
 
@@ -16,6 +18,7 @@ class ProductCreateForm extends Component {
             quantity_available: "",
             size: "",
             category: 0,
+            picture: null,
             options_category: [],
         }
 
@@ -24,15 +27,6 @@ class ProductCreateForm extends Component {
     }
 
     componentDidMount() {
-//        axios.get('/api_tct/category/')
-//        .then(res => {
-//            this.setState({options_category: res});
-//        })
-//        .catch(err => {
-//        console.log(res);
-//            alert('error');
-//
-//        });
 
         fetch('/api_tct/category/')
         .then(response => response.json())
@@ -56,7 +50,7 @@ class ProductCreateForm extends Component {
 
         })
         .then(res => {
-            alert("Product created.");
+            alert('Product created')
             window.location.reload();
         })
         .catch(err => {
@@ -68,22 +62,22 @@ class ProductCreateForm extends Component {
 
     render() {
 
-        let optionTemplate = [<option key={0} value={0}></option>]
+        let optionTemplateCategory = [<option key={0} value={0}></option>]
 
         this.state.options_category.forEach(category => {
-            optionTemplate.push(<option key={category.id} value={category.id}>{category.name}</option>)
+            optionTemplateCategory.push(<option key={category.id} value={category.id}>{category.name}</option>)
         })
 
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create a product</h2>
+                  <h2 className="text-center text_jl">Create a product</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
 
                     <div className="form-group">
-                      <label>Name</label>
+                      <label className="text_jl">Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -94,9 +88,10 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Price</label>
+                      <label className="text_jl">Price</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="0.01"
                         className="form-control"
                         name="price"
                         onChange={e => this.onChange(e)}
@@ -105,9 +100,10 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Quantity available</label>
+                      <label className="text_jl">Quantity available</label>
                       <input
-                        type="text"
+                        type="number"
+                        step="1"
                         className="form-control"
                         name="quantity_available"
                         onChange={e => this.onChange(e)}
@@ -116,32 +112,35 @@ class ProductCreateForm extends Component {
 
 
                     <div className="form-group">
-                      <label>Size</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="size"
-                        onChange={e => this.onChange(e)}
-                      />
-                    </div>
-
-
-                    <div className="form-group">
-                      <label>Category</label>
-
+                      <label className="text_jl">Size</label>
                       <select
-                          name="category"
+                          name="size"
                           type="select"
+                          className="form-control"
                           onChange={e => this.onChange(e)}
                       >
-                        {optionTemplate}
+                        {OPTION_TEMPLATE_SIZE}
                       </select>
                     </div>
 
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <label className="text_jl">Category</label>
+
+                      <select
+                          name="category"
+                          type="select"
+                          className="form-control"
+                          onChange={e => this.onChange(e)}
+                      >
+                        {optionTemplateCategory}
+                      </select>
+                    </div>
+
+
+                    <div className="form-group">
+                      <button className="button" type="submit">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

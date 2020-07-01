@@ -47,13 +47,17 @@ class BookUpdateForm extends Component {
         this.state.books.forEach( book => {
 
             list_book_component.push(
-                <div key={book.id}>
-                    <h2>{book.name}</h2>
-                    <FormField type_input="text" model="book" id={book.id} field="name" label="Name" value={book.name} />
-                    <FormField type_input="text" model="book" id={book.id} field="author" label="Author" value={book.author} />
-                    <FormField type_input="text" model="book" id={book.id} field="category" label="Category" value={book.category} />
-                    <FormField type_input="text" model="book" id={book.id} field="url" label="URL" value={book.url} />
-                    <button type="button" onClick={() => this.handleRemove(book.id)}>Remove</button>
+                <div key={book.id} className="col-md-6 m-auto">
+                    <div className="card card-body mt-5">
+                        <h2 className="text-center text_jl">{book.name}</h2>
+                        <FormField type_input="text" model="book" id={book.id} field="name" label="Name" value={book.name} />
+                        <FormField type_input="text" model="book" id={book.id} field="author" label="Author" value={book.author} />
+                        <FormField type_input="text" model="book" id={book.id} field="category" label="Category" value={book.category} />
+                        <FormField type_input="text" model="book" id={book.id} field="url" label="URL" value={book.url} />
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(book.id)}>
+                            <label className="text_jl_button">Remove</label>
+                        </button>
+                    </div>
                 </div>
 
             )
@@ -63,7 +67,7 @@ class BookUpdateForm extends Component {
         return (
             <div>
                 {list_book_component}
-
+                <br /><br />
             </div>
         )
     }

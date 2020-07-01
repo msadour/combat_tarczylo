@@ -40,13 +40,14 @@ class MessageCreateForm extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create a message</h2>
+                  <h2 className="text-center text_jl">Create a message</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Message</label>
-                      <input
+                      <label className="text_jl">Message</label>
+                      <textarea
+                        rows="5"
                         type="text"
                         className="form-control"
                         name="content"
@@ -55,8 +56,8 @@ class MessageCreateForm extends Component {
                     </div>
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button className="button" type="submit">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

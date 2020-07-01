@@ -16,6 +16,11 @@ class LookingFor extends Component {
         this.search.bind(this)
     }
 
+    componentDidMount(){
+        var main_menu = document.getElementsByClassName("main_menu")
+        main_menu[0].style.display = 'block';
+    }
+
     search(e) {
         e.preventDefault();
         const url = '/api_tct/' + this.state.criteria + '?search=' + this.state.value
@@ -54,36 +59,38 @@ class LookingFor extends Component {
             <div>
                 <br />
                 <form onSubmit={e => this.search(e)}>
-                    <table border="1" style={{width: '90%'}}>
+                    <table border="1" style={{width: '40%'}} className="page_content" style={{backgroundColor: "white", width:"70%"}}>
+                        <tbody>
+                            <tr>
+                                <th>
+                                      <input
+                                        placeholder="Name, title...."
+                                        name="value"
+                                        style={{width: '30%'}}
+                                        onChange={e => this.onChange(e)}
+                                      />
 
-                        <tr>
-                            <th>
-                                  <input
-                                    placeholder="Name, title...."
-                                    name="value"
-                                    style={{width: '40%'}}
-                                    onChange={e => this.onChange(e)}
-                                  />
+                                 <select
+                                      name="criteria"
+                                      id="criteria"
+                                      onChange={e => this.onChange(e)}
+                                  >
+                                    <option value="book">Book</option>
+                                    <option value="internship">Internships</option>
+                                    <option value="course">Courses</option>
+                                    {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
+                                  </select>
+                                  <button className="button" type="submit" value="Submit">
+                                    <label className="text_jl_button">Search</label>
+                                   </button>
 
-                             <select
-                                  name="criteria"
-                                  id="criteria"
-                                  onChange={e => this.onChange(e)}
-                              >
-                                <option value="book">Book</option>
-                                <option value="internship">Internships</option>
-                                <option value="course">Courses</option>
-                                {localStorage.getItem('token') !== null ? (<option value="article">Article</option>) : (<option hidden />)}
-                              </select>
-                              <button type="submit" value="Submit"> Search </button>
+                                </th>
+                            </tr>
 
-                            </th>
-                        </tr>
-
-                        <tr>
-                            <th> {this.state.result_search} </th>
-                        </tr>
-
+                            <tr>
+                                <th> {this.state.result_search} </th>
+                            </tr>
+                        </tbody>
                     </table>
                 </form>
                 <br />

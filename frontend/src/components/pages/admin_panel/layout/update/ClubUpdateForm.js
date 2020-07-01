@@ -80,12 +80,24 @@ class ClubUpdateForm extends Component {
             time_tables.forEach( time_table => {
                 list_timetable_component.push(
                     <div key={time_table.id}>
-                        <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
-                        <button type="button" onClick={() => this.handleRemove(time_table.id)}>Remove time table</button>
+                        <table style={{width: "80%"}}>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <FormField type_input="text" model="time_table" id={time_table.id} field="time_table_str" label="time table" value={time_table.time_table_str} />
+                                    </th>
+
+                                    <th>
+                                        <button className="button" type="button" onClick={() => this.handleRemove(time_table.id)}>
+                                            <label className="text_jl_button">Remove time table</label>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )
             })
-            console.log(list_timetable_component);
             return list_timetable_component
         }
     }
@@ -93,43 +105,53 @@ class ClubUpdateForm extends Component {
 
     render() {
         return (
-            <div>
-                <h2>{this.state.club.name}</h2>
-                <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="Name" value={this.state.club.name} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="description" label="Description" value={this.state.club.description} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="Street" value={this.state.club.street} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="number" label="Number" value={this.state.club.number} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="zip_code" label="ZIP Code" value={this.state.club.zip_code} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="city" label="City" value={this.state.club.city} />
-                <FormField type_input="text" model="club" id={this.state.club.id} field="country" label="Country" value={this.state.club.country} />
+            <div className="col-md-6 m-auto">
+                <div className="card card-body mt-5">
+                    <h2 className="text-center text_jl">Club information</h2>
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="Name" value={this.state.club.name} />
+                    <FormField type_input="textarea" model="club" id={this.state.club.id} field="description" label="Description" value={this.state.club.description} />
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="Street" value={this.state.club.street} />
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="number" label="Number" value={this.state.club.number} />
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="zip_code" label="ZIP Code" value={this.state.club.zip_code} />
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="city" label="City" value={this.state.club.city} />
+                    <FormField type_input="text" model="club" id={this.state.club.id} field="country" label="Country" value={this.state.club.country} />
 
-                {this.build_timetable(this.state.club.time_table)}
+                    {this.build_timetable(this.state.club.time_table)}
 
-                <div className="form-group">
-                  {
-                    this.state.time_table.map((timetable, index) =>{
-                        return (
-                            <div key={index}>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="time_table"
-                                    placeholder="Monday 10:00:00 12:30:00"
-                                    value={timetable}
-                                    onChange={e => this.handleChange(e, index)}
-                                  />
-                                  <button type="button" onClick={() => this.handleRemoveTimeTable(index)}>Remove</button>
-                                  <button type="button" onClick={() => this.updateTimeTable()}>Update news time table</button>)
+                    <div className="form-group">
+                      {
+                        this.state.time_table.map((timetable, index) =>{
+                            return (
+                                <div key={index}>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        name="time_table"
+                                        placeholder="Monday 10:00:00 12:30:00"
+                                        value={timetable}
+                                        onChange={e => this.handleChange(e, index)}
+                                      />
+                                      <button className="button" type="button" onClick={() => this.handleRemoveTimeTable(index)}>
+                                        <label className="text_jl_button">Remove</label>
+                                      </button>
+                                      <button className="button" type="button" onClick={() => this.updateTimeTable()}>
+                                        <label className="text_jl_button">Update new time table</label>
+                                      </button>)
 
 
 
-                            </div>
-                        )
-                    })
-                  }
+                                </div>
+                            )
+                        })
+                      }
 
-                  <button onClick={(e) => this.addTimeTable(e)}>Add time table</button>
-                  <button onClick={(e) => this.updateTimeTable(e)}>Update time table</button>
+                      <button className="button" onClick={(e) => this.addTimeTable(e)}>
+                        <label className="text_jl_button">Add new time table</label>
+                      </button>
+                      <button className="button" onClick={(e) => this.updateTimeTable(e)}>S
+                        <label className="text_jl_button">Save all new time table</label>
+                      </button>
+                    </div>
                 </div>
             </div>
         )

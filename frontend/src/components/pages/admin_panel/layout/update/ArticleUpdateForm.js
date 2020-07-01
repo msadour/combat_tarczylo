@@ -44,18 +44,20 @@ class ArticleUpdateForm extends Component {
         return false
     }
 
-
     render() {
         var list_article_component = []
-
         this.state.articles.forEach( article => {
             list_article_component.push(
-                <div key={article.id}>
-                    <h2>{article.title}</h2>
-                    <FormField type_input="text" model="article" id={article.id} field="title" label="Title" value={article.title} />
-                    <FormField type_input="text" model="article" id={article.id} field="content" label="Content" value={article.content} />
-                    <FormField type_input="text" model="article" id={article.id} field="category" label="Category" value={article.category} />
-                    <button type="button" onClick={() => this.handleRemove(article.id)}>Remove</button> <br /><br />
+                <div key={article.id} className="col-md-6 m-auto">
+                   <div className="card card-body mt-5">
+                        <h2 className="text-center text_jl">{article.title}</h2>
+                        <FormField type_input="text" model="article" id={article.id} field="title" label="Title" value={article.title} />
+                        <FormField type_input="textarea" model="article" id={article.id} field="content" label="Content" value={article.content} />
+                        <FormField type_input="text" model="article" id={article.id} field="category" label="Category" value={article.category} />
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(article.id)}>
+                            <label className="text_jl_button">Remove</label>
+                        </button> <br /><br />
+                    </div>
                 </div>
             )
         })
@@ -63,7 +65,7 @@ class ArticleUpdateForm extends Component {
         return (
             <div>
                 {list_article_component}
-
+                <br /><br /><br />
             </div>
         )
     }

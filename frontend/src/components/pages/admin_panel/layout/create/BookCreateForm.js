@@ -47,12 +47,12 @@ class Subscription extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                  <h2 className="text-center">Create a book</h2>
+                  <h2 className="text-center text_jl">Create a book</h2>
 
 
                   <form onSubmit={e => this.onSubmit(e)}>
                     <div className="form-group">
-                      <label>Name</label>
+                      <label className="text_jl">Name</label>
                       <input
                         type="text"
                         className="form-control"
@@ -62,7 +62,7 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Author</label>
+                      <label className="text_jl">Author</label>
                       <input
                         type="text"
                         className="form-control"
@@ -73,7 +73,7 @@ class Subscription extends Component {
 
 
                     <div className="form-group">
-                      <label>Category</label>
+                      <label className="text_jl">Category</label>
                       <input
                         type="text"
                         className="form-control"
@@ -83,7 +83,7 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label>URL</label>
+                      <label className="text_jl">URL</label>
                       <input
                         type="text"
                         className="form-control"
@@ -93,8 +93,8 @@ class Subscription extends Component {
                     </div>
 
                     <div className="form-group">
-                      <button type="submit" className="btn btn-primary">
-                        Create
+                      <button type="submit" className="button">
+                        <label className="text_jl_button">Create</label>
                       </button>
                     </div>
 

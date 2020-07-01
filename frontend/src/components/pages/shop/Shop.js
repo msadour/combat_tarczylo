@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
-import Header from "./layout/Header";
-import Category from "./layout/Category";
 import ProductsCategory from "./ProductsCategory";
-
-
-import header from "../../header";
 
 class Shop extends Component {
 
@@ -50,7 +45,7 @@ class Shop extends Component {
         this.state.categories.forEach( category => {
             list_category_component.push(
                 <div key={category.id}>
-                    <h5 >{category.name}</h5>
+                    <h5 className="text_jl">{category.name}</h5>
                     {this.build_list_products(category)}
                 </div>
             )

@@ -193,6 +193,7 @@ class InternshipSerializer(serializers.ModelSerializer):
             "dates",
             "date_begin_formated",
             "date_end_formated",
+            "picture",
         ]
 
 
@@ -290,7 +291,7 @@ class AuthTokenSerializer(serializers.Serializer):
         password = attrs.get("password")
 
         user = self.authenticate_user(username=username, password=password)
-        if not user:
+        if not user or not user.have_paid:
             msg = "Unable to authenticate with provided credentials"
             raise serializers.ValidationError(msg, code="authorization")
 
