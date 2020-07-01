@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 
 class Contact extends Component {
+
+    componentDidMount(){
+        var main_menu = document.getElementsByClassName("main_menu")
+        main_menu[0].style.display = 'block';
+    }
+
     render() {
 
         return (

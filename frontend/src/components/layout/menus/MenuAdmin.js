@@ -32,8 +32,9 @@ class MenuAdmin extends Component {
 
     render() {
         return (
-            <div>
-                <table className="page_content">
+            <div className="main_menu">
+                <br /> <br /> <br /> <br />
+                <table className="table_main_menu">
                     <tbody>
                         <tr>
                             <th>

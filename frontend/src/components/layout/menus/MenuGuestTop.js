@@ -7,23 +7,29 @@ class MenuGuest extends Component {
         return (
 
             <div>
-                <table style={{float: "right"}}>
+                <table border="0" style={{float: "right", width: "25%"}}>
                     <tbody>
                         <tr>
-                            <th>
-                                <Link to='/looking_for'>
-                                    <p className="nav-link text_jl">Looking for</p>
+                            <th style={{width: "10%"}}>
+                                <Link to='/'>
+                                    <img style={{width: "50%", float: "right"}} src="../../../../../media/logo.png" />
                                 </Link>
                             </th>
 
-                            <th>
+                            <th style={{width: "10%"}}>
+                                <Link to='/looking_for'>
+                                    <img style={{width: "50%", float: "right"}} src="../../../../../media/search_icon.png" />
+                                </Link>
+                            </th>
+
+                            <th style={{width: "30%"}}>
                                 <Link to='/contact'>
                                     <p className="nav-link text_jl">Contact</p>
                                 </Link>
 
                             </th>
 
-                            <th>
+                            <th style={{width: "50%"}}>
                                 <Link to='/authentication'>
                                     <p className="nav-link text_jl">Access Member</p>
                                 </Link>

@@ -5,8 +5,8 @@ import { BrowserRouter, Link } from "react-router-dom";
 class MenuGuest extends Component {
     render() {
         return (
-            <div>
-                <table className="page_content">
+            <div className="main_menu">
+                <table className="page_content table_main_menu">
                     <tbody>
                         <tr>
                             <th>

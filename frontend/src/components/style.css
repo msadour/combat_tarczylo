@@ -7,8 +7,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #950a0a;
-  color: white;
+  background-color: black;
   text-align: center;
 }
 
@@ -25,13 +24,16 @@ body {
     margin-right: 5%
 }
 
-#menuAdmin {
-    background-color: red;
+.table_main_menu {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center
 }
 
 #img_desc_club {
     float: right;
     width: 100%;
+    margin-right: 5%
 }
 
 #hr_menu {
@@ -79,14 +81,14 @@ body {
     border: 1px solid #ebebeb;
     font-size: 14px;
     padding-top: 5px;
-    /*padding: 0px 100%;
-    transition: .3s ease #950a0a,.3s ease #e7b600;
-    font-weight: normal;
-    line-height: 300%;*/
 }
 
 .hr_presentation{
     background-color: #8E6300;
     height: 1px;
     margin-top: 0%;
+}
+
+.form_update_admin_panel{
+    margin-right: 30%
 }

@@ -16,10 +16,8 @@ class Menu extends Component {
                 return (
                     <div id="header_menu">
                         <MenuMemberTop />
-                        <br /><br /><br /><br />
                         <MenuAdmin />
                         <hr id="hr_menu" />
-                        <br /><br /><br />
                     </div>
                 )
             } else {

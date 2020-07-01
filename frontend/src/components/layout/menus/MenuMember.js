@@ -33,8 +33,8 @@ class MenuMember extends Component {
 
     render() {
         return (
-            <div>
-                <table className="page_content">
+            <div className="main_menu">
+                <table className="page_content table_main_menu">
                     <tbody>
                         <tr>
                             <th>

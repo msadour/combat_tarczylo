@@ -16,6 +16,11 @@ class LookingFor extends Component {
         this.search.bind(this)
     }
 
+    componentDidMount(){
+        var main_menu = document.getElementsByClassName("main_menu")
+        main_menu[0].style.display = 'block';
+    }
+
     search(e) {
         e.preventDefault();
         const url = '/api_tct/' + this.state.criteria + '?search=' + this.state.value
@@ -54,7 +59,7 @@ class LookingFor extends Component {
             <div>
                 <br />
                 <form onSubmit={e => this.search(e)}>
-                    <table border="1" style={{width: '40%'}} className="page_content">
+                    <table border="1" style={{width: '40%'}} className="page_content" style={{backgroundColor: "white", width:"70%"}}>
                         <tbody>
                             <tr>
                                 <th>

@@ -24,17 +24,18 @@ class Home extends Component {
                 }
             })
         }
+        var main_menu = document.getElementsByClassName("main_menu")
+        main_menu[0].style.display = 'block';
     }
 
     render() {
         return (
             <div>
                 <br />
-                <center><h1>home page</h1></center>
-                <table>
+                <table className="page_content">
                     <tbody>
-                        <tr>
-                            <th><p>{this.state.message != null? this.state.message.content : "" }</p></th>
+                        <tr style={{width: "50%"}}>
+                            <th><img style={{width: "100%"}} src="../../../../../media/image_home.png" /></th>
                         </tr>
                     </tbody>
                 </table>
@@ -45,3 +46,5 @@ class Home extends Component {
 }
 
 export default Home
+
+//<p>{this.state.message != null? this.state.message.content : "" }</p>

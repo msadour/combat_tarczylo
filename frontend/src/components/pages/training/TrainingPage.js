@@ -37,7 +37,6 @@ class Training extends Component {
                 <Description />
                 <CourseDetail courses={this.state.courses} />
                 <TrainingDetail trainings={this.state.trainings} />
-                <br />
             </div>
         )
     }

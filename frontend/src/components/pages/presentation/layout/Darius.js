@@ -5,7 +5,7 @@ class Darius extends Component {
     render() {
         return (
             <div >
-                <table border="0" className="page_content" style={{'background-color': '#FFFFFF'}}>
+                <table border="0" className="page_content" style={{backgroundColor: '#FFFFFF'}}>
                     <tbody>
                         <tr>
                             <td>

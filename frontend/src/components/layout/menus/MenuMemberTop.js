@@ -34,12 +34,18 @@ class MenuMember extends Component {
     render() {
         return (
             <div>
-                <table style={{float: "right"}}>
+                <table border="0" style={{float: "right", width: "20%"}}>
                     <tbody>
                         <tr>
                             <th>
+                                <Link to='/'>
+                                    <img style={{width: "30%", float: "right", marginBottom: "15%"}} src="../../../../../media/logo.png" />
+                                </Link>
+                            </th>
+
+                            <th>
                                 <Link to='/looking_for'>
-                                    <p className="nav-link text_jl">Looking for</p>
+                                    <img style={{width: "35%", float: "right", marginBottom: "15%"}} src="../../../../../media/search_icon.png" />
                                 </Link>
                             </th>
 

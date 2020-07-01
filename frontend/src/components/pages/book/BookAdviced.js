@@ -28,15 +28,18 @@ class BookAdviced extends Component {
         return (
             <div>
               <br />
-              <table border="1" style={{width: "90%"}} className="page_content">
+              <table border="0" style={{width: "90%"}} className="page_content">
                 <tbody>
                     <tr>
                         {this.state.books.map((book) => (
                             <th key={book.id}>
-                                <h2 className="text_jl">{book.name}</h2>
-                                <p className="text_jl">Author : {book.author}</p><br />
-                                <p className="text_jl">Kind of book :{book.category}</p><br />
-                                <p className="text_jl">URL: {book.url}</p><br /><br />
+                                <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
+                                    <br />
+                                    <h2 className="text_jl">{book.name}</h2>
+                                    <p className="text_presentation">Author : {book.author}</p>
+                                    <p className="text_presentation">Kind of book :{book.category}</p>
+                                    <p className="text_presentation">URL: {book.url}</p><br />
+                                </div>
                             </th>
                         ))}
                     </tr>

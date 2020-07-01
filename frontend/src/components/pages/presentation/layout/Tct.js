@@ -5,8 +5,7 @@ class Tct extends Component {
     render() {
         return (
             <div >
-                <br />
-                <table border="0" className="page_content" style={{'background-color': '#FFFFFF'}}>
+                <table border="0" className="page_content" style={{backgroundColor: '#FFFFFF'}}>
                     <tbody>
                         <tr>
                             <td style={{width:"60%"}}>

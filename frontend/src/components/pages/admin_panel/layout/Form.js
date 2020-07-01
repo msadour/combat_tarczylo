@@ -178,11 +178,8 @@ class FormField extends Component {
 
         e.preventDefault();
         const member_id = localStorage.getItem("member_id");
-        var data = {}
-        data[this.props.field] = this.state.new_value
-        console.log('-------------------------------')
-        console.log(data)
-        console.log('-------------------------------')
+        var data = {};
+        data[this.props.field] = this.state.new_value;
         var url = '/api_tct/' + this.props.model + '/' + this.props.id + '/';
         if (e.target[0].type == 'file'){
             url += 'upload/';
@@ -230,7 +227,7 @@ class FormField extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <table>
+                  <table className="form_update_admin_panel">
                     <tbody>
                       <tr>
                         <th>
