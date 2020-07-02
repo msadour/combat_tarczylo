@@ -30,7 +30,6 @@ const TrainingDetail = ({ trainings }) => {
                             <br />
                             <h3 className="text_jl">{training.name}</h3>
                             <img style={{width:"20%"}} src={training.picture} /> <br />
-                            <p className="text_presentation">{training.description}</p>
                             <p className="text_presentation">Date : {training.dates}</p>
                             <p className="text_presentation">Price : {training.price} €</p>
                             <p className="text_presentation">Theme : {training.theme}</p>

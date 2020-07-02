@@ -29,7 +29,6 @@ const CourseDetail = ({ courses }) => {
                         <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
                             <br />
                             <h3 className="text_jl">{course.name}</h3>
-                            <p className="text_presentation" style={{width: "90%"}}>{course.description}</p>
                             <p className="text_presentation">Open to :{course.category}</p>
                             <p className="text_presentation"> Level : {course.level}</p>
                             <p className="text_presentation">Instructor : {course.instructor.full_name}</p>

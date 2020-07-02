@@ -70,12 +70,12 @@ class MemberUpdateForm extends Component {
                     { member.is_superuser == false ? (
                         <section className="card card-body mt-5">
                             <h2 className="text-center text_jl">{member.full_name}</h2>
-                            <form onSubmit={e => this.onSubmit(e, member.id)}>
+                            <form className="memberAdminPanel" onSubmit={e => this.onSubmit(e, member.id)}>
                                 <table>
                                     <tbody>
 
                                         <tr>
-                                            <th colSpan={2}><img style={{width:"50%"}} src={member.picture} /></th>
+                                            <th colSpan={2}><br /><img style={{width:"50%"}} src={member.picture} /><br /></th>
                                         </tr>
 
                                         <tr>
@@ -123,7 +123,7 @@ class MemberUpdateForm extends Component {
         return (
             <div>
                 {list_member_component}
-                <br /><br />
+                <br /><br /><br /><br />
             </div>
         )
     }

@@ -92,8 +92,8 @@ class InternshipUpdateForm extends Component {
                                     </th>
 
                                     <th>
-                                        <button className="button" type="button" onClick={() => this.handleRemove(time_table.id)}>
-                                            <label className="text_jl_button">Remove time table</label>
+                                        <button className="button" style={{width: "100%"}} type="button" onClick={() => this.handleRemove(time_table.id)}>
+                                            <label className="text_jl_button">Remove</label>
                                         </button>
                                     </th>
                                 </tr>
@@ -114,7 +114,7 @@ class InternshipUpdateForm extends Component {
 
             list_internship_component.push(
                 <div key={internship.id} className="col-md-6 m-auto">
-                    <div className="card card-body mt-5">
+                    <div className="card card-body mt-5" style={{marginLeft: "1%"}}>
                         <h2 className="text-center text_jl">{internship.name}</h2>
                         <img style={{width:"50%"}} src={internship.picture} /><br />
                         <FormField type_input="text" model="internship" id={internship.id} field="name" label="Name" value={internship.name} />
@@ -157,7 +157,7 @@ class InternshipUpdateForm extends Component {
                           <button className="button" onClick={(e) => this.addTimeTable(e)}>
                             <label className="text_jl_button">Add time table</label>
                           </button> <br /><br />
-                          <button className="button" type="button" onClick={() => this.handleRemove(internship.id, 'internship')}>
+                          <button className="button" type="button" style={{width:"10%"}} onClick={() => this.handleRemove(internship.id, 'internship')}>
                             <label className="text_jl_button">Remove</label>
                           </button>
                         </div>
@@ -169,7 +169,7 @@ class InternshipUpdateForm extends Component {
         return (
             <div>
                 {list_internship_component}
-                <br /><br />
+                <br /><br /><br /><br />
             </div>
         )
     }

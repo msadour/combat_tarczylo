@@ -57,7 +57,7 @@ class ProductUpdateForm extends Component {
                         <FormField type_input="number" model="product" id={product.id} field="quantity_available" label="Quantity_available" value={product.quantity_available} />
                         <FormField type_input="text" model="product" id={product.id} field="size" label="Size" value={product.size} />
                         <FormField type_input="image" model="product" id={product.id} field="picture" label="Picture" />
-                        <button className="button" type="button" onClick={() => this.handleRemove(product.id)}>
+                        <button className="button" style={{width:"10%"}} type="button" onClick={() => this.handleRemove(product.id)}>
                             <label className="text_jl_button">Remove</label>
                         </button>
                     </div>

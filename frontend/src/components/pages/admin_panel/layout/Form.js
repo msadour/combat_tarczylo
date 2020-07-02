@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import axios from 'axios';
 
+import TextField from '@material-ui/core/TextField';
+
 import header from "../../../header";
 
 class FormField extends Component {
@@ -38,11 +40,13 @@ class FormField extends Component {
             case "text":
                 return (
                     <div>
-                        <input
+                        <TextField
                             type="text"
                             name="new_value"
+                            style = {{width: 500}}
+                            variant="outlined"
                             onChange={e => this.onChange(e)}
-                            placeholder={this.props.value}
+                            defaultValue={this.props.value}
                         />
                     </div>
                 )
@@ -225,9 +229,9 @@ class FormField extends Component {
     render() {
 
         return (
-            <div className="col-md-6 m-auto">
+            <div className="col-md-6">
                 <form onSubmit={e => this.onSubmit(e)}>
-                  <table className="form_update_admin_panel">
+                  <table border="0" className="form_update_admin_panel">
                     <tbody>
                       <tr>
                         <th>
@@ -239,7 +243,9 @@ class FormField extends Component {
                         </th>
 
                         <th>
-                            <button type="submit" value="Submit" className="button"><label className="text_jl_button">Update</label> </button>
+                            <button type="submit" value="Submit" className="button">
+                                <label className="text_jl_button">Update</label>
+                            </button>
                         </th>
                       </tr>
                     </tbody>

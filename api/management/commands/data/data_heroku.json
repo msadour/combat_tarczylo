@@ -1,0 +1,171 @@
+{
+
+  "BookAdviced" : [],
+
+  "Article" : [],
+
+  "ImportantMessage" : [
+    {
+      "content": "This is a important message"
+    }
+  ],
+
+  "Presentation": [
+    {
+      "name_club": "Club TCT",
+      "tct": "TCT is a club that teachs self defense. It was founded by Darius Tarczylo in 2020 and it is based in Poland",
+      "darius": "Darius is self defense teacher which have knowledge in Jujitsu, weapon defense and physical conditioning for the fight.",
+      "technical": "The technicals are Krav maga, Jujitsu and knife defense."
+    }
+  ],
+
+  "ClubInformation" : [
+    {
+      "street": "rue du club",
+      "number": "1",
+      "zip_code": "13051",
+      "city": "Warsaw",
+      "country": "Poland",
+      "time_table": [
+        {
+          "day": "monday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
+        },
+
+        {
+          "day": "tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "18:00:00"
+        },
+
+        {
+          "day": "wednesday",
+          "from_hour": "10:00:00",
+          "to_hour": "17:00:00"
+        },
+
+        {
+          "day": "friday",
+          "from_hour": "10:00:00",
+          "to_hour": "19:00:00"
+        },
+        {
+          "day": "saturday",
+          "from_hour": "10:00:00",
+          "to_hour": "16:00:00"
+        }
+      ]
+    }
+  ],
+
+  "Member" : [],
+
+  "Instructor" : [
+    {
+      "id": 1,
+      "email": "dariustarczylo@gmail.com",
+      "username": "dariustarczylo@gmail.com",
+      "password": "qwertz",
+      "first_name": "Darius",
+      "last_name": "Tarczylo",
+      "postal_code": "88888",
+      "city": "varsovie",
+      "street": "rue de l'instructor 3",
+      "country": "Poland",
+      "phone": "0366111111",
+      "insurance_name": "insurencemember1",
+      "insurance_number": "123456",
+      "birthday": "20/05/1990 10:00:00",
+      "sex": "male",
+      "level": "black",
+      "biography": "biography instructor",
+      "is_superuser": true,
+      "have_paid": true
+    }
+  ],
+
+  "Course" : [
+    {
+      "id": 1,
+      "name": "Krav maga",
+      "description": "fight hand and foot",
+      "level": "white",
+      "category": "mix",
+      "time_table": [
+        {
+          "day": "Monday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
+        },
+
+        {
+          "day": "Tuesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
+        }
+      ],
+      "instructor": 1
+    },
+
+    {
+      "id": 2,
+      "name": "Knife defense",
+      "description": "fight hand and foot",
+      "level": "brown",
+      "category": "men",
+      "time_table": [
+        {
+          "day": "Tuesday",
+          "from_hour": "13:00:00",
+          "to_hour": "14:30:00"
+        },
+
+        {
+          "day": "Wednesday",
+          "from_hour": "10:00:00",
+          "to_hour": "11:00:00"
+        }
+      ],
+      "instructor": 1
+    },
+
+    {
+      "id": 3,
+      "name": "Introduction to self defense",
+      "description": "fight knife",
+      "level": "white",
+      "category": "all",
+      "time_table": [
+        {
+          "day": "Monday",
+          "from_hour": "16:00:00",
+          "to_hour": "17:30:00"
+        },
+
+        {
+          "day": "Thursday",
+          "from_hour": "17:00:00",
+          "to_hour": "18:30:00"
+        }
+      ],
+      "instructor": 1
+    }
+  ],
+
+  "Internship" : [],
+
+  "Category" : [
+    {
+      "id": 1,
+      "name": "T-shirt"
+    },
+
+    {
+      "id": 2,
+      "name": "Patch"
+    }
+  ],
+
+  "Product" : []
+}

@@ -12,7 +12,7 @@ class Result extends Component {
                 {
                     this.props.criteria == "course" ? (
                         <section>
-                            <table border="1">
+                            <table border="0">
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
@@ -47,7 +47,7 @@ class Result extends Component {
                         </section>
                      ): this.props.criteria == "internship" ?(
                         <section>
-                            <table border="1">
+                            <table border="0">
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
@@ -103,7 +103,7 @@ class Result extends Component {
                         </section>
                      ) : this.props.criteria == "article" ?(
                         <section>
-                            <table border="1">
+                            <table border="0">
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.title}</p></th>
