@@ -24,7 +24,7 @@ SECRET_KEY = "md*x^+l89#8+uq-$gvkiydmz^2(u!y+*0%_2s5a3t!i!vc-f$_"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "combat-tarczylo.herokuapp.com"]
 
 # Application definition
 
@@ -146,3 +146,6 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"

@@ -59,16 +59,17 @@ class LookingFor extends Component {
             <div>
                 <br />
                 <form onSubmit={e => this.search(e)}>
-                    <table border="1" style={{width: '40%'}} className="page_content" style={{backgroundColor: "white", width:"70%"}}>
+                    <table border="0" className="page_content" style={{backgroundColor: "white", width:"70%"}}>
                         <tbody>
                             <tr>
                                 <th>
-                                      <input
-                                        placeholder="Name, title...."
-                                        name="value"
-                                        style={{width: '30%'}}
-                                        onChange={e => this.onChange(e)}
-                                      />
+                                  <br />
+                                  <input
+                                    placeholder="Name, title...."
+                                    name="value"
+                                    style={{width: '30%'}}
+                                    onChange={e => this.onChange(e)}
+                                  />
 
                                  <select
                                       name="criteria"
@@ -83,7 +84,7 @@ class LookingFor extends Component {
                                   <button className="button" type="submit" value="Submit">
                                     <label className="text_jl_button">Search</label>
                                    </button>
-
+                                    <br />
                                 </th>
                             </tr>
 

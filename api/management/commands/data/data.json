@@ -44,9 +44,9 @@
   "Presentation": [
     {
       "name_club": "Club TCT",
-      "tct": "TCT is a club .....",
-      "darius": "Darius is .....",
-      "technical": "The technicals are ...."
+      "tct": "TCT is a club that teachs self defense. It was founded by Darius Tarczylo in 2020 and it is based in Poland",
+      "darius": "Darius is self defense teacher which have knowledge in Jujitsu, weapon defense and physical conditioning for the fight.",
+      "technical": "The technicals are Krav maga, Jujitsu and knife defense."
     }
   ],
 
@@ -55,8 +55,8 @@
       "street": "rue du club",
       "number": "1",
       "zip_code": "13051",
-      "city": "Berlin",
-      "country": "Germany",
+      "city": "Warsaw",
+      "country": "Poland",
       "time_table": [
         {
           "day": "monday",
@@ -221,19 +221,19 @@
   "Course" : [
     {
       "id": 1,
-      "name": "fight",
+      "name": "Krav maga",
       "description": "fight hand and foot",
       "level": "white",
-      "category": "men",
+      "category": "mix",
       "time_table": [
         {
-          "day": "monday",
+          "day": "Monday",
           "from_hour": "10:00:00",
           "to_hour": "11:00:00"
         },
 
         {
-          "day": "tuesday",
+          "day": "Tuesday",
           "from_hour": "10:00:00",
           "to_hour": "11:00:00"
         }
@@ -243,21 +243,21 @@
 
     {
       "id": 2,
-      "name": "fight",
+      "name": "Knife defense",
       "description": "fight hand and foot",
-      "level": "black",
+      "level": "brown",
       "category": "men",
       "time_table": [
         {
-          "day": "monday",
-          "from_hour": "10:00:00",
-          "to_hour": "18:00:00"
+          "day": "Tuesday",
+          "from_hour": "13:00:00",
+          "to_hour": "14:30:00"
         },
 
         {
-          "day": "tuesday",
+          "day": "Wednesday",
           "from_hour": "10:00:00",
-          "to_hour": "18:00:00"
+          "to_hour": "11:00:00"
         }
       ],
       "instructor": 1
@@ -265,21 +265,21 @@
 
     {
       "id": 3,
-      "name": "fight",
+      "name": "Introduction to self defense",
       "description": "fight knife",
-      "level": "orange",
-      "category": "men",
+      "level": "white",
+      "category": "all",
       "time_table": [
         {
-          "day": "monday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "day": "Monday",
+          "from_hour": "16:00:00",
+          "to_hour": "17:30:00"
         },
 
         {
-          "day": "tuesday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "day": "Thursday",
+          "from_hour": "17:00:00",
+          "to_hour": "18:30:00"
         }
       ],
       "instructor": 1
@@ -287,21 +287,21 @@
 
     {
       "id": 4,
-      "name": "fight",
+      "name": "Self defense for women",
       "description": "fight knife",
-      "level": "orange",
+      "level": "white",
       "category": "women",
       "time_table": [
         {
-          "day": "monday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "day": "Wednesday",
+          "from_hour": "14:00:00",
+          "to_hour": "15:30:00"
         },
 
         {
-          "day": "tuesday",
+          "day": "Friday",
           "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "to_hour": "11:30:00"
         }
       ],
       "instructor": 1
@@ -309,15 +309,15 @@
 
     {
       "id": 5,
-      "name": "fight",
+      "name": "Krav maga for kid",
       "description": "fight on the ground",
-      "level": "blue",
-      "category": "women",
+      "level": "white",
+      "category": "kids",
       "time_table": [
         {
           "day": "monday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "from_hour": "13:30:00",
+          "to_hour": "15:00:00"
         },
 
         {
@@ -331,21 +331,15 @@
 
     {
       "id": 6,
-      "name": "general",
+      "name": "physical conditioning",
       "description": "general fight description",
-      "level": "white",
-      "category": "kid",
+      "level": "blue",
+      "category": "men",
       "time_table": [
         {
-          "day": "monday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
-        },
-
-        {
-          "day": "tuesday",
-          "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "day": "Saturday",
+          "from_hour": "14:00:00",
+          "to_hour": "16:00:00"
         }
       ],
       "instructor": 1
@@ -354,28 +348,28 @@
 
   "Internship" : [
     {
-      "name": "general",
+      "name": "Urban self defense",
       "description": "general fight description",
       "level": "all",
-      "category": "kid",
+      "category": "mix",
       "time_table": [
         {
-          "day": "Friday",
+          "day": "Saturday",
           "from_hour": "10:00:00",
-          "to_hour": "11:00:00"
+          "to_hour": "18:00:00"
         },
 
         {
-          "day": "saturday",
-          "from_hour": "14:00:00",
-          "to_hour": "16:00:00"
+          "day": "Sunday",
+          "from_hour": "13:00:00",
+          "to_hour": "20:00:00"
         }
       ],
       "instructor": 1,
-      "date_begin": "2020-04-20",
-      "date_end": "2020-04-22",
-      "price": 100,
-      "theme": "knife"
+      "date_begin": "2020-08-01",
+      "date_end": "2020-08-02",
+      "price": 150,
+      "theme": "self defense"
     },
 
     {
@@ -385,21 +379,15 @@
       "category": "men",
       "time_table": [
         {
-          "day": "Monday",
+          "day": "Saturday",
           "from_hour": "9:00:00",
-          "to_hour": "11:00:00"
-        },
-
-        {
-          "day": "saturday",
-          "from_hour": "12:00:00",
-          "to_hour": "16:00:00"
+          "to_hour": "18:00:00"
         }
       ],
       "instructor": 1,
-      "date_begin": "2020-05-20",
-      "price": 150,
-      "theme": "knife"
+      "date_begin": "2020-09-05",
+      "price": 250,
+      "theme": "Fight without weapon"
     }
   ],
 

@@ -114,7 +114,7 @@ class CourseUpdateForm extends Component {
             list_course_component.push(
                 <div key={course.id} className="col-md-6 m-auto">
                     <div className="card card-body mt-5">
-                        <h2 className="text-center text_jl">{course.description}</h2>
+                        <h2 className="text-center text_jl">{course.name}</h2>
                         <FormField type_input="text" model="course" id={course.id} field="name" label="Name" value={course.name} />
                         <FormField type_input="textarea" model="course" id={course.id} field="description" label="Description" value={course.description} />
                         <FormField type_input="text" model="course" id={course.id} field="place" label="Place" value={course.place} />
@@ -153,8 +153,8 @@ class CourseUpdateForm extends Component {
                             <label className="text_jl">Add time table</label>
                           </button>
                         </div>
-                        <button className="button" type="button" onClick={() => this.handleRemove(course.id, 'course')}>
-                            <label className="text_jl_button">Remove course</label>
+                        <button className="button" type="button" style={{width:"10%"}} onClick={() => this.handleRemove(course.id, 'course')}>
+                            <label className="text_jl_button">Remove</label>
                         </button>
                         <br /><br />
                     </div>

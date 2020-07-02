@@ -6,7 +6,7 @@ class MenuGuest extends Component {
     render() {
         return (
             <div className="main_menu">
-                <table className="page_content table_main_menu">
+                <table className="table_main_menu">
                     <tbody>
                         <tr>
                             <th>

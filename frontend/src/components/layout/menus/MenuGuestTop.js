@@ -10,15 +10,15 @@ class MenuGuest extends Component {
                 <table border="0" style={{float: "right", width: "25%"}}>
                     <tbody>
                         <tr>
-                            <th style={{width: "10%"}}>
+                            <th>
                                 <Link to='/'>
-                                    <img style={{width: "50%", float: "right"}} src="../../../../../media/logo.png" />
+                                    <img style={{width: "50%", float: "right", marginBottom: "15%"}} src="../../../../../media/logo.png" />
                                 </Link>
                             </th>
 
-                            <th style={{width: "10%"}}>
+                            <th>
                                 <Link to='/looking_for'>
-                                    <img style={{width: "50%", float: "right"}} src="../../../../../media/search_icon.png" />
+                                    <img style={{width: "50%", float: "right", marginBottom: "15%"}} src="../../../../../media/search_icon.png" />
                                 </Link>
                             </th>
 
