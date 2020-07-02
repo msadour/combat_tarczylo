@@ -1,4 +1,5 @@
 asgiref==3.2.7
+dj-database-url
 django>=3.0.7
 django_heroku
 django-rest-auth==0.9.5
