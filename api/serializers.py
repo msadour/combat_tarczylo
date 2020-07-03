@@ -93,6 +93,7 @@ class ClubSerializer(serializers.ModelSerializer):
             "city",
             "country",
             "time_table",
+            "description_training",
         ]
 
 

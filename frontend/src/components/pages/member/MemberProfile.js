@@ -37,7 +37,7 @@ class MemberProfile extends Component {
 
         return (
             <div>
-                <br /><br /><br />
+                <br />
                       <table className="page_content" style={{backgroundColor: "white", width:"70%"}}>
                         <tbody>
 
@@ -112,7 +112,7 @@ class MemberProfile extends Component {
 
                         </tbody>
                       </table>
-                <br /><br /><br />
+                <br /><br /><br /><br /><br />
             </div>
         )
     }

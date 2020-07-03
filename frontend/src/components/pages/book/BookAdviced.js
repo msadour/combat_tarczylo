@@ -28,23 +28,39 @@ class BookAdviced extends Component {
         return (
             <div>
               <br />
-              <table border="0" style={{width: "90%"}} className="page_content">
-                <tbody>
-                    <tr>
-                        {this.state.books.map((book) => (
-                            <th key={book.id}>
-                                <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
+              { this.state.books.length == 0 ? (
+                  <table border="0" style={{width: "90%"}} className="page_content">
+                    <tbody>
+                        <tr>
+                            <th>
+                                 <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
                                     <br />
-                                    <h2 className="text_jl">{book.name}</h2>
-                                    <p className="text_presentation">Author : {book.author}</p>
-                                    <p className="text_presentation">Kind of book :{book.category}</p>
-                                    <p className="text_presentation">URL: {book.url}</p><br />
+                                    <h2 className="text_jl">No book(s) available</h2>
+                                    <br />
                                 </div>
                             </th>
-                        ))}
-                    </tr>
-                </tbody>
-              </table>
+                        </tr>
+                    </tbody>
+                  </table>
+              ) : (
+                  <table border="0" style={{width: "90%"}} className="page_content">
+                    <tbody>
+                        <tr>
+                            {this.state.books.map((book) => (
+                                <th key={book.id}>
+                                    <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
+                                        <br />
+                                        <h2 className="text_jl">{book.name}</h2>
+                                        <p className="text_presentation">Author : {book.author}</p>
+                                        <p className="text_presentation">Kind of book :{book.category}</p>
+                                        <p className="text_presentation">URL: {book.url}</p><br />
+                                    </div>
+                                </th>
+                            ))}
+                        </tr>
+                    </tbody>
+                  </table>
+              )}
             </div>
         )
     }
