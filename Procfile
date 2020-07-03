@@ -1,2 +1,2 @@
-release: python manage.py migrate
-web: gunicorn combat_tarczylo.wsgi --log-file -
+release: python manage.py init_db
+web: gunicorn combat_tarczylo.wsgi
