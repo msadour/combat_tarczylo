@@ -57,6 +57,7 @@
       "zip_code": "13051",
       "city": "Warsaw",
       "country": "Poland",
+      "description_training": "Very long description about trainings",
       "time_table": [
         {
           "day": "monday",
@@ -400,6 +401,11 @@
     {
       "id": 2,
       "name": "Patch"
+    },
+
+    {
+      "id": 3,
+      "name": "other"
     }
   ],
 

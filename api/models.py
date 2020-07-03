@@ -73,6 +73,7 @@ class ClubInformation(models.Model):
     zip_code = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
+    description_training = models.TextField(blank=True)
     time_table = models.ManyToManyField(TimeTable)
 
 

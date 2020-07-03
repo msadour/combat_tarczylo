@@ -21,7 +21,7 @@ class Technical extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <br />
+                                <br /><br />
                             </td>
                         </tr>
                     </tbody>

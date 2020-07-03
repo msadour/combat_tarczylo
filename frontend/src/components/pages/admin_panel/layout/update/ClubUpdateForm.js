@@ -110,6 +110,7 @@ class ClubUpdateForm extends Component {
                     <h2 className="text-center text_jl">Club information</h2>
                     <FormField type_input="text" model="club" id={this.state.club.id} field="name" label="Name" value={this.state.club.name} />
                     <FormField type_input="textarea" model="club" id={this.state.club.id} field="description" label="Description" value={this.state.club.description} />
+                    <FormField type_input="textarea" model="club" id={this.state.club.id} field="description_training" label="General description of trainings" value={this.state.club.description_training} />
                     <FormField type_input="text" model="club" id={this.state.club.id} field="street" label="Street" value={this.state.club.street} />
                     <FormField type_input="text" model="club" id={this.state.club.id} field="number" label="Number" value={this.state.club.number} />
                     <FormField type_input="text" model="club" id={this.state.club.id} field="zip_code" label="ZIP Code" value={this.state.club.zip_code} />

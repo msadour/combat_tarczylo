@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import TrainingDetail from "./TrainingDetail";
 import Description from "../../layout/DescriptionClub";
-import CourseDetail from "./CourseDetail"
+import CourseDetail from "./CourseDetail";
+import DescriptionTraining from "./DescriptionTraining";
 
 class Training extends Component {
 
@@ -35,6 +36,7 @@ class Training extends Component {
             <div>
                 <br />
                 <Description />
+                <DescriptionTraining />
                 <CourseDetail courses={this.state.courses} />
                 <TrainingDetail trainings={this.state.trainings} />
             </div>
