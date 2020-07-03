@@ -30,7 +30,10 @@ class BookUpdateForm extends Component {
 
     handleRemove(id) {
         event.preventDefault();
-        axios.delete('/api_tct/book/' + id + '/' , header)
+        fetch('/api_tct/book/' + id + '/', {
+            method: "DELETE",
+            headers: { 'Authorization': 'Token ' + localStorage.getItem('token') },
+        })
         .then(res => {
             window.location.reload();
         })
