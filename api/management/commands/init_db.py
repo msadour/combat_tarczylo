@@ -55,8 +55,6 @@ class Command(BaseCommand):
             PendingSubscription.objects.all().delete()
 
         datas_files = BASE_DIR + "/commands/data/data.json"
-        if len(ClubInformation.objects.all()) > 0:
-            delete_data()
 
         with open(datas_files) as json_file:
             try:
