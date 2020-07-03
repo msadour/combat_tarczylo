@@ -30,6 +30,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Command(BaseCommand):
     """Class command."""
 
+    def add_arguments(self, parser):
+        """Add params in command.
+
+        Args:
+            parser: command params.
+        """
+        parser.add_argument("mode", nargs="+", type=str)
+
     def handle(self, *args: Any, **options: Any) -> None:
         """Execute the command that create book(s).
 
@@ -39,6 +47,7 @@ class Command(BaseCommand):
         """
 
         def delete_data() -> None:
+            """Clean database."""
             BookAdviced.objects.all().delete()
             Article.objects.all().delete()
             ImportantMessage.objects.all().delete()
@@ -54,7 +63,12 @@ class Command(BaseCommand):
             Order.objects.all().delete()
             PendingSubscription.objects.all().delete()
 
-        datas_files = BASE_DIR + "/commands/data/data.json"
+        if options["mode"][0] == "heroku":
+            datas_files = BASE_DIR + "/commands/data/data_heroku.json"
+        else:
+            datas_files = BASE_DIR + "/commands/data/data.json"
+
+        delete_data()
 
         with open(datas_files) as json_file:
             try:
