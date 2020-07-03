@@ -54,7 +54,7 @@ class Command(BaseCommand):
             Order.objects.all().delete()
             PendingSubscription.objects.all().delete()
 
-        datas_files = BASE_DIR + "/commands/data/data_heroku.json"
+        datas_files = BASE_DIR + "/commands/data/data.json"
         if len(ClubInformation.objects.all()) > 0:
             delete_data()
 
