@@ -35,6 +35,7 @@ const ProductsCategory = ({ categories }) => {
                                 <th colSpan={categories.length}>
                                     <h2 className="text-center text_jl" colSpan={category.products.length}>{category.name}</h2>
                                     <hr className="hr_presentation" style={{width: "3%"}}/>
+                                    <br />
                                 </th>
                             </tr>
                             <tr>
@@ -60,6 +61,7 @@ const ProductsCategory = ({ categories }) => {
                 </div>
             )
         ))}
+        <br /><br /><br /><br />
     </div>
   )
 };

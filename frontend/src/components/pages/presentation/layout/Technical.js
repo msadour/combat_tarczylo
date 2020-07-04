@@ -26,6 +26,7 @@ class Technical extends Component {
                         </tr>
                     </tbody>
                 </table>
+                <br /><br /><br />
             </div>
         )
     }

@@ -154,6 +154,7 @@ class ClubUpdateForm extends Component {
                       </button>
                     </div>
                 </div>
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }
