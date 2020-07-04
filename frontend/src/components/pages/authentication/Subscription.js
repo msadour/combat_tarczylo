@@ -78,7 +78,7 @@ class Subscription extends Component {
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    render() {m-auto
+    render() {
 
         const{username, email, password, password_again} = this.state
 

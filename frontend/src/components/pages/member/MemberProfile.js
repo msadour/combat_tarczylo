@@ -22,7 +22,6 @@ class MemberProfile extends Component {
         })
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
             this.setState({info_member: data});
         })
         .catch(err => {
