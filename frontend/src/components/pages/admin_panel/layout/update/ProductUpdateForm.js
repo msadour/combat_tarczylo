@@ -68,7 +68,7 @@ class ProductUpdateForm extends Component {
         return (
             <div>
                 {list_product_component}
-                <br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

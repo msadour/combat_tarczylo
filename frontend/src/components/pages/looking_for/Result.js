@@ -9,10 +9,11 @@ class Result extends Component {
     render() {
         return (
             <div>
+            <br />
                 {
                     this.props.criteria == "course" ? (
                         <section>
-                            <table border="0">
+                            <table border="0" style={{backgroundColor: "#D8D8D8", "margin": "0 auto"}}>
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
@@ -47,7 +48,7 @@ class Result extends Component {
                         </section>
                      ): this.props.criteria == "internship" ?(
                         <section>
-                            <table border="0">
+                            <table border="0" style={{backgroundColor: "#D8D8D8", "margin": "0 auto"}}>
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
@@ -103,7 +104,7 @@ class Result extends Component {
                         </section>
                      ) : this.props.criteria == "article" ?(
                         <section>
-                            <table border="0">
+                            <table border="0" style={{backgroundColor: "#D8D8D8", "margin": "0 auto"}}>
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.title}</p></th>
@@ -124,7 +125,7 @@ class Result extends Component {
                      ) : (
                         <section>
 
-                            <table border="1">
+                            <table border="0" style={{backgroundColor: "#D8D8D8", "margin": "0 auto"}}>
                                 <tbody>
                                     <tr>
                                         <th colSpan={2}><p className="text_jl">{this.props.result.name}</p></th>
@@ -149,6 +150,7 @@ class Result extends Component {
                         </section>
                      )
                  }
+             <br /><br />
             </div>
         )
     }

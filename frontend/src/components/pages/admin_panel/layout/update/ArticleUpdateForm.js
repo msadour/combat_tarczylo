@@ -65,7 +65,7 @@ class ArticleUpdateForm extends Component {
         return (
             <div>
                 {list_article_component}
-                <br /><br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

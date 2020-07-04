@@ -78,13 +78,13 @@ class Subscription extends Component {
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    render() {
+    render() {m-auto
 
         const{username, email, password, password_again} = this.state
 
         return (
             <div className="col-md-6 m-auto">
-                <div className="card card-body mt-5">
+                <div className="card card-body mt-5 ">
                   <h2 className="text-center text_jl">Do you want join us?</h2>
 
 
@@ -255,6 +255,7 @@ class Subscription extends Component {
 
                   </form>
                 </div>
+                <br /> <br /> <br /> <br /> <br />
           </div>
         )
     }

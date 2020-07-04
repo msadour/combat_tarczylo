@@ -165,7 +165,7 @@ class CourseUpdateForm extends Component {
         return (
             <div>
                 {list_course_component}
-                <br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

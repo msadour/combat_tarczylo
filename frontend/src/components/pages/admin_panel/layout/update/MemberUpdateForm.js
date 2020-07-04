@@ -123,7 +123,7 @@ class MemberUpdateForm extends Component {
         return (
             <div>
                 {list_member_component}
-                <br /><br /><br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

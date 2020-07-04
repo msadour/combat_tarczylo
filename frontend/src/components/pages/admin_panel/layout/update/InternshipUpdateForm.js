@@ -169,7 +169,7 @@ class InternshipUpdateForm extends Component {
         return (
             <div>
                 {list_internship_component}
-                <br /><br /><br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

@@ -61,7 +61,7 @@ class CategoryUpdateForm extends Component {
         return (
             <div>
                 {list_category_component}
-                <br /><br />
+                <br /><br /><br /><br /><br /><br />
             </div>
         )
     }
