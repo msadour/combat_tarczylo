@@ -34,7 +34,7 @@ class MenuMember extends Component {
     render() {
         return (
             <div className="main_menu">
-                <table className="page_content table_main_menu">
+                <table className="table_main_menu">
                     <tbody>
                         <tr>
                             <th>
@@ -72,6 +72,13 @@ class MenuMember extends Component {
                                     <p className="nav-link text_jl">Books</p>
                                 </Link>
                             </th>
+
+                            <th>
+                                <Link to='/blog'>
+                                    <p className="nav-link text_jl">Blog</p>
+                                </Link>
+                            </th>
+
                         </tr>
                     </tbody>
                 </table>

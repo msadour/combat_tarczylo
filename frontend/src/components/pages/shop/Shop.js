@@ -52,8 +52,8 @@ class Shop extends Component {
         })
 
         return (
-            <div style={{backgroundColor: "white", height: "250%"}}>
-                <br /><br />
+            <div>
+                <br />
                 <ProductsCategory categories={this.state.categories} />
             </div>
 
