@@ -25,11 +25,8 @@ class MemberProfile extends Component {
             this.setState({info_member: data});
         })
         .catch(err => {
-        console.log(res);
             alert('error');
-
         });
-
     }
 
     render() {

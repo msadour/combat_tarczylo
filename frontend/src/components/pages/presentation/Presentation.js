@@ -24,9 +24,7 @@ class Presentation extends Component {
             this.setState({presentation: data});
         })
         .catch(err => {
-        console.log(res);
             alert('error');
-
         });
         var main_menu = document.getElementsByClassName("main_menu")
         main_menu[0].style.display = 'none';

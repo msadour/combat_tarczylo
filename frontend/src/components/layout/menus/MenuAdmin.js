@@ -80,6 +80,12 @@ class MenuAdmin extends Component {
                                 </Link>
                             </th>
 
+                            <th>
+                                <Link to='/blog'>
+                                    <p className="nav-link text_jl">Blog</p>
+                                </Link>
+                            </th>
+
                         </tr>
                     </tbody>
                 </table>

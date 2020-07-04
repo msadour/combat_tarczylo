@@ -3,10 +3,11 @@ import ReactDom from "react-dom";
 
 const ProductsCategory = ({ categories }) => {
   return (
-    <div>
+    <div style={{backgroundColor: "white"}}>
+        <br />
         {categories.map((category) => (
             category.products.length == 0 ? (
-                <div key={category.id} style={{"padding": "3%"}}>
+                <div key={category.id} style={{"padding": "2%"}}>
                     <table border="0" className="page_content">
                         <tbody>
                             <tr>
@@ -53,9 +54,6 @@ const ProductsCategory = ({ categories }) => {
                                     </th>
                                 ))}
                             </tr>
-                        <tr>
-                            <th><br /></th>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
