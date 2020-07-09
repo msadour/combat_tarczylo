@@ -46,7 +46,7 @@ const ProductsCategory = ({ categories }) => {
                                             <br />
                                             <img style={{width:"25%"}} src={product.picture} />
                                             <h2 className="text_jl">{product.name}</h2>
-                                            <p className="text_presentation"> price : {product.price} €</p>
+                                            <p className="text_presentation"> {product.price} €</p>
                                             <p className="text_presentation">Quantity available : {product.quantity_available}</p>
                                             <p className="text_presentation">size: {product.size} </p>
 

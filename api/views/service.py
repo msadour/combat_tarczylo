@@ -94,6 +94,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         for attr, value in datas.items():
             if attr == "add_time_table":
                 for time_table in value:
+                    time_table = time_table.replace("- ", "")
                     time_table_str = re.split(r"\s", time_table)
                     info_time_table = {
                         "day": time_table_str[0],

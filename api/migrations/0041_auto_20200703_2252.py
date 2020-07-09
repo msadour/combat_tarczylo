@@ -7,18 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0040_auto_20200703_2242'),
+        ("api", "0040_auto_20200703_2242"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='clubinformation',
-            name='description_training',
+            model_name="clubinformation",
+            name="description_training",
             field=models.TextField(blank=True),
         ),
         migrations.AlterField(
-            model_name='internship',
-            name='date_begin',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2020, 7, 3, 22, 52, 46, 540242)),
+            model_name="internship",
+            name="date_begin",
+            field=models.DateTimeField(
+                blank=True, default=datetime.datetime(2020, 7, 3, 22, 52, 46, 540242)
+            ),
         ),
     ]
