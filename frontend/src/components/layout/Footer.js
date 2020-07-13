@@ -8,7 +8,7 @@ class Footer extends Component {
         return (
             <div id='footer'>
                 <br />
-                <p className="text_jl"> Darius Tarzylo - Club Technical Combative Tarczylo 2020 </p>
+                <p className="text_jl"> Darius Tarczylo - Club Technical Combative Tarczylo 2020 </p>
                 <br />
             </div>
         )

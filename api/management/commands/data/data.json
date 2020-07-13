@@ -18,6 +18,19 @@
       "author": "author 3",
       "category": "category 3",
       "url": "www.cat3.com"
+    },
+
+        {
+      "name": "Book 4",
+      "author": "author 2",
+      "category": "category 2",
+      "url": "www.cat2.com"
+    },
+    {
+      "name": "Book 5",
+      "author": "author 3",
+      "category": "category 3",
+      "url": "www.cat3.com"
     }
   ],
 

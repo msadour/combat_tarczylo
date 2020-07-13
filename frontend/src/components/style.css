@@ -2,6 +2,52 @@ body {
     background-color: #7f0101;
 }
 
+/* ***************************** list ***************************** */
+
+ul {
+    margin: 0 auto;
+    text-align: center;
+    list-style: none;
+}
+
+#ul_book {
+    width: 50%;
+}
+
+
+#li_book {
+    margin:0 1% 1% 0;
+    width:50%
+}
+
+#ul_product {
+    width: 90%;
+}
+
+#li_product {
+    float:left;
+    margin:0 1% 1% 0;
+    width:45%
+}
+
+#ul_training {
+    width: 90%;
+}
+
+
+#li_training {
+    float:left;
+    margin:0 1% 1% 0;
+    width:30%
+}
+
+li:nth-child(even){
+    margin-right:0;
+}
+
+/* **************************************************************** */
+
+
 #footer {
   position: fixed;
   left: 0;

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import ReactDom from "react-dom";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Menu from "./layout/Menu";

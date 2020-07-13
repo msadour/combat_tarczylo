@@ -58,6 +58,7 @@ class TimeTableViewSet(viewsets.ModelViewSet):
         """
         time_table = request.data
         time_table_object = TimeTable.objects.get(id=pk)
+        time_table["time_table_str"] = time_table["time_table_str"].replace("- ", "")
         time_table_str = re.split(r"\s", time_table["time_table_str"])
         info_time_table = {
             "day": time_table_str[0],

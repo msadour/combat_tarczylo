@@ -187,7 +187,8 @@ class Subscription extends Component {
                    <div className="form-group">
                       <label className="text_jl">Phone</label>
                       <input
-                        type="text"
+                        type="tel"
+                        pattern='^\+(?:[0-9]●?){6,14}[0-9]$'
                         className="form-control"
                         name="phone"
                         onChange={e => this.onChange(e)}

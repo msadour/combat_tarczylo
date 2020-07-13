@@ -40,19 +40,23 @@ const ProductsCategory = ({ categories }) => {
                                 </th>
                             </tr>
                             <tr>
-                                {category.products.map((product) => (
-                                    <th key={product.id}>
-                                        <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
-                                            <br />
-                                            <img style={{width:"25%"}} src={product.picture} />
-                                            <h2 className="text_jl">{product.name}</h2>
-                                            <p className="text_presentation"> price : {product.price} €</p>
-                                            <p className="text_presentation">Quantity available : {product.quantity_available}</p>
-                                            <p className="text_presentation">size: {product.size} </p>
+                                <th>
+                                    <ul id="ul_product">
+                                        {category.products.map((product) => (
+                                            <li key={product.id} id="li_product">
+                                                <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
+                                                    <br />
+                                                    <img style={{width:"25%"}} src={product.picture} />
+                                                    <h2 className="text_jl">{product.name}</h2>
+                                                    <p className="text_presentation"> {product.price} €</p>
+                                                    <p className="text_presentation">Quantity available : {product.quantity_available}</p>
+                                                    <p className="text_presentation">size: {product.size} </p>
 
-                                        </div>
-                                    </th>
-                                ))}
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </th>
                             </tr>
                         </tbody>
                     </table>
