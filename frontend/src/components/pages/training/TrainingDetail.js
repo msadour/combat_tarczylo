@@ -33,24 +33,28 @@ const TrainingDetail = ({ trainings }) => {
                 </tr>
             ) : (
                 <tr>
-                    {trainings.map((training) => (
-                        <th key={training.id} >
-                            <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
-                                <br />
-                                <h3 className="text_jl">{training.name}</h3>
-                                <img style={{width:"20%"}} src={training.picture} /> <br />
-                                <p className="text_presentation">Date : {training.dates}</p>
-                                <p className="text_presentation">Price : {training.price} €</p>
-                                <p className="text_presentation">Theme : {training.theme}</p>
-                                <p className="text_presentation">Instructor : {training.instructor.full_name}</p>
-                                <p className="text_presentation">Open to :{training.category}</p>
-                                <p className="text_presentation">Level : {training.level}</p>
-                                <p className="text_presentation">Availabilities :</p>
-                                {get_list_time_table(training.time_table)}
-                                <br />
-                            </div>
-                        </th>
-                    ))}
+                    <th>
+                        <ul id="ul_training">
+                            {trainings.map((training) => (
+                                <li id="li_training" key={training.id} >
+                                    <div style={{backgroundColor: "#D8D8D8"}}>
+                                        <br />
+                                        <h3 className="text_jl">{training.name}</h3>
+                                        <img style={{width:"20%"}} src={training.picture} /> <br />
+                                        <p className="text_presentation">Date : {training.dates}</p>
+                                        <p className="text_presentation">Price : {training.price} €</p>
+                                        <p className="text_presentation">Theme : {training.theme}</p>
+                                        <p className="text_presentation">Instructor : {training.instructor.full_name}</p>
+                                        <p className="text_presentation">Open to :{training.category}</p>
+                                        <p className="text_presentation">Level : {training.level}</p>
+                                        <p className="text_presentation">Availabilities :</p>
+                                        {get_list_time_table(training.time_table)}
+                                        <br />
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </th>
                 </tr>
             )}
 

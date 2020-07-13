@@ -33,20 +33,24 @@ const CourseDetail = ({ courses }) => {
                 </tr>
             ): (
                 <tr>
-                    {courses.map((course) => (
-                        <th key={course.id} >
-                            <div style={{backgroundColor: "#D8D8D8", width:"90%", marginLeft: "5%"}}>
-                                <br />
-                                <h3 className="text_jl">{course.name}</h3>
-                                <p className="text_presentation">Open to :{course.category}</p>
-                                <p className="text_presentation"> Level : {course.level}</p>
-                                <p className="text_presentation">Instructor : {course.instructor.full_name}</p>
-                                <p className="text_presentation">Availabilities :</p>
-                                {get_list_time_table(course.time_table)}
-                                <br />
-                            </div>
-                        </th>
-                    ))}
+                    <th>
+                        <ul id="ul_training">
+                            {courses.map((course) => (
+                                <li key={course.id} id="li_training">
+                                    <div style={{backgroundColor: "#D8D8D8"}}>
+                                        <br />
+                                        <h3 className="text_jl">{course.name}</h3>
+                                        <p className="text_presentation">Open to :{course.category}</p>
+                                        <p className="text_presentation"> Level : {course.level}</p>
+                                        <p className="text_presentation">Instructor : {course.instructor.full_name}</p>
+                                        <p className="text_presentation">Availabilities :</p>
+                                        {get_list_time_table(course.time_table)}
+                                        <br />
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </th>
                 </tr>
             )}
         </tbody>
