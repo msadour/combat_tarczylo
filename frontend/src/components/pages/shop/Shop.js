@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from 'axios';
 
 import ProductsCategory from "./ProductsCategory";
+import VerticalMenu from "../../layout/menus/VerticalMenu"
 
 class Shop extends Component {
 
@@ -54,6 +55,7 @@ class Shop extends Component {
         return (
             <div>
                 <br />
+                <VerticalMenu />
                 <ProductsCategory categories={this.state.categories} />
             </div>
 
